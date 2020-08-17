@@ -8,18 +8,6 @@ on:
     branches: [master]
 
 jobs:
-  build:
-    runs-on: ubuntu-18.04
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Docker build Backend
-        run: docker build -t beam-server ./backend
-
-      - name: Docker build Frontend
-        run: docker build -t beam-web ./frontend
-
   run-tests:
     runs-on: ubuntu-18.04
 
@@ -38,12 +26,18 @@ jobs:
 
   deploy:
     runs-on: ubuntu-18.04
+    needs: run-tests
 
     steps:
       - uses: actions/checkout@v2
 
       - name: Docker Login
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Docker Build
+        run: |
+          docker build -t beam-web ./frontend
+          docker build -t beam-server ./backend
 
       - name: Tag Frontend and Backend
         run: |
