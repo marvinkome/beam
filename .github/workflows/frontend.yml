@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "frontend/**"
+      - "tests/**"
       - ".github/workflows/frontend*"
   pull_request:
     branches: [master]
@@ -16,9 +17,27 @@ env:
 jobs:
   ci:
     runs-on: ubuntu-18.04
+    container:
+      image: cypress/base:11.13.0
+
     steps:
-      - name: It works
-        run: echo "All is well. Setup CI"
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "12.x"
+
+      - name: Install
+        run: cd ./frontend && yarn install --frozen-lockfile
+
+      - name: start client in backgroud
+        run: cd ./frontend && yarn start &
+
+      - name: Run tests
+        uses: cypress-io/github-action@v1
+        with:
+          working-directory: tests
+          wait-on: "http://localhost:3000"
+          wait-on-timeout: 120
 
   cd:
     runs-on: ubuntu-18.04
