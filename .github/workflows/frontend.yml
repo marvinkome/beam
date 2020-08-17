@@ -32,7 +32,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t beam-web .
+        run: docker build -t beam-web ./frontend
 
       - name: Tags
         run: |

@@ -31,7 +31,7 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: docker build -t beam-server .
+        run: docker build -t beam-server ./backend
 
       - name: Tags
         run: |
