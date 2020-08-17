@@ -1,0 +1,48 @@
+@import "styles/utils/mixins.scss";
+
+.public-footer {
+    font-size: 14px;
+    padding: 50px 100px;
+    text-align: center;
+    color: white;
+    background-color: #9175db;
+    margin-top: 100px;
+
+    @include for-phone-only {
+        padding: 50px 10px;
+    }
+
+    a {
+        color: white;
+    }
+
+    .feedback-text {
+        padding: 0 20%;
+
+        @include for-phone-only {
+            padding: 0 5%;
+        }
+    }
+
+    .grid-container-footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 50px;
+
+        .grid-1-footer {
+            margin-left: 50%;
+
+            @include for-phone-only {
+                margin-left: 20%;
+            }
+        }
+
+        .grid-2-footer {
+            margin-right: 50%;
+
+            @include for-phone-only {
+                margin-right: 20%;
+            }
+        }
+    }
+}

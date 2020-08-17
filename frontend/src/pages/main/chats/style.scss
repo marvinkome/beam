@@ -1,0 +1,59 @@
+.chats-page {
+    .chats-list {
+        padding: 15px 0px;
+
+        .chat-item {
+            display: flex;
+            color: var(--text-color);
+            padding: 15px;
+            border-bottom: 1px solid rgba(50, 41, 77, 0.2);
+
+            img {
+                width: 55px;
+                height: 55px;
+                border-radius: 10px;
+            }
+
+            .chat-details {
+                margin-left: 15px;
+                overflow: hidden;
+                flex: 1;
+
+                p:first-child {
+                    display: flex;
+                    justify-content: space-between;
+                    font-weight: 600;
+                    margin-bottom: 3px;
+
+                    span {
+                        font-weight: normal;
+                        font-size: var(--small-text);
+                    }
+                }
+
+                p:last-child {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    &.isDefault {
+                        font-style: italic;
+                    }
+                }
+            }
+        }
+    }
+
+    .button-container {
+        bottom: 0;
+        position: absolute;
+        padding: 0px 2em;
+        margin-bottom: 3em;
+
+        width: 100%;
+
+        .btn {
+            width: 100%;
+        }
+    }
+}

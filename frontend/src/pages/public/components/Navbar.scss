@@ -1,0 +1,31 @@
+@import "styles/utils/mixins.scss";
+
+.public-navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 3em;
+    width: 100%;
+
+    @include for-phone-only {
+        padding: 20px 1em;
+    }
+
+    img {
+        width: 120px;
+        margin-left: 20px;
+    }
+
+    .btn {
+        color: #9175db;
+        border: 2px solid #9175db;
+        padding: 8px 20px;
+        border-radius: 10px;
+        background-color: transparent;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}

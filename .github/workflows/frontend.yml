@@ -1,0 +1,53 @@
+name: Beam Web CD
+
+on:
+    push:
+        branches:
+            - master
+    pull_request:
+        branches: [master]
+
+env:
+    IMAGE: beam-web
+
+jobs:
+    cd:
+        runs-on: ubuntu-18.04
+        if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
+
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Docker login
+              run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+            - name: Docker Build
+              run: docker build -t beam-web .
+
+            - name: Tags
+              run: |
+                  docker tag beam-web ${{ secrets.DOCKER_USER }}/beam-web:${{ github.sha }}
+                  docker tag beam-web ${{ secrets.DOCKER_USER }}/beam-web:latest
+
+            - name: Push
+              run: |
+                  docker push ${{ secrets.DOCKER_USER }}/beam-web:${{ github.sha }}
+                  docker push ${{ secrets.DOCKER_USER }}/beam-web:latest
+
+            - name: Install doctl
+              uses: digitalocean/action-doctl@v2
+              with:
+                  token: ${{ secrets.DOCTL_TOKEN }}
+
+            - name: Update deployment file
+              run: |
+                  sed -i 's|<IMAGE>|docker.io/marvinkome/beam-web:'${{ github.sha }}'|' $GITHUB_WORKSPACE/config/beam-web.yml
+
+            - name: Save DigitalOcean kubeconfig
+              run: doctl kubernetes cluster kubeconfig save beam-cluster
+
+            - name: Deploy to DigitalOcean Kubernetes
+              run: kubectl apply -f $GITHUB_WORKSPACE/config/beam-web.yml
+
+            - name: Verify deployment
+              run: kubectl rollout status deployment/beam-web-dep

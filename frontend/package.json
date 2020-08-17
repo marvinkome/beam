@@ -1,0 +1,79 @@
+{
+    "name": "beam-web",
+    "version": "0.1.0",
+    "private": true,
+    "dependencies": {
+        "@apollo/client": "3.1.1",
+        "@testing-library/jest-dom": "^4.2.4",
+        "@testing-library/react": "^9.3.2",
+        "@testing-library/user-event": "^7.1.2",
+        "@types/classnames": "2.2.10",
+        "@types/intro.js": "2.4.7",
+        "@types/jest": "^24.0.0",
+        "@types/lodash.findindex": "4.6.6",
+        "@types/lodash.orderby": "4.6.6",
+        "@types/lodash.shuffle": "4.2.6",
+        "@types/lodash.sortby": "4.7.6",
+        "@types/node": "^12.0.0",
+        "@types/react": "^16.9.0",
+        "@types/react-dom": "^16.9.0",
+        "@types/react-modal": "3.10.6",
+        "@types/react-router-dom": "5.1.3",
+        "@types/react-toastify": "4.1.0",
+        "axios": "0.19.2",
+        "classnames": "2.2.6",
+        "graphql": "15.3.0",
+        "intro.js": "2.9.3",
+        "lodash.findindex": "4.6.0",
+        "lodash.orderby": "4.6.0",
+        "lodash.shuffle": "4.2.0",
+        "lodash.sortby": "4.7.0",
+        "moment": "2.27.0",
+        "node-sass": "4.14.1",
+        "react": "^16.13.1",
+        "react-autosize-textarea": "7.1.0",
+        "react-chat-ui": "0.3.2",
+        "react-dom": "^16.13.1",
+        "react-ga": "3.1.2",
+        "react-google-login": "5.1.21",
+        "react-icons": "3.10.0",
+        "react-modal": "3.11.2",
+        "react-onesignal": "1.4.1",
+        "react-router-dom": "5.1.2",
+        "react-scripts": "3.4.1",
+        "serve": "11.3.2",
+        "source-map-explorer": "2.4.2",
+        "subscriptions-transport-ws": "0.9.17",
+        "typescript": "~3.7.2"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test",
+        "eject": "react-scripts eject",
+        "serve": "serve -s build -l 3033",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
+        "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+        "format-files": "prettier '*/**/*.{js,ts,tsx}' --write"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    },
+    "devDependencies": {
+        "@typescript-eslint/eslint-plugin": "3.7.1",
+        "@typescript-eslint/parser": "3.7.1",
+        "eslint-config-prettier": "6.11.0",
+        "eslint-plugin-prettier": "3.1.4",
+        "eslint-plugin-react": "7.20.5",
+        "prettier": "2.0.5"
+    }
+}

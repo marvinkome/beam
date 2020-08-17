@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: beam-web-svc
+spec:
+    selector:
+        app: beam-web
+    ports:
+        - port: 80
+          targetPort: 3033
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: beam-web-dep
+    labels:
+        app: beam-web
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: beam-web
+    template:
+        metadata:
+            labels:
+                app: beam-web
+        spec:
+            containers:
+                - name: beam-web
+                  image: <IMAGE>
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 3033
+                  livenessProbe:
+                      httpGet:
+                          path: /
+                          port: 3033
+                      initialDelaySeconds: 5
+                  readinessProbe:
+                      httpGet:
+                          path: /
+                          port: 3033

@@ -1,0 +1,53 @@
+.suggestion-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 80vh;
+
+    &.loading {
+        .location {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 10em;
+        }
+    }
+
+    .page-content {
+        margin: 2em 0px;
+
+        &.share-container {
+            border-radius: 10px;
+            border: 1px solid rgba(50, 41, 77, 0.5);
+            flex-direction: column;
+            display: flex;
+            margin-top: 50px;
+            padding: 20px 15px;
+            box-shadow: -2px 2px 0px 1px rgba(226, 225, 229, 1);
+
+            .share-box {
+                flex-direction: row;
+                display: flex;
+                margin-top: 25px;
+
+                span {
+                    font-weight: 600;
+                    color: rgba(53, 142, 248, 1);
+                    letter-spacing: 1px;
+                    font-size: 16px;
+                }
+
+                img {
+                    width: 15px;
+                    height: 15px;
+                    align-self: flex-end;
+                    margin-left: 9px;
+                    margin-bottom: 1px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
+
+    .btn {
+        margin-top: auto;
+    }
+}

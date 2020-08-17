@@ -1,0 +1,101 @@
+#share-beam-modal {
+    text-align: center;
+
+    .modal-header {
+        padding: 20px 10px;
+        border-bottom: 1px solid hsl(0, 0%, 80%);
+        font-weight: 600;
+    }
+
+    .modal-content {
+        padding: 10px 15px;
+
+        & > p {
+            font-size: var(--small-text);
+        }
+
+        .invite-box {
+            margin: 20px 10px;
+            margin-bottom: 35px;
+
+            & > p {
+                font-size: var(--small-text);
+                font-weight: 600;
+            }
+
+            .share-options {
+                padding: 25px 0px;
+                display: flex;
+                justify-content: space-around;
+
+                .icon {
+                    width: 30px;
+                    height: 30px;
+
+                    &.messenger {
+                        color: #006aff;
+                    }
+
+                    &.whatsapp {
+                        background-color: #25d366;
+                        padding: 3px;
+                        color: #fff;
+                        border-radius: 5px;
+                    }
+
+                    &.snapchat {
+                        background-color: #fffc00;
+                    }
+
+                    &.twitter {
+                        background-color: #1da1f2;
+                        padding: 5px;
+                        color: #fff;
+                        border-radius: 5px;
+                    }
+                }
+            }
+
+            .copy-link {
+                display: grid;
+                grid-template-columns: 60% 40%;
+                align-items: center;
+                grid-auto-rows: 1fr;
+                width: 100%;
+                margin-top: 1.5em;
+                border: 1px solid rgba(192, 189, 189, 1);
+                border-radius: 10px;
+                overflow: hidden;
+
+                input {
+                    width: 100%;
+                    margin-right: auto;
+                    padding: 10px 10px;
+                    overflow: hidden;
+                    cursor: default;
+                    border: none;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                span {
+                    font-size: var(--small-text);
+                    width: 100%;
+                    height: 100%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: rgba(145, 117, 219, 1);
+                    color: #fff;
+                    cursor: pointer;
+
+                    .icon {
+                        font-size: 1.3em;
+                    }
+                }
+            }
+        }
+    }
+}

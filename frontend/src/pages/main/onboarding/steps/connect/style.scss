@@ -1,0 +1,111 @@
+.connect-account-page {
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        margin-top: 30px;
+        min-height: 52vh;
+
+        .account {
+            display: flex;
+            flex-direction: row;
+            border: 2px dashed rgb(155, 155, 155);
+            border-radius: 20px;
+            align-items: center;
+            padding: 15px 25px;
+            margin-top: 20px;
+            cursor: pointer;
+
+            img {
+                opacity: 0.8;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                padding: 12px;
+                object-fit: contain;
+            }
+
+            .account-details {
+                margin-left: 20px;
+
+                p {
+                    color: #121212;
+                    font-size: var(--small-text);
+                    margin-top: 5px;
+
+                    &.account-type {
+                        font-weight: 600;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .loader {
+                width: 50px;
+                height: 50px;
+                margin: 0px;
+                border-width: 5px;
+            }
+
+            &.disabled {
+                background-color: #81cc66;
+                border: none;
+                opacity: 1;
+
+                img {
+                    background-color: transparent !important;
+                }
+
+                .account-details p {
+                    color: #fff;
+                }
+            }
+
+            &.youtube {
+                img {
+                    background-color: rgb(255, 0, 0);
+                }
+
+                .loader {
+                    border-top-color: rgb(255, 0, 0);
+                }
+
+                .account-type {
+                    color: rgb(255, 0, 0);
+                }
+            }
+
+            &.spotify {
+                img {
+                    background-color: rgb(30, 215, 96);
+                }
+
+                .loader {
+                    border-top-color: rgb(30, 215, 96);
+                }
+
+                .account-type {
+                    color: rgb(30, 215, 96);
+                }
+            }
+
+            &.reddit {
+                img {
+                    background-color: #ff4500;
+                }
+
+                .loader {
+                    border-top-color: #ff4500;
+                }
+
+                .account-type {
+                    color: #ff4500;
+                }
+            }
+        }
+    }
+
+    .btn {
+        margin-top: auto;
+        width: 100%;
+    }
+}

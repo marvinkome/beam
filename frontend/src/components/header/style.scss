@@ -1,0 +1,67 @@
+.root-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    background-color: rgba(145, 117, 219, 1);
+    padding: 18px 25px;
+    border-radius: 0px 0px 10px 10px;
+
+    .logo {
+        width: 80px;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    .me {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: contain;
+    }
+
+    .dropdown-container {
+        position: absolute;
+        width: 180px;
+        right: 20px;
+        z-index: 10;
+        top: 18px;
+        display: none;
+
+        &.isOpen {
+            display: block;
+        }
+
+        .dropdown {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 10px 0px;
+            border: 1px solid rgba(50, 41, 77, 0.2);
+            box-shadow: -0.5px 1px 0px 1px rgba(226, 225, 229, 0.5);
+
+            a,
+            p {
+                width: 100%;
+                text-align: left;
+                display: block;
+                font-size: var(--small-text);
+                color: var(--text-color);
+                padding: 10px 15px;
+            }
+        }
+    }
+}
+
+.stack-header {
+    display: flex;
+    align-items: center;
+    background-color: rgba(145, 117, 219, 1);
+    color: #fff;
+    padding: 23px 25px;
+    border-radius: 0px 0px 10px 10px;
+
+    p {
+        margin-left: 2em;
+        font-size: 18px;
+    }
+}

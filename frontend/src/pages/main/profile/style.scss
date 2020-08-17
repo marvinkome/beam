@@ -1,0 +1,97 @@
+.profile-page {
+    .profile {
+        display: flex;
+        align-items: center;
+        padding: 15px 20px;
+        border-bottom: 1px solid rgba(50, 41, 77, 0.2);
+
+        img {
+            width: 55px;
+            height: 55px;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        p {
+            font-weight: 600;
+            margin-left: 10px;
+        }
+    }
+
+    .linked-accounts {
+        padding: 15px 20px;
+
+        p {
+            font-weight: 600;
+        }
+
+        .account {
+            display: flex;
+            align-items: center;
+            border: 2px dashed rgb(155, 155, 155);
+            border-radius: 20px;
+            align-items: center;
+            padding: 15px 20px;
+            margin-top: 20px;
+            cursor: pointer;
+
+            &.youtube {
+                img {
+                    background-color: rgb(255, 0, 0);
+                }
+
+                .account-type {
+                    color: rgb(255, 0, 0);
+                }
+            }
+
+            &.spotify {
+                img {
+                    background-color: rgb(30, 215, 96);
+                }
+
+                .account-type {
+                    color: rgb(30, 215, 96);
+                }
+            }
+
+            &.reddit {
+                img {
+                    background-color: #ff4500;
+                }
+
+                .account-type {
+                    color: #ff4500;
+                }
+            }
+
+            img {
+                opacity: 0.8;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                padding: 10px;
+                object-fit: contain;
+            }
+
+            .account-details {
+                margin-left: 25px;
+                margin-right: auto;
+
+                p {
+                    color: #121212;
+                    font-size: var(--small-text);
+
+                    &.account-type {
+                        font-weight: 600;
+                        font-size: 16px;
+                    }
+                }
+            }
+
+            .icon {
+                font-size: 2em;
+            }
+        }
+    }
+}

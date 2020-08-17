@@ -1,0 +1,51 @@
+@import "styles/utils/mixins.scss";
+
+.account-created {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    color: #32294d;
+
+    .icon {
+        color: #9175db;
+        font-size: 1.5em;
+    }
+
+    .info-container {
+        text-align: center;
+
+        .text-section {
+            width: 400px;
+            margin: 2em auto;
+
+            h2 {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 2.5;
+            }
+
+            img {
+                height: 80px;
+            }
+
+            a {
+                color: #9175db;
+            }
+
+            button {
+                background-color: #9175db;
+                color: white;
+                font-size: 24px;
+                padding: 30px;
+                margin: 40px 0px;
+                border-radius: 10px;
+                border-style: none;
+            }
+        }
+    }
+
+    footer {
+        margin-top: auto;
+    }
+}

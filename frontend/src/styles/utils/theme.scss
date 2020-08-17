@@ -1,0 +1,48 @@
+:root {
+    // colors
+    --bg-color: #ffffff;
+    --text-color: rgb(50, 41, 77);
+    --primary-color: rgb(145, 117, 219);
+    --secondary-color: rgb(145, 117, 219);
+
+    // typography
+    --heading-1: 34px;
+    --heading-2: 24px;
+    --heading-3: 20px;
+    --heading-4: 18px;
+    --body-text: 16px;
+    --small-text: 14px;
+    --smaller-text: 12px;
+}
+
+// typography
+
+h1 {
+    font-size: var(--heading-1);
+    font-weight: 700;
+}
+
+h2 {
+    font-size: var(--heading-2);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: var(--heading-3);
+    font-weight: 600;
+}
+
+h4 {
+    font-size: var(--heading-4);
+    font-weight: 600;
+}
+
+p {
+    font-size: var(--body-text);
+    font-weight: 400;
+}
+
+small {
+    font-size: var(--smaller-text);
+    font-weight: 400;
+}

@@ -1,0 +1,49 @@
+.btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 50px;
+    padding: 15px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    cursor: pointer;
+    outline: none;
+    font-size: 16px;
+    text-decoration: none;
+
+    &.btn-primary {
+        background: var(--primary-color);
+        color: #fff;
+
+        &:focus {
+            border: none;
+            outline: none;
+        }
+    }
+
+    &.btn-primary-outline {
+        border: 1px solid var(--primary-color);
+        background-color: transparent;
+        color: var(--primary-color);
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.link-button {
+    font-size: inherit;
+    border: none;
+    outline: none;
+    padding: 0;
+    color: var(--primary-color);
+    cursor: pointer;
+    background-color: transparent;
+
+    &:focus {
+        border: none;
+        outline: none;
+    }
+}

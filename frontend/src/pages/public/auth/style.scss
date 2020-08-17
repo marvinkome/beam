@@ -1,0 +1,62 @@
+.auth-page {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    height: 30vh;
+    padding: 3em 25px;
+
+    h1 {
+        font-weight: 800;
+    }
+
+    .signin-options {
+        margin-top: 8em;
+        margin-bottom: 2em;
+
+        .btn {
+            width: 100%;
+            margin-bottom: 25px;
+
+            &:last-child {
+                margin-bottom: 0px;
+            }
+
+            &.google {
+                border: 1px solid rgb(66, 133, 244);
+
+                span {
+                    color: rgb(66, 133, 244);
+                }
+            }
+
+            &.facebook {
+                border: 1px solid rgb(59, 89, 153);
+
+                span {
+                    color: rgb(59, 89, 153);
+                }
+            }
+
+            img {
+                width: 28px;
+                height: 28px;
+            }
+
+            span {
+                font-size: 16px;
+                margin-left: 15px;
+                letter-spacing: 0px;
+            }
+        }
+    }
+
+    .terms {
+        font-size: var(--small-text);
+    }
+
+    .or {
+        margin: 7em 0px;
+        font-size: var(--small-text);
+        text-align: center;
+    }
+}

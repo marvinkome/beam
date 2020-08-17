@@ -1,0 +1,24 @@
+.modal-overlay {
+    position: fixed;
+    z-index: 2;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    background-color: rgba(0, 0, 0, 0.8);
+
+    .modal-container {
+        position: absolute;
+        top: calc((100% - 50%) / 2);
+        left: calc((100% - 80%) / 2);
+        height: auto;
+        width: 80%;
+        background: rgb(255, 255, 255);
+        overflow: auto;
+        outline: none;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        border-radius: 10px;
+    }
+}
