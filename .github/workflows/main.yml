@@ -27,7 +27,14 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Set up project with docker-compose
-      # USE DOCKER COMPOSE TO RUN BOTH PLATFORMS
+        run: docker-compose up -d
+
+      - name: Run tests
+        uses: cypress-io/github-action@v1
+        with:
+          working-directory: tests
+          wait-on: "http://localhost:3033"
+          wait-on-timeout: 180
 
   deploy:
     runs-on: ubuntu-18.04
