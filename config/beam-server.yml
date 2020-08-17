@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: Service
+metadata:
+    name: beam-server-svc
+spec:
+    selector:
+        app: beam-server
+    ports:
+        - port: 80
+          targetPort: 5055
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: beam-server-dep
+    labels:
+        app: beam-server
+spec:
+    replicas: 1
+    selector:
+        matchLabels:
+            app: beam-server
+    template:
+        metadata:
+            labels:
+                app: beam-server
+        spec:
+            containers:
+                - name: beam-server
+                  image: <IMAGE>
+                  imagePullPolicy: Always
+                  ports:
+                      - containerPort: 5055
+                  envFrom:
+                      - secretRef:
+                            name: beam-server-secret
+                  livenessProbe:
+                      httpGet:
+                          path: /
+                          port: 5055
+                      initialDelaySeconds: 5
+                  readinessProbe:
+                      httpGet:
+                          path: /
+                          port: 5055
