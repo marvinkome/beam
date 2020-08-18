@@ -1,23 +1,25 @@
 {
-  "name": "beam-tests",
-  "version": "1.0.0",
-  "main": "index.ts",
-  "author": "Marvin Kome",
-  "license": "MIT",
-  "scripts": {
-    "start": "cd ../frontend && yarn start",
-    "test": "cypress open"
-  },
-  "dependencies": {
-    "cypress": "4.12.1",
-    "cypress-plugin-snapshots": "1.4.4",
-    "typescript": "3.9.7"
-  },
-  "devDependencies": {
-    "eslint": "6.8.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-cypress": "2.10.3",
-    "eslint-plugin-prettier": "3.1.3",
-    "prettier": "2.0.5"
-  }
+    "name": "beam-tests",
+    "version": "1.0.0",
+    "main": "index.ts",
+    "author": "Marvin Kome",
+    "license": "MIT",
+    "scripts": {
+        "start": "cd ../frontend && yarn start",
+        "test": "cypress open --config-file cypress.local.json",
+        "test:run": "cypress run --config-file cypress.local.json"
+    },
+    "dependencies": {
+        "cypress": "4.12.1",
+        "cypress-plugin-snapshots": "1.4.4",
+        "cypress-social-logins": "1.4.3",
+        "typescript": "3.9.7"
+    },
+    "devDependencies": {
+        "eslint": "6.8.0",
+        "eslint-config-prettier": "6.11.0",
+        "eslint-plugin-cypress": "2.10.3",
+        "eslint-plugin-prettier": "3.1.3",
+        "prettier": "2.0.5"
+    }
 }
