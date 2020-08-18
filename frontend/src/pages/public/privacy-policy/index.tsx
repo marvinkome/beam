@@ -557,6 +557,12 @@ export function PrivacyPolicy() {
                         </li>
                         <li>
                             <p>
+                                <strong>Push Notifications</strong>
+                            </p>
+                            <p>One Signal</p>
+                        </li>
+                        <li>
+                            <p>
                                 <strong>Website Hosting</strong>
                             </p>
                             <p>Digital Ocean</p>
