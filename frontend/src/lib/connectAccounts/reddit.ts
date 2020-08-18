@@ -85,7 +85,7 @@ export default function useRedditConnect(onConnected: () => void) {
     const signIn = useRedditLogin({
         clientId: REDDIT_CLIENT_ID,
         scope: "mysubreddits",
-        redirectUri: `${APP_URL}/app/onboarding`,
+        redirectUri: `${APP_URL}/app`,
         onSuccess: getUserData,
     })
 
