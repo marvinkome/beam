@@ -1,8 +1,7 @@
-describe("Onboarding Flow", () => {
+describe.skip("Onboarding Flow", () => {
     beforeEach(() => {
         cy.server()
 
-        // cy.setCookie()
         cy.visit("/app/onboarding")
     })
 
