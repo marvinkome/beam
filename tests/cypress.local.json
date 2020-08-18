@@ -6,8 +6,6 @@
     "viewportWidth": 360,
     "viewportHeight": 760,
     "env": {
-        "serverUrl": "http://localhost:5055",
-        "googleSocialLoginUsername": "marvinkome@gmail.com",
-        "googleSocialLoginPassword": "oghenekome"
+        "serverUrl": "http://localhost:5055"
     }
 }
