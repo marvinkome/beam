@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useCallback } from "react"
+import OneSignal from "react-onesignal"
 import { useMutation, gql } from "@apollo/client"
 import { trackPageView, trackUserEvent } from "lib/GA"
 import "./style.scss"
@@ -28,10 +29,9 @@ function getGeolocation() {
     })
 }
 
-export function Location({ changeStep }: { changeStep: () => void }) {
-    useEffect(() => trackPageView("grant-location"), [])
-
+function useUserLocation() {
     const [locationError, setLocationError] = useState(false)
+    const [hasLocation, setHasLocation] = useState(false)
 
     const [setLocation] = useMutation(gql`
         mutation SetLocation($location: LocationInput) {
@@ -42,41 +42,66 @@ export function Location({ changeStep }: { changeStep: () => void }) {
     useEffect(() => {
         getGeolocation()
             .then(async (location) => {
-                // store location
                 await setLocation({ variables: { location } })
-                changeStep()
+                setHasLocation(true)
             })
             .catch(() => {
                 setLocationError(true)
             })
-    }, [setLocation, changeStep])
+    }, [setLocation])
 
     const askForUserLocation = async () => {
         trackUserEvent("Ask for user location", "onboarding")
+
         const res = await navigator.permissions.query({ name: "geolocation" })
 
         if (res.state === "prompt") {
             const location = await getGeolocation()
             await setLocation({ variables: { location } })
-            changeStep()
+            setHasLocation(true)
             setLocationError(false)
         }
     }
 
+    return {
+        locationError,
+        askForUserLocation,
+        hasLocation,
+    }
+}
+
+function useNotificationAccess(hasLocation: boolean) {
+    const requestPermission = useCallback(async () => {
+        try {
+            await OneSignal.registerForPushNotifications()
+        } catch (e) {
+            console.error(e)
+        }
+    }, [])
+
+    useEffect(() => {
+        if (!hasLocation) return
+        requestPermission()
+    }, [hasLocation, requestPermission])
+}
+
+export function Permissions({ changeStep }: { changeStep: () => void }) {
+    useEffect(() => trackPageView("grant-permissions"), [])
+    const { locationError, askForUserLocation, hasLocation } = useUserLocation()
+    useNotificationAccess(hasLocation)
+
     return (
         <div className="location-page">
             <header className="page-header">
-                {!locationError ? (
-                    <h1>Allow location access to find friends near you</h1>
-                ) : (
-                    <h1>
-                        Couldn't get your location. We need your location to find friends near you
-                    </h1>
-                )}
+                <h1>Allow location and notification access</h1>
+
+                {locationError && <p>Give permission to continue</p>}
             </header>
 
             {!locationError ? (
-                <button className="btn btn-primary">Continue</button>
+                <button onClick={changeStep} className="btn btn-primary">
+                    Continue
+                </button>
             ) : (
                 <button onClick={askForUserLocation} className="btn btn-primary">
                     Try again

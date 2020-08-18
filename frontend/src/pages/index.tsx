@@ -18,7 +18,7 @@ import { MainPages } from "pages/main"
 import "react-toastify/dist/ReactToastify.css"
 
 ReactGA.initialize(GA_TRACKING_ID)
-OneSignal.initialize(ONESIGNAL_ID, { notifyButton: { enable: true } })
+OneSignal.initialize(ONESIGNAL_ID, { allowLocalhostAsSecureOrigin: true })
 
 export function RootPage() {
     useEffect(() => {
