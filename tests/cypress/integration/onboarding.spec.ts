@@ -1,5 +1,8 @@
 describe("Onboarding Flow", () => {
-    before(() => {
+    beforeEach(() => {
+        cy.server()
+
+        // cy.setCookie()
         cy.visit("/app/onboarding")
     })
 
