@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react"
 import OneSignal from "react-onesignal"
 import { useMutation, gql } from "@apollo/client"
-import { trackPageView, trackUserEvent } from "lib/GA"
+import { trackPageView, trackUserEvent, trackError } from "lib/GA"
 import "./style.scss"
 
 function getGeolocation() {
@@ -42,8 +42,8 @@ function useUserLocation() {
     useEffect(() => {
         getGeolocation()
             .then(async (location) => {
-                await setLocation({ variables: { location } })
                 setHasLocation(true)
+                await setLocation({ variables: { location } })
             })
             .catch(() => {
                 setLocationError(true)
@@ -57,8 +57,8 @@ function useUserLocation() {
 
         if (res.state === "prompt") {
             const location = await getGeolocation()
-            await setLocation({ variables: { location } })
             setHasLocation(true)
+            await setLocation({ variables: { location } })
             setLocationError(false)
         }
     }
@@ -70,11 +70,13 @@ function useUserLocation() {
     }
 }
 
-function useNotificationAccess(hasLocation: boolean) {
+function useNotificationAccess(hasLocation: boolean, changeStep: () => void) {
     const requestPermission = useCallback(async () => {
         try {
             await OneSignal.registerForPushNotifications()
+            changeStep()
         } catch (e) {
+            trackError("Failed setup push notifications")
             console.error(e)
         }
     }, [])
@@ -88,7 +90,7 @@ function useNotificationAccess(hasLocation: boolean) {
 export function Permissions({ changeStep }: { changeStep: () => void }) {
     useEffect(() => trackPageView("grant-permissions"), [])
     const { locationError, askForUserLocation, hasLocation } = useUserLocation()
-    useNotificationAccess(hasLocation)
+    useNotificationAccess(hasLocation, changeStep)
 
     return (
         <div className="location-page">
