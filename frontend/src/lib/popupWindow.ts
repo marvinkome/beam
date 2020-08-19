@@ -37,6 +37,7 @@ class PopupWindow {
 
                     if (!popup || popup.closed !== false) {
                         this.close()
+
                         reject(new Error("The popup was closed"))
 
                         return
@@ -56,7 +57,7 @@ class PopupWindow {
                      * cross-origin frame.
                      */
                 }
-            }, 500)
+            }, 1000)
         })
     }
 
