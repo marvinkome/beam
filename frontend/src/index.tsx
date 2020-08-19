@@ -13,7 +13,7 @@ ReactDOM.render(<RootPage />, document.getElementById("root"))
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.register({
     onUpdate: () => {
-        if (confirm("We've made Beam better, please click OK to get new updates")) {
+        if (window.confirm("We've made Beam better, please click OK to get new updates")) {
             window.location.reload(true)
         }
     },
