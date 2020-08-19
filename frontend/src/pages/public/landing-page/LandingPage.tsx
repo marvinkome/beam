@@ -12,6 +12,7 @@ export function LandingPageView(props: { onRegister: () => void }) {
         signIn()
         trackUserEvent("Sign up with CTA button", type)
     }
+
     return (
         <div className="landing-page">
             <div className="header-container">
@@ -48,12 +49,11 @@ export function LandingPageView(props: { onRegister: () => void }) {
                             </div>
                         </div>
 
-                        <button
-                            onClick={loaded ? () => signUp("header") : () => null}
-                            className="btn btn-primary"
-                        >
-                            Sign up with Google
-                        </button>
+                        {loaded && (
+                            <button onClick={() => signUp("header")} className="btn btn-primary">
+                                Sign up with Google
+                            </button>
+                        )}
                     </div>
 
                     <div className="image-grid">
@@ -264,12 +264,11 @@ export function LandingPageView(props: { onRegister: () => void }) {
                     </p>
 
                     <div className="text-box-cta">
-                        <button
-                            className="btn btn-primary"
-                            onClick={loaded ? () => signUp("bottom") : () => null}
-                        >
-                            Sign up with Google
-                        </button>
+                        {loaded && (
+                            <button className="btn btn-primary" onClick={() => signUp("bottom")}>
+                                Sign up with Google
+                            </button>
+                        )}
                     </div>
                 </div>
             </div>

@@ -12,19 +12,17 @@ export function Navbar() {
                 <img alt="beam" src={require("assets/images/beam-logo-dark.png")}></img>
             </div>
 
-            <button
-                onClick={
-                    loaded
-                        ? () => {
-                              signIn()
-                              trackUserEvent("Login with Google")
-                          }
-                        : () => null
-                }
-                className="btn"
-            >
-                Log in
-            </button>
+            {loaded && (
+                <button
+                    onClick={() => {
+                        signIn()
+                        trackUserEvent("Login with Google")
+                    }}
+                    className="btn"
+                >
+                    Log in
+                </button>
+            )}
         </nav>
     )
 }
