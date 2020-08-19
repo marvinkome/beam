@@ -88,7 +88,7 @@ export default function useSpotifyConnect(onCompleted: (completed: boolean) => v
     const signIn = useSpotifyLogin({
         clientId: SPOTIFY_CLIENT_ID,
         scope: "user-top-read",
-        redirectUri: `${APP_URL}/app`,
+        redirectUri: `${APP_URL}/oauth-redirect`,
         onSuccess: getUserData,
     })
 

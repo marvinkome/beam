@@ -46,6 +46,7 @@ export function PublicPages() {
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/terms-and-condition" component={Terms} />
                 <Route exact path="/acceptable-use" component={AcceptableUse} />
+                <Route exact path="/oauth-redirect" component={() => <p>Connecting account</p>} />
                 <UnauthRoute exact path="/" component={LandingPage} />
             </Switch>
         </Suspense>
