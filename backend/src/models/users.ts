@@ -32,70 +32,75 @@ export interface IUser extends Document {
     }
 }
 
-export const userSchema: Schema<IUser> = new Schema({
-    email: {
-        type: String,
-        unique: true,
-        minlength: 3,
-        required: true,
+export const userSchema: Schema<IUser> = new Schema(
+    {
+        email: {
+            type: String,
+            unique: true,
+            minlength: 3,
+            required: true,
+        },
+
+        googleId: String,
+        facebookId: String,
+
+        lastSeen: Date,
+
+        bot: {
+            default: false,
+            type: Boolean,
+        },
+
+        profile: {
+            name: String,
+            picture: String,
+            location: {
+                lat: Number,
+                long: Number,
+                state: String,
+                city: String,
+                country: String,
+            },
+        },
+
+        connectedAccounts: {
+            youtube: {
+                subscriptions: [
+                    {
+                        id: String,
+                        name: String,
+                    },
+                ],
+            },
+            reddit: {
+                subreddits: [
+                    {
+                        id: String,
+                        name: String,
+                    },
+                ],
+            },
+            spotify: {
+                artists: [
+                    {
+                        id: String,
+                        name: String,
+                    },
+                ],
+                genres: [String],
+            },
+        },
+
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
     },
-
-    googleId: String,
-    facebookId: String,
-
-    lastSeen: Date,
-
-    bot: {
-        default: false,
-        type: Boolean,
-    },
-
-    profile: {
-        name: String,
-        picture: String,
-        location: {
-            lat: Number,
-            long: Number,
-            state: String,
-            city: String,
-            country: String,
-        },
-    },
-
-    connectedAccounts: {
-        youtube: {
-            subscriptions: [
-                {
-                    id: String,
-                    name: String,
-                },
-            ],
-        },
-        reddit: {
-            subreddits: [
-                {
-                    id: String,
-                    name: String,
-                },
-            ],
-        },
-        spotify: {
-            artists: [
-                {
-                    id: String,
-                    name: String,
-                },
-            ],
-            genres: [String],
-        },
-    },
-
-    friends: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-    ],
-})
+    {
+        timestamps: true,
+    }
+)
 
 export default model<IUser>('User', userSchema)
