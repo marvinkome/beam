@@ -4,6 +4,7 @@ import { SpotifyResponseData } from "lib/hooks/spotifyLogin"
 import { setupAxios } from "."
 import { AxiosInstance } from "axios"
 import { trackError } from "lib/GA"
+import { toast } from "react-toastify"
 
 let axiosInstance: AxiosInstance | undefined
 
@@ -53,14 +54,17 @@ async function getTopArtistsAndGenres() {
     return { artists, genres: Array.from(genres) }
 }
 
-export default function useSpotifyConnect(onConnected: () => void) {
+export default function useSpotifyConnect(onCompleted: (completed: boolean) => void) {
     const connectAccount = useConnectAccount()
 
     const getUserData = async (res: SpotifyResponseData) => {
         const token = res.access_token
 
         if (!token) {
-            trackError("Failed to connect with Reddit")
+            toast.error("Failed to connect your Spotify account. Please try again")
+            trackError("Failed to connect with Spotify")
+            onCompleted(false)
+            return
         }
 
         axiosInstance = setupAxios("https://api.spotify.com/v1", token)
@@ -77,7 +81,7 @@ export default function useSpotifyConnect(onConnected: () => void) {
         })
 
         if (resp.data.connectAccount) {
-            onConnected()
+            onCompleted(true)
         }
     }
 

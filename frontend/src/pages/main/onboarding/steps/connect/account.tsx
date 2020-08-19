@@ -12,10 +12,13 @@ type IProps = {
 export function Account(props: IProps) {
     const [loading, setLoading] = useState(false)
 
-    const connectAccount = useConnectAccount(props.account, () => {
-        props.onConnect()
+    const connectAccount = useConnectAccount(props.account, (completed: boolean) => {
+        if (completed) {
+            props.onConnect()
+            trackUserEvent(`Connected ${props.account} account`, "onboarding")
+        }
+
         setLoading(false)
-        trackUserEvent(`Connected ${props.account} account`, "onboarding")
     })
 
     const onConnect = () => {

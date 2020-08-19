@@ -60,15 +60,16 @@ async function getYouTubeSubscriptions() {
     return subs
 }
 
-export default function useYouTubeConnect(onConnected: () => void) {
+export default function useYouTubeConnect(onCompleted: (completed: boolean) => void) {
     const connectAccount = useConnectAccount()
 
     const getUserData = async (res: any) => {
         const token = (res as GoogleLoginResponse).accessToken
 
         if (!token) {
-            toast.error("Failed to connect your YouTube account")
+            toast.error("Failed to connect your YouTube account. Please try again")
             trackError("Failed to connect with Youtube")
+            onCompleted(false)
             return
         }
 
@@ -85,7 +86,7 @@ export default function useYouTubeConnect(onConnected: () => void) {
         })
 
         if (resp.data.connectAccount) {
-            onConnected()
+            onCompleted(true)
         }
     }
 

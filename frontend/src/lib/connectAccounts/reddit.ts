@@ -4,6 +4,7 @@ import { setupAxios } from "lib/connectAccounts"
 import { useRedditLogin, useConnectAccount } from "lib/hooks"
 import { RedditResponseData } from "lib/hooks/redditLogin"
 import { trackError } from "lib/GA"
+import { toast } from "react-toastify"
 
 // REDDIT API
 let axiosInstance: AxiosInstance | undefined
@@ -55,14 +56,17 @@ async function getSubreddits() {
     return subreddits
 }
 
-export default function useRedditConnect(onConnected: () => void) {
+export default function useRedditConnect(onCompleted: (completed: boolean) => void) {
     const connectAccount = useConnectAccount()
 
     const getUserData = async (res: RedditResponseData) => {
         const token = res.access_token
 
         if (!token) {
+            toast.error("Failed to connect your Reddit account. Please try again")
             trackError("Failed to connect with Reddit")
+            onCompleted(false)
+            return
         }
 
         axiosInstance = setupAxios("https://oauth.reddit.com", token)
@@ -78,7 +82,7 @@ export default function useRedditConnect(onConnected: () => void) {
         })
 
         if (resp.data.connectAccount) {
-            onConnected()
+            onCompleted(true)
         }
     }
 

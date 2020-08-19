@@ -3,6 +3,7 @@ import { startLoader } from "components/loader"
 import useRedditConnect from "./reddit"
 import useYoutubeConnect from "./youtube"
 import useSpotifyConnect from "./spotify"
+
 export const setupAxios = (url: string, token: string) => {
     const axiosInst = axios.create({
         baseURL: url,
@@ -37,7 +38,7 @@ export const setupAxios = (url: string, token: string) => {
 
 export const useConnectAccount = (
     account: "reddit" | "youtube" | "spotify",
-    onConnect: () => void
+    onConnect: (completed: boolean) => void
 ) => {
     const [youtubeConnect] = useYoutubeConnect(onConnect)
     const [redditConnect] = useRedditConnect(onConnect)
