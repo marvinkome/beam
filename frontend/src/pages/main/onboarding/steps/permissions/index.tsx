@@ -79,7 +79,7 @@ function useNotificationAccess(hasLocation: boolean, changeStep: () => void) {
             trackError("Failed setup push notifications")
             console.error(e)
         }
-    }, [])
+    }, [changeStep])
 
     useEffect(() => {
         if (!hasLocation) return

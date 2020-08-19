@@ -41,7 +41,7 @@ export default function useLoginWithGoogle(onAuthCb?: () => void) {
                 : history.push("/app/onboarding")
         } else {
             // TODO:: ADD LOGGER
-            trackError("Authentication with Google failed")
+            trackError(`Authentication with Google failed - ${message}`)
             console.log(message)
             toast.error("Failed to sign up with Google")
         }

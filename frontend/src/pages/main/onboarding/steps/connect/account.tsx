@@ -15,6 +15,7 @@ export function Account(props: IProps) {
     const connectAccount = useConnectAccount(props.account, () => {
         props.onConnect()
         setLoading(false)
+        trackUserEvent(`Connected ${props.account} account`, "onboarding")
     })
 
     const onConnect = () => {
