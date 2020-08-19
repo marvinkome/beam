@@ -56,7 +56,7 @@ class PopupWindow {
                      * cross-origin frame.
                      */
                 }
-            }, 250)
+            }, 500)
         })
     }
 
