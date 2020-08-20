@@ -20,12 +20,12 @@ export function LandingPageView(props: { onRegister: () => void }) {
 
                 <div className="header-grid">
                     <div className="text-grid">
-                        <h1>Find local friends you’ll spend hours chatting with.</h1>
+                        <h1>Find friends you’ll spend hours chatting with.</h1>
 
                         <div className="check-list">
                             <div className="check">
                                 <FaCheck className="icon" />
-                                <p>Match with people near you who share your interests</p>
+                                <p>Match with people who share your interests</p>
                             </div>
 
                             <div className="check">

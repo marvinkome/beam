@@ -103,7 +103,7 @@ export function FindFriend() {
         return (
             <div className="find-friend">
                 <div className="no-friends">
-                    <h1>Please wait while we search for a match near your location</h1>
+                    <h1>Please wait while we search for a friend</h1>
 
                     <div className="loader"></div>
                 </div>

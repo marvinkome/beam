@@ -98,7 +98,7 @@ export function SuggestedFriends(props: { changeStep: () => void }) {
         return (
             <div className="suggestion-page loading">
                 <div className="page-header">
-                    <h1>Please wait while we search for a match near your location</h1>
+                    <h1>Please wait while we search for a friend</h1>
                 </div>
 
                 <div className="page-content">
