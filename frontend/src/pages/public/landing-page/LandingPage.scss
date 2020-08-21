@@ -53,7 +53,7 @@
                 padding-left: 6em;
 
                 @include for-phone-only {
-                    padding: 7em 2em 3em;
+                    padding: 6em 2em 4em;
                 }
 
                 h1 {
@@ -67,7 +67,7 @@
                     .check {
                         display: flex;
                         align-items: center;
-                        margin-bottom: 15px;
+                        margin-bottom: 25px;
 
                         .icon {
                             width: 20px;
@@ -85,7 +85,7 @@
                 .btn {
                     font-weight: 600;
                     padding: 15px 25px;
-                    margin-top: 2.5em;
+                    margin-top: 3.5em;
                     border-radius: 10px;
                     border: none;
                     background-color: #48d38a;
@@ -97,15 +97,22 @@
                         border: none;
                         outline: none;
                     }
+
+                    .loader {
+                        border-width: 3px;
+                        border-top-color: var(--primary-color);
+                        border-right-color: var(--primary-color);
+                        border-radius: 50%;
+                        width: 20px;
+                        height: 20px;
+                        margin-top: 0px;
+                        margin-left: 15px;
+                    }
                 }
             }
 
             .image-grid {
                 background-color: #9175db;
-
-                @include for-desktop-only {
-                    border-bottom-left-radius: 10px;
-                }
 
                 @include for-phone-only {
                     padding-top: 2em;
