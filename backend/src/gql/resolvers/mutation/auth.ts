@@ -30,11 +30,16 @@ const authenticateFacebook = (
 }
 
 export const resolver = {
-    googleLogin: async (_: any, { token, inviteToken }: any, { req, res }: IContext) => {
+    googleLogin: async (
+        _: any,
+        { token, inviteToken, youtubeData }: any,
+        { req, res }: IContext
+    ) => {
         req.body = { ...req.body, access_token: token }
 
         try {
             const { user, info } = await authenticateGoogle(req, res)
+
             if (info) {
                 throw new Error(info)
             }
@@ -62,6 +67,17 @@ export const resolver = {
 
                 // delete invite token
                 await invitation.remove()
+            }
+
+            if (youtubeData) {
+                await user.updateOne({
+                    $set: {
+                        connectedAccounts: youtubeData.map((sub: any) => ({
+                            ...sub,
+                            platform: 'youtube',
+                        })),
+                    },
+                })
             }
 
             return {

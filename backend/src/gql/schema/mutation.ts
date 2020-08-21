@@ -60,7 +60,11 @@ export const mutationTypeDefs = gql`
 
     type Mutation {
         # AUTH
-        googleLogin(token: String!, inviteToken: String): LoginMutationResponse
+        googleLogin(
+            token: String!
+            inviteToken: String
+            youtubeData: [YoutubeInput]
+        ): LoginMutationResponse
         facebookLogin(token: String!, inviteToken: String): LoginMutationResponse
 
         # USER

@@ -19,10 +19,10 @@ function getConnectedAccounts(user: IUser) {
     }
 
     return {
-        youtube: connectedAccounts.youtube.subscriptions,
-        reddit: connectedAccounts.reddit.subreddits,
-        spotifyArtists: connectedAccounts.spotify.artists,
-        spotifyGenres: connectedAccounts.spotify.genres,
+        youtube: connectedAccounts.filter((sub) => sub.platform === 'youtube'),
+        reddit: connectedAccounts.filter((sub) => sub.platform === 'reddit'),
+        spotifyArtists: connectedAccounts.filter((sub) => sub.platform === 'spotify'),
+        spotifyGenres: [],
     }
 }
 

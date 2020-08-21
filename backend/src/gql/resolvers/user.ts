@@ -6,11 +6,12 @@ import { IContext } from '..'
 export const userResolvers = {
     User: {
         connectedAccounts: (user: IUser) => {
-            const youtube = !!user.connectedAccounts?.youtube?.subscriptions.length
-            const reddit = !!user.connectedAccounts?.reddit?.subreddits.length
-            const spotify =
-                !!user.connectedAccounts?.spotify.artists.length ||
-                !!user.connectedAccounts?.spotify.genres.length
+            const youtube = !!user.connectedAccounts?.filter((acc) => acc.platform === 'youtube')
+                .length
+            const reddit = !!user.connectedAccounts?.filter((acc) => acc.platform === 'reddit')
+                .length
+            const spotify = !!user.connectedAccounts?.filter((acc) => acc.platform === 'spotify')
+                .length
 
             return {
                 youtube,

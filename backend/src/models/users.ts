@@ -18,18 +18,11 @@ export interface IUser extends Document {
         }
     }
     friends: Schema.Types.ObjectId[] | string[] | IUser[]
-    connectedAccounts?: {
-        youtube: {
-            subscriptions: Array<{ id: string; name: string }>
-        }
-        reddit: {
-            subreddits: Array<{ id: string; name: string }>
-        }
-        spotify: {
-            artists: Array<{ id: string; name: string }>
-            genres: string[]
-        }
-    }
+    connectedAccounts?: Array<{
+        id: string
+        name: string
+        platform: 'youtube' | 'spotify' | 'reddit'
+    }>
 }
 
 export const userSchema: Schema<IUser> = new Schema(
@@ -63,33 +56,13 @@ export const userSchema: Schema<IUser> = new Schema(
             },
         },
 
-        connectedAccounts: {
-            youtube: {
-                subscriptions: [
-                    {
-                        id: String,
-                        name: String,
-                    },
-                ],
+        connectedAccounts: [
+            {
+                id: String,
+                name: String,
+                platform: String,
             },
-            reddit: {
-                subreddits: [
-                    {
-                        id: String,
-                        name: String,
-                    },
-                ],
-            },
-            spotify: {
-                artists: [
-                    {
-                        id: String,
-                        name: String,
-                    },
-                ],
-                genres: [String],
-            },
-        },
+        ],
 
         friends: [
             {
