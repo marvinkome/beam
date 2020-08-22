@@ -70,14 +70,12 @@ export const resolver = {
             }
 
             if (youtubeData) {
-                await user.updateOne({
-                    $set: {
-                        connectedAccounts: youtubeData.map((sub: any) => ({
-                            ...sub,
-                            platform: 'youtube',
-                        })),
-                    },
-                })
+                user.connectedAccounts = youtubeData.map((sub: any) => ({
+                    ...sub,
+                    platform: 'youtube',
+                }))
+
+                await user.save()
             }
 
             return {

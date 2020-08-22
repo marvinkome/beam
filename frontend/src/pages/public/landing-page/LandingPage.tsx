@@ -1,9 +1,11 @@
 import React from "react"
+import cls from "classnames"
 import { Navbar } from "../components/Navbar"
 import { FaCheck } from "react-icons/fa"
 import { useGoogleLogin } from "lib/hooks"
 import { Footer } from "../components/Footer"
 import { trackUserEvent } from "lib/GA"
+import amplitude from "lib/amplitude"
 import "./LandingPage.scss"
 
 export function LandingPageView(props: { onRegister: () => void }) {
@@ -11,6 +13,7 @@ export function LandingPageView(props: { onRegister: () => void }) {
     const signUp = (type: string) => {
         signIn()
         trackUserEvent("Sign up with CTA button", type)
+        amplitude.trackEvent("Sign up")
     }
 
     return (
@@ -44,9 +47,11 @@ export function LandingPageView(props: { onRegister: () => void }) {
                             </div>
                         </div>
 
-                        <button onClick={() => signUp("header")} className="btn btn-primary">
+                        <button
+                            onClick={() => signUp("header")}
+                            className={cls("btn btn-primary", { disabled: !loaded })}
+                        >
                             Sign up with Google
-                            {!loaded && <div className="loader" />}
                         </button>
                     </div>
 

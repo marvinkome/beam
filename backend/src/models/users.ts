@@ -60,6 +60,7 @@ export const userSchema: Schema<IUser> = new Schema(
             {
                 id: String,
                 name: String,
+                image: String,
                 platform: String,
             },
         ],

@@ -4,16 +4,21 @@ import { useGoogleLogin } from "react-google-login"
 import { AUTH_TOKEN, GOOGLE_CLIENT_ID, ONBOARDING_KEY } from "lib/keys"
 import { toast } from "react-toastify"
 import { trackError } from "lib/GA"
+import { ConnectYoutubeAccount } from "lib/connect-account"
+import amplitude from "lib/amplitude"
 
-export default function useLoginWithGoogle(onAuthCb?: () => void) {
+export default function useGoogle(onAuthCb?: () => void) {
     const history = useHistory()
     const { inviteToken } = useParams()
 
     const [googleLogin] = useMutation(gql`
-        mutation GoogleLogin($token: String!) {
-            googleLogin(token: $token) {
+        mutation GoogleLogin($token: String!, $inviteToken: String, $youtubeData: [YoutubeInput]) {
+            googleLogin(token: $token, inviteToken: $inviteToken, youtubeData: $youtubeData) {
                 success
                 token
+                user {
+                    id
+                }
             }
         }
     `)
@@ -25,20 +30,32 @@ export default function useLoginWithGoogle(onAuthCb?: () => void) {
             return
         }
 
-        const loginResp = await googleLogin({ variables: { token: accessToken, inviteToken } })
-        const { token, success, message } = loginResp.data?.googleLogin
+        // get youtube subscriptions
+        const youtube = new ConnectYoutubeAccount(accessToken)
+        const youtubeData = await youtube.getSubscriptions()
+
+        const loginResp = await googleLogin({
+            variables: {
+                token: accessToken,
+                inviteToken,
+                youtubeData,
+            },
+        })
+        const { token, success, message, user } = loginResp.data?.googleLogin
 
         if (success) {
+            // Post login activities
             localStorage.setItem(AUTH_TOKEN, token)
+            amplitude.setUser(user.id)
 
             if (onAuthCb) {
                 return onAuthCb()
+            } else {
+                // check if user is done with onboarding
+                return localStorage.getItem(ONBOARDING_KEY) === "3"
+                    ? history.push("/app/chats")
+                    : history.push("/app/onboarding")
             }
-
-            // check if user is done with onboarding
-            return localStorage.getItem(ONBOARDING_KEY) === "3"
-                ? history.push("/app/chats")
-                : history.push("/app/onboarding")
         } else {
             // TODO:: ADD LOGGER
             trackError(`Authentication with Google failed - ${message}`)
@@ -49,6 +66,8 @@ export default function useLoginWithGoogle(onAuthCb?: () => void) {
 
     const login = useGoogleLogin({
         clientId: GOOGLE_CLIENT_ID,
+        cookiePolicy: "single_host_origin",
+        scope: "https://www.googleapis.com/auth/youtube.readonly",
         onSuccess: onGoogleLogin,
         onFailure: () => trackError("Authentication with Google failed"),
     })

@@ -5,6 +5,7 @@ export const mutationTypeDefs = gql`
     input YoutubeInput {
         name: String!
         id: String!
+        image: String
     }
 
     input RedditInput {

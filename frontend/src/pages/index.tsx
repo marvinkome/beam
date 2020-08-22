@@ -10,6 +10,7 @@ import { apolloClient } from "lib/graphql"
 import { PWAEventContext } from "lib/pwa"
 import { GA_TRACKING_ID, ONESIGNAL_ID } from "lib/keys"
 import { trackTiming } from "lib/GA"
+import amplitude from "lib/amplitude"
 
 // pages
 import { PublicPages } from "pages/public"
@@ -17,13 +18,12 @@ import { MainPages } from "pages/main"
 
 import "react-toastify/dist/ReactToastify.css"
 
+amplitude.initAmplitude()
 ReactGA.initialize(GA_TRACKING_ID)
 OneSignal.initialize(ONESIGNAL_ID, { allowLocalhostAsSecureOrigin: true })
 
 export function RootPage() {
-    useEffect(() => {
-        trackTiming()
-    }, [])
+    useEffect(() => trackTiming(), [])
 
     // hide prompt
     const prompt = useRef<any>()

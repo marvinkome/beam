@@ -3,10 +3,11 @@ import { Steps } from "components/steps"
 import { ONBOARDING_KEY } from "lib/keys"
 
 // steps
-import { Download } from "./steps/download"
-import { ConnectAccount } from "./steps/connect"
 import { Permissions } from "./steps/permissions"
-import { SuggestedFriends } from "./steps/suggested-friends"
+import { JoinGroups } from "./steps/joinGroups"
+// import { Download } from "./steps/download"
+// import { ConnectAccount } from "./steps/connect"
+// import { SuggestedFriends } from "./steps/suggested-friends"
 import "./style.scss"
 
 export function OnBoarding() {
@@ -20,19 +21,22 @@ export function OnBoarding() {
 
     return (
         <div className="onboarding">
-            <Steps stepsCount={4} currentStep={currentStep} />
+            <Steps stepsCount={3} currentStep={currentStep} />
 
             <div className="onboarding-page">
-                {currentStep === 0 && <Download changeStep={() => changeStep(currentStep + 1)} />}
-                {currentStep === 1 && (
+                {currentStep === 0 && (
                     <Permissions changeStep={() => changeStep(currentStep + 1)} />
                 )}
-                {currentStep === 2 && (
+
+                {currentStep === 1 && <JoinGroups changeStep={() => changeStep(currentStep + 1)} />}
+
+                {/* {currentStep === 2 && (
                     <ConnectAccount changeStep={() => changeStep(currentStep + 1)} />
                 )}
+
                 {currentStep === 3 && (
-                    <SuggestedFriends changeStep={() => changeStep(currentStep + 1)} />
-                )}
+                    <SuggestedFriends  />
+                )} */}
             </div>
         </div>
     )

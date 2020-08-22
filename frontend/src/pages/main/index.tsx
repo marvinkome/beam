@@ -19,7 +19,7 @@ const OnBoarding = React.lazy(() =>
     import("./onboarding").then((module) => ({ default: module.OnBoarding }))
 )
 
-export function useConnectedAccounts() {
+export function useAuth() {
     const history = useHistory()
 
     useEffect(() => {
@@ -29,12 +29,13 @@ export function useConnectedAccounts() {
 
         // check if user is done with onboarding
         if (localStorage.getItem(ONBOARDING_KEY) !== "3") {
-            history.push("/app/onboarding")
+            return history.push("/app/onboarding")
         }
     }, [history])
 }
 
 export function MainPages() {
+    useAuth()
     const location = useLocation()
     useEffect(() => {
         if (location.pathname.includes("/chat/")) {
@@ -43,8 +44,6 @@ export function MainPages() {
             trackPageView(location.pathname)
         }
     }, [location.pathname])
-
-    useConnectedAccounts()
 
     return isMobile() ? (
         <Suspense fallback={<PageLoader />}>

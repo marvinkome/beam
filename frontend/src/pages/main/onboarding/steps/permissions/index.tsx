@@ -55,7 +55,7 @@ function useUserLocation() {
 
         const res = await navigator.permissions.query({ name: "geolocation" })
 
-        if (res.state === "prompt") {
+        if (res.state === "prompt" || res.state === "granted") {
             const location = await getGeolocation()
             setHasLocation(true)
             await setLocation({ variables: { location } })

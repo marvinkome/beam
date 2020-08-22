@@ -15,3 +15,4 @@ export const SPOTIFY_CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID!
 // OTHER KEYS
 export const GA_TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID!
 export const ONESIGNAL_ID = process.env.REACT_APP_ONESIGNAL_ID!
+export const AMPLITUDE_KEY = process.env.REACT_APP_AMPLITUDE_KEY!

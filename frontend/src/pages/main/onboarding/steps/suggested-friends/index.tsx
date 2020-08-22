@@ -89,7 +89,7 @@ function useContinueToChat(suggestedFriend: any) {
     return onContinueToChat
 }
 
-export function SuggestedFriends(props: { changeStep: () => void }) {
+export function SuggestedFriends() {
     useEffect(() => trackPageView("suggest-friend"), [])
     const { loading, data, profileData } = useData()
     const onContinueToChat = useContinueToChat(data?.suggestedFriend)
