@@ -1,21 +1,23 @@
 import { gql } from 'apollo-server-express'
 
 export const queryTypeDef = gql`
-    type Interest {
+    type SharedInterest {
         name: String
         platform: String
     }
 
     type SuggestedFriend {
         friend: User
-        sharedInterests: [Interest]
+        sharedInterests: [SharedInterest]
     }
 
     type Query {
         me: User
+
         friend(id: ID!): User
         friends: [User]
-        conversation(with: ID!, first: Int, sort: Boolean, after: Int): [Message]
         suggestedFriend: SuggestedFriend
+
+        conversation(with: ID!, first: Int, sort: Boolean, after: Int): [Message]
     }
 `

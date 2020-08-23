@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react"
 import Loader from "components/loader"
 import ReactGA from "react-ga"
 import OneSignal from "react-onesignal"
-import { ToastContainer } from "react-toastify"
+import { ToastContainer, Slide } from "react-toastify"
 import { ApolloProvider } from "@apollo/client"
 import { Router, Switch, Route } from "react-router-dom"
 import { history } from "lib/history"
@@ -45,7 +45,12 @@ export function RootPage() {
                 </Router>
 
                 <Loader />
-                <ToastContainer />
+                <ToastContainer
+                    position="bottom-center"
+                    closeButton={false}
+                    hideProgressBar={true}
+                    transition={Slide}
+                />
             </ApolloProvider>
         </PWAEventContext.Provider>
     )

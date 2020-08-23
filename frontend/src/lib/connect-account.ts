@@ -60,7 +60,7 @@ export class ConnectYoutubeAccount extends ConnectAccount {
             subs.push({
                 id: item.snippet.resourceId.channelId,
                 name: item.snippet.title,
-                image: item.subscriberSnippet.thumbnails.default.url,
+                image: item.snippet.thumbnails.default.url,
             })
         }
 
@@ -77,6 +77,7 @@ export class ConnectYoutubeAccount extends ConnectAccount {
                 subs.push({
                     id: item.snippet.resourceId.channelId,
                     name: item.snippet.title,
+                    image: item.snippet.thumbnails.default.url,
                 })
             }
         }
@@ -88,7 +89,7 @@ export class ConnectYoutubeAccount extends ConnectAccount {
         try {
             const resp = await this.axios?.get("/subscriptions", {
                 params: {
-                    part: "snippet,contentDetails,subscriberSnippet",
+                    part: "snippet",
                     mine: true,
                     key: GOOGLE_CLIENT_ID,
                     maxResults: 150,

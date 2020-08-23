@@ -2,7 +2,6 @@ import { IContext, pubsub } from '@gql/index'
 import { IUser } from '@models/users'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
-import { groupsmigration } from 'googleapis/build/src/apis/groupsmigration'
 
 type sendMessageData = {
     to: string

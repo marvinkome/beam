@@ -3,13 +3,13 @@ import cls from "classnames"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa"
 
 type Props = {
-    defaultValue: boolean
+    defaultIsOpen: boolean
     children: any
     className: string
     header: any
 }
 export function Collapsible(props: Props) {
-    const [isOpen, setOpen] = useState(props.defaultValue)
+    const [isOpen, setOpen] = useState(props.defaultIsOpen)
     const toggle = () => setOpen(!isOpen)
 
     return (

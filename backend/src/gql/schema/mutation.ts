@@ -37,7 +37,7 @@ export const mutationTypeDefs = gql`
         long: Float
     }
 
-    # MUTATIONS
+    # MUTATIONS RESPONSES
     type LoginMutationResponse {
         code: String!
         success: Boolean!
@@ -59,6 +59,12 @@ export const mutationTypeDefs = gql`
         message: String
     }
 
+    type GroupMutationResponse {
+        success: Boolean!
+        message: String!
+        group: Group
+    }
+
     type Mutation {
         # AUTH
         googleLogin(
@@ -75,6 +81,10 @@ export const mutationTypeDefs = gql`
         createInviteLink: String
         addFriend(inviteToken: String!): AddFriendMutationResponse
         addFriendById(friendId: ID!): Boolean
+
+        # GROUP
+        createGroup(interestId: ID!): GroupMutationResponse
+        joinGroup(groupId: ID!): GroupMutationResponse
 
         # MESSAGING
         sendMessage(to: ID!, message: String!): SendMessageMutationResponse

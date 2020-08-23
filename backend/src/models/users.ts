@@ -21,6 +21,7 @@ export interface IUser extends Document {
     connectedAccounts?: Array<{
         id: string
         name: string
+        image: string
         platform: 'youtube' | 'spotify' | 'reddit'
     }>
 }

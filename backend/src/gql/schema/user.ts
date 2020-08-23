@@ -27,10 +27,18 @@ export const userTypeDefs = gql`
         location: Location
     }
 
+    type Interest {
+        id: String
+        name: String
+        image: String
+        group: Group
+    }
+
     type User {
         id: ID!
         email: String!
         connectedAccounts: ConnectedAccounts
+        interests: [Interest]
         profile: Profile
         lastSeen: String
         bot: Boolean
