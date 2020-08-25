@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react"
 import _sortBy from "lodash.sortby"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
-import { useParams, useHistory } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { formatDate, getProfileImage } from "lib/helpers"
 import { ChatUi } from "components/chat"
 

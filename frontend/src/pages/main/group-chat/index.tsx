@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react"
+import sortBy from "lodash.sortby"
 import { ChatUi } from "components/chat"
 import { useParams } from "react-router-dom"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { getProfileImage } from "lib/helpers"
-import sortBy from "lodash.sortby"
 import { trackError } from "lib/GA"
+import { toast } from "react-toastify"
 
 type User = {
     id: string
@@ -190,21 +191,55 @@ function useMessages(queryData: any) {
     }
 }
 
+function useMembership(defaultIsMember: boolean) {
+    const [isMember, setMembership] = useState(defaultIsMember)
+    const [joinGroupFn] = useMutation(gql`
+        mutation JoinGroup($groupId: ID!) {
+            joinGroup(groupId: $groupId) {
+                success
+                message
+                group {
+                    id
+                }
+            }
+        }
+    `)
+
+    useEffect(() => {
+        if (defaultIsMember) {
+            setMembership(true)
+        }
+    }, [defaultIsMember])
+    return {
+        isMember,
+        joinGroup: async (groupId: string) => {
+            const { data } = await joinGroupFn({ variables: { groupId } })
+            if (!data?.joinGroup.success) {
+                return toast.dark(data?.joinGroup.message)
+            }
+
+            setMembership(true)
+        },
+    }
+}
+
 export function GroupChat() {
     const { data } = useGroupData()
     const { messages, sendMessage } = useMessages(data)
+    const { isMember, joinGroup } = useMembership(data?.group?.isMember)
 
     return (
         <div className="group-chat">
             <ChatUi
-                isPreviewing={!data?.group?.isMember}
-                description=""
+                isPreviewing={!isMember}
+                description={!isMember ? "You're previewing this group" : ""}
                 profile={{
                     name: data?.group?.name,
                     image: data?.group?.image,
                 }}
                 messages={messages}
                 sendMessage={sendMessage}
+                joinGroup={() => joinGroup(data?.group.id)}
             />
         </div>
     )
