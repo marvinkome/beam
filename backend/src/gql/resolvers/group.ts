@@ -17,6 +17,10 @@ export const groupResolvers = {
             return !!group.users.find((gUser) => gUser.user == user.id)
         },
 
+        lastMessage: async (group: IGroup) => {
+            return Message.findOne({ to: group?.id }).sort('-timestamp')
+        },
+
         messages: async (group: IGroup, data: any) => {
             return Message.find({ to: group.id })
                 .sort({ timestamp: -1 })

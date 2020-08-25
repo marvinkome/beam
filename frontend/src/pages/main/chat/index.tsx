@@ -2,13 +2,8 @@ import React, { useState, useEffect, useCallback } from "react"
 import _sortBy from "lodash.sortby"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { useParams, useHistory } from "react-router-dom"
-import TextareaAutosize from "react-autosize-textarea"
-import { MdSend } from "react-icons/md"
-import { FiArrowLeft } from "react-icons/fi"
-import { ChatFeed } from "react-chat-ui"
-import { ChatBubble } from "./components/bubble"
 import { formatDate, getProfileImage } from "lib/helpers"
-import "./style.scss"
+import { ChatUi } from "components/chat"
 
 /* === Types === */
 type Friend = {
@@ -35,6 +30,7 @@ function formatMessages(messages: MessageResponse[], friendId: string) {
         senderName: message.from.profile.firstName,
         senderImage: getProfileImage(message.from.profile),
         timestamp: message.timestamp,
+        type: "friend",
         sending: false,
     }))
 }
@@ -71,7 +67,10 @@ function useDataFetch() {
                 }
             }
         `,
-        { variables: { friendId, first: 30 } }
+        {
+            fetchPolicy: "cache-and-network",
+            variables: { friendId, first: 30 },
+        }
     )
 
     return resp
@@ -244,39 +243,22 @@ function useProfile(data: any) {
 
 // MAIN COMPONENT
 export function Chat() {
-    const history = useHistory()
     const { data } = useDataFetch()
     const { profile } = useProfile(data)
     const { messages, sendMessage } = useMessages(data)
 
     return (
         <div className="chat-page">
-            <header>
-                <FiArrowLeft onClick={() => history.goBack()} className="icon" />
-
-                <img alt={profile?.firstName} src={getProfileImage(profile)} />
-
-                <div className="user-details">
-                    <p>{profile?.firstName}</p>
-                    <span>{profile?.lastSeen}</span>
-                </div>
-            </header>
-
-            <section className="chat-section">
-                <div className="chat-container">
-                    <ChatFeed chatBubble={ChatBubble} messages={messages} />
-                </div>
-            </section>
-
-            <footer>
-                <form onSubmit={sendMessage} className="form-section">
-                    <TextareaAutosize id="message" placeholder="What's on your mind?" maxRows={5} />
-
-                    <button type="submit" className="send">
-                        <MdSend className="icon" />
-                    </button>
-                </form>
-            </footer>
+            <ChatUi
+                description={profile?.lastSeen}
+                profile={{
+                    name: profile?.firstName,
+                    image: getProfileImage(profile),
+                }}
+                messages={messages}
+                sendMessage={sendMessage}
+                isPreviewing={false}
+            />
         </div>
     )
 }

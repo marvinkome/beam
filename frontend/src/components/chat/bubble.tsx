@@ -10,6 +10,7 @@ type ChatBubbleProps = {
         senderName?: string
         senderImage?: string
         timestamp: number
+        type: "group" | "friend"
         sending?: boolean
     }
     bubbleStyles?: any
@@ -19,7 +20,9 @@ export function ChatBubble(props: ChatBubbleProps) {
     return (
         <div className={cls("chat-bubble", { mine: props.message.id === "0" })}>
             {/* img */}
-            <img alt={props.message.senderName} src={props.message.senderImage} />
+            {props.message.type === "group" && (
+                <img alt={props.message.senderName} src={props.message.senderImage} />
+            )}
 
             {/* bubble */}
             <div className="bubble-card">

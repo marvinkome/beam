@@ -1,166 +1,50 @@
-import React, { useEffect } from "react"
+import React, { useState } from "react"
 import cls from "classnames"
-import introJs from "intro.js"
-import _orderBy from "lodash.orderby"
+import { FriendsTab } from "./friends"
+import { GroupsTab } from "./groups"
 import { RootHeader } from "components/header"
-import { useQuery, gql } from "@apollo/client"
-import { formatDate, getProfileImage } from "lib/helpers"
-import { Link } from "react-router-dom"
-import { AddFriend } from "components/modals"
 import "./style.scss"
 
-function formatItems(friends: any[]) {
-    const formattedFriends = friends.reduce((reduced, friend) => {
-        let item = {
-            id: friend.id,
-            name: friend.profile.firstName,
-            message: {
-                text: "Say hello",
-                isDefault: true,
-            },
-            timestamp: "",
-            image: getProfileImage(friend.profile),
-        }
+function useTabs() {
+    const [currentTab, changeCurrentTab] = useState<"groups" | "friends">("groups")
 
-        if (friend.lastMessage) {
-            item = {
-                ...item,
-                message: {
-                    text: friend.lastMessage.message,
-                    isDefault: false,
-                },
-                timestamp: formatDate(parseInt(friend.lastMessage.timestamp, 10)),
-            }
-        }
-
-        reduced.push(item)
-        return reduced
-    }, [])
-
-    return _orderBy(formattedFriends, "timestamp", "desc")
-}
-
-function useFriends() {
-    const { data, loading } = useQuery(
-        gql`
-            query Friend {
-                friends {
-                    id
-                    lastMessage {
-                        message
-                        timestamp
-                    }
-                    profile {
-                        firstName
-                        name
-                        picture
-                    }
-                }
-            }
-        `,
-        { fetchPolicy: "cache-and-network" }
-    )
-
-    return { data, loading }
-}
-
-function useIntroJs(data: any) {
-    useEffect(() => {
-        if (window.localStorage.getItem("done-intro")) {
-            return undefined
-        }
-
-        const intro = introJs()
-
-        intro.onbeforechange(() => {
-            // @ts-ignore
-            const currentStepIdx = intro._currentStep
-
-            // @ts-ignore
-            const currentStepDynamic = !!intro._options.steps[currentStepIdx].dynamic
-
-            if (currentStepDynamic) {
-                // @ts-ignore
-                const step = intro._options.steps[currentStepIdx]
-                const element = document.querySelector(step.element)
-
-                if (element) {
-                    // @ts-ignore
-                    const introItem = intro._introItems[currentStepIdx]
-                    introItem.element = element
-                    introItem.position = step.position
-                }
-            }
-        })
-
-        intro.oncomplete(() => {
-            window.localStorage.setItem("done-intro", "true")
-        })
-
-        intro.setOptions({
-            steps: [
-                {
-                    element: ".button-container",
-                    intro: "To start chatting on Beam add your friend here",
-                    // @ts-ignore
-                    dynamic: true,
-                },
-                {
-                    element: "img.me",
-                    intro: "Click on your profile icon to see settings and find new friends",
-                    // @ts-ignore
-                    dynamic: true,
-                },
-            ],
-        })
-
-        if (data?.friends.length < 2) {
-            intro.start()
-        }
-    }, [data])
+    return {
+        currentTab,
+        changeTab: (tab: "groups" | "friends") => {
+            changeCurrentTab(tab)
+        },
+    }
 }
 
 export function Chats() {
-    const { data, loading } = useFriends()
-    const friends = formatItems(data?.friends || [])
-    useIntroJs(data)
+    const { currentTab, changeTab } = useTabs()
 
     return (
         <div className="chats-page">
             <RootHeader />
 
-            <section className="chats-list">
-                {friends.map((friend: any) => (
-                    <Link to={`/app/chat/${friend.id}`} key={friend.id} className="chat-item">
-                        <img alt={friend.name} src={friend.image} />
+            {/* friends */}
+            {currentTab === "friends" && <FriendsTab />}
 
-                        <div className="chat-details">
-                            <p>
-                                {friend.name} <span>{friend.timestamp}</span>
-                            </p>
+            {/* groups */}
+            {currentTab === "groups" && <GroupsTab />}
 
-                            <p className={cls({ isDefault: friend.message.isDefault })}>
-                                {friend.message.text}
-                            </p>
-                        </div>
-                    </Link>
-                ))}
-            </section>
+            {/* bottom bar */}
+            <div className="bottom-nav">
+                <div
+                    onClick={() => changeTab("groups")}
+                    className={cls("nav-content", { active: currentTab === "groups" })}
+                >
+                    Groups
+                </div>
 
-            {!loading && friends.length < 2 && (
-                <AddFriend
-                    modalLocation="onboarding"
-                    trigger={(toggle) => {
-                        return (
-                            <div className="button-container">
-                                <button onClick={toggle} className="btn btn-primary">
-                                    Add your first friend
-                                </button>
-                            </div>
-                        )
-                    }}
-                />
-            )}
+                <div
+                    onClick={() => changeTab("friends")}
+                    className={cls("nav-content", { active: currentTab === "friends" })}
+                >
+                    Friends
+                </div>
+            </div>
         </div>
     )
 }

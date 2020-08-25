@@ -8,7 +8,6 @@ import { ChatFeed } from "react-chat-ui"
 import { ChatBubble } from "./bubble"
 
 type IProps = {
-    chatType: "group" | "friend"
     isPreviewing: boolean
     description: string
     profile: {

@@ -29,6 +29,7 @@ function formatMessages(messages: MessageResponse[], myId: string) {
         senderName: message.from.profile.firstName,
         senderImage: getProfileImage(message.from.profile),
         timestamp: message.timestamp,
+        type: "group",
         sending: false,
     }))
 }
@@ -196,7 +197,6 @@ export function GroupChat() {
     return (
         <div className="group-chat">
             <ChatUi
-                chatType="group"
                 isPreviewing={!data?.group?.isMember}
                 description=""
                 profile={{

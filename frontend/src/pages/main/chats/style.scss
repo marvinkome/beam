@@ -44,16 +44,50 @@
         }
     }
 
-    .button-container {
+    .friends-tab {
+        position: relative;
+        min-height: 82vh;
+    }
+
+    .action-button-container {
         bottom: 0;
         position: absolute;
         padding: 0px 2em;
-        margin-bottom: 3em;
+        margin-bottom: 1.5em;
 
         width: 100%;
 
         .btn {
             width: 100%;
+        }
+    }
+
+    .bottom-nav {
+        bottom: 0;
+        position: absolute;
+        padding: 1em 0px;
+        width: 100%;
+
+        display: flex;
+        border: 1px solid #c4c4c4;
+        border-radius: 10px 10px 0px 0px;
+
+        .nav-content {
+            flex: 1;
+            text-align: center;
+            text-transform: uppercase;
+            color: var(--primary-color);
+            font-weight: 600;
+
+            &.active::after {
+                content: "";
+                display: block;
+                margin: auto;
+                width: 10px;
+                height: 10px;
+                background-color: #daccff;
+                border-radius: 50%;
+            }
         }
     }
 }

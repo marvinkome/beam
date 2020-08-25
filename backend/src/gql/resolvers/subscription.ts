@@ -18,7 +18,6 @@ export const subscriptionResolver = {
 
                     if (variables.groupId) {
                         const fromSpecifiedGroup = payload.groupId == variables.groupId
-                        console.log(messageNotFromCurrentUser, fromSpecifiedGroup)
                         return messageNotFromCurrentUser && fromSpecifiedGroup
                     }
 

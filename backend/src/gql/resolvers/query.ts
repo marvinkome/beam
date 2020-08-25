@@ -14,12 +14,12 @@ type ConversationArgs = {
 
 export const queryResolver = {
     Query: {
-        me: authenticated(async function (_: any, __: any, context: IContext) {
-            return context.currentUser
+        me: authenticated(async function (_: any, __: any, ctx: IContext) {
+            return ctx.currentUser
         }),
 
-        friend: authenticated(async function (_: any, { id }: { id: string }, context: IContext) {
-            const user = context.currentUser
+        friend: authenticated(async function (_: any, { id }: { id: string }, ctx: IContext) {
+            const user = ctx.currentUser
             if (!user) return false
 
             const { friends } = await user.populate('friends').execPopulate()
@@ -27,8 +27,8 @@ export const queryResolver = {
             return (friends as any).find((friend: any) => friend.id === id)
         }),
 
-        friends: authenticated(async function (_: any, __: any, context: IContext) {
-            const user = context.currentUser
+        friends: authenticated(async function (_: any, __: any, ctx: IContext) {
+            const user = ctx.currentUser
             if (!user) return false
 
             const { friends } = await user.populate('friends').execPopulate()
@@ -53,6 +53,17 @@ export const queryResolver = {
         group: authenticated(async function (_: any, { id }: { id: string }) {
             // get group
             return Group.findOne({ _id: id })
+        }),
+
+        groups: authenticated(async function (_: any, __: any, ctx: IContext) {
+            const user = ctx.currentUser
+            if (!user) {
+                return []
+            }
+
+            return Group.find({
+                'users.user': user.id,
+            })
         }),
 
         suggestedFriend: authenticated(async function (_: any, __: any, ctx: IContext) {
