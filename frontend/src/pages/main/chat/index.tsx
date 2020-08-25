@@ -109,7 +109,7 @@ function useSubscibeToMessage(updateState: (data: any) => void) {
 
     const { data, loading } = useSubscription(
         gql`
-            subscription Messages($friendId: ID!) {
+            subscription Messages($friendId: ID) {
                 messageSent(friendId: $friendId) {
                     id
                     message

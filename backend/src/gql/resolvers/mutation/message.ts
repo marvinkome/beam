@@ -2,6 +2,7 @@ import { IContext, pubsub } from '@gql/index'
 import { IUser } from '@models/users'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
+import Group from '@models/groups'
 
 type sendMessageData = {
     to: string
@@ -10,7 +11,13 @@ type sendMessageData = {
 export const resolvers = {
     sendMessage: async (_: any, data: sendMessageData, ctx: IContext) => {
         const user = ctx.currentUser
-        if (!user) return false
+        if (!user) {
+            return {
+                code: 400,
+                success: false,
+                message: 'user not found',
+            }
+        }
 
         // check if user is a friend
         const { friends } = await user.populate('friends').execPopulate()
@@ -50,6 +57,57 @@ export const resolvers = {
         await pubsub.publish('SENT_MESSAGE', {
             messageSent: message,
             friendId: friend.id,
+        })
+
+        // send push notification
+
+        return {
+            code: 200,
+            success: true,
+            sentMessage: message,
+        }
+    },
+
+    sendMessageToGroup: async (_: any, data: sendMessageData, ctx: IContext) => {
+        const user = ctx.currentUser
+        if (!user) {
+            return {
+                code: 400,
+                success: false,
+                message: 'user not found',
+            }
+        }
+
+        const group = await Group.findOne({ _id: data.to })
+        if (!group) {
+            return {
+                code: 400,
+                success: false,
+                message: 'Group not found',
+            }
+        }
+
+        // check if user is in group
+        if (!group.users.find((gUser) => gUser.user == user.id)) {
+            return {
+                code: 400,
+                success: false,
+                message: "Can't send message to this group",
+            }
+        }
+
+        // create message
+        const message = new Message()
+        message.message = data.message
+        message.from = user.id
+        message.to = group.id
+
+        await message.save()
+
+        // publish change with pubsub
+        await pubsub.publish('SENT_MESSAGE', {
+            messageSent: message,
+            groupId: group.id,
         })
 
         // send push notification

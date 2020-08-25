@@ -1,5 +1,5 @@
 import moment, { Moment } from "moment"
-import { FACEBOOK_ID } from "./keys"
+import { FACEBOOK_ID, ONBOARDING_KEY } from "./keys"
 
 export function checkForConnectedAccounts(connectedAccounts: any) {
     if (connectedAccounts) {
@@ -106,4 +106,12 @@ export function getProfileImage(profile: any) {
     }
 
     return profile?.picture
+}
+
+export function redirectUri() {
+    if (localStorage.getItem(ONBOARDING_KEY) === "true") {
+        return "/app/chats"
+    } else {
+        return "/app/onboarding"
+    }
 }

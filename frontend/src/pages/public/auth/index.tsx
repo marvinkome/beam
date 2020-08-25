@@ -3,10 +3,11 @@ import GoogleLogin from "react-google-login"
 import { toast } from "react-toastify"
 import { useMutation, gql } from "@apollo/client"
 import { useHistory, useParams } from "react-router-dom"
-import { GOOGLE_CLIENT_ID, AUTH_TOKEN, ONBOARDING_KEY } from "lib/keys"
+import { GOOGLE_CLIENT_ID, AUTH_TOKEN } from "lib/keys"
 import { trackUserEvent } from "lib/GA"
 
 import "./style.scss"
+import { redirectUri } from "lib/helpers"
 
 function useInvite() {
     const [isLoading, setLoading] = useState(true)
@@ -33,9 +34,7 @@ function useInvite() {
                     toast.error("Invite token is invalid")
                 }
 
-                localStorage.getItem(ONBOARDING_KEY) === "3"
-                    ? history.push("/app/chats")
-                    : history.push("/app/onboarding")
+                history.push(redirectUri())
             })
         } else {
             setLoading(false)
@@ -66,9 +65,7 @@ function useAuthLogin() {
         if (success) {
             localStorage.setItem(AUTH_TOKEN, token)
 
-            return localStorage.getItem(ONBOARDING_KEY) === "3"
-                ? history.push("/app/chats")
-                : history.push("/app/onboarding")
+            return history.push(redirectUri())
         } else {
             toast.error("Invite token is invalid")
         }

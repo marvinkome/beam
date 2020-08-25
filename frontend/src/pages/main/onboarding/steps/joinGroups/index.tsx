@@ -5,6 +5,8 @@ import { useQuery, gql, useMutation } from "@apollo/client"
 import { FaSearch, FaPlus, FaPaintBrush } from "react-icons/fa"
 import { Collapsible } from "components/collapsible"
 import "./style.scss"
+import { useHistory, Link } from "react-router-dom"
+import { ONBOARDING_KEY } from "lib/keys"
 
 function splitInterestsIntoGroups(interests: any[]) {
     return partition(interests, (o) => o.group !== null)
@@ -65,11 +67,15 @@ function useInterests() {
 }
 
 function useCreateGroup() {
+    const history = useHistory()
     const [createGroupFn] = useMutation(gql`
         mutation CreateGroup($interestId: ID!) {
             createGroup(interestId: $interestId) {
                 success
                 message
+                group {
+                    id
+                }
             }
         }
     `)
@@ -81,16 +87,21 @@ function useCreateGroup() {
         }
 
         // redirect to group
-        toast.dark("Group created")
+        localStorage.setItem(ONBOARDING_KEY, "true")
+        history.push(`/app/group/${data?.createGroup.group?.id}`)
     }
 }
 
 function useJoinGroup() {
+    const history = useHistory()
     const [joinGroupFn] = useMutation(gql`
         mutation JoinGroup($groupId: ID!) {
             joinGroup(groupId: $groupId) {
                 success
                 message
+                group {
+                    id
+                }
             }
         }
     `)
@@ -102,7 +113,8 @@ function useJoinGroup() {
         }
 
         // redirect to group
-        toast.dark("Joined group")
+        localStorage.setItem(ONBOARDING_KEY, "true")
+        history.push(`/app/group/${data?.joinGroup.group?.id}`)
     }
 }
 
@@ -174,7 +186,9 @@ export function JoinGroups(props: { changeStep: () => void }) {
 
                                 <div>
                                     <p>{interest.group.name}</p>
-                                    <span>click to preview</span>
+                                    <Link to={`/app/group/${interest.group.id}`}>
+                                        click to preview
+                                    </Link>
                                 </div>
                             </div>
 

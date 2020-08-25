@@ -3,6 +3,7 @@ import { authenticated } from '@libs/auth'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import { findFriends } from '@libs/match'
+import Group from '@models/groups'
 
 type ConversationArgs = {
     with: string
@@ -47,6 +48,11 @@ export const queryResolver = {
                 .sort({ timestamp: data.sort ? -1 : 1 })
                 .limit(data.first || 10)
                 .skip(data.after || 0)
+        }),
+
+        group: authenticated(async function (_: any, { id }: { id: string }) {
+            // get group
+            return Group.findOne({ _id: id })
         }),
 
         suggestedFriend: authenticated(async function (_: any, __: any, ctx: IContext) {

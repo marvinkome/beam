@@ -88,5 +88,6 @@ export const mutationTypeDefs = gql`
 
         # MESSAGING
         sendMessage(to: ID!, message: String!): SendMessageMutationResponse
+        sendMessageToGroup(to: ID!, message: String!): SendMessageMutationResponse
     }
 `

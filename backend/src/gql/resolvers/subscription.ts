@@ -7,16 +7,22 @@ export const subscriptionResolver = {
             subscribe: withFilter(
                 () => pubsub.asyncIterator(['SENT_MESSAGE']),
 
-                // filter to only send message
-                // if messsage it's not from current user
-                // and it's from the specified friend
                 (payload, variables, ctx) => {
                     const messageNotFromCurrentUser =
                         payload.messageSent.from !== ctx.currentUser?.id
 
-                    const fromSpecifiedFriend = `${payload.messageSent.from}` === variables.friendId
+                    if (variables.friendId) {
+                        const fromSpecifiedFriend = payload.messageSent.from == variables.friendId
+                        return messageNotFromCurrentUser && fromSpecifiedFriend
+                    }
 
-                    return messageNotFromCurrentUser && fromSpecifiedFriend
+                    if (variables.groupId) {
+                        const fromSpecifiedGroup = payload.groupId == variables.groupId
+                        console.log(messageNotFromCurrentUser, fromSpecifiedGroup)
+                        return messageNotFromCurrentUser && fromSpecifiedGroup
+                    }
+
+                    return false
                 }
             ),
         },

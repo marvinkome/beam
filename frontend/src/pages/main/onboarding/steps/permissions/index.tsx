@@ -72,7 +72,12 @@ function useUserLocation() {
 
 function useNotificationAccess(hasLocation: boolean, changeStep: () => void) {
     const requestPermission = useCallback(async () => {
-        await OneSignal.registerForPushNotifications()
+        try {
+            await OneSignal.registerForPushNotifications()
+        } catch (e) {
+            console.error(e)
+        }
+
         changeStep()
     }, [changeStep])
 

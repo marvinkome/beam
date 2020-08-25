@@ -19,5 +19,6 @@ export const queryTypeDef = gql`
         suggestedFriend: SuggestedFriend
 
         conversation(with: ID!, first: Int, sort: Boolean, after: Int): [Message]
+        group(id: ID!): Group
     }
 `

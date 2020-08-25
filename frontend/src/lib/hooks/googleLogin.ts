@@ -1,11 +1,12 @@
 import { useHistory, useParams } from "react-router-dom"
 import { useMutation, gql } from "@apollo/client"
 import { useGoogleLogin } from "react-google-login"
-import { AUTH_TOKEN, GOOGLE_CLIENT_ID, ONBOARDING_KEY } from "lib/keys"
+import { AUTH_TOKEN, GOOGLE_CLIENT_ID } from "lib/keys"
 import { toast } from "react-toastify"
 import { trackError } from "lib/GA"
 import { ConnectYoutubeAccount } from "lib/connect-account"
 import amplitude from "lib/amplitude"
+import { redirectUri } from "lib/helpers"
 
 export default function useGoogle(onAuthCb?: () => void) {
     const history = useHistory()
@@ -52,9 +53,7 @@ export default function useGoogle(onAuthCb?: () => void) {
                 return onAuthCb()
             } else {
                 // check if user is done with onboarding
-                return localStorage.getItem(ONBOARDING_KEY) === "3"
-                    ? history.push("/app/chats")
-                    : history.push("/app/onboarding")
+                return history.push(redirectUri())
             }
         } else {
             // TODO:: ADD LOGGER

@@ -1,12 +1,13 @@
 import { Schema, model, Document } from 'mongoose'
 import { IConversation } from './conversations'
 import { IUser } from './users'
+import { IGroup } from './groups'
 
 export interface IMessage extends Document {
     message: string
     timestamp: Date
     from: Schema.Types.ObjectId | string | IUser
-    to: Schema.Types.ObjectId | string | IConversation
+    to: Schema.Types.ObjectId | string | IConversation | IGroup
 }
 
 export const messageSchema: Schema<IMessage> = new Schema({
@@ -20,9 +21,17 @@ export const messageSchema: Schema<IMessage> = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User',
     },
+
+    // to either conversation or group
     to: {
         type: Schema.Types.ObjectId,
-        ref: 'Conversation',
+        refPath: 'ToModel',
+    },
+
+    // ref path
+    ToModel: {
+        type: String,
+        enum: ['Group', 'Conversation'],
     },
 })
 

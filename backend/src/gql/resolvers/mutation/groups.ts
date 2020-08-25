@@ -65,9 +65,6 @@ export const resolvers = {
         // get group
         const group = await Group.findOne({
             _id: groupId,
-            'users.$': {
-                user: { $ne: user.id },
-            },
         })
 
         if (!group) {
@@ -89,6 +86,7 @@ export const resolvers = {
         return {
             success: true,
             message: 'Joined group',
+            group,
         }
     },
 }

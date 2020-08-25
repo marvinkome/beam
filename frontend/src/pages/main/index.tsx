@@ -9,6 +9,9 @@ import { PageLoader } from "components/page-loader"
 // PAGES
 const Chats = React.lazy(() => import("./chats").then((module) => ({ default: module.Chats })))
 const Chat = React.lazy(() => import("./chat").then((module) => ({ default: module.Chat })))
+const GroupChat = React.lazy(() =>
+    import("./group-chat").then((module) => ({ default: module.GroupChat }))
+)
 const FindFriend = React.lazy(() =>
     import("./find-friend").then((module) => ({ default: module.FindFriend }))
 )
@@ -21,17 +24,14 @@ const OnBoarding = React.lazy(() =>
 
 export function useAuth() {
     const history = useHistory()
+    const { pathname } = useLocation()
+    const onboarded = localStorage.getItem(ONBOARDING_KEY)
 
     useEffect(() => {
         if (!localStorage.getItem(AUTH_TOKEN)) {
             return history.push("/")
         }
-
-        // check if user is done with onboarding
-        if (localStorage.getItem(ONBOARDING_KEY) !== "3") {
-            return history.push("/app/onboarding")
-        }
-    }, [history])
+    }, [history, pathname, onboarded])
 }
 
 export function MainPages() {
@@ -51,6 +51,7 @@ export function MainPages() {
                 <Route exact path="/app/onboarding" component={OnBoarding} />
                 <Route exact path="/app/chats" component={Chats} />
                 <Route exact path="/app/chat/:friendId" component={Chat} />
+                <Route exact path="/app/group/:groupId" component={GroupChat} />
                 <Route exact path="/app/profile" component={Profile} />
                 <Route exact path="/app/find-friend" component={FindFriend} />
             </Switch>
