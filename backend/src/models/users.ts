@@ -22,6 +22,7 @@ export interface IUser extends Document {
         id: string
         name: string
         image: string
+        type?: 'artists' | 'genres' // for spotify
         platform: 'youtube' | 'spotify' | 'reddit'
     }>
 }
@@ -63,6 +64,10 @@ export const userSchema: Schema<IUser> = new Schema(
                 name: String,
                 image: String,
                 platform: String,
+                type: {
+                    type: String,
+                    required: false,
+                },
             },
         ],
 

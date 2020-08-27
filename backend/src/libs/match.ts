@@ -19,14 +19,17 @@ function getConnectedAccounts(user: IUser) {
     }
 
     return {
-        youtube: connectedAccounts.filter((sub) => sub.platform === 'youtube'),
-        reddit: connectedAccounts.filter((sub) => sub.platform === 'reddit'),
-        spotifyArtists: connectedAccounts.filter((sub) => sub.platform === 'spotify'),
-        spotifyGenres: [],
+        youtube: connectedAccounts.filter((acc) => acc.platform === 'youtube'),
+        reddit: connectedAccounts.filter((acc) => acc.platform === 'reddit'),
+        spotifyArtists: connectedAccounts.filter(
+            (acc) => acc.platform === 'spotify' && acc.type === 'artists'
+        ),
+        spotifyGenres: connectedAccounts.filter(
+            (acc) => acc.platform === 'spotify' && acc.type === 'genres'
+        ),
     }
 }
 
-// Total score:
 function getTotalPossibleScore(user: IUser) {
     const connectedAccounts = getConnectedAccounts(user)
     if (!connectedAccounts) {
@@ -95,15 +98,20 @@ function getRedditSimilarites(
     return [similarityWeight, sharedInterest]
 }
 
-function getSpotifyGenreSimilarites(user: string[], closeUser: string[]): [number, string[]] {
+function getSpotifyGenreSimilarites(
+    user: Array<{ name: string }>,
+    closeUser: Array<{ name: string }>
+): [number, string[]] {
     const sharedInterest: string[] = []
 
     const similarityWeight = user.reduce((simValue, curr) => {
-        const similar = closeUser.find((sub) => sub.toLowerCase() === curr.toLowerCase())
+        const similar = closeUser.find(
+            (genre) => genre.name.toLowerCase() === curr.name.toLowerCase()
+        )
 
         if (similar) {
             simValue = simValue + WEIGHT.spotify_genre
-            sharedInterest.push(curr)
+            sharedInterest.push(curr.name)
         }
 
         return simValue
@@ -119,7 +127,9 @@ function getSpotifyArtistSimilarites(
     const sharedInterest: string[] = []
 
     const similarityWeight = user.reduce((simValue, curr) => {
-        const similar = closeUser.find((sub) => sub.name.toLowerCase() === curr.name.toLowerCase())
+        const similar = closeUser.find(
+            (artist) => artist.name.toLowerCase() === curr.name.toLowerCase()
+        )
 
         if (similar) {
             simValue = simValue + WEIGHT.spotify_artist

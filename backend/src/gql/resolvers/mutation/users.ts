@@ -35,8 +35,11 @@ export const resolvers = {
             switch (input.account) {
                 case ConnectedAccountType.YOUTUBE: {
                     await user.updateOne({
-                        $set: {
-                            'connectedAccounts.youtube.subscriptions': input.subs,
+                        $addToSet: {
+                            connectedAccounts: input.subs.map((sub) => ({
+                                ...sub,
+                                platform: 'youtube',
+                            })),
                         },
                     })
 
@@ -44,9 +47,22 @@ export const resolvers = {
                 }
                 case ConnectedAccountType.SPOTIFY: {
                     await user.updateOne({
-                        $set: {
-                            'connectedAccounts.spotify.artists': input.artists,
-                            'connectedAccounts.spotify.genres': input.genres,
+                        $addToSet: {
+                            connectedAccounts: input.artists.map((artist) => ({
+                                ...artist,
+                                type: 'artist',
+                                platform: 'spotify',
+                            })),
+                        },
+                    })
+
+                    await user.updateOne({
+                        $addToSet: {
+                            connectedAccounts: input.genres.map((genre) => ({
+                                name: genre,
+                                type: 'genre',
+                                platform: 'spotify',
+                            })),
                         },
                     })
 
@@ -54,10 +70,14 @@ export const resolvers = {
                 }
                 case ConnectedAccountType.REDDIT: {
                     await user.updateOne({
-                        $set: {
-                            'connectedAccounts.reddit.subreddits': input.subreddits,
+                        $addToSet: {
+                            connectedAccounts: input.subreddits.map((subreddit) => ({
+                                ...subreddit,
+                                platform: 'reddit',
+                            })),
                         },
                     })
+
                     return true
                 }
                 default:
