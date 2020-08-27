@@ -6,6 +6,7 @@ import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { getProfileImage } from "lib/helpers"
 import { trackError } from "lib/GA"
 import { toast } from "react-toastify"
+import { ONBOARDING_KEY } from "lib/keys"
 
 type User = {
     id: string
@@ -219,6 +220,7 @@ function useMembership(defaultIsMember: boolean) {
             }
 
             setMembership(true)
+            localStorage.setItem(ONBOARDING_KEY, "true")
         },
     }
 }

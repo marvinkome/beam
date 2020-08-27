@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import * as admin from 'firebase-admin'
 import { createServer } from 'http'
 import { connect } from 'mongoose'
 import bodyParser from 'body-parser'
@@ -31,6 +32,11 @@ export default function createApp() {
 
     // setup passport
     setupStrategies()
+
+    // setup firebase
+    admin.initializeApp({
+        credential: admin.credential.applicationDefault(),
+    })
 
     // api routes
     app.use('/auth', authRoutes)

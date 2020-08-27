@@ -6,6 +6,8 @@ export interface IUser extends Document {
     facebookId?: string
     lastSeen?: Date | null
     bot?: boolean
+    deviceToken?: string
+    friends: Schema.Types.ObjectId[] | string[] | IUser[]
     profile: {
         name?: string
         picture?: string
@@ -17,7 +19,6 @@ export interface IUser extends Document {
             country: string
         }
     }
-    friends: Schema.Types.ObjectId[] | string[] | IUser[]
     connectedAccounts?: Array<{
         id: string
         name: string
@@ -28,21 +29,12 @@ export interface IUser extends Document {
 
 export const userSchema: Schema<IUser> = new Schema(
     {
+        // user information
         email: {
             type: String,
             unique: true,
             minlength: 3,
             required: true,
-        },
-
-        googleId: String,
-        facebookId: String,
-
-        lastSeen: Date,
-
-        bot: {
-            default: false,
-            type: Boolean,
         },
 
         profile: {
@@ -57,6 +49,14 @@ export const userSchema: Schema<IUser> = new Schema(
             },
         },
 
+        friends: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'User',
+            },
+        ],
+
+        // accounts
         connectedAccounts: [
             {
                 id: String,
@@ -66,12 +66,18 @@ export const userSchema: Schema<IUser> = new Schema(
             },
         ],
 
-        friends: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-            },
-        ],
+        // auth ids
+        googleId: String,
+        facebookId: String,
+
+        // chat information
+        lastSeen: Date,
+        deviceToken: String,
+
+        bot: {
+            default: false,
+            type: Boolean,
+        },
     },
     {
         timestamps: true,

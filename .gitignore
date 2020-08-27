@@ -67,6 +67,8 @@ dist
 build
 
 # Misc
+*secret.yml
+*secret.json
 sandbox.ts
 client_secret.json
 .DS_Store

@@ -1,5 +1,6 @@
 import { IContext, pubsub } from '@gql/index'
 import { IUser } from '@models/users'
+import { messaging } from 'firebase-admin'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import Group from '@models/groups'
@@ -111,6 +112,16 @@ export const resolvers = {
         })
 
         // send push notification
+        await messaging().send({
+            topic: group.id,
+            data: {
+                title: group.name,
+                message: `${user.profile.name?.split(' ')[0]}: ${message.message}`,
+                image: group.image,
+                messageId: message.id,
+                groupId: group.id,
+            },
+        })
 
         return {
             code: 200,

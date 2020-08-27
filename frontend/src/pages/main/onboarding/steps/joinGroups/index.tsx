@@ -40,6 +40,7 @@ function useInterests() {
     const { data, loading } = useQuery(gql`
         {
             me {
+                id
                 profile {
                     location {
                         state

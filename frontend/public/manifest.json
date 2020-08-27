@@ -18,9 +18,10 @@
             "sizes": "512x512"
         }
     ],
-    "scope": "/app/",
+    "scope": "/",
     "start_url": "/app/chats",
     "display": "standalone",
     "theme_color": "rgb(145, 117, 219)",
-    "background_color": "#32294D"
+    "background_color": "#32294D",
+    "gcm_sender_id": "103953800507"
 }

@@ -34,7 +34,12 @@ export function ChatUi(props: IProps) {
     return (
         <div className="chat-ui">
             <header>
-                <FiArrowLeft onClick={() => history.goBack()} className="icon" />
+                <FiArrowLeft
+                    onClick={() =>
+                        props.isPreviewing ? history.goBack() : history.push("/app/chats")
+                    }
+                    className="icon"
+                />
 
                 <img alt={props.profile.name} src={props.profile.image} />
 

@@ -4,6 +4,8 @@ import { IContext } from '@gql/index'
 import User from '@models/users'
 import { generateInviteId } from '@libs/helpers'
 import Invitation from '@models/invitations'
+import Group from '@models/groups'
+import { messaging } from 'firebase-admin'
 
 // TYPES
 enum ConnectedAccountType {
@@ -210,6 +212,28 @@ export const resolvers = {
                 console.error(e)
                 return false
             }
+        }
+    ),
+
+    setupNotifications: authenticated(
+        async (_: any, { token }: { token: string }, ctx: IContext) => {
+            const user = await ctx.currentUser
+            if (!user) return false
+
+            // set token
+            user.deviceToken = token
+            await user.save()
+
+            // subscribe to group push notifications
+            const userGroups = await Group.find({
+                'users.user': { $eq: user.id },
+            })
+
+            for (const group of userGroups) {
+                await messaging().subscribeToTopic(token, group.id)
+            }
+
+            return true
         }
     ),
 }
