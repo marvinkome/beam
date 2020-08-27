@@ -62,7 +62,7 @@ export function MainPages() {
                 <ProtectedRoute exact path="/app/join-group" component={JoinGroup} />
                 <ProtectedRoute exact path="/app/find-friend" component={FindFriend} />
 
-                {!localStorage.getItem(ONBOARDING_KEY) ? (
+                {localStorage.getItem(ONBOARDING_KEY) !== "true" ? (
                     <ProtectedRoute exact path="/app/onboarding" component={OnBoarding} />
                 ) : (
                     <Redirect to="/app/chats" />

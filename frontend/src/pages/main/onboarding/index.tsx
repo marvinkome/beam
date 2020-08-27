@@ -4,9 +4,7 @@ import { Steps } from "components/steps"
 // steps
 import { Permissions } from "./steps/permissions"
 import { JoinGroups } from "./steps/joinGroups"
-// import { Download } from "./steps/download"
-// import { ConnectAccount } from "./steps/connect"
-// import { SuggestedFriends } from "./steps/suggested-friends"
+
 import "./style.scss"
 
 export function OnBoarding() {
