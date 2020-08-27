@@ -1,31 +1,11 @@
-import React, { useState } from "react"
+import React from "react"
 import cls from "classnames"
+import { useDropdown } from "lib/hooks"
 import { useQuery, gql } from "@apollo/client"
 import { FiArrowLeft } from "react-icons/fi"
 import { useHistory, Link } from "react-router-dom"
 import { AddFriend, ShareBeam } from "components/modals"
 import "./style.scss"
-
-function useDropdown() {
-    const [dropdownOpen, setDropdownState] = useState(false)
-    const closeDropdown = () => {
-        setDropdownState(false)
-        document.removeEventListener("click", closeDropdown)
-    }
-
-    const openDropdown = () => {
-        setDropdownState(true)
-        // close the dropdown when document is clicked
-        document.addEventListener("click", closeDropdown)
-    }
-
-    const toggleDropdown = dropdownOpen ? closeDropdown : openDropdown
-
-    return {
-        dropdownOpen,
-        toggleDropdown,
-    }
-}
 
 export function RootHeader() {
     const { dropdownOpen, toggleDropdown } = useDropdown()
@@ -52,6 +32,7 @@ export function RootHeader() {
                         modalLocation="header"
                         trigger={(toggle) => <p onClick={toggle}>Add a friend to Beam</p>}
                     />
+                    <Link to="/app/join-group">Join a group</Link>
                     <Link to="/app/find-friend">Find me a friend</Link>
                     <Link to="/app/profile">Profile settings</Link>
                     <ShareBeam

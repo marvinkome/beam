@@ -240,6 +240,7 @@ export function GroupChat() {
                 messages={messages}
                 sendMessage={sendMessage}
                 joinGroup={() => joinGroup(data?.group.id)}
+                actions={[{ title: "Leave group", action: () => console.log("leave group") }]}
             />
         </div>
     )

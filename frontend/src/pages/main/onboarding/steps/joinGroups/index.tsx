@@ -1,132 +1,35 @@
-import React, { useState, useEffect } from "react"
-import partition from "lodash.partition"
-import { toast } from "react-toastify"
-import { useQuery, gql, useMutation } from "@apollo/client"
+import React from "react"
 import { FaSearch, FaPlus, FaPaintBrush } from "react-icons/fa"
 import { Collapsible } from "components/collapsible"
-import "./style.scss"
 import { useHistory, Link } from "react-router-dom"
 import { ONBOARDING_KEY } from "lib/keys"
+import {
+    useInterestsAndLocation,
+    useDataSource,
+    useCreateGroup,
+    useJoinGroup,
+} from "lib/hooks/groups"
 
-function splitInterestsIntoGroups(interests: any[]) {
-    return partition(interests, (o) => o.group !== null)
-}
-
-function useDataSource(interests: any[]) {
-    const [data, setData] = useState(interests)
-    const [searchTerm, setSearchTerm] = useState("")
-
-    useEffect(() => {
-        if (!searchTerm.length) {
-            setData(interests)
-        } else {
-            setData(
-                interests.filter((interest) => {
-                    const lcaseInterestName = (interest.name as string).toLowerCase()
-                    return lcaseInterestName.startsWith(searchTerm)
-                })
-            )
-        }
-    }, [searchTerm, interests])
-
-    return {
-        onSearch: (term: string) => setSearchTerm(term),
-        isSearching: !!searchTerm.length,
-        data: splitInterestsIntoGroups(data),
-    }
-}
-
-function useInterests() {
-    const { data, loading } = useQuery(gql`
-        {
-            me {
-                profile {
-                    location {
-                        state
-                    }
-                }
-                interests {
-                    id
-                    name
-                    image
-                    group {
-                        id
-                        name
-                        image
-                    }
-                }
-            }
-        }
-    `)
-
-    return {
-        interests: data?.me?.interests,
-        location: data?.me?.profile?.location?.state,
-        loading,
-    }
-}
-
-function useCreateGroup() {
-    const history = useHistory()
-    const [createGroupFn] = useMutation(gql`
-        mutation CreateGroup($interestId: ID!) {
-            createGroup(interestId: $interestId) {
-                success
-                message
-                group {
-                    id
-                }
-            }
-        }
-    `)
-
-    return async (interestId: string) => {
-        const { data } = await createGroupFn({ variables: { interestId } })
-        if (!data?.createGroup.success) {
-            return toast.dark(data?.createGroup.message)
-        }
-
-        // redirect to group
-        localStorage.setItem(ONBOARDING_KEY, "true")
-        history.push(`/app/group/${data?.createGroup.group?.id}`)
-    }
-}
-
-function useJoinGroup() {
-    const history = useHistory()
-    const [joinGroupFn] = useMutation(gql`
-        mutation JoinGroup($groupId: ID!) {
-            joinGroup(groupId: $groupId) {
-                success
-                message
-                group {
-                    id
-                }
-            }
-        }
-    `)
-
-    return async (groupId: string) => {
-        const { data } = await joinGroupFn({ variables: { groupId } })
-        if (!data?.joinGroup.success) {
-            return toast.dark(data?.joinGroup.message)
-        }
-
-        // redirect to group
-        localStorage.setItem(ONBOARDING_KEY, "true")
-        history.push(`/app/group/${data?.joinGroup.group?.id}`)
-    }
-}
+import "./style.scss"
 
 export function JoinGroups(props: { changeStep: () => void }) {
+    const history = useHistory()
+
     // query
-    const { interests, location, loading } = useInterests()
+    const { interests, location, loading } = useInterestsAndLocation()
     const { onSearch, data, isSearching } = useDataSource(interests || [])
     const [existingGroups, nonExistingGroups] = data
 
     // mutations
-    const createGroup = useCreateGroup()
-    const joinGroup = useJoinGroup()
+    const createGroup = useCreateGroup((group) => {
+        localStorage.setItem(ONBOARDING_KEY, "true")
+        history.push(`/app/group/${group?.id}`)
+    })
+
+    const joinGroup = useJoinGroup((group) => {
+        localStorage.setItem(ONBOARDING_KEY, "true")
+        history.push(`/app/group/${group?.id}`)
+    })
 
     return (
         <div className="join-groups">

@@ -41,6 +41,47 @@
                 color: hsl(0, 0%, 35%);
             }
         }
+
+        .actions {
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+
+            & > .icon {
+                text-align: center;
+                margin-right: 0px;
+                font-size: 1.3em;
+            }
+
+            .dropdown-container {
+                position: absolute;
+                width: 180px;
+                right: 10px;
+                z-index: 10;
+                top: 3em;
+                display: none;
+
+                &.isOpen {
+                    display: block;
+                }
+
+                .dropdown {
+                    background-color: #fff;
+                    border-radius: 10px;
+                    padding: 10px 0px;
+                    border: 1px solid rgba(50, 41, 77, 0.2);
+                    box-shadow: -0.5px 1px 0px 1px rgba(226, 225, 229, 0.5);
+
+                    span {
+                        width: 100%;
+                        text-align: left;
+                        display: block;
+                        color: var(--text-color);
+                        padding: 5px 15px;
+                    }
+                }
+            }
+        }
     }
 
     section.chat-section {

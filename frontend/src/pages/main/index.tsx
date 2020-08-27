@@ -12,6 +12,9 @@ const Chat = React.lazy(() => import("./chat").then((module) => ({ default: modu
 const GroupChat = React.lazy(() =>
     import("./group-chat").then((module) => ({ default: module.GroupChat }))
 )
+const JoinGroup = React.lazy(() =>
+    import("./join-group").then((module) => ({ default: module.JoinGroup }))
+)
 const FindFriend = React.lazy(() =>
     import("./find-friend").then((module) => ({ default: module.FindFriend }))
 )
@@ -53,6 +56,7 @@ export function MainPages() {
                 <Route exact path="/app/chat/:friendId" component={Chat} />
                 <Route exact path="/app/group/:groupId" component={GroupChat} />
                 <Route exact path="/app/profile" component={Profile} />
+                <Route exact path="/app/join-group" component={JoinGroup} />
                 <Route exact path="/app/find-friend" component={FindFriend} />
             </Switch>
         </Suspense>

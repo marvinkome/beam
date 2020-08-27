@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import cls from "classnames"
-import { useConnectAccount } from "lib/connectAccounts"
-import { trackUserEvent } from "lib/GA"
+import { useConnectAccount } from "lib/hooks"
+import { trackEvent } from "lib/analytics"
 
 type IProps = {
     account: "youtube" | "reddit" | "spotify"
@@ -15,7 +15,10 @@ export function Account(props: IProps) {
     const connectAccount = useConnectAccount(props.account, (completed: boolean) => {
         if (completed) {
             props.onConnect()
-            trackUserEvent(`Connected ${props.account} account`, "onboarding")
+            trackEvent(`Connected ${props.account} account`, {
+                category: "Connect",
+                label: "onboarding",
+            })
         }
 
         setLoading(false)
@@ -24,7 +27,10 @@ export function Account(props: IProps) {
     const onConnect = () => {
         connectAccount()
         setLoading(true)
-        trackUserEvent(`Connect ${props.account} account`, "onboarding")
+        trackEvent(`Connect ${props.account} account`, {
+            category: "Connect",
+            label: "onboarding",
+        })
     }
 
     return (

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react"
 import { StackHeader } from "components/header"
 import { FiX } from "react-icons/fi"
 import { useQuery, gql, useMutation } from "@apollo/client"
-import { useYouTubeConnect, useRedditConnect, useSpotifyConnect } from "lib/connectAccounts"
+import { useYouTubeConnect, useRedditConnect, useSpotifyConnect } from "lib/hooks"
+import { trackEvent } from "lib/analytics"
 import "./style.scss"
-import { trackUserEvent } from "lib/GA"
 
 function useConnectAccountAndProfile() {
     const [connectedAccounts, setConnectedAccounts] = useState({
@@ -66,9 +66,9 @@ function useConnectAccountAndProfile() {
         })
     }
 
-    const [youtubeConnect] = useYouTubeConnect(() => addConnectedAccount("youtube"))
-    const [redditConnect] = useRedditConnect(() => addConnectedAccount("reddit"))
-    const [spotifyConnect] = useSpotifyConnect(() => addConnectedAccount("spotify"))
+    const youtubeConnect = useYouTubeConnect(() => addConnectedAccount("youtube"))
+    const redditConnect = useRedditConnect(() => addConnectedAccount("reddit"))
+    const spotifyConnect = useSpotifyConnect(() => addConnectedAccount("spotify"))
 
     return {
         profile,
@@ -123,7 +123,10 @@ export function Profile() {
                         !youtube.isConnected
                             ? () => {
                                   youtube.connect()
-                                  trackUserEvent("Connect youtube account", "profile")
+                                  trackEvent("Connect youtube account", {
+                                      category: "Connect",
+                                      label: "profile",
+                                  })
                               }
                             : undefined
                     }
@@ -149,7 +152,10 @@ export function Profile() {
                         <FiX
                             onClick={() => {
                                 youtube.disconnect()
-                                trackUserEvent("Disconnect youtube account", "profile")
+                                trackEvent("Disconnect youtube account", {
+                                    category: "Disconnect",
+                                    label: "profile",
+                                })
                             }}
                             className="icon"
                         />
@@ -162,7 +168,10 @@ export function Profile() {
                         !spotify.isConnected
                             ? () => {
                                   spotify.connect()
-                                  trackUserEvent("Connect spotify account", "profile")
+                                  trackEvent("Connect spotify account", {
+                                      category: "Connect",
+                                      label: "profile",
+                                  })
                               }
                             : undefined
                     }
@@ -188,7 +197,10 @@ export function Profile() {
                         <FiX
                             onClick={() => {
                                 spotify.disconnect()
-                                trackUserEvent("Disconnect spotify account", "profile")
+                                trackEvent("Disconnect spotify account", {
+                                    category: "Disconnect",
+                                    label: "profile",
+                                })
                             }}
                             className="icon"
                         />
@@ -201,7 +213,10 @@ export function Profile() {
                         !reddit.isConnected
                             ? () => {
                                   reddit.connect()
-                                  trackUserEvent("Connect reddit account", "profile")
+                                  trackEvent("Connect reddit account", {
+                                      category: "Connect",
+                                      label: "profile",
+                                  })
                               }
                             : undefined
                     }
@@ -227,7 +242,10 @@ export function Profile() {
                         <FiX
                             onClick={() => {
                                 reddit.disconnect()
-                                trackUserEvent("Disconnect reddit account", "profile")
+                                trackEvent("Disconnect reddit account", {
+                                    category: "Disconnect",
+                                    label: "profile",
+                                })
                             }}
                             className="icon"
                         />

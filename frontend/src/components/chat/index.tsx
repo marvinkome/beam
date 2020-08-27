@@ -1,11 +1,14 @@
 import React from "react"
-import "./style.scss"
-import { FiArrowLeft } from "react-icons/fi"
-import { useHistory } from "react-router-dom"
+import cls from "classnames"
 import TextareaAutosize from "react-autosize-textarea"
+import { useDropdown } from "lib/hooks"
+import { FiArrowLeft, FiMoreVertical } from "react-icons/fi"
+import { useHistory } from "react-router-dom"
 import { MdSend } from "react-icons/md"
 import { ChatFeed } from "react-chat-ui"
 import { ChatBubble } from "./bubble"
+
+import "./style.scss"
 
 type IProps = {
     isPreviewing: boolean
@@ -24,12 +27,18 @@ type IProps = {
         sending?: boolean
     }>
 
+    actions?: Array<{
+        title: string
+        action: () => void
+    }>
+
     sendMessage: (e: React.FormEvent) => void
     joinGroup?: () => void
 }
 
 export function ChatUi(props: IProps) {
     const history = useHistory()
+    const { toggleDropdown, dropdownOpen } = useDropdown()
 
     return (
         <div className="chat-ui">
@@ -42,6 +51,22 @@ export function ChatUi(props: IProps) {
                     <p>{props.profile.name}</p>
                     <span>{props.description}</span>
                 </div>
+
+                {props.actions?.length && (
+                    <div className="actions">
+                        <FiMoreVertical onClick={toggleDropdown} className="icon" />
+
+                        <div className={cls("dropdown-container", { isOpen: dropdownOpen })}>
+                            <div className="dropdown">
+                                {props.actions.map((option, id) => (
+                                    <span key={id} onClick={option.action}>
+                                        {option.title}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                )}
             </header>
 
             <section className="chat-section">
