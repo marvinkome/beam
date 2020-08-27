@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react"
-import OneSignal from "react-onesignal"
+import React, { useEffect, useState, useCallback, useMemo } from "react"
 import { useMutation, gql } from "@apollo/client"
-import { trackPageView, trackUserEvent } from "lib/GA"
+import { trackPageView, trackEvent } from "lib/analytics"
+
 import "./style.scss"
 
 function getGeolocation() {
@@ -19,8 +19,6 @@ function getGeolocation() {
                 },
                 {
                     enableHighAccuracy: true,
-                    maximumAge: 30000,
-                    timeout: 27000,
                 }
             )
         } else {
@@ -29,7 +27,7 @@ function getGeolocation() {
     })
 }
 
-function useUserLocation() {
+function useUserLocation(changeStep: () => void) {
     const [locationError, setLocationError] = useState(false)
     const [hasLocation, setHasLocation] = useState(false)
 
@@ -39,19 +37,31 @@ function useUserLocation() {
         }
     `)
 
+    const checkGeolocation = useCallback(async () => {
+        const { state } = await navigator.permissions.query({ name: "geolocation" })
+        if (state === "granted") {
+            return changeStep()
+        }
+
+        try {
+            const location = await getGeolocation()
+            setHasLocation(true)
+            await setLocation({ variables: { location } })
+            return changeStep()
+        } catch (e) {
+            setLocationError(true)
+        }
+    }, [setLocation, changeStep])
+
     useEffect(() => {
-        getGeolocation()
-            .then(async (location) => {
-                setHasLocation(true)
-                await setLocation({ variables: { location } })
-            })
-            .catch(() => {
-                setLocationError(true)
-            })
-    }, [setLocation])
+        checkGeolocation()
+    }, [checkGeolocation])
 
     const askForUserLocation = async () => {
-        trackUserEvent("Ask for user location", "onboarding")
+        trackEvent("Ask for user location", {
+            category: "Request Permissions",
+            label: "onboarding",
+        })
 
         const res = await navigator.permissions.query({ name: "geolocation" })
 
@@ -60,6 +70,7 @@ function useUserLocation() {
             setHasLocation(true)
             await setLocation({ variables: { location } })
             setLocationError(false)
+            changeStep()
         }
     }
 
@@ -70,35 +81,25 @@ function useUserLocation() {
     }
 }
 
-function useNotificationAccess(hasLocation: boolean, changeStep: () => void) {
-    const requestPermission = useCallback(async () => {
-        try {
-            await OneSignal.registerForPushNotifications()
-        } catch (e) {
-            console.error(e)
-        }
-
-        changeStep()
-    }, [changeStep])
-
-    useEffect(() => {
-        if (hasLocation) {
-            requestPermission()
-        }
-    }, [hasLocation, requestPermission])
-}
-
 export function Permissions({ changeStep }: { changeStep: () => void }) {
     useEffect(() => trackPageView("grant-permissions"), [])
-    const { locationError, askForUserLocation, hasLocation } = useUserLocation()
-    useNotificationAccess(hasLocation, changeStep)
+
+    // first check if user has granted location already
+    useMemo(async () => {
+        const { state } = await navigator.permissions.query({ name: "geolocation" })
+        if (state === "granted") {
+            return changeStep()
+        }
+    }, [changeStep])
+
+    const { locationError, askForUserLocation } = useUserLocation(changeStep)
 
     return (
         <div className="location-page">
             <header className="page-header">
-                <h1>Allow location and notification access</h1>
+                <h1>Allow location access</h1>
 
-                {locationError && <p>Give permission to continue</p>}
+                {locationError && <p>We need your location to find groups in your nearby</p>}
             </header>
 
             {locationError && (

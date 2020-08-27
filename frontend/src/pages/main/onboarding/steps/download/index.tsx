@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 import { usePWAPrompt } from "lib/pwa"
-import { trackUserEvent, trackPageView, trackError } from "lib/GA"
+import { trackEvent, trackPageView, trackError } from "lib/analytics"
 import "./style.scss"
 
 export function Download(props: { changeStep: () => void }) {
@@ -23,7 +23,7 @@ export function Download(props: { changeStep: () => void }) {
             if (choice.outcome === "accepted") {
                 // move to next step
                 props.changeStep()
-                trackUserEvent("Download Beam")
+                trackEvent("Download Beam")
             } else {
                 console.log("User dismissed the install prompt")
                 props.changeStep()

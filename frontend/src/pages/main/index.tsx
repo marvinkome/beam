@@ -1,8 +1,8 @@
 import React, { useEffect, Suspense } from "react"
-import { Switch, Route, useHistory, useLocation } from "react-router-dom"
+import { Switch, Route, useHistory, useLocation, Redirect } from "react-router-dom"
 import { AUTH_TOKEN, ONBOARDING_KEY } from "lib/keys"
 import { isMobile } from "lib/helpers"
-import { trackPageView } from "lib/GA"
+import { trackPageView } from "lib/analytics"
 import { DesktopWarning } from "components/desktopWarning"
 import { PageLoader } from "components/page-loader"
 
@@ -25,20 +25,19 @@ const OnBoarding = React.lazy(() =>
     import("./onboarding").then((module) => ({ default: module.OnBoarding }))
 )
 
-export function useAuth() {
+function ProtectedRoute({ component: Component, ...rest }: any) {
     const history = useHistory()
-    const { pathname } = useLocation()
-    const onboarded = localStorage.getItem(ONBOARDING_KEY)
 
     useEffect(() => {
         if (!localStorage.getItem(AUTH_TOKEN)) {
             return history.push("/")
         }
-    }, [history, pathname, onboarded])
+    }, [history])
+
+    return <Route {...rest} render={(props) => <Component {...rest} {...props} />} />
 }
 
-export function MainPages() {
-    useAuth()
+function useGAPageTracking() {
     const location = useLocation()
     useEffect(() => {
         if (location.pathname.includes("/chat/")) {
@@ -47,17 +46,27 @@ export function MainPages() {
             trackPageView(location.pathname)
         }
     }, [location.pathname])
+}
+
+export function MainPages() {
+    useGAPageTracking()
 
     return isMobile() ? (
         <Suspense fallback={<PageLoader />}>
             <Switch>
-                <Route exact path="/app/onboarding" component={OnBoarding} />
-                <Route exact path="/app/chats" component={Chats} />
-                <Route exact path="/app/chat/:friendId" component={Chat} />
-                <Route exact path="/app/group/:groupId" component={GroupChat} />
-                <Route exact path="/app/profile" component={Profile} />
-                <Route exact path="/app/join-group" component={JoinGroup} />
-                <Route exact path="/app/find-friend" component={FindFriend} />
+                <ProtectedRoute exact path="/app/onboarding" component={OnBoarding} />
+                <ProtectedRoute exact path="/app/chats" component={Chats} />
+                <ProtectedRoute exact path="/app/chat/:friendId" component={Chat} />
+                <ProtectedRoute exact path="/app/group/:groupId" component={GroupChat} />
+                <ProtectedRoute exact path="/app/profile" component={Profile} />
+                <ProtectedRoute exact path="/app/join-group" component={JoinGroup} />
+                <ProtectedRoute exact path="/app/find-friend" component={FindFriend} />
+
+                {!localStorage.getItem(ONBOARDING_KEY) ? (
+                    <ProtectedRoute exact path="/app/onboarding" component={OnBoarding} />
+                ) : (
+                    <Redirect to="/app/chats" />
+                )}
             </Switch>
         </Suspense>
     ) : (

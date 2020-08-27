@@ -1,7 +1,7 @@
 import React from "react"
 import cls from "classnames"
 import { useGoogleLogin } from "lib/hooks"
-import { trackUserEvent } from "lib/GA"
+import { trackEvent } from "lib/analytics"
 import "./Navbar.scss"
 
 export function Navbar() {
@@ -16,7 +16,7 @@ export function Navbar() {
             <button
                 onClick={() => {
                     signIn()
-                    trackUserEvent("Login with Google")
+                    trackEvent("Login with Google", { category: "Auth" })
                 }}
                 className={cls("btn", { disabled: !loaded })}
             >

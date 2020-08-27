@@ -3,13 +3,11 @@ import amplitudeJs from "amplitude-js"
 import { AMPLITUDE_KEY, GA_TRACKING_ID } from "./keys"
 
 // INIT
-export function initAmplitude() {
+export function initAnalytics() {
     amplitudeJs.getInstance().init(AMPLITUDE_KEY, undefined, {
         includeReferrer: true,
     })
-}
 
-export function initGA() {
     ReactGA.initialize(GA_TRACKING_ID)
 }
 

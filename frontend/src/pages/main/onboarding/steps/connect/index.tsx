@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import cls from "classnames"
 import { useQuery, gql } from "@apollo/client"
 import { checkForConnectedAccounts } from "lib/helpers"
-import { trackPageView } from "lib/GA"
+import { trackPageView } from "lib/analytics"
 import { Account } from "./account"
 import "./style.scss"
 

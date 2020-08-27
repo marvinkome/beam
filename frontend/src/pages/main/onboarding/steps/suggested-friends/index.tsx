@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useQuery, gql, useMutation } from "@apollo/client"
 import { ShareBeam } from "components/modals"
 import { useHistory } from "react-router-dom"
-import { trackPageView, trackUserEvent } from "lib/GA"
+import { trackPageView, trackEvent } from "lib/analytics"
 import { SuggestedFriendCard } from "components/suggestedFriendCard"
 import "./style.scss"
 
@@ -73,7 +73,7 @@ function useContinueToChat(suggestedFriend: any) {
             return history.push("/app/chats")
         }
 
-        trackUserEvent("Found match", "onboarding")
+        trackEvent("Found match", { category: "Friend Matching", label: "onboarding" })
         const { data } = await addFriend({
             variables: {
                 friend: suggestedFriend.friend.id,

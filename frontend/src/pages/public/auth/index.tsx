@@ -4,10 +4,10 @@ import { toast } from "react-toastify"
 import { useMutation, gql } from "@apollo/client"
 import { useHistory, useParams } from "react-router-dom"
 import { GOOGLE_CLIENT_ID, AUTH_TOKEN } from "lib/keys"
-import { trackUserEvent } from "lib/GA"
+import { trackEvent } from "lib/analytics"
+import { redirectUri } from "lib/helpers"
 
 import "./style.scss"
-import { redirectUri } from "lib/helpers"
 
 function useInvite() {
     const [isLoading, setLoading] = useState(true)
@@ -98,7 +98,10 @@ export function AuthPage() {
                             className={`btn btn-primary-outline google ${disabled}`}
                             onClick={() => {
                                 onClick()
-                                trackUserEvent("Sign up with Google", "invite")
+                                trackEvent("Sign up with Google", {
+                                    category: "Auth",
+                                    label: "invite",
+                                })
                             }}
                         >
                             <img alt="google-signup" src={require("assets/images/google.png")} />

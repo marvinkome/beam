@@ -1,4 +1,3 @@
-import amplitude from "lib/amplitude"
 import PopupWindow from "lib/popupWindow"
 import { useHistory, useParams } from "react-router-dom"
 import { useMutation, gql } from "@apollo/client"
@@ -16,7 +15,7 @@ import {
     SPOTIFY_CLIENT_ID,
 } from "lib/keys"
 import { redirectUri, toQuery } from "lib/helpers"
-import { trackError } from "lib/GA"
+import { trackError, setUser } from "lib/analytics"
 import { useGoogleLogin as _useGoogleLogin, GoogleLoginResponse } from "react-google-login"
 
 function useConnectAccountMutation() {
@@ -68,7 +67,7 @@ export function useGoogleLogin(onAuthCb?: () => void) {
         if (success) {
             // Post login activities
             localStorage.setItem(AUTH_TOKEN, token)
-            amplitude.setUser(user.id)
+            setUser(user.id)
 
             if (onAuthCb) {
                 return onAuthCb()

@@ -1,7 +1,7 @@
 import React, { useEffect, Suspense } from "react"
 import { Switch, Route, useHistory, useLocation } from "react-router-dom"
 import { AUTH_TOKEN } from "lib/keys"
-import { trackPageView } from "lib/GA"
+import { trackPageView } from "lib/analytics"
 import { PageLoader } from "components/page-loader"
 
 // pages

@@ -5,7 +5,7 @@ import { SuggestedFriendCard } from "components/suggestedFriendCard"
 import { shareUrl } from "lib/helpers"
 import { useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation } from "@apollo/client"
-import { trackUserEvent } from "lib/GA"
+import { trackEvent } from "lib/analytics"
 import "./style.scss"
 
 function useShare() {
@@ -14,7 +14,7 @@ function useShare() {
     const copyLink = () => {
         copyRef.current?.select()
         if (document.execCommand("copy")) {
-            trackUserEvent("Share Beam through copy link", "Find friend")
+            trackEvent("Share Beam through copy link", { category: "Share", label: "Find friend" })
             setCopied(true)
         }
     }
@@ -141,30 +141,30 @@ export function FindFriend() {
                                 <div className="share-options">
                                     <FaFacebookMessenger
                                         onClick={() => {
-                                            trackUserEvent(
-                                                "Share Beam through Messenger",
-                                                "Find friend"
-                                            )
+                                            trackEvent("Share Beam through Messenger", {
+                                                category: "Share",
+                                                label: "Find friend",
+                                            })
                                             window.open(shareData.messenger)
                                         }}
                                         className="icon messenger"
                                     />
                                     <FaWhatsapp
                                         onClick={() => {
-                                            trackUserEvent(
-                                                "Share Beam through WhatsApp",
-                                                "Find friend"
-                                            )
+                                            trackEvent("Share Beam through WhatsApp", {
+                                                category: "Share",
+                                                label: "Find friend",
+                                            })
                                             window.open(shareData.whatsapp)
                                         }}
                                         className="icon whatsapp"
                                     />
                                     <FaTwitter
                                         onClick={() => {
-                                            trackUserEvent(
-                                                "Share Beam through Twitter",
-                                                "Find friend"
-                                            )
+                                            trackEvent("Share Beam through Twitter", {
+                                                category: "Share",
+                                                label: "Find friend",
+                                            })
                                             window.open(shareData.twitter)
                                         }}
                                         className="icon twitter"

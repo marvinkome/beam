@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import { FaFacebookMessenger, FaWhatsapp, FaTwitter } from "react-icons/fa"
 import { Modal } from ".."
 import { shareUrl } from "lib/helpers"
-import { trackModalView, trackUserEvent } from "lib/GA"
+import { trackModalView, trackEvent } from "lib/analytics"
 import "./style.scss"
 
 type IProps = {
@@ -24,7 +24,7 @@ export default function ShareBeam(props: IProps) {
     const copyLink = () => {
         copyRef.current?.select()
         if (document.execCommand("copy")) {
-            trackUserEvent("Share beam through copy link")
+            trackEvent("Share beam through copy link", { category: "Share" })
             setCopied(true)
         }
     }
@@ -47,21 +47,23 @@ export default function ShareBeam(props: IProps) {
                         <div className="share-options">
                             <FaFacebookMessenger
                                 onClick={() => {
-                                    trackUserEvent("Share beam through Messenger")
+                                    trackEvent("Share beam through Messenger", {
+                                        category: "Share",
+                                    })
                                     window.open(messenger)
                                 }}
                                 className="icon messenger"
                             />
                             <FaWhatsapp
                                 onClick={() => {
-                                    trackUserEvent("Share beam through WhatsApp")
+                                    trackEvent("Share beam through WhatsApp", { category: "Share" })
                                     window.open(whatsapp)
                                 }}
                                 className="icon whatsapp"
                             />
                             <FaTwitter
                                 onClick={() => {
-                                    trackUserEvent("Share beam through Twitter")
+                                    trackEvent("Share beam through Twitter", { category: "Share" })
                                     window.open(twitter)
                                 }}
                                 className="icon twitter"

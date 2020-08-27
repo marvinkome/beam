@@ -4,16 +4,14 @@ import { Navbar } from "../components/Navbar"
 import { FaCheck } from "react-icons/fa"
 import { useGoogleLogin } from "lib/hooks"
 import { Footer } from "../components/Footer"
-import { trackUserEvent } from "lib/GA"
-import amplitude from "lib/amplitude"
+import { trackEvent } from "lib/analytics"
 import "./LandingPage.scss"
 
 export function LandingPageView(props: { onRegister: () => void }) {
     const { signIn, loaded } = useGoogleLogin(props.onRegister)
     const signUp = (type: string) => {
         signIn()
-        trackUserEvent("Sign up with CTA button", type)
-        amplitude.trackEvent("Sign up")
+        trackEvent("Sign up with CTA button", { category: "Auth", label: type })
     }
 
     return (

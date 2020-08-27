@@ -4,7 +4,7 @@ import { ChatUi } from "components/chat"
 import { useParams } from "react-router-dom"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { getProfileImage } from "lib/helpers"
-import { trackError } from "lib/GA"
+import { trackError } from "lib/analytics"
 import { toast } from "react-toastify"
 
 type User = {

@@ -8,28 +8,31 @@ function splitInterestsIntoGroups(interests: any[]) {
 }
 
 export function useInterestsAndLocation() {
-    const { data, loading } = useQuery(gql`
-        {
-            me {
-                id
-                profile {
-                    location {
-                        state
-                    }
-                }
-                interests {
+    const { data, loading } = useQuery(
+        gql`
+            {
+                me {
                     id
-                    name
-                    image
-                    group {
+                    profile {
+                        location {
+                            state
+                        }
+                    }
+                    interests {
                         id
                         name
                         image
+                        group {
+                            id
+                            name
+                            image
+                        }
                     }
                 }
             }
-        }
-    `)
+        `,
+        { fetchPolicy: "cache-and-network" }
+    )
 
     return {
         interests: data?.me?.interests,

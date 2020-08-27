@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react"
-import { trackModalView, trackUserEvent } from "lib/GA"
+import { trackModalView, trackEvent } from "lib/analytics"
 import { FaFacebookMessenger, FaWhatsapp, FaTwitter } from "react-icons/fa"
 import { Modal } from ".."
 import { useQuery, gql, useMutation } from "@apollo/client"
@@ -54,7 +54,10 @@ export default function AddFriend(props: IProps) {
     const copyLink = () => {
         copyRef.current?.select()
         if (document.execCommand("copy")) {
-            trackUserEvent("Invite friend through copy link")
+            trackEvent("Invite friend through copy link", {
+                category: "Invite",
+                label: "onboarding",
+            })
             setCopied(true)
         }
     }
@@ -82,7 +85,9 @@ export default function AddFriend(props: IProps) {
                         <div className="share-options">
                             <FaFacebookMessenger
                                 onClick={() => {
-                                    trackUserEvent("Invite friend through Messenger")
+                                    trackEvent("Invite friend through Messenger", {
+                                        category: "Invite ",
+                                    })
                                     window.open(messenger)
                                 }}
                                 className="icon messenger"
@@ -90,7 +95,9 @@ export default function AddFriend(props: IProps) {
 
                             <FaWhatsapp
                                 onClick={() => {
-                                    trackUserEvent("Invite friend through WhatsApp")
+                                    trackEvent("Invite friend through WhatsApp", {
+                                        category: "Invite ",
+                                    })
                                     window.open(whatsapp)
                                 }}
                                 className="icon whatsapp"
@@ -98,7 +105,9 @@ export default function AddFriend(props: IProps) {
 
                             <FaTwitter
                                 onClick={() => {
-                                    trackUserEvent("Invite friend through Twitter")
+                                    trackEvent("Invite friend through Twitter", {
+                                        category: "Invite ",
+                                    })
                                     window.open(twitter)
                                 }}
                                 className="icon twitter"
