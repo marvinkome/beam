@@ -69,6 +69,7 @@ build
 # Misc
 sandbox.ts
 client_secret.json
+*secret.yml
 .DS_Store
 .env.local
 .env.development.local

@@ -18,7 +18,7 @@
             "sizes": "512x512"
         }
     ],
-    "scope": "/app/",
+    "scope": "/",
     "start_url": "/app/chats",
     "display": "standalone",
     "theme_color": "rgb(145, 117, 219)",
