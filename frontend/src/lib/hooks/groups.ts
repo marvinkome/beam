@@ -2,6 +2,7 @@ import partition from "lodash.partition"
 import { useQuery, gql, useMutation } from "@apollo/client"
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
+import { trackEvent } from "lib/analytics"
 
 function splitInterestsIntoGroups(interests: any[]) {
     return partition(interests, (o) => o.group !== null)
@@ -50,6 +51,7 @@ export function useDataSource(interests: any[]) {
         if (!searchTerm.length) {
             setData(interests)
         } else {
+            trackEvent("Search for group", { category: "Group", label: "find-group" })
             setData(
                 interests.filter((interest) => {
                     const lcaseInterestName = (interest.name as string).toLowerCase()
@@ -85,6 +87,7 @@ export function useCreateGroup(onCreateGroup: (group?: any) => void) {
             return toast.dark(data?.createGroup.message)
         }
 
+        trackEvent("Create group", { category: "Group" })
         onCreateGroup(data?.createGroup.group)
     }
 }
@@ -108,6 +111,25 @@ export function useJoinGroup(onJoinGroup: (group?: any) => void) {
             return toast.dark(data?.joinGroup.message)
         }
 
+        trackEvent("Join group", { category: "Group" })
         onJoinGroup(data?.joinGroup.id)
+    }
+}
+
+export function useLeaveGroup(onLeaveGroup: () => void) {
+    const [leaveGroupFn] = useMutation(gql`
+        mutation LeaveGroup($groupId: ID!) {
+            leaveGroup(groupId: $groupId)
+        }
+    `)
+
+    return async (groupId: string) => {
+        const { data } = await leaveGroupFn({ variables: { groupId } })
+        if (!data?.leaveGroup) {
+            return toast.dark("Error leaving group")
+        }
+
+        trackEvent("Leave group", { category: "Group" })
+        onLeaveGroup()
     }
 }

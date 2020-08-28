@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react"
 import sortBy from "lodash.sortby"
 import { ChatUi } from "components/chat"
-import { useParams } from "react-router-dom"
+import { useParams, useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { getProfileImage } from "lib/helpers"
 import { trackError } from "lib/analytics"
-import { toast } from "react-toastify"
+import { useJoinGroup, useLeaveGroup } from "lib/hooks/groups"
 
 type User = {
     id: string
@@ -193,40 +193,30 @@ function useMessages(queryData: any) {
 
 function useMembership(defaultIsMember: boolean) {
     const [isMember, setMembership] = useState(defaultIsMember)
-    const [joinGroupFn] = useMutation(gql`
-        mutation JoinGroup($groupId: ID!) {
-            joinGroup(groupId: $groupId) {
-                success
-                message
-                group {
-                    id
-                }
-            }
-        }
-    `)
+    const joinGroup = useJoinGroup(() => {
+        setMembership(true)
+    })
 
     useEffect(() => {
         if (defaultIsMember) {
             setMembership(true)
         }
     }, [defaultIsMember])
+
     return {
         isMember,
-        joinGroup: async (groupId: string) => {
-            const { data } = await joinGroupFn({ variables: { groupId } })
-            if (!data?.joinGroup.success) {
-                return toast.dark(data?.joinGroup.message)
-            }
-
-            setMembership(true)
-        },
+        joinGroup,
     }
 }
 
 export function GroupChat() {
+    const history = useHistory()
     const { data } = useGroupData()
     const { messages, sendMessage } = useMessages(data)
     const { isMember, joinGroup } = useMembership(data?.group?.isMember)
+    const leaveGroup = useLeaveGroup(() => {
+        return history.push("/app/chats")
+    })
 
     return (
         <div className="group-chat">
@@ -240,7 +230,7 @@ export function GroupChat() {
                 messages={messages}
                 sendMessage={sendMessage}
                 joinGroup={() => joinGroup(data?.group.id)}
-                actions={[{ title: "Leave group", action: () => console.log("leave group") }]}
+                actions={[{ title: "Leave group", action: () => leaveGroup(data?.group.id) }]}
             />
         </div>
     )

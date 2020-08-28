@@ -90,4 +90,28 @@ export const resolvers = {
             group,
         }
     },
+
+    leaveGroup: async (_: any, { groupId }: any, ctx: IContext) => {
+        const user = ctx.currentUser
+        if (!user) {
+            return false
+        }
+
+        const group = await Group.findOne({
+            _id: groupId,
+            'users.user': { $eq: user.id },
+        })
+
+        if (!group) {
+            return false
+        }
+
+        // TODO:: If user is an admin, transfer admin role to someone else
+
+        await group.updateOne({
+            $pull: { users: { user: user.id } },
+        })
+
+        return true
+    },
 }

@@ -124,11 +124,15 @@ export function useYouTubeConnect(onCompleted: (completed: boolean) => void) {
         }
     }
 
-    const { signIn } = _useGoogleLogin({
+    const { signIn, loaded } = _useGoogleLogin({
         clientId: GOOGLE_CLIENT_ID,
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         onSuccess: getUserData,
     })
+
+    if (!loaded) {
+        toast.dark("Please try again.")
+    }
 
     return signIn
 }

@@ -85,6 +85,7 @@ export const mutationTypeDefs = gql`
         # GROUP
         createGroup(interestId: ID!): GroupMutationResponse
         joinGroup(groupId: ID!): GroupMutationResponse
+        leaveGroup(groupId: ID!): Boolean
 
         # MESSAGING
         sendMessage(to: ID!, message: String!): SendMessageMutationResponse

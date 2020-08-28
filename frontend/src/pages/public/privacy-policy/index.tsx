@@ -554,12 +554,7 @@ export function PrivacyPolicy() {
                                 <strong>Web and Mobile Analytics</strong>
                             </p>
                             <p>Google Analytics</p>
-                        </li>
-                        <li>
-                            <p>
-                                <strong>Push Notifications</strong>
-                            </p>
-                            <p>One Signal</p>
+                            <p>Amplitude</p>
                         </li>
                         <li>
                             <p>
