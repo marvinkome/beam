@@ -67,6 +67,21 @@ export function useDataSource(interests: any[]) {
     }
 }
 
+export function useGroupsPagination(data: any[]) {
+    const steps = 30
+    const [currentChunk, setCurrentChunk] = useState(0) // store current chunk
+
+    return {
+        data: data.slice(0, (currentChunk + 1) * steps),
+        hasMore: (currentChunk + 1) * steps < data.length,
+        loadMore: () => {
+            if ((currentChunk + 1) * steps < data.length) {
+                setCurrentChunk(currentChunk + 1)
+            }
+        },
+    }
+}
+
 export function useCreateGroup(onCreateGroup: (group?: any) => void) {
     const [createGroupFn] = useMutation(gql`
         mutation CreateGroup($interestId: ID!) {

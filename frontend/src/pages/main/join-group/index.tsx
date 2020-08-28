@@ -1,13 +1,14 @@
 import React from "react"
 import { Collapsible } from "components/collapsible"
 import { StackHeader } from "components/header"
-import { FaSearch, FaPlus, FaPaintBrush } from "react-icons/fa"
+import { FaSearch, FaPlus, FaPaintBrush, FaChevronDown } from "react-icons/fa"
 import { useHistory, Link } from "react-router-dom"
 import {
     useInterestsAndLocation,
     useDataSource,
     useCreateGroup,
     useJoinGroup,
+    useGroupsPagination,
 } from "lib/hooks/groups"
 import "./style.scss"
 
@@ -17,7 +18,9 @@ export function JoinGroup() {
     // query
     const { interests, location, loading } = useInterestsAndLocation()
     const { onSearch, data, isSearching } = useDataSource(interests || [])
-    const [existingGroups, nonExistingGroups] = data
+    const [existingGroups, nonExistingGroupsRaw] = data
+    // add pagination for new groups
+    const { data: nonExistingGroups, loadMore, hasMore } = useGroupsPagination(nonExistingGroupsRaw)
 
     // mutations
     const createGroup = useCreateGroup((group) => {
@@ -117,33 +120,44 @@ export function JoinGroup() {
                             </div>
                         }
                     >
-                        {nonExistingGroups.slice(0, 30).map((interest) => (
-                            <div key={interest.id} className="group">
-                                <div className="group-details">
-                                    <img
-                                        src={interest.image || require("assets/images/beambot.png")}
-                                        alt="Group"
-                                    />
+                        <>
+                            {nonExistingGroups.slice(0, 30).map((interest) => (
+                                <div key={interest.id} className="group">
+                                    <div className="group-details">
+                                        <img
+                                            src={
+                                                interest.image ||
+                                                require("assets/images/beambot.png")
+                                            }
+                                            alt="Group"
+                                        />
 
-                                    <div>
-                                        <p>
-                                            {interest.platform === "reddit" && "r/"}
-                                            {interest.name}
-                                        </p>
-                                        <span>{location}</span>
+                                        <div>
+                                            <p>
+                                                {interest.platform === "reddit" && "r/"}
+                                                {interest.name}
+                                            </p>
+                                            <span>{location}</span>
+                                        </div>
+                                    </div>
+
+                                    <div className="group-action">
+                                        <button
+                                            onClick={() => createGroup(interest.id)}
+                                            className="btn btn-primary-outline"
+                                        >
+                                            <FaPaintBrush className="icon" /> Create
+                                        </button>
                                     </div>
                                 </div>
+                            ))}
 
-                                <div className="group-action">
-                                    <button
-                                        onClick={() => createGroup(interest.id)}
-                                        className="btn btn-primary-outline"
-                                    >
-                                        <FaPaintBrush className="icon" /> Create
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
+                            {hasMore && (
+                                <p onClick={loadMore}>
+                                    View more <FaChevronDown className="icon" />
+                                </p>
+                            )}
+                        </>
                     </Collapsible>
                 )}
             </div>
