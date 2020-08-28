@@ -40,7 +40,7 @@ export const resolvers = {
         group.users = [
             {
                 user: user.id,
-                role: Roles.admin,
+                role: Roles.user,
             },
         ]
 
@@ -72,6 +72,14 @@ export const resolvers = {
             return {
                 success: false,
                 message: 'Group not found',
+            }
+        }
+
+        // check if user is in group location
+        if (user.profile.location?.state !== group.location) {
+            return {
+                success: false,
+                message: 'This group is not for you location',
             }
         }
 
