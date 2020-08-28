@@ -71,12 +71,7 @@ export const userSchema: Schema<IUser> = new Schema(
             },
         ],
 
-        friends: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User',
-            },
-        ],
+        friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     },
     {
         timestamps: true,

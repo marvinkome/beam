@@ -29,6 +29,15 @@ export const resolvers = {
             }
         }
 
+        // check if user has reached max number of groups (15)
+        const userGroups = await Group.find({ 'users.user': user.id })
+        if (userGroups.length >= 15) {
+            return {
+                success: false,
+                message: "You've reached your group limit of 15",
+            }
+        }
+
         // create group
         const group = new Group()
 
@@ -75,6 +84,14 @@ export const resolvers = {
             }
         }
 
+        const userGroups = await Group.find({ 'users.user': user.id })
+        if (userGroups.length >= 15) {
+            return {
+                success: false,
+                message: "You've reached your group limit of 15",
+            }
+        }
+
         // check if user is in group location
         if (user.profile.location?.state !== group.location) {
             return {
@@ -107,7 +124,7 @@ export const resolvers = {
 
         const group = await Group.findOne({
             _id: groupId,
-            'users.user': { $eq: user.id },
+            'users.user': user.id,
         })
 
         if (!group) {
