@@ -71,6 +71,7 @@
 
             .grid-2 {
                 background-color: #9175db;
+                border-bottom-left-radius: 10px;
 
                 @include for-phone-only {
                     padding-top: 2em;

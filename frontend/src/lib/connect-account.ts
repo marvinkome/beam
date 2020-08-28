@@ -120,6 +120,7 @@ export class ConnectRedditAccount extends ConnectAccount {
             subreddits.push({
                 id: item.data.id,
                 name: item.data.url.replace(/\/r\//, "").replace(/\/$/, ""),
+                image: item.data.icon_img,
             })
         }
 
@@ -134,6 +135,7 @@ export class ConnectRedditAccount extends ConnectAccount {
                 subreddits.push({
                     id: item.data.id,
                     name: item.data.url.replace(/\/r\//, "").replace(/\/$/, ""),
+                    image: item.data.icon_img,
                 })
             }
         }

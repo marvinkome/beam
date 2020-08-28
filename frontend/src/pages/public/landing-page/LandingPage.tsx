@@ -31,12 +31,12 @@ export function LandingPageView(props: { onRegister: () => void }) {
 
                             <div className="check">
                                 <FaCheck className="icon" />
-                                <p>No Ads</p>
+                                <p>Find friends nearby who share your interests</p>
                             </div>
 
                             <div className="check">
                                 <FaCheck className="icon" />
-                                <p>Completely private</p>
+                                <p>No Ads</p>
                             </div>
 
                             <div className="check">

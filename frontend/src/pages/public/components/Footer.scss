@@ -4,15 +4,15 @@
     font-size: 14px;
     padding: 50px 100px;
     text-align: center;
-    color: white;
-    background-color: #9175db;
+    // color: #9175db;
+    background-color: white;
 
     @include for-phone-only {
         padding: 50px 10px;
     }
 
     a {
-        color: white;
+        color: var(--primary-color);
     }
 
     .feedback-text {
