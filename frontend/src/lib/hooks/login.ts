@@ -28,7 +28,7 @@ function useConnectAccountMutation() {
     return connectAccount
 }
 
-export function useGoogleLogin(onAuthCb?: () => void) {
+export function useGoogleLogin(isLogin?: boolean, onAuthCb?: () => void) {
     const history = useHistory()
     const { inviteToken } = useParams()
 
@@ -51,9 +51,13 @@ export function useGoogleLogin(onAuthCb?: () => void) {
             return
         }
 
-        // get youtube subscriptions
-        const youtube = new ConnectYoutubeAccount(accessToken)
-        const youtubeData = await youtube.getSubscriptions()
+        let youtubeData: any = undefined
+
+        if (!isLogin) {
+            // get youtube subscriptions
+            const youtube = new ConnectYoutubeAccount(accessToken)
+            youtubeData = await youtube.getSubscriptions()
+        }
 
         const loginResp = await googleLogin({
             variables: {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react"
+import React, { useEffect, useState, useCallback } from "react"
 import { useMutation, gql } from "@apollo/client"
 import { trackPageView, trackEvent } from "lib/analytics"
 
@@ -38,11 +38,6 @@ function useUserLocation(changeStep: () => void) {
     `)
 
     const checkGeolocation = useCallback(async () => {
-        const { state } = await navigator.permissions.query({ name: "geolocation" })
-        if (state === "granted") {
-            return changeStep()
-        }
-
         try {
             const location = await getGeolocation()
             setHasLocation(true)
@@ -83,14 +78,6 @@ function useUserLocation(changeStep: () => void) {
 
 export function Permissions({ changeStep }: { changeStep: () => void }) {
     useEffect(() => trackPageView("grant-permissions"), [])
-
-    // first check if user has granted location already
-    useMemo(async () => {
-        const { state } = await navigator.permissions.query({ name: "geolocation" })
-        if (state === "granted") {
-            return changeStep()
-        }
-    }, [changeStep])
 
     const { locationError, askForUserLocation } = useUserLocation(changeStep)
 

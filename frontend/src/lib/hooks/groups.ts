@@ -51,11 +51,10 @@ export function useDataSource(interests: any[]) {
         if (!searchTerm.length) {
             setData(interests)
         } else {
-            trackEvent("Search for group", { category: "Group", label: "find-group" })
             setData(
                 interests.filter((interest) => {
                     const lcaseInterestName = (interest.name as string).toLowerCase()
-                    return lcaseInterestName.startsWith(searchTerm)
+                    return lcaseInterestName.startsWith(searchTerm.toLowerCase())
                 })
             )
         }

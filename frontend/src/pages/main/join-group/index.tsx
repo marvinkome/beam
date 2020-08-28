@@ -117,7 +117,7 @@ export function JoinGroup() {
                             </div>
                         }
                     >
-                        {nonExistingGroups.slice(0, 10).map((interest) => (
+                        {nonExistingGroups.slice(0, 30).map((interest) => (
                             <div key={interest.id} className="group">
                                 <div className="group-details">
                                     <img

@@ -5,7 +5,7 @@ import { trackEvent } from "lib/analytics"
 import "./Navbar.scss"
 
 export function Navbar() {
-    const { signIn, loaded } = useGoogleLogin()
+    const { signIn, loaded } = useGoogleLogin(true)
 
     return (
         <nav className="public-navbar">

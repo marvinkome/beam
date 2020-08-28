@@ -8,7 +8,7 @@ import { trackEvent } from "lib/analytics"
 import "./LandingPage.scss"
 
 export function LandingPageView(props: { onRegister: () => void }) {
-    const { signIn, loaded } = useGoogleLogin(props.onRegister)
+    const { signIn, loaded } = useGoogleLogin(false, props.onRegister)
     const signUp = (type: string) => {
         signIn()
         trackEvent("Sign up with CTA button", { category: "Auth", label: type })

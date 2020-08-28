@@ -1,5 +1,4 @@
 import React, { useState } from "react"
-import { Steps } from "components/steps"
 
 // steps
 import { Permissions } from "./steps/permissions"
@@ -16,7 +15,7 @@ export function OnBoarding() {
 
     return (
         <div className="onboarding">
-            <Steps stepsCount={2} currentStep={currentStep} />
+            {/* <Steps stepsCount={2} currentStep={currentStep} /> */}
 
             <div className="onboarding-page">
                 {currentStep === 0 && (
