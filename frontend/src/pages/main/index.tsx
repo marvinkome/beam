@@ -54,7 +54,6 @@ export function MainPages() {
     return isMobile() ? (
         <Suspense fallback={<PageLoader />}>
             <Switch>
-                <ProtectedRoute exact path="/app/onboarding" component={OnBoarding} />
                 <ProtectedRoute exact path="/app/chats" component={Chats} />
                 <ProtectedRoute exact path="/app/chat/:friendId" component={Chat} />
                 <ProtectedRoute exact path="/app/group/:groupId" component={GroupChat} />

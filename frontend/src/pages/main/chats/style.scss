@@ -1,4 +1,8 @@
 .chats-page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
     .chats-list {
         padding: 15px 0px;
 
@@ -44,16 +48,15 @@
         }
     }
 
-    .friends-tab {
+    .tab {
+        flex: 1 1 auto;
         position: relative;
-        min-height: 82vh;
     }
 
     .action-button-container {
-        bottom: 0;
+        bottom: 30px;
         position: absolute;
         padding: 0px 2em;
-        margin-bottom: 1.5em;
 
         width: 100%;
 
@@ -63,8 +66,7 @@
     }
 
     .bottom-nav {
-        bottom: 0;
-        position: absolute;
+        flex: 0 1 40px;
         padding: 1em 0px;
         width: 100%;
 

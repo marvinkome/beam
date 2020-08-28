@@ -4,6 +4,7 @@ import orderBy from "lodash.orderby"
 import { formatDate } from "lib/helpers"
 import { useQuery, gql } from "@apollo/client"
 import { Link } from "react-router-dom"
+import { useIntroJs } from "lib/hooks"
 
 function formatItems(groups: any[]) {
     const formattedGroups = groups.reduce((reduced, group) => {
@@ -61,6 +62,25 @@ export function GroupsTab() {
     const { data, loading } = useGroups()
     const groups = formatItems(data?.groups || [])
 
+    useIntroJs({
+        key: "done-group-intro",
+        start: groups?.length < 1,
+        steps: [
+            {
+                element: ".action-button-container",
+                intro: "You can now join or create groups based on your interests",
+                // @ts-ignore
+                dynamic: true,
+            },
+            {
+                element: "img.me",
+                intro: "Click on your profile icon to find new groups",
+                // @ts-ignore
+                dynamic: true,
+            },
+        ],
+    })
+
     if (loading) {
         return (
             <div className="loading-container">
@@ -70,7 +90,7 @@ export function GroupsTab() {
     }
 
     return (
-        <div className="groups-tab">
+        <div className="tab groups-tab">
             <section className="chats-list">
                 {groups.map((group: any) => (
                     <Link to={`/app/group/${group.id}`} key={group.id} className="chat-item">
@@ -88,6 +108,14 @@ export function GroupsTab() {
                     </Link>
                 ))}
             </section>
+
+            {!loading && groups.length < 1 && (
+                <div className="action-button-container">
+                    <Link className="btn btn-primary" to="/app/join-group">
+                        Find your first group
+                    </Link>
+                </div>
+            )}
         </div>
     )
 }
