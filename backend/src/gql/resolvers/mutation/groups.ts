@@ -33,7 +33,7 @@ export const resolvers = {
         const group = new Group()
 
         // set data
-        group.name = `${interest.name} - ${userState}`
+        group.name = `${interest.platform === 'reddit' ? 'r/' : ''}${interest.name} - ${userState}`
         group.image = interest.image
         group.interest = interest.name
         group.location = userState
