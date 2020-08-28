@@ -109,19 +109,19 @@ export function JoinGroup() {
                 )}
 
                 {/* non-existing groups */}
-                {!!nonExistingGroups.length && (
+                {!!nonExistingGroupsRaw.length && (
                     <Collapsible
                         defaultIsOpen={!existingGroups.length}
                         className="groups-card"
                         header={
                             <div>
                                 <p>Create a group for your location</p>
-                                <span>{nonExistingGroups.length} groups doesn't exist</span>
+                                <span>{nonExistingGroupsRaw.length} groups doesn't exist</span>
                             </div>
                         }
                     >
                         <>
-                            {nonExistingGroups.slice(0, 30).map((interest) => (
+                            {nonExistingGroups.map((interest) => (
                                 <div key={interest.id} className="group">
                                     <div className="group-details">
                                         <img
