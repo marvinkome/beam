@@ -112,7 +112,7 @@ export function GroupsTab() {
             {!loading && groups.length < 1 && (
                 <div className="action-button-container">
                     <Link className="btn btn-primary" to="/app/join-group">
-                        Find your first group
+                        Join a group
                     </Link>
                 </div>
             )}

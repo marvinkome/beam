@@ -1,7 +1,6 @@
-import React, { useEffect } from "react"
+import React from "react"
 import cls from "classnames"
 import orderBy from "lodash.orderby"
-import introJs from "intro.js"
 import { useQuery, gql } from "@apollo/client"
 import { getProfileImage, formatDate } from "lib/helpers"
 import { Link } from "react-router-dom"
