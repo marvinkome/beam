@@ -22,7 +22,7 @@ export interface IUser extends Document {
         id: string
         name: string
         image: string
-        type?: 'artists' | 'genres' // for spotify
+        type?: 'artist' | 'genre' // for spotify
         platform: 'youtube' | 'spotify' | 'reddit'
     }>
 }

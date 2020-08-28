@@ -31,6 +31,7 @@ export const userTypeDefs = gql`
         id: String
         name: String
         image: String
+        platform: String
         group: Group
     }
 

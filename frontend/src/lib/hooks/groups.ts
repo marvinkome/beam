@@ -22,6 +22,7 @@ export function useInterestsAndLocation() {
                         id
                         name
                         image
+                        platform
                         group {
                             id
                             name

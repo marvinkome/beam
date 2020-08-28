@@ -22,10 +22,10 @@ function getConnectedAccounts(user: IUser) {
         youtube: connectedAccounts.filter((acc) => acc.platform === 'youtube'),
         reddit: connectedAccounts.filter((acc) => acc.platform === 'reddit'),
         spotifyArtists: connectedAccounts.filter(
-            (acc) => acc.platform === 'spotify' && acc.type === 'artists'
+            (acc) => acc.platform === 'spotify' && acc.type === 'artist'
         ),
         spotifyGenres: connectedAccounts.filter(
-            (acc) => acc.platform === 'spotify' && acc.type === 'genres'
+            (acc) => acc.platform === 'spotify' && acc.type === 'genre'
         ),
     }
 }

@@ -39,7 +39,7 @@ export function JoinGroup() {
                         id="search"
                         type="text"
                         className="form-input"
-                        placeholder="Search for a group"
+                        placeholder="Search for more groups"
                         onChange={(e) => onSearch(e.target.value)}
                     />
                 </label>
@@ -126,7 +126,10 @@ export function JoinGroup() {
                                     />
 
                                     <div>
-                                        <p title={`{interest.name} Lagos`}>{interest.name}</p>
+                                        <p>
+                                            {interest.platform === "reddit" && "r/"}
+                                            {interest.name}
+                                        </p>
                                         <span>{location}</span>
                                     </div>
                                 </div>

@@ -25,7 +25,7 @@ export const userResolvers = {
             const state = user.profile.location?.state
             if (!state) return []
 
-            const connectedData = user.connectedAccounts
+            const connectedData = user.connectedAccounts?.filter((acc) => acc.type !== 'genre')
             if (!connectedData) return []
 
             const interestWithGroupId = []
@@ -46,6 +46,7 @@ export const userResolvers = {
                 interestWithGroupId.push({
                     id: interest.id,
                     name: interest.name,
+                    platform: interest.platform,
                     image: interest.image,
                     group: group,
                 })
