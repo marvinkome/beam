@@ -161,7 +161,7 @@ export async function findFriends(user: IUser, withLogs = false) {
     // get all users who is not in friends
     const closestUsers = await User.find({
         _id: { $ne: user.id, $nin: user.friends },
-        // 'profile.location.state': user.profile.location?.state,
+        'profile.location.state': user.profile.location?.state,
     })
 
     // loop through all close users
