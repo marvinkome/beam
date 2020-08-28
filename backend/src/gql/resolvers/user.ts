@@ -25,7 +25,9 @@ export const userResolvers = {
             const state = user.profile.location?.state
             if (!state) return []
 
-            const connectedData = user.connectedAccounts?.filter((acc) => acc.type !== 'genre')
+            const connectedData = user.connectedAccounts?.filter(
+                (acc) => acc.platform !== 'spotify'
+            )
             if (!connectedData) return []
 
             const interestWithGroupId = []

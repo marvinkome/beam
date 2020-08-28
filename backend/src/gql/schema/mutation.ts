@@ -11,6 +11,7 @@ export const mutationTypeDefs = gql`
     input RedditInput {
         name: String!
         id: String!
+        image: String
     }
 
     input ArtistsInput {
