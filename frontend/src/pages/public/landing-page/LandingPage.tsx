@@ -51,6 +51,13 @@ export function LandingPageView(props: { onRegister: () => void }) {
                         >
                             Sign up with Google
                         </button>
+                        <p>Already have an account? <a onClick={() => {
+                    signIn()
+                    trackEvent("Login with Google", { category: "Auth" })
+                }}
+                className={cls("text-link", { disabled: !loaded })}
+            > Log In</a></p>
+                        
                     </div>
 
                     <div className="image-grid">
