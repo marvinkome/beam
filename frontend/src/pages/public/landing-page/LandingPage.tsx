@@ -21,17 +21,17 @@ export function LandingPageView(props: { onRegister: () => void }) {
 
                 <div className="header-grid">
                     <div className="text-grid">
-                        <h1>Meet local friends you’ll spend hours chatting with</h1>
+                        <h1>Chat with friends in your city who share your interests</h1>
 
                         <div className="check-list">
                             <div className="check">
                                 <FaCheck className="icon" />
-                                <p>Join local groups for your YouTube channels</p>
+                                <p>Find people with similar interests on YouTube, Spotify, and Reddit</p>
                             </div>
 
                             <div className="check">
                                 <FaCheck className="icon" />
-                                <p>Find friends nearby who share your interests</p>
+                                <p>Join a local group for your YouTube subscriptions</p>
                             </div>
 
                             <div className="check">
