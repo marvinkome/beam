@@ -2,7 +2,6 @@ import Email from 'email-templates'
 import path from 'path'
 
 const email = new Email({
-    send: true,
     views: {
         root: path.resolve(__dirname, 'templates'),
         options: { extension: 'ejs' },
@@ -17,6 +16,7 @@ const email = new Email({
             pass: process.env.GMAIL_PASSWORD || '',
         },
     },
+    preview: false,
 })
 
 interface IEmailOptions {

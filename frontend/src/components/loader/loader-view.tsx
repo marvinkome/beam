@@ -9,6 +9,7 @@ const MOUNTED: Array<string | null> = []
 export function LoaderContainer() {
     const [loaderData, setLoaders] = useState<
         Array<{
+            id: string
             isLoading: boolean
             type?: LoaderType
             message?: string
@@ -19,14 +20,24 @@ export function LoaderContainer() {
 
     const setLoadingState = useCallback(
         (loader?: LoadingDataType) => {
-            if (MOUNTED.indexOf(id) > -1) {
-                setLoaders(
-                    loaderData.concat({
-                        isLoading: !!loader,
-                        type: loader?.type,
-                        message: loader?.message,
-                    })
-                )
+            if (MOUNTED.indexOf(id) < 0) {
+                return
+            }
+
+            // if event is not available, push it
+            if (!loader?.isLoading) {
+                const newLoaderData = loaderData.filter((l) => l.id !== loader?.id)
+
+                setLoaders(newLoaderData)
+            } else {
+                const newLoaderData = loaderData.concat({
+                    id: loader?.id,
+                    isLoading: loader.isLoading,
+                    type: loader?.type,
+                    message: loader?.message,
+                })
+
+                setLoaders(newLoaderData)
             }
         },
         [id, loaderData]
@@ -50,15 +61,15 @@ export function LoaderContainer() {
 
     return (
         <div>
-            {loaderData.map((data, id) => {
+            {loaderData.map((data) => {
                 if (data.type === "top") {
-                    return <TopLoader key={id} loading={data.isLoading} />
+                    return <TopLoader key={data.id} loading={data.isLoading} />
                 }
 
                 if (data.type === "fullscreen") {
                     return (
                         <FullScreenLoader
-                            key={id}
+                            key={data.id}
                             message={data.message}
                             loading={data.isLoading}
                         />

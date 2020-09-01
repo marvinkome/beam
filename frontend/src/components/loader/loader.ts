@@ -1,7 +1,7 @@
-import findIndex from "lodash.findindex"
+import debounce from "lodash.debounce"
 
 export type LoaderType = "top" | "transparent" | "fullscreen"
-export type LoadingDataType = { id: string; type: LoaderType; message?: string }
+export type LoadingDataType = { id: string; isLoading: boolean; type: LoaderType; message?: string }
 
 class Loader {
     loadingData: LoadingDataType[] = []
@@ -30,9 +30,20 @@ class Loader {
         }
     }
 
+    // normal emit for when stopping events, because we want to
+    // call stop when needed
     emit = (event: string, loader?: LoadingDataType) => {
         if (!this.listeners.has(event)) {
             return false
+        }
+
+        if (loader?.isLoading) {
+            // start loading
+            this.loadingData.push(loader!)
+        } else {
+            // stop loading
+            let idx = this.loadingData.findIndex((n) => n.id === loader?.id)
+            this.loadingData.splice(idx, 1)
         }
 
         this.listeners.get(event)?.forEach((callback) => {
@@ -42,30 +53,34 @@ class Loader {
         return true
     }
 
-    isLoading = (id?: string) => this.loadingData.find((l) => l.id === id)!
+    debouncedEmit = debounce(this.emit, 250, { leading: true, trailing: false })
 
     startLoading = (loader: { type: LoaderType; message?: string }) => {
         let id = Date.now() + "-" + Math.random() * 9999
 
-        this.loadingData.push({
+        const loaderData = {
             id,
+            isLoading: true,
             type: loader.type,
             message: loader.message,
-        })
+        }
 
-        this.emit("loading", this.isLoading(id))
-
+        this.debouncedEmit("loading", loaderData)
         return () => this.stopLoading(id)
     }
 
     stopLoading = (id: string) => {
-        let idx = findIndex(this.loadingData, function (n) {
-            return n.id === id
-        })
+        let idx = this.loadingData.findIndex((n) => n.id === id)
+        if (idx < 0) {
+            return
+        }
 
-        this.loadingData.splice(idx, 1)
+        const newLoader = {
+            ...this.loadingData[idx],
+            isLoading: false,
+        }
 
-        this.emit("loading", undefined)
+        this.emit("loading", newLoader)
     }
 }
 
