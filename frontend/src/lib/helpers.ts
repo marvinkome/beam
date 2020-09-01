@@ -115,3 +115,26 @@ export function redirectUri() {
         return "/app/onboarding"
     }
 }
+
+export function getGeolocation() {
+    return new Promise((res: (location: any) => void, rej) => {
+        if (navigator.geolocation) {
+            return navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    res({
+                        lat: position.coords.latitude,
+                        long: position.coords.longitude,
+                    })
+                },
+                () => {
+                    rej()
+                },
+                {
+                    enableHighAccuracy: true,
+                }
+            )
+        } else {
+            rej()
+        }
+    })
+}

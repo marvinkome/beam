@@ -12,7 +12,6 @@ export function PageLoader() {
             }}
         >
             <div className="loader" style={{ margin: 0 }} />
-            <p style={{ paddingTop: 20 }}>Loading page...</p>
         </div>
     )
 }

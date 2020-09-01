@@ -5,7 +5,7 @@ import { useQuery, gql } from "@apollo/client"
 import { getProfileImage, formatDate } from "lib/helpers"
 import { Link } from "react-router-dom"
 import { AddFriend } from "components/modals"
-import { useIntroJs } from "lib/hooks"
+import { useIntroJs } from "hooks"
 
 function formatItems(friends: any[]) {
     const formattedFriends = friends.reduce((reduced, friend) => {

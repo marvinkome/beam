@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import cls from "classnames"
-import { useConnectAccount } from "lib/hooks"
+import { useConnectAccount } from "hooks"
 import { trackEvent } from "lib/analytics"
 
 type IProps = {

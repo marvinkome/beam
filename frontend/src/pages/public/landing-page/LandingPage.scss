@@ -51,7 +51,6 @@
             .text-grid {
                 margin-top: 5%;
                 padding-left: 6em;
-                 padding-left: 6em;
 
                 @include for-phone-only {
                     padding: 6em 2em 4em;
@@ -59,7 +58,7 @@
 
                 h1 {
                     font-size: 32px;
-                    font-weight: 600;
+                    font-weight: 700;
                 }
 
                 .check-list {
@@ -80,34 +79,50 @@
                             padding: 5px;
                             font-size: 1.2em;
                         }
+
+                        p {
+                            flex: 1;
+                        }
                     }
                 }
 
-                .btn {
-                    font-weight: 600;
-                    padding: 15px 25px;
-                    margin-top: 3.5em;
-                    border-radius: 50px;
-                    border: none;
-                    background-color: #9175DB;
-                    color: white;
-                    font-size: 16px;
-                    cursor: pointer;
+                .header-cta {
+                    text-align: center;
 
-                    &:focus {
+                    .btn {
+                        font-weight: 600;
+                        padding: 15px 25px;
+                        margin-top: 3.5em;
+                        border-radius: 50px;
                         border: none;
-                        outline: none;
+                        background-color: #9175db;
+                        color: white;
+                        font-size: 16px;
+                        cursor: pointer;
+
+                        @include for-phone-only {
+                            width: 100%;
+                        }
+
+                        &:focus {
+                            border: none;
+                            outline: none;
+                        }
+
+                        .loader {
+                            border-width: 3px;
+                            border-top-color: var(--primary-color);
+                            border-right-color: var(--primary-color);
+                            border-radius: 50%;
+                            width: 20px;
+                            height: 20px;
+                            margin-top: 0px;
+                            margin-left: 15px;
+                        }
                     }
 
-                    .loader {
-                        border-width: 3px;
-                        border-top-color: var(--primary-color);
-                        border-right-color: var(--primary-color);
-                        border-radius: 50%;
-                        width: 20px;
-                        height: 20px;
-                        margin-top: 0px;
-                        margin-left: 15px;
+                    p {
+                        margin-top: 15px;
                     }
                 }
             }

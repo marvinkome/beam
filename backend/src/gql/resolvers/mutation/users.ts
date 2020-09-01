@@ -127,7 +127,7 @@ export const resolvers = {
 
     setLocation: authenticated(async (_: any, { location }: any, ctx: IContext) => {
         const user = ctx.currentUser
-        if (!user) return false
+        if (!user) return null
 
         const geocoder = Geocoder({ provider: 'openstreetmap' })
         const res = await geocoder.reverse({ lat: location.lat, lon: location.long })
@@ -141,8 +141,7 @@ export const resolvers = {
             country: country || '',
         }
 
-        await user.save()
-        return true
+        return user.save()
     }),
 
     createInviteLink: authenticated(async (_: any, __: any, ctx: IContext) => {

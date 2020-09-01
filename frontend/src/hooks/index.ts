@@ -1,3 +1,5 @@
 export * from "./dropdown"
 export * from "./login"
+export * from "./connect"
 export * from "./intro"
+export * from "./app-setup"

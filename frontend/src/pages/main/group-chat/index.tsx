@@ -5,7 +5,7 @@ import { useParams, useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { getProfileImage } from "lib/helpers"
 import { trackError } from "lib/analytics"
-import { useJoinGroup, useLeaveGroup } from "lib/hooks/groups"
+import { useJoinGroup, useLeaveGroup } from "hooks/groups"
 
 type User = {
     id: string

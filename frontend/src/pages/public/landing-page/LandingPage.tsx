@@ -2,17 +2,17 @@ import React from "react"
 import cls from "classnames"
 import { Navbar } from "../components/Navbar"
 import { FaCheck } from "react-icons/fa"
-import { useGoogleLogin } from "lib/hooks"
+import { useGoogleLogin } from "hooks"
 import { Footer } from "../components/Footer"
-import { trackEvent } from "lib/analytics"
 import "./LandingPage.scss"
 
 export function LandingPageView(props: { onRegister: () => void }) {
-    const { signIn, loaded } = useGoogleLogin(false, props.onRegister)
-    const signUp = (type: string) => {
-        signIn()
-        trackEvent("Sign up with CTA button", { category: "Auth", label: type })
-    }
+    const { signIn: signUp, loaded } = useGoogleLogin({
+        loginType: "register",
+        onAuthCb: props.onRegister,
+    })
+
+    const { signIn } = useGoogleLogin({ loginType: "login" })
 
     return (
         <div className="landing-page">
@@ -26,7 +26,11 @@ export function LandingPageView(props: { onRegister: () => void }) {
                         <div className="check-list">
                             <div className="check">
                                 <FaCheck className="icon" />
-                                <p>Find people with similar interests on YouTube, Spotify, and Reddit</p>
+
+                                <p>
+                                    Find people with similar interests on YouTube, Spotify, and
+                                    Reddit
+                                </p>
                             </div>
 
                             <div className="check">
@@ -45,19 +49,24 @@ export function LandingPageView(props: { onRegister: () => void }) {
                             </div>
                         </div>
 
-                        <button
-                            onClick={() => signUp("header")}
-                            className={cls("btn btn-primary", { disabled: !loaded })}
-                        >
-                            Sign up with Google
-                        </button>
-                        <p>Already have an account? <a onClick={() => {
-                    signIn()
-                    trackEvent("Login with Google", { category: "Auth" })
-                }}
-                className={cls("text-link", { disabled: !loaded })}
-            > Log In</a></p>
-                        
+                        <div className="header-cta">
+                            <button
+                                onClick={signUp}
+                                className={cls("btn btn-primary", { disabled: !loaded })}
+                            >
+                                Sign up with Google
+                            </button>
+
+                            <p>
+                                Already have an account?{" "}
+                                <button
+                                    onClick={signIn}
+                                    className={cls("link-button", { disabled: !loaded })}
+                                >
+                                    Log In
+                                </button>
+                            </p>
+                        </div>
                     </div>
 
                     <div className="image-grid">

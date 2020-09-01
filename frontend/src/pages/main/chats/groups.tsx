@@ -4,7 +4,7 @@ import orderBy from "lodash.orderby"
 import { formatDate } from "lib/helpers"
 import { useQuery, gql } from "@apollo/client"
 import { Link } from "react-router-dom"
-import { useIntroJs } from "lib/hooks"
+import { useIntroJs } from "hooks"
 
 function formatItems(groups: any[]) {
     const formattedGroups = groups.reduce((reduced, group) => {

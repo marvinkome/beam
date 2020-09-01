@@ -1,7 +1,7 @@
 import React from "react"
 import cls from "classnames"
 import TextareaAutosize from "react-autosize-textarea"
-import { useDropdown } from "lib/hooks"
+import { useDropdown } from "hooks"
 import { FiArrowLeft, FiMoreVertical } from "react-icons/fi"
 import { useHistory } from "react-router-dom"
 import { MdSend } from "react-icons/md"

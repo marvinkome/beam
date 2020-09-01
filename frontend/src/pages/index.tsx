@@ -1,13 +1,15 @@
 import React, { useRef, useEffect } from "react"
-import Loader from "components/loader"
-import { ToastContainer, Slide } from "react-toastify"
+import { LoaderContainer } from "components/loader"
+
 import { ApolloProvider } from "@apollo/client"
 import { Router, Switch, Route, Redirect } from "react-router-dom"
+import { ToastContainer, Slide } from "react-toastify"
+
+// libs
 import { history } from "lib/history"
 import { apolloClient } from "lib/graphql"
 import { PWAEventContext } from "lib/pwa"
-import { trackTiming } from "lib/analytics"
-import { initAnalytics } from "lib/analytics"
+import { trackTiming, initAnalytics } from "lib/analytics"
 
 // pages
 import { PublicPages } from "pages/public"
@@ -17,7 +19,7 @@ import "react-toastify/dist/ReactToastify.css"
 
 initAnalytics()
 
-export function RootPage() {
+export default function App() {
     useEffect(() => trackTiming(), [])
 
     // hide prompt
@@ -30,15 +32,22 @@ export function RootPage() {
     return (
         <PWAEventContext.Provider value={pwaInstallPrompt}>
             <ApolloProvider client={apolloClient}>
+                {/* routes */}
                 <Router history={history}>
                     <Switch>
+                        {/* app routes */}
                         <Route path="/app" component={MainPages} />
+
+                        {/* public routes  */}
                         <Route path="/" component={PublicPages} />
+
+                        {/* 404 - redirect to landing page */}
                         <Redirect to="/" />
                     </Switch>
                 </Router>
 
-                <Loader />
+                {/* components */}
+                <LoaderContainer />
                 <ToastContainer
                     position="bottom-center"
                     closeButton={false}

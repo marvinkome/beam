@@ -1,6 +1,6 @@
 import React from "react"
 import cls from "classnames"
-import { useDropdown } from "lib/hooks"
+import { useDropdown } from "hooks"
 import { useQuery, gql } from "@apollo/client"
 import { FiArrowLeft } from "react-icons/fi"
 import { useHistory, Link } from "react-router-dom"

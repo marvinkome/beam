@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { StackHeader } from "components/header"
 import { FiX } from "react-icons/fi"
 import { useQuery, gql, useMutation } from "@apollo/client"
-import { useYouTubeConnect, useRedditConnect, useSpotifyConnect } from "lib/hooks"
+import { useYouTubeConnect, useRedditConnect, useSpotifyConnect } from "hooks"
 import { trackEvent } from "lib/analytics"
 import "./style.scss"
 

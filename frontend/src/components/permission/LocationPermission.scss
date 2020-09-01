@@ -1,0 +1,28 @@
+.request-location {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    padding: 3em 25px;
+
+    .page-header {
+        flex: 6;
+
+        h1 {
+            font-size: 2em;
+        }
+
+        p {
+            margin-top: 15px;
+        }
+    }
+
+    .button-container {
+        flex: 1;
+        margin-top: auto;
+
+        .btn {
+            width: 100%;
+            text-transform: uppercase;
+        }
+    }
+}

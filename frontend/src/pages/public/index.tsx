@@ -5,16 +5,34 @@ import { trackPageView } from "lib/analytics"
 import { PageLoader } from "components/page-loader"
 
 // pages
-const AuthPage = React.lazy(() => import("./auth").then((module) => ({ default: module.AuthPage })))
 const LandingPage = React.lazy(() =>
-    import("./landing-page").then((module) => ({ default: module.LandingPage }))
+    import("./landing-page").then((module) => ({
+        default: module.LandingPage,
+    }))
 )
+
+const InvitePage = React.lazy(() =>
+    import("./invite").then((module) => ({
+        default: module.InvitePage,
+    }))
+)
+
 const PrivacyPolicy = React.lazy(() =>
-    import("./privacy-policy").then((module) => ({ default: module.PrivacyPolicy }))
+    import("./privacy-policy").then((module) => ({
+        default: module.PrivacyPolicy,
+    }))
 )
-const Terms = React.lazy(() => import("./terms").then((module) => ({ default: module.Terms })))
+
+const Terms = React.lazy(() =>
+    import("./terms").then((module) => ({
+        default: module.Terms,
+    }))
+)
+
 const AcceptableUse = React.lazy(() =>
-    import("./acceptable-use").then((module) => ({ default: module.AcceptableUse }))
+    import("./acceptable-use").then((module) => ({
+        default: module.AcceptableUse,
+    }))
 )
 
 function UnauthRoute({ component: Component, ...rest }: any) {
@@ -42,7 +60,7 @@ export function PublicPages() {
     return (
         <Suspense fallback={<PageLoader />}>
             <Switch>
-                <Route exact path="/invite/:inviteToken" component={AuthPage} />
+                <Route exact path="/invite/:inviteToken" component={InvitePage} />
                 <Route exact path="/privacy-policy" component={PrivacyPolicy} />
                 <Route exact path="/terms-and-condition" component={Terms} />
                 <Route exact path="/acceptable-use" component={AcceptableUse} />

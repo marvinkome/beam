@@ -9,7 +9,7 @@ import {
     useCreateGroup,
     useJoinGroup,
     useGroupsPagination,
-} from "lib/hooks/groups"
+} from "hooks/groups"
 import "./style.scss"
 
 export function JoinGroup() {

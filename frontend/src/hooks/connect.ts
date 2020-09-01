@@ -1,5 +1,4 @@
 import PopupWindow from "lib/popupWindow"
-import { useHistory, useParams } from "react-router-dom"
 import { useMutation, gql } from "@apollo/client"
 import { toast } from "react-toastify"
 import {
@@ -7,15 +6,9 @@ import {
     ConnectRedditAccount,
     ConnectSpotifyAccount,
 } from "lib/connect-account"
-import {
-    AUTH_TOKEN,
-    GOOGLE_CLIENT_ID,
-    REDDIT_CLIENT_ID,
-    APP_URL,
-    SPOTIFY_CLIENT_ID,
-} from "lib/keys"
-import { redirectUri, toQuery } from "lib/helpers"
-import { trackError, setUser } from "lib/analytics"
+import { GOOGLE_CLIENT_ID, REDDIT_CLIENT_ID, APP_URL, SPOTIFY_CLIENT_ID } from "lib/keys"
+import { toQuery } from "lib/helpers"
+import { trackError } from "lib/analytics"
 import { useGoogleLogin as _useGoogleLogin, GoogleLoginResponse } from "react-google-login"
 
 function useConnectAccountMutation() {
@@ -26,76 +19,6 @@ function useConnectAccountMutation() {
     `)
 
     return connectAccount
-}
-
-export function useGoogleLogin(isLogin?: boolean, onAuthCb?: () => void) {
-    const history = useHistory()
-    const { inviteToken } = useParams()
-
-    const [googleLogin] = useMutation(gql`
-        mutation GoogleLogin($token: String!, $inviteToken: String, $youtubeData: [YoutubeInput]) {
-            googleLogin(token: $token, inviteToken: $inviteToken, youtubeData: $youtubeData) {
-                success
-                token
-                user {
-                    id
-                }
-            }
-        }
-    `)
-
-    const onGoogleLogin = async (resp: any) => {
-        const accessToken = resp.accessToken || resp.wc.access_token
-        if (!accessToken) {
-            toast.error("Failed to authenticate with Google")
-            return
-        }
-
-        let youtubeData: any = undefined
-
-        if (!isLogin) {
-            // get youtube subscriptions
-            const youtube = new ConnectYoutubeAccount(accessToken)
-            youtubeData = await youtube.getSubscriptions()
-        }
-
-        const loginResp = await googleLogin({
-            variables: {
-                token: accessToken,
-                inviteToken,
-                youtubeData,
-            },
-        })
-        const { token, success, message, user } = loginResp.data?.googleLogin
-
-        if (success) {
-            // Post login activities
-            localStorage.setItem(AUTH_TOKEN, token)
-            setUser(user.id)
-
-            if (onAuthCb) {
-                return onAuthCb()
-            } else {
-                // check if user is done with onboarding
-                return history.push(redirectUri())
-            }
-        } else {
-            // TODO:: ADD LOGGER
-            trackError(`Authentication with Google failed - ${message}`)
-            console.log(message)
-            toast.error("Failed to sign up with Google")
-        }
-    }
-
-    const login = _useGoogleLogin({
-        clientId: GOOGLE_CLIENT_ID,
-        cookiePolicy: "single_host_origin",
-        scope: "https://www.googleapis.com/auth/youtube.readonly",
-        onSuccess: onGoogleLogin,
-        onFailure: () => trackError("Authentication with Google failed"),
-    })
-
-    return login
 }
 
 export function useYouTubeConnect(onCompleted: (completed: boolean) => void) {

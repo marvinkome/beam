@@ -78,7 +78,7 @@ export const mutationTypeDefs = gql`
         # USER
         connectAccount(input: ConnectAccountInput): Boolean
         disconnectAccount(account: String!): Boolean
-        setLocation(location: LocationInput): Boolean
+        setLocation(location: LocationInput): User
         createInviteLink: String
         addFriend(inviteToken: String!): AddFriendMutationResponse
         addFriendById(friendId: ID!): Boolean
