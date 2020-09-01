@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react"
-import { gql, useMutation } from "@apollo/client"
+import { gql, useMutation, useQuery } from "@apollo/client"
 import { useHistory } from "react-router-dom"
 import { AUTH_TOKEN } from "lib/keys"
 import { isMobile, getGeolocation } from "lib/helpers"
@@ -12,19 +12,26 @@ export function useAppSetup() {
     const history = useHistory()
 
     // set location and cache user data
+    const { data, loading } = useQuery(gql`
+        {
+            me {
+                id
+                profile {
+                    firstName
+                    picture
+                    location {
+                        state
+                        city
+                    }
+                }
+            }
+        }
+    `)
+
     const [setLocation] = useMutation(gql`
         mutation SetLocation($location: LocationInput) {
             setLocation(location: $location) {
                 id
-                profile {
-                    name
-                    firstName
-                    picture
-                    location {
-                        city
-                        state
-                    }
-                }
             }
         }
     `)
@@ -53,9 +60,17 @@ export function useAppSetup() {
             return setAction("redirect-to-public")
         }
 
-        // 2 - we need to store user current location
-        getLocation()
-    }, [history, setAction, getLocation])
+        // 2 - we need to check if user has given permission
+        if (!loading && data) {
+            const { location } = data.me.profile
+            if (!location || !location.state) {
+                getLocation()
+                return
+            }
+
+            return setAction("render")
+        }
+    }, [history, setAction, getLocation, data, loading])
 
     return {
         action,
