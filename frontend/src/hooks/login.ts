@@ -33,7 +33,7 @@ export function useGoogleLogin(options: LoginOptions) {
         // get access token from google
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
-            toast.error("Failed to authenticate with Google")
+            toast.dark("Failed to authenticate with Google")
             return
         }
 
@@ -88,11 +88,13 @@ export function useGoogleLogin(options: LoginOptions) {
     // setup google login action
     const login = useReactGoogleLogin({
         clientId: GOOGLE_CLIENT_ID,
-        cookiePolicy: "single_host_origin",
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         fetchBasicProfile: false,
         onSuccess: onGoogleLoginSuccess,
-        onFailure: () => trackError("Authentication with react google login failed"),
+        onFailure: () => {
+            toast.dark("Failed to authenticate with Google")
+            trackError("Authentication with react google login failed")
+        },
     })
 
     return {
