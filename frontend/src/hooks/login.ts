@@ -91,9 +91,10 @@ export function useGoogleLogin(options: LoginOptions) {
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         fetchBasicProfile: false,
         onSuccess: onGoogleLoginSuccess,
-        onFailure: () => {
+        onFailure: (resp) => {
+            console.error(resp)
             toast.dark("Failed to authenticate with Google")
-            trackError("Authentication with react google login failed")
+            trackError(`Authentication with react google login failed - ${resp}`)
         },
     })
 
