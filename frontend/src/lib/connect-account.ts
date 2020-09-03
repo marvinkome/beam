@@ -1,5 +1,4 @@
 import axios, { AxiosInstance } from "axios"
-import { startLoader } from "components/loader"
 import { GOOGLE_CLIENT_ID } from "./keys"
 
 class ConnectAccount {
@@ -21,26 +20,6 @@ class ConnectAccount {
                 Accept: "application/json",
             },
         })
-
-        let loaderCompleteCb: () => void
-
-        this.axios.interceptors.request.use((config) => {
-            loaderCompleteCb = startLoader()
-
-            return config
-        })
-
-        this.axios.interceptors.response.use(
-            (response) => {
-                loaderCompleteCb()
-
-                return response
-            },
-            (error) => {
-                loaderCompleteCb()
-                return error
-            }
-        )
     }
 }
 

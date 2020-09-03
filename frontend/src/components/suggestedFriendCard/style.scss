@@ -1,16 +1,17 @@
 .suggested-friend-card {
-    border: 1px solid rgba(50, 41, 77, 0.5);
+    border: 1px solid var(--primary-color);
     border-radius: 10px;
-    padding: 15px;
-    margin-top: 20px;
+    margin: 3em 0px;
 
     .card-header {
         display: flex;
         align-items: center;
+        padding: 15px;
+        border-bottom: 1px solid rgba(50, 41, 77, 0.5);
 
         img {
-            width: 55px;
-            height: 55px;
+            width: 50px;
+            height: 50px;
             border-radius: 10px;
         }
 
@@ -24,48 +25,62 @@
         }
     }
 
-    & > p {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
-        margin-left: 15px;
-        font-size: var(--small-text);
-
-        .icon {
-            margin-top: 5px;
-            margin-left: 3px;
-        }
-    }
-
     .shared-interests {
-        padding: 20px 0px;
-
-        h2 {
-            font-size: var(--heading);
-            margin-bottom: 10px;
-        }
+        padding: 20px 15px;
 
         & > p {
-            font-weight: 600;
-            margin-bottom: 1em;
+            text-align: center;
+            margin-bottom: 10px;
+            color: var(--text-color-light);
         }
 
         ul {
-            margin-left: 5px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 15px;
+            margin: 1.5em 0px;
+            padding: 0px 5px;
 
             li {
                 display: flex;
                 align-items: center;
-                margin-bottom: 10px;
+                overflow: hidden;
 
                 img {
-                    width: 25px;
-                    height: 25px;
+                    width: 22.5px;
+                    height: 22.5px;
+                    border: 1px solid var(--primary-color);
                     border-radius: 50%;
                     margin-right: 10px;
                 }
+
+                span {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
             }
+        }
+
+        .btn {
+            margin: auto;
+            background: transparent;
+            border: 1px solid hsl(0, 0%, 40%);
+            padding: 5px 20px;
+            font-weight: normal;
+        }
+    }
+
+    .card-footer {
+        display: flex;
+        margin-top: 10px;
+        border-top: 1px solid var(--primary-color);
+
+        .btn {
+            flex: 1;
+            border-radius: 0px;
+            border-bottom-left-radius: 10px;
+            border: none;
         }
     }
 }

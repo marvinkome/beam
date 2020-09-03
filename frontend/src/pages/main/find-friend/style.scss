@@ -1,130 +1,37 @@
-.find-friend {
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
+.find-friend-page {
+    padding: 2.5em 25px;
 
-    .no-friends,
-    .has-friend {
-        padding: 25px 15px;
-    }
+    .page-header {
+        text-align: center;
 
-    .no-friends {
-        & > p {
-            margin: 3em 0px;
-            text-align: center;
+        h2 {
+            font-weight: normal;
+            margin-bottom: 20px;
         }
 
-        .share-box {
-            text-align: center;
-            border: 1px solid hsl(0, 0%, 80%);
-            border-radius: 10px;
-
-            .share-box-header {
-                padding: 20px 15px;
-                border-bottom: 1px solid hsl(0, 0%, 80%);
-                font-weight: 600;
-            }
-
-            .share-box-content {
-                padding: 10px 15px;
-
-                & > p {
-                    font-size: var(--small-text);
-                }
-
-                .invite-box {
-                    margin: 20px 10px;
-                    margin-bottom: 35px;
-
-                    & > p {
-                        font-size: var(--small-text);
-                        font-weight: 600;
-                    }
-
-                    .share-options {
-                        padding: 25px 0px;
-                        display: flex;
-                        justify-content: space-around;
-
-                        .icon {
-                            width: 40px;
-                            height: 40px;
-
-                            &.messenger {
-                                color: #006aff;
-                            }
-
-                            &.whatsapp {
-                                background-color: #25d366;
-                                padding: 3px;
-                                color: #fff;
-                                border-radius: 5px;
-                            }
-
-                            &.snapchat {
-                                background-color: #fffc00;
-                            }
-
-                            &.twitter {
-                                background-color: #1da1f2;
-                                padding: 5px;
-                                color: #fff;
-                                border-radius: 5px;
-                            }
-                        }
-                    }
-
-                    .copy-link {
-                        display: grid;
-                        grid-template-columns: 60% 40%;
-                        align-items: center;
-                        grid-auto-rows: 1fr;
-                        width: 100%;
-                        margin-top: 1.5em;
-                        border: 1px solid rgba(192, 189, 189, 1);
-                        border-radius: 10px;
-                        overflow: hidden;
-
-                        input {
-                            width: 100%;
-                            margin-right: auto;
-                            padding: 15px 10px;
-                            font-size: var(--body-text);
-                            overflow: hidden;
-                            cursor: default;
-                            border: none;
-
-                            &:focus {
-                                outline: none;
-                            }
-                        }
-
-                        span {
-                            font-size: var(--body-text);
-                            width: 100%;
-                            height: 100%;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: rgba(145, 117, 219, 1);
-                            color: #fff;
-                            cursor: pointer;
-
-                            .icon {
-                                font-size: 1.3em;
-                            }
-                        }
-                    }
-                }
-            }
+        span {
+            color: hsl(0, 0%, 30%);
         }
     }
 
-    .friends {
-        margin-top: 3em;
-    }
+    .share-box {
+        text-align: center;
+        border: 1px solid hsl(0, 0%, 80%);
+        border-radius: 10px;
+        margin-top: 2.5em;
 
-    & > .btn {
-        margin: auto 1em 4em;
+        .share-box-header {
+            padding: 20px 15px;
+            border-bottom: 1px solid hsl(0, 0%, 80%);
+            font-weight: 600;
+        }
+
+        .share-box-content {
+            padding: 10px 15px;
+
+            & > p {
+                font-size: var(--small-text);
+            }
+        }
     }
 }

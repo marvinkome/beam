@@ -2,13 +2,13 @@ import User, { IUser } from '@models/users'
 
 const WEIGHT = {
     youtube: 1,
-    reddit: 2,
-    spotify_genre: 3,
-    spotify_artist: 4,
+    reddit: 1.5,
+    spotify_genre: 1.75,
+    spotify_artist: 2,
 }
 
-const MIN_SCORE = 20
-const MIN_POSSIBLE_SCORE = 60
+const MIN_SCORE = 4
+// const MIN_POSSIBLE_SCORE = 1
 
 // HELPERS
 function getConnectedAccounts(user: IUser) {
@@ -154,9 +154,9 @@ export async function findFriends(user: IUser, withLogs = false) {
     }
 
     // if highest posible score is too small break early
-    if (totalPossibleScore < MIN_POSSIBLE_SCORE) {
-        return null
-    }
+    // if (totalPossibleScore < MIN_POSSIBLE_SCORE) {
+    //     return null
+    // }
 
     // get all users who is not in friends
     const closestUsers = await User.find({
@@ -219,7 +219,7 @@ export async function findFriends(user: IUser, withLogs = false) {
             })),
         ]
 
-        if (normalizedScore >= MIN_SCORE) {
+        if (totalScore >= MIN_SCORE) {
             recommendedUsers.push({
                 normalizedScore,
                 friend: closeUser,
@@ -250,5 +250,5 @@ export async function findFriends(user: IUser, withLogs = false) {
         if (a.normalizedScore < b.normalizedScore) return 1
         if (a.normalizedScore > b.normalizedScore) return -1
         return 0
-    })[0]
+    })
 }

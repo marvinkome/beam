@@ -3,7 +3,7 @@ import { useQuery, gql, useMutation } from "@apollo/client"
 import { ShareBeam } from "components/modals"
 import { useHistory } from "react-router-dom"
 import { trackPageView, trackEvent } from "lib/analytics"
-import { SuggestedFriendCard } from "components/suggestedFriendCard"
+import { SuggestedFriendCard } from "components/suggestedFriendCard/index-o"
 import "./style.scss"
 
 function useData() {

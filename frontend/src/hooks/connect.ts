@@ -1,15 +1,16 @@
 import PopupWindow from "lib/popupWindow"
+import { useGoogleLogin as _useGoogleLogin, GoogleLoginResponse } from "react-google-login"
 import { useMutation, gql } from "@apollo/client"
-import { toast } from "react-toastify"
+import { startLoader } from "components"
 import {
     ConnectYoutubeAccount,
     ConnectRedditAccount,
     ConnectSpotifyAccount,
 } from "lib/connect-account"
+import { toast } from "react-toastify"
 import { GOOGLE_CLIENT_ID, REDDIT_CLIENT_ID, APP_URL, SPOTIFY_CLIENT_ID } from "lib/keys"
 import { toQuery } from "lib/helpers"
 import { trackError } from "lib/analytics"
-import { useGoogleLogin as _useGoogleLogin, GoogleLoginResponse } from "react-google-login"
 
 function useConnectAccountMutation() {
     const [connectAccount] = useMutation(gql`
@@ -34,6 +35,8 @@ export function useYouTubeConnect(onCompleted: (completed: boolean) => void) {
             return
         }
 
+        let stopLoader = startLoader()
+
         const youtube = new ConnectYoutubeAccount(token)
         const subs = await youtube.getSubscriptions()
 
@@ -46,6 +49,7 @@ export function useYouTubeConnect(onCompleted: (completed: boolean) => void) {
             },
         })
 
+        stopLoader && stopLoader()
         if (resp.data.connectAccount) {
             onCompleted(true)
         }
@@ -74,6 +78,8 @@ export function useRedditConnect(onCompleted: (completed: boolean) => void) {
             return
         }
 
+        let stopLoader = startLoader()
+
         // get subreddits
         const reddit = new ConnectRedditAccount(token)
         const subreddits = await reddit.getSubreddits()
@@ -87,6 +93,7 @@ export function useRedditConnect(onCompleted: (completed: boolean) => void) {
             },
         })
 
+        stopLoader && stopLoader()
         if (data.connectAccount) {
             return onCompleted(true)
         }
@@ -130,6 +137,8 @@ export function useSpotifyConnect(onCompleted: (completed: boolean) => void) {
             return
         }
 
+        let stopLoader = startLoader()
+
         // get spotify data
         const spotify = new ConnectSpotifyAccount(token)
         const { artists, genres } = await spotify.getTopArtistsAndGenres()
@@ -144,6 +153,7 @@ export function useSpotifyConnect(onCompleted: (completed: boolean) => void) {
             },
         })
 
+        stopLoader && stopLoader()
         if (data.connectAccount) {
             onCompleted(true)
         }

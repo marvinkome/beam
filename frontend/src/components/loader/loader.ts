@@ -53,7 +53,7 @@ class Loader {
         return true
     }
 
-    debouncedEmit = debounce(this.emit, 250, { leading: true, trailing: false })
+    debouncedEmit = debounce(this.emit, 100, { leading: false, trailing: true })
 
     startLoading = (loader: { type: LoaderType; message?: string }) => {
         let id = Date.now() + "-" + Math.random() * 9999
