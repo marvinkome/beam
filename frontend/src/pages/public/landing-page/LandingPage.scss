@@ -51,6 +51,8 @@
             .text-grid {
                 margin-top: 5%;
                 padding-left: 6em;
+                padding-right: 6em;
+                
 
                 @include for-phone-only {
                     padding: 6em 2em 4em;
@@ -91,7 +93,7 @@
 
                     .btn {
                         font-weight: 600;
-                        padding: 15px 25px;
+                        padding: 25px 40px;
                         margin-top: 3.5em;
                         border-radius: 50px;
                         border: none;
@@ -102,6 +104,7 @@
 
                         @include for-phone-only {
                             width: 100%;
+                            padding: 15px 25px;
                         }
 
                         &:focus {
@@ -122,7 +125,13 @@
                     }
 
                     p {
-                        margin-top: 15px;
+                        margin-top: 25px;
+                        text-align: left;
+                        
+                        @include for-phone-only {
+                            text-align: center;
+                            margin-top: 15px;
+                        }
                     }
                 }
             }
