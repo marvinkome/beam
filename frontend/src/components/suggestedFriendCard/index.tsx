@@ -14,6 +14,7 @@ export function useInterestsPagination(interests: any[]) {
 }
 
 type IProps = {
+    actions: JSX.Element
     suggestedFriend?: {
         friend: any
         sharedInterests: any[]
@@ -77,9 +78,9 @@ export function SuggestedFriendCard(props: IProps) {
             </div>
 
             <div className="card-footer">
-                <button className="btn btn-primary">Accept</button>
+                {props.actions}
 
-                <button className="btn btn-primary-outline">Decline</button>
+                {/* <button className="btn btn-primary-outline">Decline</button> */}
             </div>
         </div>
     )

@@ -35,11 +35,18 @@ export const userTypeDefs = gql`
         group: Group
     }
 
+    type Request {
+        from: User
+        date: String
+        sharedInterests: [SharedInterest]
+    }
+
     type User {
         id: ID!
         email: String!
         connectedAccounts: ConnectedAccounts
         interests: [Interest]
+        requests: [Request]
         profile: Profile
         lastSeen: String
         bot: Boolean

@@ -1,8 +1,9 @@
-import { IUser } from '@models/users'
+import User, { IUser } from '@models/users'
 import Conversation from '@models/conversations'
 import Message from '@models/messages'
 import Group from '@models/groups'
 import { IContext } from '..'
+import { getUsersSharedInterests } from '@libs/helpers'
 
 export const userResolvers = {
     User: {
@@ -71,6 +72,21 @@ export const userResolvers = {
     Profile: {
         firstName: (profile: { name: string; picture: string }) => {
             return profile.name.split(' ')[0]
+        },
+    },
+
+    Request: {
+        from: ({ from }: { from: string }) => {
+            return User.findOne({ _id: from })
+        },
+
+        sharedInterests: async ({ from }: { from: string }, _: any, ctx: IContext) => {
+            const userA = ctx.currentUser
+            const userB = await User.findOne({ _id: from })
+
+            if (!userA || !userB) return []
+
+            return getUsersSharedInterests(userA, userB)
         },
     },
 }

@@ -231,4 +231,64 @@ export const resolvers = {
             }
         }
     ),
+
+    sendFriendRequest: authenticated(
+        async (_: any, { matchId }: { matchId: string }, ctx: IContext) => {
+            const user = ctx.currentUser
+            if (!user) return false
+
+            // get friend
+            const match = await User.findOne({ _id: matchId })
+
+            if (!match) return false
+
+            await match.updateOne({
+                $addToSet: {
+                    requests: {
+                        from: user.id,
+                    },
+                },
+            })
+
+            return true
+        }
+    ),
+
+    respondToFriendRequest: authenticated(
+        async (_: any, data: { matchId: string; accepted: boolean }, ctx: IContext) => {
+            const user = ctx.currentUser
+            if (!user) return false
+
+            // get user sending request
+            const requestingUser = await User.findOne({ _id: data.matchId })
+            if (!requestingUser) return false
+            if (requestingUser.id === user.id) return false
+
+            if (data.accepted) {
+                await requestingUser.updateOne({
+                    $addToSet: { friends: user.id },
+                })
+
+                await user.updateOne({
+                    $pull: {
+                        requests: {
+                            from: requestingUser.id,
+                        },
+                    },
+                    $addToSet: { friends: requestingUser.id },
+                })
+            } else {
+                await user.updateOne({
+                    $pull: {
+                        requests: {
+                            from: requestingUser.id,
+                        },
+                    },
+                    $addToSet: { declinedRequests: requestingUser.id },
+                })
+            }
+
+            return true
+        }
+    ),
 }

@@ -1,8 +1,20 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import { StackHeader, SuggestedFriendCard, ShareBox } from "components"
-import { useSuggestedFriends } from "hooks"
+import { useSuggestedFriends, useInviteToChat } from "hooks"
 import "./style.scss"
+
+function FriendAction(props: { friendId: string }) {
+    const [invited, inviteToChat] = useInviteToChat()
+
+    return invited ? (
+        <button className="btn btn-primary-outline">Invite sent</button>
+    ) : (
+        <button onClick={() => inviteToChat(props.friendId)} className="btn btn-primary">
+            Invite to chat
+        </button>
+    )
+}
 
 export function FindFriend() {
     const { data } = useSuggestedFriends()
@@ -17,7 +29,7 @@ export function FindFriend() {
                     {isEmpty ? (
                         <h2>Sorry, but there aren't enough people in your location</h2>
                     ) : (
-                        <h2>Send an invite to chat</h2>
+                        <h2>Find a friend to chat with</h2>
                     )}
 
                     <span>
@@ -43,6 +55,7 @@ export function FindFriend() {
                         <SuggestedFriendCard
                             key={suggestedFriend.friend.id}
                             suggestedFriend={suggestedFriend}
+                            actions={<FriendAction friendId={suggestedFriend.friend.id} />}
                         />
                     ))}
                 </div>

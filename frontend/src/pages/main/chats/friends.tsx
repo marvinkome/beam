@@ -6,6 +6,7 @@ import { getProfileImage, formatDate } from "lib/helpers"
 import { Link } from "react-router-dom"
 import { AddFriend } from "components/modals"
 import { useIntroJs } from "hooks"
+import { FiArrowRight } from "react-icons/fi"
 
 function formatItems(friends: any[]) {
     const formattedFriends = friends.reduce((reduced, friend) => {
@@ -95,6 +96,15 @@ export function FriendsTab() {
 
     return (
         <div className="tab friends-tab">
+            <Link to="/app/invites" className="chat-invites">
+                <p>
+                    View chat invite
+                    <span>2</span>
+                </p>
+
+                <FiArrowRight className="icon" />
+            </Link>
+
             <section className="chats-list">
                 {friends.map((friend: any) => (
                     <Link to={`/app/chat/${friend.id}`} key={friend.id} className="chat-item">

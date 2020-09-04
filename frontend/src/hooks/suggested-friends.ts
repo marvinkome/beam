@@ -1,6 +1,7 @@
-import { useRef, useEffect } from "react"
-import { useQuery, gql } from "@apollo/client"
+import { useRef, useEffect, useState } from "react"
+import { useQuery, gql, useMutation } from "@apollo/client"
 import { startLoader } from "components"
+import { toast } from "react-toastify"
 
 export function useSuggestedFriends() {
     const stopLoader = useRef<any>()
@@ -22,6 +23,7 @@ export function useSuggestedFriends() {
                     }
                     sharedInterests {
                         name
+                        image
                         platform
                     }
                 }
@@ -34,10 +36,10 @@ export function useSuggestedFriends() {
 
     useEffect(() => {
         if (loading && !data) {
-            stopLoader.current = startLoader({
-                type: "fullscreen",
-                message: "Please wait while we find people nearby",
-            })
+            stopLoader.current = startLoader(
+                "fullscreen",
+                "Please wait while we find people nearby"
+            )
         }
 
         if (!loading && data) {
@@ -49,4 +51,26 @@ export function useSuggestedFriends() {
         data,
         loading,
     }
+}
+
+export function useInviteToChat(): [boolean, (matchId: string) => void] {
+    const [invited, setInviteStatus] = useState(false)
+    const [sendFriendRequest] = useMutation(gql`
+        mutation SendFriendRequest($matchId: ID!) {
+            sendFriendRequest(matchId: $matchId)
+        }
+    `)
+
+    return [
+        invited,
+        async (matchId: string) => {
+            const { data } = await sendFriendRequest({ variables: { matchId } })
+
+            if (!data.sendFriendRequest) {
+                return toast.dark("Error sending invite. Try Again")
+            }
+
+            setInviteStatus(true)
+        },
+    ]
 }

@@ -1,46 +1,31 @@
 import React, { useState, useEffect, useCallback } from "react"
 import classnames from "classnames"
-import { loader, LoadingDataType, LoaderType } from "./loader"
+import { loader } from "./loader"
 import "./style.scss"
 
 const EVENT_LOADING = "loading"
 const MOUNTED: Array<string | null> = []
 
 export function LoaderContainer() {
-    const [loaderData, setLoaders] = useState<
-        Array<{
-            id: string
-            isLoading: boolean
-            type?: LoaderType
-            message?: string
-        }>
-    >([])
+    const [loaderData, setLoaderData] = useState({
+        loading: false,
+        type: "",
+        message: "",
+    })
 
     const [id, setId] = useState<string | null>(null)
 
     const setLoadingState = useCallback(
-        (loader?: LoadingDataType) => {
-            if (MOUNTED.indexOf(id) < 0) {
-                return
-            }
+        (loading, type, message) => {
+            if (MOUNTED.indexOf(id) < 0) return
 
-            // if event is not available, push it
-            if (!loader?.isLoading) {
-                const newLoaderData = loaderData.filter((l) => l.id !== loader?.id)
-
-                setLoaders(newLoaderData)
-            } else {
-                const newLoaderData = loaderData.concat({
-                    id: loader?.id,
-                    isLoading: loader.isLoading,
-                    type: loader?.type,
-                    message: loader?.message,
-                })
-
-                setLoaders(newLoaderData)
-            }
+            setLoaderData({
+                loading,
+                type,
+                message,
+            })
         },
-        [id, loaderData]
+        [id]
     )
 
     useEffect(() => {
@@ -61,23 +46,10 @@ export function LoaderContainer() {
 
     return (
         <div>
-            {loaderData.map((data) => {
-                if (data.type === "top") {
-                    return <TopLoader key={data.id} loading={data.isLoading} />
-                }
-
-                if (data.type === "fullscreen") {
-                    return (
-                        <FullScreenLoader
-                            key={data.id}
-                            message={data.message}
-                            loading={data.isLoading}
-                        />
-                    )
-                }
-
-                return null
-            })}
+            {loaderData.type === "top" && <TopLoader loading={loaderData.loading} />}
+            {loaderData.type === "fullscreen" && (
+                <FullScreenLoader message={loaderData.message} loading={loaderData.loading} />
+            )}
         </div>
     )
 }

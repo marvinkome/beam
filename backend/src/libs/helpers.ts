@@ -13,3 +13,30 @@ export async function generateInviteId(user: IUser) {
     await invite.save()
     return { item: invite }
 }
+
+export async function getUsersSharedInterests(userA: IUser, userB: IUser) {
+    const userAInterests = userA.connectedAccounts
+    const userBInterests = userB.connectedAccounts
+
+    if (!userAInterests || !userAInterests.length || !userBInterests || !userBInterests.length) {
+        return []
+    }
+
+    // scan through connected data
+    const sharedInterests = userAInterests.reduce(
+        (sharedInterests: IUser['connectedAccounts'], current) => {
+            const similar = userBInterests.find(
+                (acc) => acc.name.toLowerCase() === current.name.toLowerCase()
+            )
+
+            if (similar) {
+                sharedInterests?.push(similar)
+            }
+
+            return sharedInterests
+        },
+        []
+    )
+
+    return sharedInterests
+}

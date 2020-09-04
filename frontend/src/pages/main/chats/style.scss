@@ -54,6 +54,32 @@
         position: relative;
     }
 
+    .chat-invites {
+        display: flex;
+        border: 1px solid var(--text-color);
+        border-radius: 10px;
+        margin: 15px;
+        padding: 10px 18px;
+        color: initial;
+
+        p {
+            margin-right: auto;
+
+            span {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-left: 10px;
+                width: 20px;
+                height: 20px;
+                background: var(--primary-color);
+                border-radius: 50%;
+                color: #fff;
+                font-size: var(--small-text);
+            }
+        }
+    }
+
     .action-button-container {
         bottom: 30px;
         position: absolute;

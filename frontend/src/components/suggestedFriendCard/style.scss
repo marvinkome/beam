@@ -2,6 +2,7 @@
     border: 1px solid var(--primary-color);
     border-radius: 10px;
     margin: 3em 0px;
+    overflow: hidden;
 
     .card-header {
         display: flex;
@@ -79,7 +80,6 @@
         .btn {
             flex: 1;
             border-radius: 0px;
-            border-bottom-left-radius: 10px;
             border: none;
         }
     }

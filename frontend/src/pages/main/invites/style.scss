@@ -1,0 +1,18 @@
+.invites-page {
+    padding: 2.5em 25px;
+
+    .page-header {
+        text-align: center;
+
+        h2 {
+            width: 90%;
+            margin: auto;
+            font-weight: normal;
+            margin-bottom: 20px;
+        }
+
+        span {
+            color: hsl(0, 0%, 30%);
+        }
+    }
+}

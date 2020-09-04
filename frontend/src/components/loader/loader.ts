@@ -1,13 +1,17 @@
-import debounce from "lodash.debounce"
-
 export type LoaderType = "top" | "transparent" | "fullscreen"
 export type LoadingDataType = { id: string; isLoading: boolean; type: LoaderType; message?: string }
 
 class Loader {
-    loadingData: LoadingDataType[] = []
-    listeners: Map<string, Array<(loader?: LoadingDataType) => void>> = new Map()
+    loadingIds: string[] = []
+    listeners: Map<
+        string,
+        Array<(isLoading: boolean, type: LoaderType, message?: string) => void>
+    > = new Map()
 
-    on = (event: string, callback: (loader?: LoadingDataType) => void) => {
+    on = (
+        event: string,
+        callback: (isLoading: boolean, type: LoaderType, message?: string) => void
+    ) => {
         if (typeof callback === "function") {
             this.listeners.has(event) || this.listeners.set(event, [])
 
@@ -17,7 +21,10 @@ class Loader {
         }
     }
 
-    off = (event: string, callback: (loader?: LoadingDataType) => void) => {
+    off = (
+        event: string,
+        callback: (isLoading: boolean, type: LoaderType, message?: string) => void
+    ) => {
         if (!this.listeners.has(event)) return
 
         let cbs = this.listeners.get(event)
@@ -30,63 +37,39 @@ class Loader {
         }
     }
 
-    // normal emit for when stopping events, because we want to
-    // call stop when needed
-    emit = (event: string, loader?: LoadingDataType) => {
+    emit = (event: string, ...args: any[]) => {
         if (!this.listeners.has(event)) {
             return false
         }
 
-        if (loader?.isLoading) {
-            // start loading
-            this.loadingData.push(loader!)
-        } else {
-            // stop loading
-            let idx = this.loadingData.findIndex((n) => n.id === loader?.id)
-            this.loadingData.splice(idx, 1)
-        }
-
-        this.listeners.get(event)?.forEach((callback) => {
-            setTimeout(() => callback.call(null, loader), 0)
-        })
+        this.listeners
+            .get(event)
+            ?.forEach((callback: any) => setTimeout(() => callback.call(null, ...args), 0))
 
         return true
     }
 
-    debouncedEmit = debounce(this.emit, 100, { leading: false, trailing: true })
+    isLoading = () => this.loadingIds.length > 0
 
-    startLoading = (loader: { type: LoaderType; message?: string }) => {
+    startLoading = (type: LoaderType, message?: string) => {
         let id = Date.now() + "-" + Math.random() * 9999
 
-        const loaderData = {
-            id,
-            isLoading: true,
-            type: loader.type,
-            message: loader.message,
-        }
+        this.loadingIds.push(id)
 
-        this.debouncedEmit("loading", loaderData)
+        this.emit("loading", this.isLoading(), type, message)
+
         return () => this.stopLoading(id)
     }
 
-    stopLoading = (id: string) => {
-        let idx = this.loadingData.findIndex((n) => n.id === id)
-        if (idx < 0) {
-            return
-        }
+    stopLoading = (id: any) => {
+        let idx = this.loadingIds.findIndex((n) => n === id)
 
-        const newLoader = {
-            ...this.loadingData[idx],
-            isLoading: false,
-        }
+        this.loadingIds.splice(idx, 1)
 
-        this.emit("loading", newLoader)
+        this.emit("loading", this.isLoading())
     }
 }
 
 export const loader = new Loader()
-export const startLoader = (
-    loaderType: { type: LoaderType; message?: string } = { type: "top" }
-) => {
-    return loader.startLoading(loaderType!)
-}
+export const startLoader = (type?: LoaderType, message?: string) =>
+    loader.startLoading(type || "top", message)

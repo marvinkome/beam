@@ -35,6 +35,12 @@ const FindFriend = React.lazy(() =>
     }))
 )
 
+const FriendInvites = React.lazy(() =>
+    import("./invites").then((module) => ({
+        default: module.FriendInvites,
+    }))
+)
+
 const Profile = React.lazy(() =>
     import("./profile").then((module) => ({
         default: module.Profile,
@@ -87,6 +93,7 @@ export function MainPages() {
                     {/* find more */}
                     <Route exact path="/app/join-group" component={JoinGroup} />
                     <Route exact path="/app/find-friend" component={FindFriend} />
+                    <Route exact path="/app/invites" component={FriendInvites} />
 
                     {/* profile */}
                     <Route exact path="/app/profile" component={Profile} />
