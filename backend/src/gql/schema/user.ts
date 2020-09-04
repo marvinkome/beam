@@ -47,6 +47,7 @@ export const userTypeDefs = gql`
         connectedAccounts: ConnectedAccounts
         interests: [Interest]
         requests: [Request]
+        requestsCount: Int
         profile: Profile
         lastSeen: String
         bot: Boolean

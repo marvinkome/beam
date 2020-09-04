@@ -24,7 +24,10 @@ export async function findFriends(user: IUser) {
     }
 
     const closeUsers = await User.find({
-        _id: { $ne: user.id, $nin: user.friends },
+        _id: {
+            $ne: user.id,
+            $nin: user.requests.map((req) => req.from).concat(user.friends),
+        },
         'profile.location.state': user.profile.location?.state,
         'requests.from': { $nin: user.id },
         declinedRequests: { $nin: user.id },

@@ -67,6 +67,10 @@ export const userResolvers = {
 
             return Message.findOne({ to: conversation?.id }).sort('-timestamp')
         },
+
+        requestsCount: async (user: IUser) => {
+            return user.requests.length
+        },
     },
 
     Profile: {

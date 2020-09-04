@@ -43,6 +43,10 @@ function useFriends() {
     const { data, loading } = useQuery(
         gql`
             query Friend {
+                me {
+                    id
+                    requestsCount
+                }
                 friends {
                     id
                     lastMessage {
@@ -89,6 +93,7 @@ export function FriendsTab() {
     if (loading) {
         return (
             <div className="loading-container">
+                <div className="loader" />
                 <p>Loading friends. Please wait...</p>
             </div>
         )
@@ -96,14 +101,16 @@ export function FriendsTab() {
 
     return (
         <div className="tab friends-tab">
-            <Link to="/app/invites" className="chat-invites">
-                <p>
-                    View chat invite
-                    <span>2</span>
-                </p>
+            {!!data?.me?.requestsCount && (
+                <Link to="/app/invites" className="chat-invites">
+                    <p>
+                        View chat invite
+                        <span>{data?.me?.requestsCount}</span>
+                    </p>
 
-                <FiArrowRight className="icon" />
-            </Link>
+                    <FiArrowRight className="icon" />
+                </Link>
+            )}
 
             <section className="chats-list">
                 {friends.map((friend: any) => (
