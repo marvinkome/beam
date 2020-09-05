@@ -1,5 +1,6 @@
 import React from "react"
 import { useSuggestedFriends, useInviteToChat } from "hooks"
+import { FiCheck } from "react-icons/fi"
 import { Link } from "react-router-dom"
 import { SuggestedFriendCard } from "components"
 import "./style.scss"
@@ -8,7 +9,9 @@ function FriendAction(props: { friendId: string }) {
     const [invited, inviteToChat] = useInviteToChat()
 
     return invited ? (
-        <button className="btn btn-primary-outline">Invite sent</button>
+        <button className="btn btn-primary-outline">
+            Invite sent <FiCheck className="icon" />
+        </button>
     ) : (
         <button onClick={() => inviteToChat(props.friendId)} className="btn btn-primary">
             Invite to chat
