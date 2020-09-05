@@ -91,7 +91,7 @@ export function useGoogleLogin(options: LoginOptions) {
         onFailure: (resp) => {
             console.error(resp)
             toast.dark("Failed to authenticate with Google")
-            trackError(`Authentication with react google login failed - ${resp}`)
+            trackError(`Authentication with react google login failed - ${resp.error}`)
         },
     })
 
