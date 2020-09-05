@@ -34,6 +34,7 @@ export function useGoogleLogin(options: LoginOptions) {
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
             toast.dark("Failed to authenticate with Google")
+            trackError(`Authentication with Google failed - Access token not found`)
             return
         }
 
@@ -88,6 +89,7 @@ export function useGoogleLogin(options: LoginOptions) {
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         fetchBasicProfile: false,
         onSuccess: onGoogleLoginSuccess,
+        onRequest: () => trackEvent("Authenticate with Google request started"),
         onFailure: (resp) => {
             console.error(resp)
             toast.dark("Failed to authenticate with Google")
