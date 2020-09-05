@@ -17,6 +17,7 @@ type IProps = {
         name: string
         image: any
     }
+    defaultMessage: string
     messages: Array<{
         id: string
         messageId?: string
@@ -76,6 +77,12 @@ export function ChatUi(props: IProps) {
 
             <section className="chat-section">
                 <div className="chat-container">
+                    {!props.messages.length && !props.isPreviewing && (
+                        <div className="default-message">
+                            <p>{props.defaultMessage}</p>
+                        </div>
+                    )}
+
                     <ChatFeed chatBubble={ChatBubble} messages={props.messages} />
                 </div>
             </section>
@@ -87,11 +94,7 @@ export function ChatUi(props: IProps) {
                     </button>
                 ) : (
                     <form onSubmit={props.sendMessage} className="form-section">
-                        <TextareaAutosize
-                            id="message"
-                            placeholder="What's on your mind?"
-                            maxRows={5}
-                        />
+                        <TextareaAutosize id="message" placeholder="Type a message" maxRows={5} />
 
                         <button type="submit" className="send">
                             <MdSend className="icon" />

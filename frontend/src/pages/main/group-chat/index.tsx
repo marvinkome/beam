@@ -231,6 +231,9 @@ export function GroupChat() {
                 sendMessage={sendMessage}
                 joinGroup={() => joinGroup(data?.group.id)}
                 actions={[{ title: "Leave group", action: () => leaveGroup(data?.group.id) }]}
+                defaultMessage={
+                    !!data ? `This is the beginning of the ${data?.group?.name} group.` : ""
+                }
             />
         </div>
     )

@@ -258,6 +258,11 @@ export function Chat() {
                 messages={messages}
                 sendMessage={sendMessage}
                 isPreviewing={false}
+                defaultMessage={
+                    !!profile
+                        ? `This is the beginning of your conversations with ${profile?.firstName}. Why don't you be the first to say hello?`
+                        : ""
+                }
             />
         </div>
     )
