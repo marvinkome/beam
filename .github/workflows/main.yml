@@ -27,6 +27,7 @@ jobs:
   deploy:
     runs-on: ubuntu-18.04
     needs: run-tests
+    if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
 
     steps:
       - uses: actions/checkout@v2
