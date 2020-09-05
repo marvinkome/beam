@@ -24,6 +24,8 @@ export function useGoogleLogin(options: LoginOptions) {
                 token
                 user {
                     id
+                    email
+                    createdAt
                 }
             }
         }
@@ -62,7 +64,10 @@ export function useGoogleLogin(options: LoginOptions) {
         if (success) {
             // Post login activities
             localStorage.setItem(AUTH_TOKEN, token)
-            setUser(user.id)
+            setUser(user.id, {
+                $email: user.email,
+                signUpDate: new Date(parseInt(user.createdAt, 10)).toISOString(),
+            })
 
             stopLoader && stopLoader()
             if (options.onAuthCb) {

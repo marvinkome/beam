@@ -14,3 +14,4 @@ export const SPOTIFY_CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID!
 
 // OTHER KEYS
 export const GA_TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID!
+export const MIXPANEL_ID = process.env.REACT_APP_MIXPANEL_ID!
