@@ -18,6 +18,8 @@ export interface IUser extends Document {
         }
     }
     friends: Schema.Types.ObjectId[] | string[] | IUser[]
+    requests: Array<{ from: Schema.Types.ObjectId[] | string[] | IUser[]; date: Date }>
+    declinedRequests: Schema.Types.ObjectId[] | string[] | IUser[]
     connectedAccounts?: Array<{
         id: string
         name: string
@@ -72,10 +74,24 @@ export const userSchema: Schema<IUser> = new Schema(
         ],
 
         friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+        requests: [
+            {
+                from: {
+                    type: Schema.Types.ObjectId,
+                    ref: 'User',
+                },
+                date: {
+                    type: Date,
+                    default: Date.now,
+                },
+            },
+        ],
+        declinedRequests: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     },
     {
         timestamps: true,
     }
 )
 
-export default model<IUser>('User', userSchema)
+const User = model<IUser>('User', userSchema)
+export default User

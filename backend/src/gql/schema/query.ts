@@ -2,7 +2,9 @@ import { gql } from 'apollo-server-express'
 
 export const queryTypeDef = gql`
     type SharedInterest {
+        id: String
         name: String
+        image: String
         platform: String
     }
 
@@ -18,7 +20,7 @@ export const queryTypeDef = gql`
         friends: [User]
         groups: [Group]
 
-        suggestedFriend: SuggestedFriend
+        suggestedFriends: [SuggestedFriend]
 
         conversation(with: ID!, first: Int, sort: Boolean, after: Int): [Message]
         group(id: ID!): Group

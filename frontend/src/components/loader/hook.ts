@@ -6,10 +6,7 @@ export function useLoader(isLoading: boolean, loadingText: string) {
 
     useEffect(() => {
         if (isLoading) {
-            stopLoader.current = startLoader({
-                type: "fullscreen",
-                message: loadingText,
-            })
+            stopLoader.current = startLoader("fullscreen", loadingText)
         }
 
         if (!isLoading) {

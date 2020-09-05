@@ -6,6 +6,7 @@ import { getProfileImage, formatDate } from "lib/helpers"
 import { Link } from "react-router-dom"
 import { AddFriend } from "components/modals"
 import { useIntroJs } from "hooks"
+import { FiArrowRight } from "react-icons/fi"
 
 function formatItems(friends: any[]) {
     const formattedFriends = friends.reduce((reduced, friend) => {
@@ -42,6 +43,10 @@ function useFriends() {
     const { data, loading } = useQuery(
         gql`
             query Friend {
+                me {
+                    id
+                    requestsCount
+                }
                 friends {
                     id
                     lastMessage {
@@ -88,6 +93,7 @@ export function FriendsTab() {
     if (loading) {
         return (
             <div className="loading-container">
+                <div className="loader" />
                 <p>Loading friends. Please wait...</p>
             </div>
         )
@@ -95,6 +101,17 @@ export function FriendsTab() {
 
     return (
         <div className="tab friends-tab">
+            {!!data?.me?.requestsCount && (
+                <Link to="/app/invites" className="chat-invites">
+                    <p>
+                        View chat invite
+                        <span>{data?.me?.requestsCount}</span>
+                    </p>
+
+                    <FiArrowRight className="icon" />
+                </Link>
+            )}
+
             <section className="chats-list">
                 {friends.map((friend: any) => (
                     <Link to={`/app/chat/${friend.id}`} key={friend.id} className="chat-item">

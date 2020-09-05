@@ -42,10 +42,7 @@ export function useGoogleLogin(options: LoginOptions) {
         let youtubeData: any = undefined
         if (options.loginType !== "login") {
             // start loader
-            stopLoader = startLoader({
-                type: "fullscreen",
-                message: "Setting up your Beam account.",
-            })
+            stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
 
             // get youtube subscriptions
             const youtube = new ConnectYoutubeAccount(accessToken)

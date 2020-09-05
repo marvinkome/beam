@@ -66,12 +66,14 @@ export const queryResolver = {
             })
         }),
 
-        suggestedFriend: authenticated(async function (_: any, __: any, ctx: IContext) {
+        suggestedFriends: authenticated(async function (_: any, __: any, ctx: IContext) {
             const user = ctx.currentUser
             if (!user) return []
 
-            await new Promise((res) => setTimeout(res, 5000))
-            return findFriends(user)
+            await new Promise((res) => setTimeout(res, 3000))
+            const friends = await findFriends(user)
+
+            return friends || []
         }),
     },
 }

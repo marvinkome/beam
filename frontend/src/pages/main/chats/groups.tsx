@@ -84,6 +84,7 @@ export function GroupsTab() {
     if (loading) {
         return (
             <div className="loading-container">
+                <div className="loader" />
                 <p>Loading groups. Please wait...</p>
             </div>
         )

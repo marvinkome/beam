@@ -6,7 +6,7 @@ import { RootHeader } from "components/header"
 import "./style.scss"
 
 function useTabs() {
-    const [currentTab, changeCurrentTab] = useState<"groups" | "friends">("groups")
+    const [currentTab, changeCurrentTab] = useState<"groups" | "friends">("friends")
 
     return {
         currentTab,
@@ -32,17 +32,17 @@ export function Chats() {
             {/* bottom bar */}
             <div className="bottom-nav">
                 <div
-                    onClick={() => changeTab("groups")}
-                    className={cls("nav-content", { active: currentTab === "groups" })}
-                >
-                    Groups
-                </div>
-
-                <div
                     onClick={() => changeTab("friends")}
                     className={cls("nav-content", { active: currentTab === "friends" })}
                 >
                     Friends
+                </div>
+
+                <div
+                    onClick={() => changeTab("groups")}
+                    className={cls("nav-content", { active: currentTab === "groups" })}
+                >
+                    Groups
                 </div>
             </div>
         </div>

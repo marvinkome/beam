@@ -19,6 +19,7 @@ export function JoinGroup() {
     const { interests, location, loading } = useInterestsAndLocation()
     const { onSearch, data, isSearching } = useDataSource(interests || [])
     const [existingGroups, nonExistingGroupsRaw] = data
+
     // add pagination for new groups
     const { data: nonExistingGroups, loadMore, hasMore } = useGroupsPagination(nonExistingGroupsRaw)
 
