@@ -25,8 +25,8 @@ export default function App() {
     // hide prompt
     const pwaInstallPrompt = useRef<any>()
     window.addEventListener("beforeinstallprompt", (e) => {
-        e.preventDefault()
-        pwaInstallPrompt.current = e
+        // e.preventDefault()
+        // pwaInstallPrompt.current = e
     })
 
     return (
