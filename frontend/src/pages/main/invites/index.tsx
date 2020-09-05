@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation } from "@apollo/client"
-import { StackHeader, startLoader, SuggestedFriendCard } from "components"
+import { StackHeader, startLoader, SuggestedFriendCard, ShareBox } from "components"
 import "./style.scss"
 
 function useChatInvites() {
@@ -134,6 +134,16 @@ export function FriendInvites() {
                             actions={<FriendAction friendId={request.from.id} />}
                         />
                     ))}
+                </div>
+
+                <div className="share-box">
+                    <div className="share-box-header">
+                        <p>{isEmpty ? "Want to get matched?" : "Want to get more invites?"}</p>
+                    </div>
+
+                    <div className="share-box-content">
+                        <ShareBox>Increase your chances by spreading the word about Beam</ShareBox>
+                    </div>
                 </div>
             </div>
         </div>

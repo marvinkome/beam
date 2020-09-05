@@ -38,18 +38,6 @@ export function FindFriend() {
                     </span>
                 </div>
 
-                {isEmpty && (
-                    <div className="share-box">
-                        <div className="share-box-header">
-                            <p>Want to get matched?</p>
-                        </div>
-
-                        <div className="share-box-content">
-                            <ShareBox>Help us spread the word about Beam</ShareBox>
-                        </div>
-                    </div>
-                )}
-
                 <div className="suggested-friends">
                     {data?.suggestedFriends?.map((suggestedFriend: any) => (
                         <SuggestedFriendCard
@@ -58,6 +46,16 @@ export function FindFriend() {
                             actions={<FriendAction friendId={suggestedFriend.friend.id} />}
                         />
                     ))}
+                </div>
+
+                <div className="share-box">
+                    <div className="share-box-header">
+                        <p>{isEmpty ? "Want to get matched?" : "Want to get more matches?"}</p>
+                    </div>
+
+                    <div className="share-box-content">
+                        <ShareBox>Help us spread the word about Beam</ShareBox>
+                    </div>
                 </div>
             </div>
         </div>
