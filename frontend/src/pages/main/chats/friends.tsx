@@ -137,7 +137,7 @@ export function FriendsTab() {
                         return (
                             <div className="action-button-container">
                                 <button onClick={toggle} className="btn btn-primary">
-                                    Add your first friend
+                                    Invite a friend to Beam
                                 </button>
                             </div>
                         )

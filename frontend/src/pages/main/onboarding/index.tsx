@@ -1,7 +1,7 @@
 import React from "react"
 import { useSuggestedFriends, useInviteToChat } from "hooks"
 import { Link } from "react-router-dom"
-import { SuggestedFriendCard, ShareBox } from "components"
+import { SuggestedFriendCard } from "components"
 import "./style.scss"
 
 function FriendAction(props: { friendId: string }) {
@@ -45,15 +45,9 @@ export function OnBoarding() {
                 ))}
             </div>
 
-            <div className="share-box">
-                <div className="share-box-header">
-                    <p>{isEmpty ? "Want to get matched?" : "Want to get more matches?"}</p>
-                </div>
-
-                <div className="share-box-content">
-                    <ShareBox>Help us spread the word about Beam</ShareBox>
-                </div>
-            </div>
+            <Link to="/app/chats" className="btn btn-primary">
+                Continue to chats
+            </Link>
         </div>
     )
 }
