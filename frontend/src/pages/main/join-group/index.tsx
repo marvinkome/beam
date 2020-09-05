@@ -48,7 +48,7 @@ export function JoinGroup() {
                     />
                 </label>
 
-                {loading && (
+                {loading && !data && (
                     <div className="loading">
                         <p>Please wait while we look for groups in your location</p>
 

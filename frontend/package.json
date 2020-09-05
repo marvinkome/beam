@@ -29,8 +29,6 @@
         "env-cmd": "10.1.0",
         "graphql": "15.3.0",
         "intro.js": "2.9.3",
-        "lodash.debounce": "4.0.8",
-        "lodash.findindex": "4.6.0",
         "lodash.orderby": "4.6.0",
         "lodash.partition": "4.6.0",
         "lodash.shuffle": "4.2.0",

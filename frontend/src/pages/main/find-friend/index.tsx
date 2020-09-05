@@ -57,7 +57,7 @@ export function FindFriend() {
                     </div>
 
                     <div className="share-box-content">
-                        <ShareBox>Help us spread the word about Beam</ShareBox>
+                        <ShareBox>Tell others about Beam</ShareBox>
                     </div>
                 </div>
             </div>

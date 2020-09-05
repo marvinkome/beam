@@ -65,7 +65,7 @@ function useGroupData() {
                 }
             }
         `,
-        { variables: { groupId, first: 30 } }
+        { fetchPolicy: "cache-and-network", variables: { groupId, first: 30 } }
     )
 
     return resp

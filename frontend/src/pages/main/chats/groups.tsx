@@ -81,7 +81,7 @@ export function GroupsTab() {
         ],
     })
 
-    if (loading) {
+    if (loading && !data) {
         return (
             <div className="loading-container">
                 <div className="loader" />
