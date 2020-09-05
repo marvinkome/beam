@@ -1,169 +1,59 @@
 import React from "react"
-import { FaSearch, FaPlus, FaPaintBrush, FaChevronDown } from "react-icons/fa"
-import { Collapsible } from "components/collapsible"
-import { useHistory, Link } from "react-router-dom"
-import {
-    useInterestsAndLocation,
-    useDataSource,
-    useGroupsPagination,
-    useCreateGroup,
-    useJoinGroup,
-} from "hooks/groups"
-import { ONBOARDING_KEY } from "lib/keys"
-
+import { useSuggestedFriends, useInviteToChat } from "hooks"
+import { Link } from "react-router-dom"
+import { SuggestedFriendCard, ShareBox } from "components"
 import "./style.scss"
 
+function FriendAction(props: { friendId: string }) {
+    const [invited, inviteToChat] = useInviteToChat()
+
+    return invited ? (
+        <button className="btn btn-primary-outline">Invite sent</button>
+    ) : (
+        <button onClick={() => inviteToChat(props.friendId)} className="btn btn-primary">
+            Invite to chat
+        </button>
+    )
+}
+
 export function OnBoarding() {
-    const history = useHistory()
-
-    // query
-    const { interests, location, loading } = useInterestsAndLocation()
-    const { onSearch, data, isSearching } = useDataSource(interests || [])
-    const [existingGroups, nonExistingGroupsRaw] = data
-
-    // add pagination for new groups
-    const { data: nonExistingGroups, loadMore, hasMore } = useGroupsPagination(nonExistingGroupsRaw)
-
-    // mutations
-    const createGroup = useCreateGroup((group) => {
-        localStorage.setItem(ONBOARDING_KEY, "true")
-        history.push(`/app/group/${group?.id}`)
-    })
-
-    const joinGroup = useJoinGroup((group) => {
-        localStorage.setItem(ONBOARDING_KEY, "true")
-        history.push(`/app/group/${group?.id}`)
-    })
+    const { data } = useSuggestedFriends()
+    const isEmpty = data?.suggestedFriends?.length === 0
 
     return (
         <div className="onboarding-page">
             <header>
-                <h1>Join Groups</h1>
-                <p>Join or create groups near you based on your interests</p>
+                {isEmpty ? (
+                    <h1>Sorry, but there aren't enough people in your location</h1>
+                ) : (
+                    <h1>Find a friend to chat with</h1>
+                )}
+
+                <p>
+                    <Link to="/app/profile">Connect</Link> your Spotify and Reddit to get more
+                    matches
+                </p>
             </header>
 
-            {/* search bar */}
-            <label className="form-label" htmlFor="search">
-                <FaSearch className="icon" />
-                <input
-                    id="search"
-                    type="text"
-                    className="form-input"
-                    placeholder="Search for more groups"
-                    onChange={(e) => onSearch(e.target.value)}
-                />
-            </label>
+            <div className="suggested-friends">
+                {data?.suggestedFriends?.map((suggestedFriend: any) => (
+                    <SuggestedFriendCard
+                        key={suggestedFriend.friend.id}
+                        suggestedFriend={suggestedFriend}
+                        actions={<FriendAction friendId={suggestedFriend.friend.id} />}
+                    />
+                ))}
+            </div>
 
-            {/* loader */}
-            {loading && (
-                <div className="loading">
-                    <p>Please wait while we look for groups in your location</p>
-
-                    <div className="loader" />
+            <div className="share-box">
+                <div className="share-box-header">
+                    <p>{isEmpty ? "Want to get matched?" : "Want to get more matches?"}</p>
                 </div>
-            )}
 
-            {/* if they're no groups to join */}
-            {!existingGroups.length && !loading && (
-                <p className="no-group">
-                    {isSearching
-                        ? "There are no groups in your location that match your search."
-                        : "There are currently no groups in your location that match your interests."}
-                </p>
-            )}
-
-            {/* existing groups */}
-            {!!existingGroups.length && (
-                <Collapsible
-                    defaultIsOpen={true}
-                    className="groups-card"
-                    header={
-                        <div>
-                            <p>Current groups in your location</p>
-                            <span>{existingGroups.length} groups near you</span>
-                        </div>
-                    }
-                >
-                    {existingGroups.map((interest) => (
-                        <div key={interest.group.id} className="group">
-                            <div className="group-details">
-                                <img
-                                    src={
-                                        interest.group.image || require("assets/images/beambot.png")
-                                    }
-                                    alt="Group"
-                                />
-
-                                <div>
-                                    <p>{interest.group.name}</p>
-                                    <Link to={`/app/group/${interest.group.id}`}>
-                                        click to preview
-                                    </Link>
-                                </div>
-                            </div>
-
-                            <div className="group-action">
-                                <button
-                                    onClick={() => joinGroup(interest.group.id)}
-                                    className="btn btn-primary-outline"
-                                >
-                                    <FaPlus className="icon" /> Join
-                                </button>
-                            </div>
-                        </div>
-                    ))}
-                </Collapsible>
-            )}
-
-            {/* non-existing groups */}
-            {!!nonExistingGroupsRaw.length && (
-                <Collapsible
-                    defaultIsOpen={!existingGroups.length}
-                    className="groups-card"
-                    header={
-                        <div>
-                            <p>Create a group for your location</p>
-                            <span>{nonExistingGroupsRaw.length} groups doesn't exist</span>
-                        </div>
-                    }
-                >
-                    <>
-                        {nonExistingGroups.map((interest) => (
-                            <div key={interest.id} className="group">
-                                <div className="group-details">
-                                    <img
-                                        src={interest.image || require("assets/images/beambot.png")}
-                                        alt="Group"
-                                    />
-
-                                    <div>
-                                        <p>
-                                            {interest.platform === "reddit" && "r/"}
-                                            {interest.name}
-                                        </p>
-                                        <span>{location}</span>
-                                    </div>
-                                </div>
-
-                                <div className="group-action">
-                                    <button
-                                        onClick={() => createGroup(interest.id)}
-                                        className="btn btn-primary-outline"
-                                    >
-                                        <FaPaintBrush className="icon" /> Create
-                                    </button>
-                                </div>
-                            </div>
-                        ))}
-
-                        {hasMore && (
-                            <p onClick={loadMore}>
-                                View more <FaChevronDown className="icon" />
-                            </p>
-                        )}
-                    </>
-                </Collapsible>
-            )}
+                <div className="share-box-content">
+                    <ShareBox>Help us spread the word about Beam</ShareBox>
+                </div>
+            </div>
         </div>
     )
 }
