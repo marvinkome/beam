@@ -32,6 +32,8 @@ export function useGoogleLogin(options: LoginOptions) {
     `)
 
     const onGoogleLoginSuccess = async (googleResp: any) => {
+        trackEvent("Google auth - successful")
+
         // get access token from google
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
@@ -71,6 +73,8 @@ export function useGoogleLogin(options: LoginOptions) {
             })
 
             stopLoader && stopLoader()
+            trackEvent("User auth - successful", {})
+
             if (options.onAuthCb) {
                 return options.onAuthCb()
             } else {
@@ -81,9 +85,9 @@ export function useGoogleLogin(options: LoginOptions) {
             }
         } else {
             // TODO:: ADD LOGGER
-            trackError(`Authentication with Google failed - ${message}`)
+            trackError(`User auth failed - ${message}`)
             console.log(message)
-            toast.dark(`Authentication Failed - ${message}`)
+            toast.dark(`Error signing up - ${message}`)
             stopLoader && stopLoader()
         }
     }
@@ -93,7 +97,7 @@ export function useGoogleLogin(options: LoginOptions) {
         clientId: GOOGLE_CLIENT_ID,
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         onSuccess: onGoogleLoginSuccess,
-        onRequest: () => trackEvent("Authenticate with Google request started", {}),
+        onRequest: () => trackEvent("Google auth started"),
         onFailure: (resp) => {
             console.error(resp)
             switch (resp.error) {
@@ -105,16 +109,14 @@ export function useGoogleLogin(options: LoginOptions) {
                     break
             }
 
-            trackError(`Authentication with react google login failed - ${resp}`)
+            trackError(`Google auth failed - ${resp}`)
         },
     })
 
     return {
         signIn: () => {
             login.signIn()
-            trackEvent("Authenticate with Google", {
-                label: options.loginType,
-            })
+            trackEvent("Clicked on google auth", { label: options.loginType })
         },
         loaded: login.loaded,
     }
