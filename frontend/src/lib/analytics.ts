@@ -4,7 +4,13 @@ import { GA_TRACKING_ID, MIXPANEL_ID } from "./keys"
 
 // INIT
 export function initAnalytics() {
+    // mixpanel
     mixpanel.init(MIXPANEL_ID)
+    mixpanel.track_links("a", "click nav link", {
+        referrer: document.referrer,
+    })
+
+    // Google analytics
     ReactGA.initialize(GA_TRACKING_ID)
 }
 
