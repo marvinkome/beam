@@ -3,7 +3,7 @@ import { gql, useMutation, useQuery } from "@apollo/client"
 import { useHistory } from "react-router-dom"
 import { AUTH_TOKEN } from "lib/keys"
 import { isMobile, getGeolocation } from "lib/helpers"
-import { setUser } from "lib/analytics"
+import { setUser, trackError } from "lib/analytics"
 
 type Actions = "request-permission" | "redirect-to-public" | "render" | "render-desktop"
 
@@ -46,6 +46,7 @@ export function useAppSetup() {
 
             setAction("render")
         } catch (e) {
+            trackError(`Location Error - ${e}`)
             return setAction("request-permission")
         }
     }, [setLocation])

@@ -117,7 +117,7 @@ export function redirectUri() {
 }
 
 export function getGeolocation() {
-    return new Promise((res: (location: any) => void, rej) => {
+    return new Promise((res: (location: any) => void, rej: (reason?: string) => void) => {
         if (navigator.geolocation) {
             return navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -126,15 +126,15 @@ export function getGeolocation() {
                         long: position.coords.longitude,
                     })
                 },
-                () => {
-                    rej()
+                (err) => {
+                    rej(err.message)
                 },
                 {
                     enableHighAccuracy: true,
                 }
             )
         } else {
-            rej()
+            rej("Navigation not supported")
         }
     })
 }
