@@ -10,7 +10,7 @@ import {
 import { toast } from "react-toastify"
 import { GOOGLE_CLIENT_ID, REDDIT_CLIENT_ID, APP_URL, SPOTIFY_CLIENT_ID } from "lib/keys"
 import { toQuery } from "lib/helpers"
-import { trackError } from "lib/analytics"
+import { trackError, trackEvent } from "lib/analytics"
 
 function useConnectAccountMutation() {
     const [connectAccount] = useMutation(gql`
@@ -51,6 +51,7 @@ export function useYouTubeConnect(onCompleted: (completed: boolean) => void) {
 
         stopLoader && stopLoader()
         if (resp.data.connectAccount) {
+            trackEvent("Connected youtube account", { category: "Connect" })
             onCompleted(true)
         }
     }
@@ -95,6 +96,7 @@ export function useRedditConnect(onCompleted: (completed: boolean) => void) {
 
         stopLoader && stopLoader()
         if (data.connectAccount) {
+            trackEvent("Connected reddit account", { category: "Connect" })
             return onCompleted(true)
         }
     }
@@ -155,6 +157,7 @@ export function useSpotifyConnect(onCompleted: (completed: boolean) => void) {
 
         stopLoader && stopLoader()
         if (data.connectAccount) {
+            trackEvent("Connected spotify account", { category: "Connect" })
             onCompleted(true)
         }
     }

@@ -13,6 +13,7 @@ export function LocationPermission(props: { getLocation: () => void }) {
         <div className="request-location">
             <header className="page-header">
                 <h1>We need your location to find friends near you</h1>
+                <p>Grant location access from site settings and try again</p>
             </header>
 
             <footer className="button-container">

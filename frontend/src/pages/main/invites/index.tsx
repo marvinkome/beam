@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import { trackEvent } from "lib/analytics"
 import { useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation } from "@apollo/client"
 import { StackHeader, startLoader, SuggestedFriendCard, ShareBox } from "components"
@@ -75,8 +76,10 @@ function useInviteAction(): [boolean | null, (matchId: string, accepted: boolean
             }
 
             if (accepted) {
+                trackEvent("Accepted invite", { category: "Find Friend" })
                 return history.push(`/app/chat/${matchId}`)
             } else {
+                trackEvent("Declined invite", { category: "Find Friend" })
                 setDeclined(true)
             }
         },

@@ -2,6 +2,7 @@ import { useRef, useEffect, useState } from "react"
 import { useQuery, gql, useMutation } from "@apollo/client"
 import { startLoader } from "components"
 import { toast } from "react-toastify"
+import { trackEvent } from "lib/analytics"
 
 export function useSuggestedFriends() {
     const stopLoader = useRef<any>()
@@ -70,6 +71,7 @@ export function useInviteToChat(): [boolean, (matchId: string) => void] {
                 return toast.dark("Error sending invite. Try Again")
             }
 
+            trackEvent("Sent invite", { category: "Find Friend" })
             setInviteStatus(true)
         },
     ]
