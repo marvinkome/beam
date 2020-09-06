@@ -36,6 +36,7 @@ export function useGoogleLogin(options: LoginOptions) {
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
             toast.dark("Failed to authenticate with Google")
+            trackError(`Authentication with Google failed - Access token not found`)
             return
         }
 
@@ -93,9 +94,18 @@ export function useGoogleLogin(options: LoginOptions) {
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         fetchBasicProfile: false,
         onSuccess: onGoogleLoginSuccess,
+        onRequest: () => trackEvent("Authenticate with Google request started", {}),
         onFailure: (resp) => {
             console.error(resp)
-            toast.dark("Failed to authenticate with Google")
+            switch (resp.error) {
+                case "popup_closed_by_user":
+                    toast.dark("Please complete sign up before closing the tab")
+                    break
+                case "access_denied":
+                    toast.dark("You need to give access to continue on Beam")
+                    break
+            }
+
             trackError(`Authentication with react google login failed - ${resp}`)
         },
     })

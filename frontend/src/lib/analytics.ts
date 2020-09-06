@@ -20,7 +20,7 @@ export function setUser(userId: string, props?: any) {
 // EVENTS
 export function trackEvent(event: string, props?: any) {
     mixpanel.track(event, props)
-    ReactGA.event({ action: event, category: props.category || "User", label: props.label })
+    ReactGA.event({ action: event, category: props?.category || "User", label: props?.label })
 }
 
 export function trackTiming() {
