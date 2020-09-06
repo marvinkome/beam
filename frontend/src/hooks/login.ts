@@ -87,7 +87,6 @@ export function useGoogleLogin(options: LoginOptions) {
     const login = useReactGoogleLogin({
         clientId: GOOGLE_CLIENT_ID,
         scope: "https://www.googleapis.com/auth/youtube.readonly",
-        fetchBasicProfile: false,
         onSuccess: onGoogleLoginSuccess,
         onRequest: () => trackEvent("Authenticate with Google request started"),
         onFailure: (resp) => {
@@ -99,12 +98,10 @@ export function useGoogleLogin(options: LoginOptions) {
 
     return {
         signIn: () => {
-            if (login.loaded) {
-                login.signIn()
-                trackEvent("Authenticate with Google", {
-                    label: options.loginType,
-                })
-            }
+            login.signIn()
+            trackEvent("Authenticate with Google", {
+                label: options.loginType,
+            })
         },
         loaded: login.loaded,
     }
