@@ -3,6 +3,7 @@ import { gql, useMutation, useQuery } from "@apollo/client"
 import { useHistory } from "react-router-dom"
 import { AUTH_TOKEN } from "lib/keys"
 import { isMobile, getGeolocation } from "lib/helpers"
+import { setUser } from "lib/analytics"
 
 type Actions = "request-permission" | "redirect-to-public" | "render" | "render-desktop"
 
@@ -16,6 +17,8 @@ export function useAppSetup() {
         {
             me {
                 id
+                email
+                createdAt
                 profile {
                     firstName
                     picture
@@ -67,6 +70,11 @@ export function useAppSetup() {
                 getLocation()
                 return
             }
+
+            setUser(data.me.id, {
+                $email: data.me.email,
+                signUpDate: new Date(parseInt(data?.me?.createdAt, 10)).toISOString(),
+            })
 
             return setAction("render")
         }

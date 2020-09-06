@@ -44,6 +44,7 @@ export const userTypeDefs = gql`
     type User {
         id: ID!
         email: String!
+        createdAt: String
         connectedAccounts: ConnectedAccounts
         interests: [Interest]
         requests: [Request]

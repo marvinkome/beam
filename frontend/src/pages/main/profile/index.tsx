@@ -16,23 +16,30 @@ function useConnectAccountAndProfile() {
     const [profile, setProfile] = useState<any>(null)
 
     // fetch connected accounts
-    const { data } = useQuery(gql`
-        {
-            me {
-                id
-                connectedAccounts {
-                    reddit
-                    spotify
-                    youtube
-                }
+    const { data, loading } = useQuery(
+        gql`
+            {
+                me {
+                    id
+                    connectedAccounts {
+                        reddit
+                        spotify
+                        youtube
+                    }
 
-                profile {
-                    firstName
-                    picture
+                    profile {
+                        firstName
+                        picture
+                        location {
+                            city
+                            state
+                        }
+                    }
                 }
             }
-        }
-    `)
+        `,
+        { fetchPolicy: "cache-and-network" }
+    )
 
     // add connected accounts to state
     useEffect(() => {
@@ -71,6 +78,7 @@ function useConnectAccountAndProfile() {
     const spotifyConnect = useSpotifyConnect(() => addConnectedAccount("spotify"))
 
     return {
+        loading,
         profile,
         youtube: {
             connect: youtubeConnect,
@@ -100,7 +108,7 @@ function useConnectAccountAndProfile() {
 }
 
 export function Profile() {
-    const { youtube, spotify, reddit, profile } = useConnectAccountAndProfile()
+    const { youtube, spotify, reddit, profile, loading } = useConnectAccountAndProfile()
 
     return (
         <div className="profile-page">
@@ -111,147 +119,153 @@ export function Profile() {
 
                 <div className="profile-details">
                     <p>{profile?.firstName}</p>
+                    <span>
+                        {profile?.location.city ? `${profile.location.city},` : ""}{" "}
+                        {profile?.location.state}
+                    </span>
                 </div>
             </section>
 
-            <section className="linked-accounts">
-                <p>Linked accounts</p>
+            {!loading && (
+                <section className="linked-accounts">
+                    <p>Linked accounts</p>
 
-                {/* youtube */}
-                <article
-                    onClick={
-                        !youtube.isConnected
-                            ? () => {
-                                  youtube.connect()
-                                  trackEvent("Connect youtube account", {
-                                      category: "Connect",
-                                      label: "profile",
-                                  })
-                              }
-                            : undefined
-                    }
-                    className="account youtube"
-                >
-                    <img
-                        alt=""
-                        src={
-                            youtube.isConnected
-                                ? require("assets/images/tick.png")
-                                : require("assets/images/plus.png")
+                    {/* youtube */}
+                    <article
+                        onClick={
+                            !youtube.isConnected
+                                ? () => {
+                                      youtube.connect()
+                                      trackEvent("Connect youtube account", {
+                                          category: "Connect",
+                                          label: "profile",
+                                      })
+                                  }
+                                : undefined
                         }
-                    />
-
-                    <div className="account-details">
-                        <p className="account-type">
-                            {youtube.isConnected ? "YouTube connected" : "Connect Youtube"}
-                        </p>
-                        {!youtube.isConnected && <p>We only scan your subscriptions</p>}
-                    </div>
-
-                    {youtube.isConnected && (
-                        <FiX
-                            onClick={() => {
-                                youtube.disconnect()
-                                trackEvent("Disconnect youtube account", {
-                                    category: "Disconnect",
-                                    label: "profile",
-                                })
-                            }}
-                            className="icon"
+                        className="account youtube"
+                    >
+                        <img
+                            alt=""
+                            src={
+                                youtube.isConnected
+                                    ? require("assets/images/tick.png")
+                                    : require("assets/images/plus.png")
+                            }
                         />
-                    )}
-                </article>
 
-                {/* spotify */}
-                <article
-                    onClick={
-                        !spotify.isConnected
-                            ? () => {
-                                  spotify.connect()
-                                  trackEvent("Connect spotify account", {
-                                      category: "Connect",
-                                      label: "profile",
-                                  })
-                              }
-                            : undefined
-                    }
-                    className="account spotify"
-                >
-                    <img
-                        alt=""
-                        src={
-                            spotify.isConnected
-                                ? require("assets/images/tick.png")
-                                : require("assets/images/plus.png")
+                        <div className="account-details">
+                            <p className="account-type">
+                                {youtube.isConnected ? "YouTube connected" : "Connect Youtube"}
+                            </p>
+                            {!youtube.isConnected && <p>We only scan your subscriptions</p>}
+                        </div>
+
+                        {youtube.isConnected && (
+                            <FiX
+                                onClick={() => {
+                                    youtube.disconnect()
+                                    trackEvent("Disconnect youtube account", {
+                                        category: "Disconnect",
+                                        label: "profile",
+                                    })
+                                }}
+                                className="icon"
+                            />
+                        )}
+                    </article>
+
+                    {/* spotify */}
+                    <article
+                        onClick={
+                            !spotify.isConnected
+                                ? () => {
+                                      spotify.connect()
+                                      trackEvent("Connect spotify account", {
+                                          category: "Connect",
+                                          label: "profile",
+                                      })
+                                  }
+                                : undefined
                         }
-                    />
-
-                    <div className="account-details">
-                        <p className="account-type">
-                            {spotify.isConnected ? "Spotify connected" : "Connect Spotify"}
-                        </p>
-                        {!spotify.isConnected && <p>We only scan your genre and top artists</p>}
-                    </div>
-
-                    {spotify.isConnected && (
-                        <FiX
-                            onClick={() => {
-                                spotify.disconnect()
-                                trackEvent("Disconnect spotify account", {
-                                    category: "Disconnect",
-                                    label: "profile",
-                                })
-                            }}
-                            className="icon"
+                        className="account spotify"
+                    >
+                        <img
+                            alt=""
+                            src={
+                                spotify.isConnected
+                                    ? require("assets/images/tick.png")
+                                    : require("assets/images/plus.png")
+                            }
                         />
-                    )}
-                </article>
 
-                {/* reddit */}
-                <article
-                    onClick={
-                        !reddit.isConnected
-                            ? () => {
-                                  reddit.connect()
-                                  trackEvent("Connect reddit account", {
-                                      category: "Connect",
-                                      label: "profile",
-                                  })
-                              }
-                            : undefined
-                    }
-                    className="account reddit"
-                >
-                    <img
-                        alt=""
-                        src={
-                            reddit.isConnected
-                                ? require("assets/images/tick.png")
-                                : require("assets/images/plus.png")
+                        <div className="account-details">
+                            <p className="account-type">
+                                {spotify.isConnected ? "Spotify connected" : "Connect Spotify"}
+                            </p>
+                            {!spotify.isConnected && <p>We only scan your genre and top artists</p>}
+                        </div>
+
+                        {spotify.isConnected && (
+                            <FiX
+                                onClick={() => {
+                                    spotify.disconnect()
+                                    trackEvent("Disconnect spotify account", {
+                                        category: "Disconnect",
+                                        label: "profile",
+                                    })
+                                }}
+                                className="icon"
+                            />
+                        )}
+                    </article>
+
+                    {/* reddit */}
+                    <article
+                        onClick={
+                            !reddit.isConnected
+                                ? () => {
+                                      reddit.connect()
+                                      trackEvent("Connect reddit account", {
+                                          category: "Connect",
+                                          label: "profile",
+                                      })
+                                  }
+                                : undefined
                         }
-                    />
-
-                    <div className="account-details">
-                        <p className="account-type">
-                            {reddit.isConnected ? "Reddit connected" : "Connect Reddit"}
-                        </p>
-                        {!reddit.isConnected && <p>We only scan your subreddits</p>}
-                    </div>
-
-                    {reddit.isConnected && (
-                        <FiX
-                            onClick={() => {
-                                reddit.disconnect()
-                                trackEvent("Disconnect reddit account", {
-                                    category: "Disconnect",
-                                    label: "profile",
-                                })
-                            }}
-                            className="icon"
+                        className="account reddit"
+                    >
+                        <img
+                            alt=""
+                            src={
+                                reddit.isConnected
+                                    ? require("assets/images/tick.png")
+                                    : require("assets/images/plus.png")
+                            }
                         />
-                    )}
-                </article>
-            </section>
+
+                        <div className="account-details">
+                            <p className="account-type">
+                                {reddit.isConnected ? "Reddit connected" : "Connect Reddit"}
+                            </p>
+                            {!reddit.isConnected && <p>We only scan your subreddits</p>}
+                        </div>
+
+                        {reddit.isConnected && (
+                            <FiX
+                                onClick={() => {
+                                    reddit.disconnect()
+                                    trackEvent("Disconnect reddit account", {
+                                        category: "Disconnect",
+                                        label: "profile",
+                                    })
+                                }}
+                                className="icon"
+                            />
+                        )}
+                    </article>
+                </section>
+            )}
         </div>
     )
 }
