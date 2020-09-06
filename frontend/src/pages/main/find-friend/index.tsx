@@ -30,7 +30,7 @@ export function FindFriend() {
             <div className="find-friend-page">
                 <div className="page-header">
                     {isEmpty ? (
-                        <h2>Sorry, but there aren't enough people in your location</h2>
+                        <h2>Sorry, we can't find a match in your location</h2>
                     ) : (
                         <h2>Find a friend to chat with</h2>
                     )}

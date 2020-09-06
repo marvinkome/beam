@@ -27,7 +27,7 @@ export function OnBoarding() {
         <div className="onboarding-page">
             <header>
                 {isEmpty ? (
-                    <h1>Sorry, but there aren't enough people in your location</h1>
+                    <h1>Sorry, we can't find a match in your location</h1>
                 ) : (
                     <h1>Find a friend to chat with</h1>
                 )}

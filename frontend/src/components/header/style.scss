@@ -47,6 +47,10 @@
                 font-size: var(--small-text);
                 color: var(--text-color);
                 padding: 10px 15px;
+
+                &.text-link {
+                    color: #0378bf;
+                }
             }
         }
     }
