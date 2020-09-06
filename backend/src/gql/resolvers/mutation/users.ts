@@ -4,7 +4,7 @@ import { IContext } from '@gql/index'
 import User from '@models/users'
 import { generateInviteId, getUsersSharedInterests } from '@libs/helpers'
 import Invitation from '@models/invitations'
-import { sendInviteEmail } from '@libs/emails'
+import { sendInviteEmail, sendAcceptInviteEmail } from '@libs/emails'
 
 // TYPES
 enum ConnectedAccountType {
@@ -286,6 +286,14 @@ export const resolvers = {
                         },
                     },
                     $addToSet: { friends: requestingUser.id },
+                })
+
+                sendAcceptInviteEmail({
+                    to: requestingUser.email,
+                    data: {
+                        friendName: user.profile.name?.split(' ')[0],
+                        friendId: user.id,
+                    },
                 })
             } else {
                 await user.updateOne({

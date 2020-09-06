@@ -69,3 +69,14 @@ export function sendInviteEmail(options: IEmailOptions) {
         locals: options.data,
     })
 }
+
+export function sendAcceptInviteEmail(options: IEmailOptions) {
+    return email.send({
+        template: 'acceptInvite',
+        message: {
+            to: options.to,
+            subject: `${options.data.friendName} accepted your invite`,
+        },
+        locals: options.data,
+    })
+}
