@@ -3,8 +3,8 @@ import "./LocationPermission.scss"
 
 export function LocationPermission(props: { getLocation: () => void }) {
     const askForLocation = async () => {
-        const res = await navigator.permissions.query({ name: "geolocation" })
-        if (res.state === "prompt" || res.state === "granted") {
+        const res = await navigator?.permissions?.query({ name: "geolocation" })
+        if (res?.state === "prompt" || res?.state === "granted") {
             props.getLocation()
         }
     }
