@@ -554,7 +554,7 @@ export function PrivacyPolicy() {
                                 <strong>Web and Mobile Analytics</strong>
                             </p>
                             <p>Google Analytics</p>
-                            <p>Amplitude</p>
+                            <p>Mixpanel</p>
                         </li>
                         <li>
                             <p>
