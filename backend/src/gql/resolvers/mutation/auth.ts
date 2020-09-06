@@ -70,10 +70,12 @@ export const resolver = {
             }
 
             if (youtubeData) {
-                user.connectedAccounts = youtubeData.map((sub: any) => ({
-                    ...sub,
-                    platform: 'youtube',
-                }))
+                user.connectedAccounts = user.connectedAccounts?.concat(
+                    youtubeData.map((sub: any) => ({
+                        ...sub,
+                        platform: 'youtube',
+                    }))
+                )
 
                 await user.save()
             }
