@@ -10,18 +10,18 @@
             height: 55px;
             object-fit: contain;
             border-radius: 10px;
+            margin-right: 10px;
         }
 
         p {
             font-weight: 600;
-            margin-left: 10px;
         }
     }
 
     .linked-accounts {
         padding: 15px 20px;
 
-        p {
+        & > p {
             font-weight: 600;
         }
 

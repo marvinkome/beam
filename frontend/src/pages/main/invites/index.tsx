@@ -142,7 +142,7 @@ export function FriendInvites() {
                     </div>
 
                     <div className="share-box-content">
-                        <ShareBox>Increase your chances by spreading the word about Beam</ShareBox>
+                        <ShareBox>Tell others about Beam</ShareBox>
                     </div>
                 </div>
             </div>

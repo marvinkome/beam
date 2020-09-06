@@ -1,5 +1,10 @@
-import React, { useState } from "react"
+import React, { useState, useMemo } from "react"
+import shuffle from "lodash.shuffle"
 import "./style.scss"
+
+function getSharedInterests(interests: any[]) {
+    return shuffle(interests)
+}
 
 export function useInterestsPagination(interests: any[]) {
     const steps = 16
@@ -22,7 +27,8 @@ type IProps = {
 }
 export function SuggestedFriendCard(props: IProps) {
     const { friend, sharedInterests } = props.suggestedFriend!
-    const { interests, loadMore } = useInterestsPagination(sharedInterests)
+    const rawInterests = useMemo(() => getSharedInterests(sharedInterests), [sharedInterests])
+    const { interests, loadMore } = useInterestsPagination(rawInterests)
 
     return (
         <div className="suggested-friend-card">

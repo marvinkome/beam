@@ -1,32 +1,26 @@
 import ReactGA from "react-ga"
-import amplitudeJs from "amplitude-js"
-import { AMPLITUDE_KEY, GA_TRACKING_ID } from "./keys"
+import mixpanel from "mixpanel-browser"
+import { GA_TRACKING_ID, MIXPANEL_ID } from "./keys"
 
 // INIT
 export function initAnalytics() {
-    amplitudeJs.getInstance().init(AMPLITUDE_KEY, undefined, {
-        includeReferrer: true,
-    })
-
+    mixpanel.init(MIXPANEL_ID)
     ReactGA.initialize(GA_TRACKING_ID)
 }
 
 // SETUP
 export function setUser(userId: string, props?: any) {
-    amplitudeJs.getInstance().setUserId(userId)
+    mixpanel.identify(userId)
 
     if (props) {
-        Object.keys(props).forEach((key) => {
-            const id = new amplitudeJs.Identify().set(key, props[key])
-            amplitudeJs.getInstance().identify(id)
-        })
+        mixpanel.people.set(props)
     }
 }
 
 // EVENTS
 export function trackEvent(event: string, props?: any) {
-    amplitudeJs.getInstance().logEvent(event, props)
-    ReactGA.event({ action: event, category: props.category || "User", label: props.label })
+    mixpanel.track(event, props)
+    ReactGA.event({ action: event, category: props?.category || "User", label: props?.label })
 }
 
 export function trackTiming() {
