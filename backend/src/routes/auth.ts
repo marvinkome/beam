@@ -2,6 +2,7 @@ import passport from 'passport'
 import { Router } from 'express'
 import { generateToken } from '@libs/auth'
 import { IUser } from '@models/users'
+import { sendJoinGroupEmail, sendNewMessageEmail, sendInviteEmail } from '@libs/emails'
 
 const router = Router()
 
@@ -42,6 +43,36 @@ router.get('/facebook/callback', (req, res, next) => {
             error: info,
         })
     })(req, res, next)
+})
+
+router.get('/test-email', async (_, res) => {
+    await sendJoinGroupEmail({
+        to: ['marvinkome@gmail.com', 'lennyjohnson291@gmail.com'],
+        data: {
+            memberName: 'Lenny',
+            groupName: 'Kurzgesagt - In a nutshell - Lagos',
+            groupId: '0i90v',
+        },
+    })
+
+    await sendNewMessageEmail({
+        to: 'marvinkome@gmail.com',
+        data: {
+            message: 'Hey man, just testing if this works out',
+            friendName: 'Lenny',
+            friendId: '0i90v',
+        },
+    })
+
+    await sendInviteEmail({
+        to: 'marvinkome@gmail.com',
+        data: {
+            matchName: 'Lenny',
+            interestsCount: 24,
+        },
+    })
+
+    res.send('done')
 })
 
 export default router

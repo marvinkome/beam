@@ -2,8 +2,9 @@ import Geocoder from 'node-geocoder'
 import { authenticated } from '@libs/auth'
 import { IContext } from '@gql/index'
 import User from '@models/users'
-import { generateInviteId } from '@libs/helpers'
+import { generateInviteId, getUsersSharedInterests } from '@libs/helpers'
 import Invitation from '@models/invitations'
+import { sendInviteEmail } from '@libs/emails'
 
 // TYPES
 enum ConnectedAccountType {
@@ -247,6 +248,15 @@ export const resolvers = {
                     requests: {
                         from: user.id,
                     },
+                },
+            })
+
+            const numberOfInterests = await getUsersSharedInterests(user, match)
+            sendInviteEmail({
+                to: match.email,
+                data: {
+                    matchName: match.profile.name?.split(' ')[0],
+                    interestsCount: numberOfInterests?.length || 0,
                 },
             })
 

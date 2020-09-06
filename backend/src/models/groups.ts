@@ -33,7 +33,7 @@ export interface IGroup extends Document {
     interest: string
     location: string
     users: Array<{
-        user: Schema.Types.ObjectId[] | string[] | IUser[]
+        user: Schema.Types.ObjectId | string | IUser
         role: { name: string; permission: number }
     }>
 }
