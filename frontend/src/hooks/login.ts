@@ -109,7 +109,7 @@ export function useGoogleLogin(options: LoginOptions) {
                     break
             }
 
-            trackError(`Google auth failed - ${resp}`)
+            trackError(`Google auth failed - ${resp.error}`)
         },
     })
 
