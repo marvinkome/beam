@@ -260,7 +260,7 @@ export function Chat() {
                 isPreviewing={false}
                 defaultMessage={
                     !!profile
-                        ? `This is the beginning of your conversations with ${profile?.firstName}. Why don't you be the first to say hello?`
+                        ? `This is the beginning of your conversations with ${profile?.firstName}. Say hello.`
                         : ""
                 }
             />
