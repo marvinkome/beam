@@ -3,6 +3,7 @@ import { IUser } from '@models/users'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import Group from '@models/groups'
+import { sendNewMessageEmail } from '@libs/emails'
 
 type sendMessageData = {
     to: string
@@ -60,6 +61,18 @@ export const resolvers = {
         })
 
         // send push notification
+        // send email
+        if (friend.lastSeen !== null) {
+            // if friend is offline
+            sendNewMessageEmail({
+                to: friend.email,
+                data: {
+                    message: message.message,
+                    friendName: user.profile.name?.split(' ')[0],
+                    friendId: user.id,
+                },
+            })
+        }
 
         return {
             code: 200,

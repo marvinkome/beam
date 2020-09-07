@@ -70,7 +70,7 @@ export const queryResolver = {
             const user = ctx.currentUser
             if (!user) return []
 
-            await new Promise((res) => setTimeout(res, 3000))
+            await new Promise((res) => setTimeout(res, 2000))
             const friends = await findFriends(user)
 
             return friends || []

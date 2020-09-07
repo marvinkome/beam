@@ -25,6 +25,14 @@
             font-weight: 600;
         }
 
+        & > .after-connect {
+            border: 1px solid rgba(50, 41, 77, 0.2);
+            margin: 10px 0px;
+            padding: 1.2em 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
         .account {
             display: flex;
             align-items: center;

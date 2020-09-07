@@ -2,8 +2,9 @@ import Geocoder from 'node-geocoder'
 import { authenticated } from '@libs/auth'
 import { IContext } from '@gql/index'
 import User from '@models/users'
-import { generateInviteId } from '@libs/helpers'
+import { generateInviteId, getUsersSharedInterests } from '@libs/helpers'
 import Invitation from '@models/invitations'
+import { sendInviteEmail, sendAcceptInviteEmail } from '@libs/emails'
 
 // TYPES
 enum ConnectedAccountType {
@@ -93,30 +94,38 @@ export const resolvers = {
 
             switch (account) {
                 case ConnectedAccountType.YOUTUBE: {
-                    await user.updateOne({
-                        $set: {
-                            'connectedAccounts.youtube.subscriptions': [],
+                    await user.updateOne(
+                        {
+                            $pull: {
+                                connectedAccounts: { platform: 'youtube' },
+                            },
                         },
-                    })
+                        { multi: true }
+                    )
 
                     return true
                 }
                 case ConnectedAccountType.SPOTIFY: {
-                    await user.updateOne({
-                        $set: {
-                            'connectedAccounts.spotify.artists': [],
-                            'connectedAccounts.spotify.genres': [],
+                    await user.updateOne(
+                        {
+                            $pull: {
+                                connectedAccounts: { platform: 'spotify' },
+                            },
                         },
-                    })
+                        { multi: true }
+                    )
 
                     return true
                 }
                 case ConnectedAccountType.REDDIT: {
-                    await user.updateOne({
-                        $set: {
-                            'connectedAccounts.reddit.subreddits': [],
+                    await user.updateOne(
+                        {
+                            $pull: {
+                                connectedAccounts: { platform: 'reddit' },
+                            },
                         },
-                    })
+                        { multi: true }
+                    )
                     return true
                 }
                 default:
@@ -250,6 +259,15 @@ export const resolvers = {
                 },
             })
 
+            const numberOfInterests = await getUsersSharedInterests(user, match)
+            sendInviteEmail({
+                to: match.email,
+                data: {
+                    matchName: match.profile.name?.split(' ')[0],
+                    interestsCount: numberOfInterests?.length || 0,
+                },
+            })
+
             return true
         }
     ),
@@ -276,6 +294,14 @@ export const resolvers = {
                         },
                     },
                     $addToSet: { friends: requestingUser.id },
+                })
+
+                sendAcceptInviteEmail({
+                    to: requestingUser.email,
+                    data: {
+                        friendName: user.profile.name?.split(' ')[0],
+                        friendId: user.id,
+                    },
                 })
             } else {
                 await user.updateOne({

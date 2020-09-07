@@ -28,7 +28,7 @@ function formatItems(friends: any[]) {
                     text: friend.lastMessage.message,
                     isDefault: false,
                 },
-                timestamp: formatDate(parseInt(friend.lastMessage.timestamp, 10)),
+                timestamp: friend.lastMessage.timestamp,
             }
         }
 
@@ -119,7 +119,8 @@ export function FriendsTab() {
 
                         <div className="chat-details">
                             <p>
-                                {friend.name} <span>{friend.timestamp}</span>
+                                {friend.name}{" "}
+                                <span>{formatDate(parseInt(friend.timestamp, 10))}</span>
                             </p>
 
                             <p className={cls({ isDefault: friend.message.isDefault })}>

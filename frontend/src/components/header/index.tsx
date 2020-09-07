@@ -38,7 +38,9 @@ export function RootHeader() {
                     <ShareBeam
                         modalLocation="header"
                         trigger={(toggle) => (
-                            <p onClick={toggle}>Click here to tell others about Beam</p>
+                            <p className="text-link" onClick={toggle}>
+                                Click here to tell others about Beam
+                            </p>
                         )}
                     />
                 </div>

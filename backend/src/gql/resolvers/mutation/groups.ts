@@ -1,5 +1,7 @@
 import { IContext } from '@gql/index'
 import Group, { Roles } from '@models/groups'
+import { IUser } from '@models/users'
+import { sendJoinGroupEmail } from '@libs/emails'
 
 export const resolvers = {
     createGroup: async (_: any, { interestId }: any, ctx: IContext) => {
@@ -106,6 +108,20 @@ export const resolvers = {
                     user: user.id,
                     role: Roles.user,
                 },
+            },
+        })
+
+        // send joined group email
+        const groupUsersEmail = (await group.populate('users.user').execPopulate()).users
+            .filter((groupUser) => (groupUser.user as IUser).id != user.id)
+            .map((groupUser) => (groupUser.user as IUser).email)
+
+        sendJoinGroupEmail({
+            to: groupUsersEmail,
+            data: {
+                memberName: user.profile.name?.split(' ')[0],
+                groupName: group.name,
+                groupId: group.id,
             },
         })
 

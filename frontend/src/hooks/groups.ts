@@ -126,7 +126,7 @@ export function useJoinGroup(onJoinGroup: (group?: any) => void) {
         }
 
         trackEvent("Join group", { category: "Group" })
-        onJoinGroup(data?.joinGroup.id)
+        onJoinGroup(data?.joinGroup.group)
     }
 }
 

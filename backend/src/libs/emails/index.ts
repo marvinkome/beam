@@ -7,7 +7,7 @@ const email = new Email({
         options: { extension: 'ejs' },
     },
     message: {
-        from: `The Beam team <${process.env.GMAIL_USER}>`,
+        from: `Beam <${process.env.GMAIL_USER}>`,
     },
     transport: {
         service: 'gmail',
@@ -17,18 +17,65 @@ const email = new Email({
         },
     },
     preview: false,
+    send: true,
 })
 
+// emails
 interface IEmailOptions {
-    to: string
+    to: string | string[]
     data?: any
 }
+
 export function sendWelcomeEmail(options: IEmailOptions) {
     return email.send({
         template: 'welcome',
         message: {
             to: options.to,
             subject: 'Welcome to Beam',
+        },
+        locals: options.data,
+    })
+}
+
+export function sendJoinGroupEmail(options: IEmailOptions) {
+    return email.send({
+        template: 'joinGroup',
+        message: {
+            to: options.to,
+            subject: `Someone just joined ${options.data.groupName}`,
+        },
+        locals: options.data,
+    })
+}
+
+export function sendNewMessageEmail(options: IEmailOptions) {
+    return email.send({
+        template: 'newMessage',
+        message: {
+            to: options.to,
+            subject: `${options.data.friendName} sent you a message on Beam`,
+        },
+        locals: options.data,
+    })
+}
+
+export function sendInviteEmail(options: IEmailOptions) {
+    return email.send({
+        template: 'invite',
+        message: {
+            to: options.to,
+            subject: `Someone invited you to chat`,
+        },
+        locals: options.data,
+    })
+}
+
+export function sendAcceptInviteEmail(options: IEmailOptions) {
+    return email.send({
+        template: 'acceptInvite',
+        message: {
+            to: options.to,
+            subject: `${options.data.friendName} accepted your invite`,
         },
         locals: options.data,
     })

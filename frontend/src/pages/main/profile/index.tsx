@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react"
+import { Link } from "react-router-dom"
 import { StackHeader } from "components/header"
 import { FiX } from "react-icons/fi"
 import { useQuery, gql, useMutation } from "@apollo/client"
@@ -7,6 +8,7 @@ import { trackEvent } from "lib/analytics"
 import "./style.scss"
 
 function useConnectAccountAndProfile() {
+    const [showingSearchPrompt, showSearchPrompt] = useState(false)
     const [connectedAccounts, setConnectedAccounts] = useState({
         youtube: false,
         spotify: false,
@@ -64,6 +66,8 @@ function useConnectAccountAndProfile() {
             ...connectedAccounts,
             [account]: true,
         })
+
+        showSearchPrompt(true)
     }
 
     const removeConnectedAccount = (account: "youtube" | "reddit" | "spotify") => {
@@ -79,6 +83,7 @@ function useConnectAccountAndProfile() {
 
     return {
         loading,
+        showingSearchPrompt,
         profile,
         youtube: {
             connect: youtubeConnect,
@@ -108,7 +113,14 @@ function useConnectAccountAndProfile() {
 }
 
 export function Profile() {
-    const { youtube, spotify, reddit, profile, loading } = useConnectAccountAndProfile()
+    const {
+        youtube,
+        spotify,
+        reddit,
+        profile,
+        loading,
+        showingSearchPrompt,
+    } = useConnectAccountAndProfile()
 
     return (
         <div className="profile-page">
@@ -129,6 +141,13 @@ export function Profile() {
             {!loading && (
                 <section className="linked-accounts">
                     <p>Linked accounts</p>
+
+                    {showingSearchPrompt && (
+                        <div className="after-connect">
+                            <p>You connected a new account</p>
+                            <Link to="/app/find-friends">Click here to search for friends</Link>
+                        </div>
+                    )}
 
                     {/* youtube */}
                     <article
