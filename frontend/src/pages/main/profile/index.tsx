@@ -145,7 +145,7 @@ export function Profile() {
                     {showingSearchPrompt && (
                         <div className="after-connect">
                             <p>You connected a new account</p>
-                            <Link to="/app/find-friends">Click here to search for friends</Link>
+                            <Link to="/app/find-friend">Click here to search for friends</Link>
                         </div>
                     )}
 
