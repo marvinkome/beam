@@ -26,7 +26,7 @@ function formatItems(groups: any[]) {
                     text: group.lastMessage.message,
                     isDefault: false,
                 },
-                timestamp: formatDate(parseInt(group.lastMessage.timestamp, 10)),
+                timestamp: group.lastMessage.timestamp,
             }
         }
 
@@ -99,7 +99,8 @@ export function GroupsTab() {
 
                         <div className="chat-details">
                             <p>
-                                {group.name} <span>{group.timestamp}</span>
+                                {group.name}{" "}
+                                <span>{formatDate(parseInt(group.timestamp, 10))}</span>
                             </p>
 
                             <p className={cls({ isDefault: group.message.isDefault })}>
