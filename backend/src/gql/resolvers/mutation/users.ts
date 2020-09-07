@@ -94,30 +94,38 @@ export const resolvers = {
 
             switch (account) {
                 case ConnectedAccountType.YOUTUBE: {
-                    await user.updateOne({
-                        $set: {
-                            'connectedAccounts.youtube.subscriptions': [],
+                    await user.updateOne(
+                        {
+                            $pull: {
+                                connectedAccounts: { platform: 'youtube' },
+                            },
                         },
-                    })
+                        { multi: true }
+                    )
 
                     return true
                 }
                 case ConnectedAccountType.SPOTIFY: {
-                    await user.updateOne({
-                        $set: {
-                            'connectedAccounts.spotify.artists': [],
-                            'connectedAccounts.spotify.genres': [],
+                    await user.updateOne(
+                        {
+                            $pull: {
+                                connectedAccounts: { platform: 'spotify' },
+                            },
                         },
-                    })
+                        { multi: true }
+                    )
 
                     return true
                 }
                 case ConnectedAccountType.REDDIT: {
-                    await user.updateOne({
-                        $set: {
-                            'connectedAccounts.reddit.subreddits': [],
+                    await user.updateOne(
+                        {
+                            $pull: {
+                                connectedAccounts: { platform: 'reddit' },
+                            },
                         },
-                    })
+                        { multi: true }
+                    )
                     return true
                 }
                 default:

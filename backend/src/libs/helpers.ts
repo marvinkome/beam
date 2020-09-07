@@ -23,20 +23,21 @@ export async function getUsersSharedInterests(userA: IUser, userB: IUser) {
     }
 
     // scan through connected data
-    const sharedInterests = userAInterests.reduce(
-        (sharedInterests: IUser['connectedAccounts'], current) => {
-            const similar = userBInterests.find(
-                (acc) => acc.name.toLowerCase() === current.name.toLowerCase()
-            )
+    const sharedInterests = userAInterests.reduce((sharedInterests: any[], current) => {
+        const similar = userBInterests.find(
+            (acc) => acc.name.toLowerCase() === current.name.toLowerCase()
+        )
 
-            if (similar) {
-                sharedInterests?.push(similar)
-            }
+        if (similar) {
+            sharedInterests.push(similar)
+        }
 
-            return sharedInterests
-        },
-        []
+        return sharedInterests
+    }, [])
+
+    const uniqueInterests = [...new Set(sharedInterests.map((i) => i.name))].map((name) =>
+        sharedInterests.find((i) => i.name === name)
     )
 
-    return sharedInterests
+    return uniqueInterests
 }
