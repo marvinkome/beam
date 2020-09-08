@@ -263,7 +263,7 @@ export const resolvers = {
             sendInviteEmail({
                 to: match.email,
                 data: {
-                    matchName: match.profile.name?.split(' ')[0],
+                    matchName: user.profile.name?.split(' ')[0],
                     interestsCount: numberOfInterests?.length || 0,
                 },
             })
