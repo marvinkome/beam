@@ -5,10 +5,12 @@ import { GA_TRACKING_ID, MIXPANEL_ID } from "./keys"
 // INIT
 export function initAnalytics() {
     // mixpanel
-    mixpanel.init(MIXPANEL_ID)
-    mixpanel.track_links("a", "click nav link", {
-        referrer: document.referrer,
-    })
+    if (MIXPANEL_ID) {
+        mixpanel.init(MIXPANEL_ID)
+        mixpanel.track_links("a", "click nav link", {
+            referrer: document.referrer,
+        })
+    }
 
     // Google analytics
     ReactGA.initialize(GA_TRACKING_ID)
@@ -16,6 +18,8 @@ export function initAnalytics() {
 
 // SETUP
 export function setUser(userId: string, props?: any) {
+    if (!MIXPANEL_ID) return
+
     mixpanel.identify(userId)
 
     if (props) {
@@ -25,7 +29,7 @@ export function setUser(userId: string, props?: any) {
 
 // EVENTS
 export function trackEvent(event: string, props?: any) {
-    mixpanel.track(event, props)
+    if (MIXPANEL_ID) mixpanel.track(event, props)
     ReactGA.event({ action: event, category: props?.category || "User", label: props?.label })
 }
 
