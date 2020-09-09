@@ -9,34 +9,37 @@ import { useIntroJs } from "hooks"
 import { FiArrowRight } from "react-icons/fi"
 
 function formatItems(friends: any[]) {
-    const formattedFriends = friends.reduce((reduced, friend) => {
-        let item = {
-            id: friend.id,
-            name: friend.profile.firstName,
-            message: {
-                text: "Be the first to say hello",
-                isDefault: true,
-            },
-            timestamp: "",
-            image: getProfileImage(friend.profile),
-        }
-
-        if (friend.lastMessage) {
-            item = {
-                ...item,
+    const formattedFriends = orderBy(friends, "lastMessage.timestamp", "desc").reduce(
+        (reduced, friend) => {
+            let item = {
+                id: friend.id,
+                name: friend.profile.firstName,
                 message: {
-                    text: friend.lastMessage.message,
-                    isDefault: false,
+                    text: "Be the first to say hello",
+                    isDefault: true,
                 },
-                timestamp: friend.lastMessage.timestamp,
+                timestamp: "",
+                image: getProfileImage(friend.profile),
             }
-        }
 
-        reduced.push(item)
-        return reduced
-    }, [])
+            if (friend.lastMessage) {
+                item = {
+                    ...item,
+                    message: {
+                        text: friend.lastMessage.message,
+                        isDefault: false,
+                    },
+                    timestamp: friend.lastMessage.timestamp,
+                }
+            }
 
-    return orderBy(formattedFriends, "timestamp", "desc")
+            reduced.push(item)
+            return reduced
+        },
+        []
+    )
+
+    return formattedFriends // orderBy(formattedFriends, "timestamp", "desc")
 }
 
 function useFriends() {
