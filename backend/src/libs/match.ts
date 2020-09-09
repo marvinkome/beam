@@ -8,7 +8,7 @@ const WEIGHT = {
     spotify_artist: 2,
 }
 
-const MIN_SCORE = 4
+const MIN_SCORE = 1
 
 // find friends by looping through everyone in your location
 // then find sharedInterests with each user
