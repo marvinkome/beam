@@ -27,6 +27,7 @@
         "axios": "0.19.2",
         "classnames": "2.2.6",
         "env-cmd": "10.1.0",
+        "firebase": "^7.19.1",
         "graphql": "15.3.0",
         "intro.js": "2.9.3",
         "lodash.orderby": "4.6.0",

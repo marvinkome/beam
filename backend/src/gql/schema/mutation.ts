@@ -84,6 +84,7 @@ export const mutationTypeDefs = gql`
         addFriendById(friendId: ID!): Boolean
         sendFriendRequest(matchId: ID!): Boolean
         respondToFriendRequest(matchId: ID!, accepted: Boolean!): Boolean
+        setNotificationToken(token: String!): Boolean
 
         # GROUP
         createGroup(interestId: ID!): GroupMutationResponse

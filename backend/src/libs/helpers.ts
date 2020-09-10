@@ -1,6 +1,7 @@
 import { IUser } from '@models/users'
 import { generate } from 'shortid'
 import Invitation from '@models/invitations'
+import { messaging } from 'firebase-admin'
 
 export async function generateInviteId(user: IUser) {
     const inviteId = generate()
@@ -40,4 +41,45 @@ export async function getUsersSharedInterests(userA: IUser, userB: IUser) {
     )
 
     return uniqueInterests
+}
+
+type BaseNotification = {
+    title?: string
+    body?: string
+    image?: string
+    linkPath?: string
+}
+type GroupNotif = BaseNotification & {
+    type: 'group'
+    groupId: string
+}
+type UserNotif = BaseNotification & {
+    type: 'user'
+    userToken: string
+}
+export async function sendNotification(notification: GroupNotif | UserNotif) {
+    const notificationObject: any = {
+        webpush: {
+            notification: {
+                title: notification.title,
+                body: notification.body,
+                icon: notification.image,
+                badge: `${process.env.CLIENT_URL}/notif-logo.png`,
+            },
+        },
+    }
+
+    if (notification.linkPath && notificationObject.webpush) {
+        notificationObject.webpush.fcmOptions = {
+            link: `${process.env.CLIENT_URL}${notification.linkPath}`,
+        }
+    }
+
+    if (notification.type === 'group') {
+        notificationObject.topic = notification.groupId
+    } else {
+        notificationObject.token = notification.userToken
+    }
+
+    return messaging().send(notificationObject)
 }

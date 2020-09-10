@@ -27,5 +27,9 @@ export const groupResolvers = {
                 .limit(data.first || 10)
                 .skip(data.after || 0)
         },
+
+        numberOfUsers: async (group: IGroup) => {
+            return group.users.length
+        },
     },
 }

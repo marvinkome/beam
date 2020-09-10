@@ -7,34 +7,37 @@ import { Link } from "react-router-dom"
 import { useIntroJs } from "hooks"
 
 function formatItems(groups: any[]) {
-    const formattedGroups = groups.reduce((reduced, group) => {
-        let item = {
-            id: group.id,
-            name: group.name,
-            message: {
-                text: "Click to enter group",
-                isDefault: true,
-            },
-            timestamp: "",
-            image: group.image,
-        }
-
-        if (group.lastMessage) {
-            item = {
-                ...item,
+    const formattedGroups = orderBy(groups, "lastMessage.timestamp", "desc").reduce(
+        (reduced, group) => {
+            let item = {
+                id: group.id,
+                name: group.name,
                 message: {
-                    text: group.lastMessage.message,
-                    isDefault: false,
+                    text: "Click to enter group",
+                    isDefault: true,
                 },
-                timestamp: group.lastMessage.timestamp,
+                timestamp: "",
+                image: group.image,
             }
-        }
 
-        reduced.push(item)
-        return reduced
-    }, [])
+            if (group.lastMessage) {
+                item = {
+                    ...item,
+                    message: {
+                        text: group.lastMessage.message,
+                        isDefault: false,
+                    },
+                    timestamp: formatDate(parseInt(group.lastMessage.timestamp, 10)),
+                }
+            }
 
-    return orderBy(formattedGroups, "timestamp", "desc")
+            reduced.push(item)
+            return reduced
+        },
+        []
+    )
+
+    return formattedGroups
 }
 
 function useGroups() {
@@ -99,8 +102,8 @@ export function GroupsTab() {
 
                         <div className="chat-details">
                             <p>
-                                {group.name}{" "}
-                                <span>{formatDate(parseInt(group.timestamp, 10))}</span>
+                                <span className="name">{group.name} </span>
+                                <span className="date">{group.timestamp}</span>
                             </p>
 
                             <p className={cls({ isDefault: group.message.isDefault })}>

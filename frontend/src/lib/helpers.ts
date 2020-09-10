@@ -138,3 +138,11 @@ export function getGeolocation() {
         }
     })
 }
+
+export function pluralize(count: number, singularForm: string, pluralForm: string) {
+    if (count === 1) {
+        return singularForm
+    } else {
+        return pluralForm
+    }
+}

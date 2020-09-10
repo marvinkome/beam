@@ -1,7 +1,8 @@
 import passport from 'passport'
 import { Router } from 'express'
 import { generateToken } from '@libs/auth'
-import { IUser } from '@models/users'
+import User, { IUser } from '@models/users'
+import { messaging } from 'firebase-admin'
 
 const router = Router()
 
@@ -42,6 +43,34 @@ router.get('/facebook/callback', (req, res, next) => {
             error: info,
         })
     })(req, res, next)
+})
+
+router.get('/test-user-notif', async (_, res) => {
+    try {
+        const user = await User.findOne({ email: 'marvinkome@gmail.com' })
+
+        // await new Promise((res) => setTimeout(res, 2000))
+
+        await messaging().send({
+            token: user?.notificationToken || '',
+            webpush: {
+                notification: {
+                    title: 'Lenny',
+                    body: "How's notifications coming up? How close are we do being done?",
+                    icon: user?.profile.picture || '',
+                    badge: 'http://localhost:3000/notif-logo.png',
+                },
+                fcmOptions: {
+                    link: 'http://localhost:3000/app/chats',
+                },
+            },
+        })
+
+        res.send('done')
+    } catch (e) {
+        console.log(e.message)
+        res.send('error')
+    }
 })
 
 export default router

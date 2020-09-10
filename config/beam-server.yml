@@ -31,6 +31,10 @@ spec:
                   imagePullPolicy: Always
                   ports:
                       - containerPort: 5055
+                  volumeMounts:
+                      - name: firebase-secret-volume
+                        mountPath: "/opt/firebase"
+                        readOnly: true
                   envFrom:
                       - secretRef:
                             name: beam-server-secret
@@ -43,3 +47,7 @@ spec:
                       httpGet:
                           path: /
                           port: 5055
+            volumes:
+                - name: firebase-secret-volume
+                  secret:
+                      secretName: firebase-secret

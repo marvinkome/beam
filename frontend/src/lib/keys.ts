@@ -15,3 +15,13 @@ export const SPOTIFY_CLIENT_ID = process.env.REACT_APP_SPOTIFY_CLIENT_ID!
 // OTHER KEYS
 export const GA_TRACKING_ID = process.env.REACT_APP_GA_TRACKING_ID!
 export const MIXPANEL_ID = process.env.REACT_APP_MIXPANEL_ID!
+
+// FIREBASE
+export const FIREBASE_CONFIG = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY!,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID!,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID!,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID!,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID!,
+}
+export const FIREBASE_PUBLIC_VAPID_KEY = process.env.REACT_APP_FIREBASE_VAPID_KEY!

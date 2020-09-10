@@ -20,6 +20,7 @@ export const groupTypeDefs = gql`
 
         isMember: Boolean
         lastMessage: Message
+        numberOfUsers: Int
         messages(first: Int, after: Int): [Message]
     }
 `

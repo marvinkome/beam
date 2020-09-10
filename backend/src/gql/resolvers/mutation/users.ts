@@ -1,10 +1,12 @@
 import Geocoder from 'node-geocoder'
+import User from '@models/users'
+import Invitation from '@models/invitations'
+import Group from '@models/groups'
 import { authenticated } from '@libs/auth'
 import { IContext } from '@gql/index'
-import User from '@models/users'
-import { generateInviteId, getUsersSharedInterests } from '@libs/helpers'
-import Invitation from '@models/invitations'
+import { generateInviteId, getUsersSharedInterests, sendNotification } from '@libs/helpers'
 import { sendInviteEmail, sendAcceptInviteEmail } from '@libs/emails'
+import { messaging } from 'firebase-admin'
 
 // TYPES
 enum ConnectedAccountType {
@@ -153,6 +155,26 @@ export const resolvers = {
         return user.save()
     }),
 
+    setNotificationToken: authenticated(async (_: any, { token }: any, ctx: IContext) => {
+        const user = ctx.currentUser
+        if (!user) return null
+
+        // set token
+        user.notificationToken = token
+        await user.save()
+
+        // subscribe to group push notifications
+        const userGroups = await Group.find({
+            'users.user': { $eq: user.id },
+        })
+
+        for (const group of userGroups) {
+            await messaging().subscribeToTopic(token, group.id)
+        }
+
+        return true
+    }),
+
     createInviteLink: authenticated(async (_: any, __: any, ctx: IContext) => {
         const user = ctx.currentUser
         if (!user) return false
@@ -259,12 +281,24 @@ export const resolvers = {
                 },
             })
 
+            // send email and push notification
             const numberOfInterests = await getUsersSharedInterests(user, match)
+
+            if (match.notificationToken) {
+                await sendNotification({
+                    type: 'user',
+                    userToken: match.notificationToken || '',
+                    title: `You’ve got a chat invite from ${user.profile.name?.split(' ')[0]}`,
+                    body: `You both share ${numberOfInterests.length || 0} interests`,
+                    linkPath: '/app/invite',
+                })
+            }
+
             sendInviteEmail({
                 to: match.email,
                 data: {
                     matchName: user.profile.name?.split(' ')[0],
-                    interestsCount: numberOfInterests?.length || 0,
+                    interestsCount: numberOfInterests.length || 0,
                 },
             })
 
@@ -295,6 +329,17 @@ export const resolvers = {
                     },
                     $addToSet: { friends: requestingUser.id },
                 })
+
+                // send notification
+                if (requestingUser.notificationToken) {
+                    await sendNotification({
+                        type: 'user',
+                        userToken: requestingUser.notificationToken,
+                        title: `${user.profile.name?.split(' ')[0]} accepted your invite`,
+                        body: 'Say hello',
+                        linkPath: `/app/chat/${user.id}`,
+                    })
+                }
 
                 sendAcceptInviteEmail({
                     to: requestingUser.email,

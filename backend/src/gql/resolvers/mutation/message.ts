@@ -4,6 +4,7 @@ import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import Group from '@models/groups'
 import { sendNewMessageEmail } from '@libs/emails'
+import { sendNotification } from '@libs/helpers'
 
 type sendMessageData = {
     to: string
@@ -61,6 +62,15 @@ export const resolvers = {
         })
 
         // send push notification
+        await sendNotification({
+            type: 'user',
+            userToken: friend.notificationToken || '',
+            title: user.profile.name?.split(' ')[0],
+            body: message.message,
+            image: user.profile.picture,
+            linkPath: `/app/chat/${user.id}`,
+        })
+
         // send email
         if (friend.lastSeen !== null) {
             // if friend is offline
@@ -124,6 +134,14 @@ export const resolvers = {
         })
 
         // send push notification
+        await sendNotification({
+            type: 'group',
+            groupId: group.id,
+            title: group.name,
+            body: message.message,
+            image: group.image,
+            linkPath: `/app/group/${group.id}`,
+        })
 
         return {
             code: 200,

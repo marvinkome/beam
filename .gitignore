@@ -69,7 +69,7 @@ build
 # Misc
 sandbox.ts
 sandbox
-client_secret.json
+*secret.json
 *secret.yml
 .DS_Store
 .env.local

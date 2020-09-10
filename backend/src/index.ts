@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import admin from 'firebase-admin'
 import { createServer } from 'http'
 import { connect } from 'mongoose'
 import bodyParser from 'body-parser'
@@ -7,7 +8,6 @@ import bodyParser from 'body-parser'
 import apolloServer from '@gql/index'
 import setupStrategies from '@libs/strategies'
 import authRoutes from '@routes/auth'
-import connectRoutes from '@routes/connect'
 
 export default function createApp() {
     const app = express()
@@ -32,9 +32,19 @@ export default function createApp() {
     // setup passport
     setupStrategies()
 
+    // setup firebase
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const serviceAccount =
+        process.env.NODE_ENV === 'production'
+            ? require('/opt/firebase/firebase_secret.json')
+            : require('../firebase_secret.json')
+
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+    })
+
     // api routes
     app.use('/auth', authRoutes)
-    app.use('/connect', connectRoutes)
 
     app.get('/', (_, res) => res.json({ message: 'welcome to beam' }))
     app.use('*', (_, res) => res.send('404 page not found'))
