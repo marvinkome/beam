@@ -5,6 +5,7 @@ import { AUTH_TOKEN } from "lib/keys"
 import { isMobile, getGeolocation } from "lib/helpers"
 import { setUser, trackError } from "lib/analytics"
 import { toast } from "react-toastify"
+import { messaging } from "lib/notifications"
 
 type Actions = "request-permission" | "redirect-to-public" | "render" | "render-desktop"
 
@@ -20,6 +21,7 @@ export function useAppSetup() {
                 id
                 email
                 createdAt
+                notificationToken
                 profile {
                     firstName
                     picture
@@ -40,18 +42,33 @@ export function useAppSetup() {
         }
     `)
 
+    const [setNotificationToken] = useMutation(gql`
+        mutation SetNotificationToken($token: String!) {
+            setNotificationToken(token: $token)
+        }
+    `)
+
     const getLocation = useCallback(async () => {
         try {
             const location = await getGeolocation()
             await setLocation({ variables: { location } })
-
-            setAction("render")
         } catch (e) {
             toast.dark(e)
             trackError(`Location Error - ${e}`)
             return setAction("request-permission")
         }
     }, [setLocation])
+
+    const setupNotification = useCallback(async () => {
+        try {
+            const token = await messaging.getToken()
+            if (token && token !== data.me.notificationToken) {
+                setNotificationToken({ variables: { token } })
+            }
+        } catch (e) {
+            trackError(e)
+        }
+    }, [data, setNotificationToken])
 
     useEffect(() => {
         // 0 - we need to make sure it's mobile
@@ -74,6 +91,12 @@ export function useAppSetup() {
                 return
             }
 
+            // request permission access
+            setupNotification()
+        }
+
+        // 4 - if done loading and data is available
+        if (!loading && data) {
             setUser(data.me.id, {
                 $email: data.me.email,
                 signUpDate: new Date(parseInt(data?.me?.createdAt, 10)).toISOString(),
@@ -81,7 +104,7 @@ export function useAppSetup() {
 
             return setAction("render")
         }
-    }, [history, setAction, getLocation, data, loading])
+    }, [history, setAction, getLocation, setupNotification, data, loading])
 
     return {
         action,

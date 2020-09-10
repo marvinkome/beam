@@ -29,9 +29,16 @@
                     font-weight: 600;
                     margin-bottom: 3px;
 
-                    span {
+                    .name {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
+                    .date {
                         font-weight: normal;
                         font-size: var(--small-text);
+                        margin-top: 3px;
                     }
                 }
 

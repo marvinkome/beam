@@ -5,6 +5,7 @@ export interface IUser extends Document {
     googleId?: string
     facebookId?: string
     lastSeen?: Date | null
+    notificationToken?: string
     bot?: boolean
     profile: {
         name?: string
@@ -42,6 +43,7 @@ export const userSchema: Schema<IUser> = new Schema(
         facebookId: String,
 
         lastSeen: Date,
+        notificationToken: String,
 
         bot: {
             default: false,

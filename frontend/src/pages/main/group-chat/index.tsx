@@ -3,7 +3,7 @@ import sortBy from "lodash.sortby"
 import { ChatUi } from "components/chat"
 import { useParams, useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
-import { getProfileImage } from "lib/helpers"
+import { getProfileImage, pluralize } from "lib/helpers"
 import { trackError } from "lib/analytics"
 import { useJoinGroup, useLeaveGroup } from "hooks/groups"
 
@@ -50,6 +50,7 @@ function useGroupData() {
                     name
                     image
                     isMember
+                    numberOfUsers
                     messages(first: $first) {
                         id
                         timestamp
@@ -222,7 +223,15 @@ export function GroupChat() {
         <div className="group-chat">
             <ChatUi
                 isPreviewing={!isMember}
-                description={!isMember ? "You're previewing this group" : ""}
+                description={
+                    !isMember
+                        ? "You're previewing this group"
+                        : `${data?.group?.numberOfUsers} ${pluralize(
+                              data?.group?.numberOfUsers || 0,
+                              "member",
+                              "members"
+                          )}`
+                }
                 profile={{
                     name: data?.group?.name,
                     image: data?.group?.image,

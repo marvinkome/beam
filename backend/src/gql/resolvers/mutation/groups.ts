@@ -2,6 +2,8 @@ import { IContext } from '@gql/index'
 import Group, { Roles } from '@models/groups'
 import { IUser } from '@models/users'
 import { sendJoinGroupEmail } from '@libs/emails'
+import { sendNotification } from '@libs/helpers'
+import { messaging } from 'firebase-admin'
 
 export const resolvers = {
     createGroup: async (_: any, { interestId }: any, ctx: IContext) => {
@@ -111,10 +113,23 @@ export const resolvers = {
             },
         })
 
+        // subscribe to group push notifications
+        if (user.notificationToken) {
+            await messaging().subscribeToTopic(user.notificationToken, group.id)
+        }
+
         // send joined group email
         const groupUsersEmail = (await group.populate('users.user').execPopulate()).users
             .filter((groupUser) => (groupUser.user as IUser).id != user.id)
             .map((groupUser) => (groupUser.user as IUser).email)
+
+        await sendNotification({
+            type: 'group',
+            groupId: group.id,
+            title: `${user.profile.name?.split(' ')[0]} just joined ${group.name}`,
+            image: group.image,
+            linkPath: `/app/group/${group.id}`,
+        })
 
         sendJoinGroupEmail({
             to: groupUsersEmail,
@@ -152,6 +167,11 @@ export const resolvers = {
         await group.updateOne({
             $pull: { users: { user: user.id } },
         })
+
+        // subscribe to group push notifications
+        if (user.notificationToken) {
+            await messaging().unsubscribeFromTopic(user.notificationToken, group.id)
+        }
 
         return true
     },

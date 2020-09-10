@@ -51,6 +51,7 @@ export const userTypeDefs = gql`
         requestsCount: Int
         profile: Profile
         lastSeen: String
+        notificationToken: String
         bot: Boolean
         lastMessage: Message
     }
