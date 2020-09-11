@@ -32,8 +32,6 @@ export function useGoogleLogin(options: LoginOptions) {
     `)
 
     const onGoogleLoginSuccess = async (googleResp: any) => {
-        trackEvent("Google auth - successful")
-
         // get access token from google
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
@@ -73,7 +71,10 @@ export function useGoogleLogin(options: LoginOptions) {
             })
 
             stopLoader && stopLoader()
-            trackEvent("User auth - successful", {})
+            trackEvent("Connected Youtube Account", {
+                category: "Connect",
+                label: "Auth",
+            })
 
             if (options.onAuthCb) {
                 return options.onAuthCb()
@@ -97,7 +98,6 @@ export function useGoogleLogin(options: LoginOptions) {
         clientId: GOOGLE_CLIENT_ID,
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         onSuccess: onGoogleLoginSuccess,
-        onRequest: () => trackEvent("Google auth started"),
         onFailure: (resp) => {
             console.error(resp)
             switch (resp.error) {
@@ -116,7 +116,10 @@ export function useGoogleLogin(options: LoginOptions) {
     return {
         signIn: () => {
             login.signIn()
-            trackEvent("Clicked on google auth", { label: options.loginType })
+            trackEvent(`clicked on google auth for - ${options.loginType}`, {
+                category: "Auth",
+                label: options.loginType,
+            })
         },
         loaded: login.loaded,
     }

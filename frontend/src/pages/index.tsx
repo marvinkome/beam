@@ -9,7 +9,7 @@ import { ToastContainer, Slide } from "react-toastify"
 import { history } from "lib/history"
 import { apolloClient } from "lib/graphql"
 import { PWAEventContext } from "lib/pwa"
-import { trackTiming, initAnalytics } from "lib/analytics"
+import { trackTiming, initAnalytics, trackLinks } from "lib/analytics"
 
 // pages
 import { PublicPages } from "pages/public"
@@ -21,6 +21,7 @@ initAnalytics()
 
 export default function App() {
     useEffect(() => trackTiming(), [])
+    useEffect(() => trackLinks(), [])
 
     // hide prompt
     const pwaInstallPrompt = useRef<any>()

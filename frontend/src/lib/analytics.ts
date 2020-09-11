@@ -7,9 +7,6 @@ export function initAnalytics() {
     // mixpanel
     if (MIXPANEL_ID) {
         mixpanel.init(MIXPANEL_ID)
-        mixpanel.track_links("a", "click nav link", {
-            referrer: document.referrer,
-        })
     }
 
     // Google analytics
@@ -28,6 +25,14 @@ export function setUser(userId: string, props?: any) {
 }
 
 // EVENTS
+export function trackLinks() {
+    if (MIXPANEL_ID) {
+        mixpanel.track_links("a[href]", "click link", {
+            referrer: document.referrer,
+        })
+    }
+}
+
 export function trackEvent(event: string, props?: any) {
     if (MIXPANEL_ID) mixpanel.track(event, props)
     ReactGA.event({ action: event, category: props?.category || "User", label: props?.label })
