@@ -71,19 +71,6 @@ export const resolvers = {
             linkPath: `/app/chat/${user.id}`,
         })
 
-        // send email
-        if (friend.lastSeen !== null) {
-            // if friend is offline
-            sendNewMessageEmail({
-                to: friend.email,
-                data: {
-                    message: message.message,
-                    friendName: user.profile.name?.split(' ')[0],
-                    friendId: user.id,
-                },
-            })
-        }
-
         return {
             code: 200,
             success: true,
