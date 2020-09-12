@@ -290,7 +290,7 @@ export const resolvers = {
                     userToken: match.notificationToken || '',
                     title: `You’ve got a chat invite from ${user.profile.name?.split(' ')[0]}`,
                     body: `You both share ${numberOfInterests.length || 0} interests`,
-                    linkPath: '/app/invite',
+                    linkPath: '/app/invites',
                 })
             }
 
