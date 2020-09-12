@@ -198,3 +198,22 @@ export function useConnectAccount(
             return spotifyConnect
     }
 }
+
+export function useDisconnectAccount(account: "reddit" | "youtube" | "spotify") {
+    const [disconnectAccount] = useMutation(
+        gql`
+            mutation DisconnectAccount($account: String!) {
+                disconnectAccount(account: $account)
+            }
+        `
+    )
+
+    switch (account) {
+        case "youtube":
+            return () => disconnectAccount({ variables: { account: "youtube" } })
+        case "reddit":
+            return () => disconnectAccount({ variables: { account: "reddit" } })
+        case "spotify":
+            return () => disconnectAccount({ variables: { account: "spotify" } })
+    }
+}

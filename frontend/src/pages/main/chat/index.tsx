@@ -236,6 +236,7 @@ function useProfile(data: any) {
                     : `Last seen ${formatDate(parseInt(lastSeen, 10), true)}`,
         }))
     }, [])
+
     useSubscribeToProfileLastSeen(lastSeenCb)
 
     return { profile }
@@ -243,7 +244,7 @@ function useProfile(data: any) {
 
 // MAIN COMPONENT
 export function Chat() {
-    const { data } = useDataFetch()
+    const { data, loading } = useDataFetch()
     const { profile } = useProfile(data)
     const { messages, sendMessage } = useMessages(data)
 
@@ -263,6 +264,7 @@ export function Chat() {
                         ? `This is the beginning of your conversations with ${profile?.firstName}. Say hello.`
                         : ""
                 }
+                isLoading={loading && !data}
             />
         </div>
     )

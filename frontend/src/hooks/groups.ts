@@ -3,6 +3,7 @@ import { useQuery, gql, useMutation } from "@apollo/client"
 import { useState, useEffect } from "react"
 import { toast } from "react-toastify"
 import { trackEvent } from "lib/analytics"
+import { startLoader } from "components"
 
 function splitInterestsIntoGroups(interests: any[]) {
     return partition(interests, (o) => o.group !== null)
@@ -96,6 +97,7 @@ export function useCreateGroup(onCreateGroup: (group?: any) => void) {
     `)
 
     return async (interestId: string) => {
+        const stopLoading = startLoader()
         const { data } = await createGroupFn({ variables: { interestId } })
         if (!data?.createGroup.success) {
             return toast.dark(data?.createGroup.message)
@@ -103,6 +105,7 @@ export function useCreateGroup(onCreateGroup: (group?: any) => void) {
 
         trackEvent("Create group", { category: "Group" })
         onCreateGroup(data?.createGroup.group)
+        stopLoading()
     }
 }
 
@@ -120,6 +123,7 @@ export function useJoinGroup(onJoinGroup: (group?: any) => void) {
     `)
 
     return async (groupId: string) => {
+        const stopLoading = startLoader()
         const { data } = await joinGroupFn({ variables: { groupId } })
         if (!data?.joinGroup.success) {
             return toast.dark(data?.joinGroup.message)
@@ -127,6 +131,7 @@ export function useJoinGroup(onJoinGroup: (group?: any) => void) {
 
         trackEvent("Join group", { category: "Group" })
         onJoinGroup(data?.joinGroup.group)
+        stopLoading()
     }
 }
 
@@ -138,6 +143,7 @@ export function useLeaveGroup(onLeaveGroup: () => void) {
     `)
 
     return async (groupId: string) => {
+        const stopLoading = startLoader()
         const { data } = await leaveGroupFn({ variables: { groupId } })
         if (!data?.leaveGroup) {
             return toast.dark("Error leaving group")
@@ -145,5 +151,6 @@ export function useLeaveGroup(onLeaveGroup: () => void) {
 
         trackEvent("Leave group", { category: "Group" })
         onLeaveGroup()
+        stopLoading()
     }
 }

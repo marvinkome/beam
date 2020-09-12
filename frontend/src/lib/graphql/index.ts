@@ -2,7 +2,7 @@ import {
     ApolloClient,
     InMemoryCache,
     createHttpLink,
-    ApolloLink,
+    // ApolloLink,
     from,
     split,
 } from "@apollo/client"
@@ -10,19 +10,19 @@ import { WebSocketLink } from "@apollo/client/link/ws"
 import { setContext } from "@apollo/client/link/context"
 import { onError } from "@apollo/client/link/error"
 import { API_URL, AUTH_TOKEN, API_WS_URL } from "lib/keys"
-import { startLoader } from "components/loader"
+// import { startLoader } from "components/loader"
 import { getMainDefinition } from "@apollo/client/utilities"
 import { history } from "lib/history"
 
 // LINKS
-const loaderLink = new ApolloLink((operation, forward) => {
-    const loaderCompleteCb = startLoader()
+// const loaderLink = new ApolloLink((operation, forward) => {
+//     const loaderCompleteCb = startLoader()
 
-    return forward(operation).map((data) => {
-        loaderCompleteCb()
-        return data
-    })
-})
+//     return forward(operation).map((data) => {
+//         loaderCompleteCb()
+//         return data
+//     })
+// })
 
 const logoutLink = onError(({ graphQLErrors }) => {
     if (graphQLErrors) {
@@ -51,7 +51,12 @@ const authLink = setContext((_, { headers }) => {
     }
 })
 
-const httpLink = from([loaderLink, authLink, logoutLink, networkLink])
+const httpLink = from([
+    // loaderLink,
+    authLink,
+    logoutLink,
+    networkLink,
+])
 
 const wsLink = new WebSocketLink({
     uri: `${API_WS_URL}/graphql`,

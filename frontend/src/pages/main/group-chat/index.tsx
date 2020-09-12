@@ -212,7 +212,7 @@ function useMembership(defaultIsMember: boolean) {
 
 export function GroupChat() {
     const history = useHistory()
-    const { data } = useGroupData()
+    const { data, loading } = useGroupData()
     const { messages, sendMessage } = useMessages(data)
     const { isMember, joinGroup } = useMembership(data?.group?.isMember)
     const leaveGroup = useLeaveGroup(() => {
@@ -243,6 +243,7 @@ export function GroupChat() {
                 defaultMessage={
                     !!data ? `This is the beginning of the ${data?.group?.name} group.` : ""
                 }
+                isLoading={loading && !data}
             />
         </div>
     )

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import cls from "classnames"
 import TextareaAutosize from "react-autosize-textarea"
 import { useDropdown } from "hooks"
@@ -9,8 +9,11 @@ import { ChatFeed } from "react-chat-ui"
 import { ChatBubble } from "./bubble"
 
 import "./style.scss"
+import { startLoader } from "components"
 
 type IProps = {
+    isLoading: boolean
+
     isPreviewing: boolean
     description: string
     profile: {
@@ -40,6 +43,15 @@ type IProps = {
 export function ChatUi(props: IProps) {
     const history = useHistory()
     const { toggleDropdown, dropdownOpen } = useDropdown()
+
+    const stopLoader = useRef<any>()
+    useEffect(() => {
+        if (props.isLoading) {
+            stopLoader.current = startLoader("fullscreen", "Loading messages...")
+        } else {
+            stopLoader.current && stopLoader.current()
+        }
+    }, [props.isLoading])
 
     return (
         <div className="chat-ui">
