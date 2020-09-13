@@ -33,7 +33,6 @@ export const messageResolvers = {
 
     MessageTo: {
         __resolveType: async (to: any) => {
-            console.log(to)
             if (to.name) {
                 return 'Group'
             }
