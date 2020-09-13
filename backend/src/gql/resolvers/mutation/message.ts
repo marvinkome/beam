@@ -3,7 +3,6 @@ import { IUser } from '@models/users'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import Group from '@models/groups'
-import { sendNewMessageEmail } from '@libs/emails'
 import { sendNotification } from '@libs/helpers'
 
 type sendMessageData = {
@@ -35,14 +34,14 @@ export const resolvers = {
 
         // find or create a conversation
         let conversation = await Conversation.findOne({
-            users: {
+            'users.user': {
                 $all: [user.id, friend.id],
             },
         })
 
         if (!conversation) {
             conversation = new Conversation()
-            conversation.users = [user.id, friend.id]
+            conversation.users = [{ user: user.id }, { user: friend.id }]
 
             await conversation.save()
         }

@@ -22,7 +22,7 @@ export const queryTypeDef = gql`
 
         suggestedFriends: [SuggestedFriend]
 
-        conversation(with: ID!, first: Int, sort: Boolean, after: Int): [Message]
+        conversation(with: ID!): Conversation
         group(id: ID!): Group
     }
 `

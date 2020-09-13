@@ -3,6 +3,7 @@ import { mutationTypeDefs } from './mutation'
 import { userTypeDefs } from './user'
 import { messageTypeDefs } from './message'
 import { groupTypeDefs } from './group'
+import { conversationTypeDef } from './converation'
 import { subscriptionTypeDef } from './subscription'
 
 export const typeDefs = [
@@ -11,5 +12,6 @@ export const typeDefs = [
     userTypeDefs,
     groupTypeDefs,
     messageTypeDefs,
+    conversationTypeDef,
     subscriptionTypeDef,
 ]

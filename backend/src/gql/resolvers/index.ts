@@ -3,6 +3,7 @@ import { userResolvers } from './user'
 import { messageResolvers } from './message'
 import { groupResolvers } from './group'
 import { mutationResolvers } from './mutation'
+import { converationResolvers } from './conversation'
 import { subscriptionResolver } from './subscription'
 
 export const resolvers = [
@@ -11,5 +12,6 @@ export const resolvers = [
     subscriptionResolver,
     userResolvers,
     messageResolvers,
+    converationResolvers,
     groupResolvers,
 ]

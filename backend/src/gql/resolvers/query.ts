@@ -38,16 +38,11 @@ export const queryResolver = {
 
         conversation: authenticated(async function (_: any, data: ConversationArgs, ctx: IContext) {
             // get conversation
-            const conversation = await Conversation.findOne({
-                users: {
+            return Conversation.findOne({
+                'users.user': {
                     $all: [ctx.currentUser?.id, data.with],
                 },
             })
-
-            return Message.find({ to: conversation?.id })
-                .sort({ timestamp: data.sort ? -1 : 1 })
-                .limit(data.first || 10)
-                .skip(data.after || 0)
         }),
 
         group: authenticated(async function (_: any, { id }: { id: string }) {

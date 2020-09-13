@@ -60,7 +60,7 @@ export const userResolvers = {
 
         lastMessage: async (user: IUser, _: any, ctx: IContext) => {
             const conversation = await Conversation.findOne({
-                users: {
+                'users.user': {
                     $all: [user.id, ctx.currentUser?.id],
                 },
             })
