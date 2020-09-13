@@ -68,6 +68,25 @@ export const userResolvers = {
             return Message.findOne({ to: conversation?.id }).sort('-timestamp')
         },
 
+        unreadCount: async (user: IUser, _: any, ctx: IContext) => {
+            const conversation = await Conversation.findOne({
+                'users.user': {
+                    $all: [user.id, ctx.currentUser?.id],
+                },
+            })
+
+            const conversationUser = conversation?.users.find((u) => u.user == ctx.currentUser)
+            if (!conversationUser) return 0
+
+            if (!conversationUser.lastViewed) return 0
+
+            return Message.find({ to: conversation?.id })
+                .where('timestamp')
+                .gt(conversationUser.lastViewed)
+                .sort({ timestamp: -1 })
+                .countDocuments()
+        },
+
         requestsCount: async (user: IUser) => {
             return user.requests.length
         },
