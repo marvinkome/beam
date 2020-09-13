@@ -65,7 +65,7 @@ export const userResolvers = {
                 },
             })
 
-            return Message.findOne({ to: conversation?.id }).sort('-timestamp')
+            return Message.findOne({ toConversation: conversation?.id }).sort('-timestamp')
         },
 
         unreadCount: async (user: IUser, _: any, ctx: IContext) => {
@@ -80,7 +80,7 @@ export const userResolvers = {
 
             if (!conversationUser.lastViewed) return 0
 
-            return Message.find({ to: conversation?.id })
+            return Message.find({ toConversation: conversation?.id })
                 .where('timestamp')
                 .gt(conversationUser.lastViewed)
                 .sort({ timestamp: -1 })

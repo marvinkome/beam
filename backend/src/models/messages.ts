@@ -7,7 +7,8 @@ export interface IMessage extends Document {
     message: string
     timestamp: Date
     from: Schema.Types.ObjectId | string | IUser
-    to: Schema.Types.ObjectId | string | IConversation | IGroup
+    toGroup: Schema.Types.ObjectId | string | IGroup
+    toConversation: Schema.Types.ObjectId | string | IConversation
 }
 
 export const messageSchema: Schema<IMessage> = new Schema({
@@ -23,15 +24,14 @@ export const messageSchema: Schema<IMessage> = new Schema({
     },
 
     // to either conversation or group
-    to: {
+    toGroup: {
         type: Schema.Types.ObjectId,
-        refPath: 'ToModel',
+        ref: 'Group',
     },
 
-    // ref path
-    ToModel: {
-        type: String,
-        enum: ['Group', 'Conversation'],
+    toConversation: {
+        type: Schema.Types.ObjectId,
+        ref: 'Conversation',
     },
 })
 

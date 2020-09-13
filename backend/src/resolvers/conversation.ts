@@ -15,7 +15,7 @@ export const converationResolvers = {
         },
 
         messages: (conversation: IConversation, data: any) => {
-            return Message.find({ to: conversation.id })
+            return Message.find({ toConversation: conversation.id })
                 .sort({ timestamp: -1 })
                 .limit(data.first || 10)
                 .skip(data.after || 0)

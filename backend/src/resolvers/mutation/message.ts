@@ -50,7 +50,7 @@ export const resolvers = {
         const message = new Message()
         message.message = data.message
         message.from = user.id
-        message.to = conversation.id
+        message.toConversation = conversation.id
 
         await message.save()
 
@@ -109,7 +109,7 @@ export const resolvers = {
         const message = new Message()
         message.message = data.message
         message.from = user.id
-        message.to = group.id
+        message.toGroup = group.id
 
         await message.save()
 

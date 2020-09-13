@@ -256,11 +256,29 @@ function useMembership(defaultIsMember: boolean) {
     }
 }
 
+function useViewPage() {
+    const { groupId } = useParams()
+    const [setViewGroup] = useMutation(gql`
+        mutation SetViewGroup($groupId: ID!, $viewing: Boolean) {
+            setViewGroup(viewing: $viewing, id: $groupId)
+        }
+    `)
+
+    useEffect(() => {
+        setViewGroup({ variables: { groupId, viewing: true } })
+
+        return () => {
+            setViewGroup({ variables: { groupId, viewing: false } })
+        }
+    }, [groupId, setViewGroup])
+}
+
 export function GroupChat() {
     const { data, loading, subscribeToMore } = useDataQuery()
     const { isMember, joinGroup, leaveGroup } = useMembership(data?.group?.isMember)
 
     const { messages, sendMessage } = useMessages(data, subscribeToMore)
+    useViewPage()
 
     return (
         <div className="group-chat">

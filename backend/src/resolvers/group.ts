@@ -18,11 +18,27 @@ export const groupResolvers = {
         },
 
         lastMessage: async (group: IGroup) => {
-            return Message.findOne({ to: group?.id }).sort('-timestamp')
+            return Message.findOne({ toGroup: group?.id }).sort('-timestamp')
+        },
+
+        unreadCount: async (group: IGroup, _: any, ctx: IContext) => {
+            const user = ctx.currentUser
+            if (!user) return false
+
+            const groupUser = group.users.find((gUser) => gUser.user == user.id)
+            if (!groupUser) return 0
+
+            if (!groupUser.lastViewed) return 0
+
+            return Message.find({ toGroup: group.id })
+                .where('timestamp')
+                .gt(groupUser.lastViewed)
+                .sort({ timestamp: -1 })
+                .countDocuments()
         },
 
         messages: async (group: IGroup, data: any) => {
-            return Message.find({ to: group.id })
+            return Message.find({ toGroup: group.id })
                 .sort({ timestamp: -1 })
                 .limit(data.first || 10)
                 .skip(data.after || 0)

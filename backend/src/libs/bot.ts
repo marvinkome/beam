@@ -24,7 +24,7 @@ export async function sendMessageFromBot(toUser: IUser, msg: string) {
     const message = new Message()
     message.message = msg
     message.from = bot.id
-    message.to = conversation.id
+    message.toConversation = conversation.id
 
     await message.save()
 
