@@ -6,7 +6,7 @@ import { RootHeader } from "components/header"
 import "./style.scss"
 
 function useTabs() {
-    const [currentTab, changeCurrentTab] = useState<"groups" | "friends">("groups")
+    const [currentTab, changeCurrentTab] = useState<"groups" | "friends">("friends")
 
     return {
         currentTab,
