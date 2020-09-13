@@ -1,4 +1,4 @@
-import { pubsub } from '..'
+import { pubsub } from 'src/graphql'
 import { withFilter } from 'apollo-server-express'
 
 export const subscriptionResolver = {

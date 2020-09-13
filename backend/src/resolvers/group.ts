@@ -1,6 +1,6 @@
-import { IGroup } from '@models/groups'
 import Message from '@models/messages'
-import { IContext } from '..'
+import { IGroup } from '@models/groups'
+import { IContext } from 'src/graphql'
 
 export const groupResolvers = {
     Group: {

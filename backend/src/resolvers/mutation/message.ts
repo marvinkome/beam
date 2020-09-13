@@ -1,8 +1,8 @@
-import { IContext, pubsub } from '@gql/index'
-import { IUser } from '@models/users'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import Group from '@models/groups'
+import { IContext, pubsub } from 'src/graphql'
+import { IUser } from '@models/users'
 import { sendNotification } from '@libs/helpers'
 
 type sendMessageData = {

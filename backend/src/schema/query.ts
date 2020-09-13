@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express'
 
 export const queryTypeDef = gql`
+    # UNCATEGORIZED TYPES
     type SharedInterest {
         id: String
         name: String
@@ -13,6 +14,7 @@ export const queryTypeDef = gql`
         sharedInterests: [SharedInterest]
     }
 
+    # ROOT QUERY
     type Query {
         me: User
 

@@ -1,5 +1,5 @@
 import { IMessage } from '@models/messages'
-import { IContext } from '..'
+import { IContext } from 'src/graphql'
 import { IConversation } from '@models/conversations'
 
 export const messageResolvers = {

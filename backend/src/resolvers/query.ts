@@ -1,9 +1,8 @@
-import { IContext } from '@gql/index'
-import { authenticated } from '@libs/auth'
-import Message from '@models/messages'
+import Group from '@models/groups'
 import Conversation from '@models/conversations'
 import { findFriends } from '@libs/match'
-import Group from '@models/groups'
+import { IContext } from 'src/graphql'
+import { authenticated } from '@libs/auth'
 
 type ConversationArgs = {
     with: string

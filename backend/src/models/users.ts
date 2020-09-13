@@ -1,5 +1,11 @@
 import { Schema, model, Document } from 'mongoose'
 
+export enum AccountType {
+    SPOTIFY = 'spotify',
+    REDDIT = 'reddit',
+    YOUTUBE = 'youtube',
+}
+
 export interface IUser extends Document {
     email: string
     googleId?: string
@@ -26,7 +32,7 @@ export interface IUser extends Document {
         name: string
         image: string
         type?: 'artist' | 'genre' // for spotify
-        platform: 'youtube' | 'spotify' | 'reddit'
+        platform: AccountType.YOUTUBE | AccountType.SPOTIFY | AccountType.REDDIT
     }>
 }
 

@@ -1,8 +1,8 @@
-import User, { IUser } from '@models/users'
 import Conversation from '@models/conversations'
 import Message from '@models/messages'
 import Group from '@models/groups'
-import { IContext } from '..'
+import User, { IUser } from '@models/users'
+import { IContext } from 'src/graphql'
 import { getUsersSharedInterests } from '@libs/helpers'
 
 export const userResolvers = {
