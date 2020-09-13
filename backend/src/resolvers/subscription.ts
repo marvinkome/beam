@@ -11,6 +11,10 @@ export const subscriptionResolver = {
                     const messageNotFromCurrentUser =
                         payload.messageSent.from != ctx.currentUser?.id
 
+                    if (variables.shouldNotFilter) {
+                        return true
+                    }
+
                     if (variables.friendId) {
                         const isFromSpecifiedFriend = payload.messageSent.from == variables.friendId
                         const isMessageForMe = payload.friendId == ctx.currentUser?.id
