@@ -6,6 +6,36 @@ import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
 import { getProfileImage, pluralize } from "lib/helpers"
 import { trackError } from "lib/analytics"
 import { useJoinGroup, useLeaveGroup } from "hooks/groups"
+import { toast } from "react-toastify"
+
+/* === GQL DOCS === */
+const GROUP_DATA_QUERY = gql`
+    query GetGroup($groupId: ID!, $first: Int) {
+        me {
+            id
+        }
+
+        group(id: $groupId) {
+            id
+            name
+            image
+            isMember
+            numberOfUsers
+            messages(first: $first) {
+                id
+                timestamp
+                message
+                from {
+                    id
+                    profile {
+                        firstName
+                        picture
+                    }
+                }
+            }
+        }
+    }
+`
 
 type User = {
     id: string
@@ -17,7 +47,7 @@ type User = {
 
 type MessageResponse = {
     id: string
-    timestamp: string
+    timestamp: number
     message: string
     from: User
 }
@@ -31,81 +61,27 @@ function formatMessages(messages: MessageResponse[], myId: string) {
         senderImage: getProfileImage(message.from.profile),
         timestamp: message.timestamp,
         type: "group",
-        sending: false,
+        sending: message.id === null,
     }))
 }
 
-function useGroupData() {
+function useDataQuery() {
     const { groupId } = useParams()
 
-    const resp = useQuery(
-        gql`
-            query GetGroup($groupId: ID!, $first: Int) {
-                me {
-                    id
-                }
-
-                group(id: $groupId) {
-                    id
-                    name
-                    image
-                    isMember
-                    numberOfUsers
-                    messages(first: $first) {
-                        id
-                        timestamp
-                        message
-                        from {
-                            id
-                            profile {
-                                firstName
-                                picture
-                            }
-                        }
-                    }
-                }
-            }
-        `,
-        { fetchPolicy: "cache-and-network", variables: { groupId, first: 30 } }
-    )
+    const resp = useQuery(GROUP_DATA_QUERY, {
+        variables: { groupId, first: 30 },
+    })
 
     return resp
 }
 
 function useSendMessageToServer() {
-    const [sendMessageToServer] = useMutation(
-        gql`
-            mutation SendMessage($groupId: ID!, $message: String!) {
-                sendMessageToGroup(to: $groupId, message: $message) {
-                    code
-                    success
-                    sentMessage {
-                        id
-                        message
-                        timestamp
-                        from {
-                            id
-                            profile {
-                                firstName
-                                picture
-                            }
-                        }
-                    }
-                }
-            }
-        `
-    )
-
-    return sendMessageToServer
-}
-
-function useSubscibeToMessage(updateState: (data: any) => void) {
-    const { groupId } = useParams()
-
-    const { data, loading } = useSubscription(
-        gql`
-            subscription Messages($groupId: ID) {
-                messageSent(groupId: $groupId) {
+    const DOC = gql`
+        mutation SendMessage($groupId: ID!, $message: String!) {
+            sendMessageToGroup(to: $groupId, message: $message) {
+                code
+                success
+                sentMessage {
                     id
                     message
                     timestamp
@@ -118,32 +94,123 @@ function useSubscibeToMessage(updateState: (data: any) => void) {
                     }
                 }
             }
-        `,
-        {
-            variables: { groupId },
         }
-    )
+    `
 
-    useEffect(() => {
-        if (!loading && data) {
-            updateState(data.messageSent)
+    const [sendMessageToServer] = useMutation(DOC)
+
+    return async (message: string, groupId: string) => {
+        // create optimistic response
+        const optimisticResponse = {
+            sendMessageToGroup: {
+                code: "200",
+                success: true,
+                sentMessage: {
+                    __typename: "Message",
+                    id: null,
+                    message,
+                    timestamp: Date.now(),
+                    from: {
+                        id: "0",
+                        __typename: "User",
+                        profile: {
+                            // not needed as it's not shown
+                            firstName: "",
+                            picture: "",
+                            __typename: "Profile",
+                        },
+                    },
+                },
+            },
         }
-    }, [loading, data, updateState])
+
+        // update cache with new data
+        try {
+            const { data } = await sendMessageToServer({
+                variables: { message, groupId },
+                optimisticResponse,
+                update: (cache, resp) => {
+                    const data = cache.readQuery<any>({
+                        variables: { groupId, first: 30 },
+                        query: GROUP_DATA_QUERY,
+                    })
+
+                    const newMessage = {
+                        __typename: "Message",
+                        ...resp.data.sendMessageToGroup.sentMessage,
+                    }
+
+                    cache.writeQuery({
+                        query: GROUP_DATA_QUERY,
+                        variables: { groupId, first: 30 },
+                        data: {
+                            ...data,
+                            group: {
+                                ...data.group,
+                                messages: [newMessage, ...data.group.messages],
+                            },
+                        },
+                    })
+                },
+            })
+
+            if (!data.sendMessageToGroup.success) {
+                toast.dark("Error sending message")
+                trackError(data.sendMessageToGroup.message)
+                return
+            }
+
+            return data.sendMessageToGroup.sentMessage
+        } catch (e) {
+            console.log(e)
+            toast.dark("Error sending message. Check your network connection")
+            return
+        }
+    }
 }
 
-function useMessages(queryData: any) {
+function useMessages(data: any, subscribeToMore: any) {
     const { groupId } = useParams()
+    const messages = sortBy(formatMessages(data?.group.messages || [], data?.me.id), ["timestamp"])
 
-    // FETCH MESSAGES
-    const [messages, updateMessageState] = useState<any[]>([])
+    // subscribe to new messages
     useEffect(() => {
-        if (queryData) {
-            const messages = formatMessages(queryData.group.messages, queryData.me.id)
-            updateMessageState(sortBy(messages, ["timestamp"]))
-        }
-    }, [queryData])
+        const MESSAGE_SUB = gql`
+            subscription Messages($friendId: ID) {
+                messageSent(friendId: $friendId) {
+                    id
+                    message
+                    timestamp
+                    from {
+                        id
+                        profile {
+                            firstName
+                            picture
+                        }
+                    }
+                }
+            }
+        `
 
-    // SEND MESSAGE
+        subscribeToMore({
+            document: MESSAGE_SUB,
+            variables: { groupId },
+            updateQuery: (data: any, { subscriptionData }: any) => {
+                if (!subscriptionData.data) return data
+
+                const newMessage = subscriptionData.data.messageSent
+
+                // update conversation profile
+                return {
+                    ...data,
+                    group: {
+                        messages: [newMessage, ...data.group.messages],
+                    },
+                }
+            },
+        })
+    }, [groupId, subscribeToMore])
+
     const sendMessageToServer = useSendMessageToServer()
     const sendMessage = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -154,37 +221,13 @@ function useMessages(queryData: any) {
         const messageText = messageTarget.value.trim()
         if (!messageText.length) return
 
-        // Send message to server
-        const { data } = await sendMessageToServer({
-            variables: { message: messageText, groupId },
-        })
-
-        if (!data?.sendMessageToGroup.success) {
-            console.log("error", data?.sendMessageToGroup.message)
-            trackError(`${data?.sendMessageToGroup.message} in Group Chat`)
-            return
-        }
-
-        // update state with new data
-        updateMessageState(
-            messages.concat(
-                ...formatMessages([data?.sendMessageToGroup.sentMessage], queryData.me.id)
-            )
-        )
-
+        // clear message
         messageTarget.value = ""
+
+        // Send message to server
+        const sentMessage = await sendMessageToServer(messageText, groupId)
+        if (!sentMessage) return
     }
-
-    // LISTEN FOR NEW MESSAGE
-    const messageCb = useCallback(
-        (message: any) => {
-            const formattedMessage = formatMessages([message], queryData.me.id)
-            updateMessageState((oldMessages) => oldMessages.concat(...formattedMessage))
-        },
-        [queryData]
-    )
-
-    useSubscibeToMessage(messageCb)
 
     return {
         messages,
@@ -193,10 +236,12 @@ function useMessages(queryData: any) {
 }
 
 function useMembership(defaultIsMember: boolean) {
+    const history = useHistory()
     const [isMember, setMembership] = useState(defaultIsMember)
     const joinGroup = useJoinGroup(() => {
         setMembership(true)
     })
+    const leaveGroup = useLeaveGroup(() => history.push("/app/chats"))
 
     useEffect(() => {
         if (defaultIsMember) {
@@ -207,17 +252,15 @@ function useMembership(defaultIsMember: boolean) {
     return {
         isMember,
         joinGroup,
+        leaveGroup,
     }
 }
 
 export function GroupChat() {
-    const history = useHistory()
-    const { data, loading } = useGroupData()
-    const { messages, sendMessage } = useMessages(data)
-    const { isMember, joinGroup } = useMembership(data?.group?.isMember)
-    const leaveGroup = useLeaveGroup(() => {
-        return history.push("/app/chats")
-    })
+    const { data, loading, subscribeToMore } = useDataQuery()
+    const { isMember, joinGroup, leaveGroup } = useMembership(data?.group?.isMember)
+
+    const { messages, sendMessage } = useMessages(data, subscribeToMore)
 
     return (
         <div className="group-chat">

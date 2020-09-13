@@ -82,7 +82,6 @@ export function Profile() {
     const { loading, data } = useFetchData()
     const connectedAccountsData = useConnectedAccounts(data)
     const profile = data?.me.profile
-    console.log(connectedAccountsData.connectedAccounts)
 
     return (
         <div className="profile-page">

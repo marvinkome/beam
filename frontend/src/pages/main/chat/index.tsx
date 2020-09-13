@@ -1,9 +1,39 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useEffect } from "react"
 import _sortBy from "lodash.sortby"
-import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
+import { useQuery, gql, useMutation } from "@apollo/client"
 import { useParams } from "react-router-dom"
 import { formatDate, getProfileImage } from "lib/helpers"
 import { ChatUi } from "components/chat"
+import { toast } from "react-toastify"
+import { trackError } from "lib/analytics"
+
+/* === GQL DOCS === */
+const DATA_QUERY = gql`
+    query GetFriendProfileAndChats($friendId: ID!, $first: Int) {
+        friend(id: $friendId) {
+            id
+            lastSeen
+            bot
+            profile {
+                firstName
+                picture
+            }
+        }
+
+        conversation(with: $friendId, first: $first, sort: true) {
+            id
+            timestamp
+            message
+            from {
+                id
+                profile {
+                    firstName
+                    picture
+                }
+            }
+        }
+    }
+`
 
 /* === Types === */
 type Friend = {
@@ -16,7 +46,7 @@ type Friend = {
 
 type MessageResponse = {
     id: string
-    timestamp: string
+    timestamp: number
     message: string
     from: Friend
 }
@@ -31,32 +61,32 @@ function formatMessages(messages: MessageResponse[], friendId: string) {
         senderImage: getProfileImage(message.from.profile),
         timestamp: message.timestamp,
         type: "friend",
-        sending: false,
+        sending: message.id === null,
     }))
 }
 
-/* === Custom Hooks === */
-function useDataFetch() {
+/* === API Calls === */
+function useDataQuery() {
     const { friendId } = useParams()
 
     // Get friend's profile and conversation with friend
-    const resp = useQuery(
-        gql`
-            query GetFriendProfileAndChats($friendId: ID!, $first: Int) {
-                friend(id: $friendId) {
-                    id
-                    lastSeen
-                    bot
-                    profile {
-                        firstName
-                        picture
-                    }
-                }
+    const resp = useQuery(DATA_QUERY, {
+        variables: { friendId, first: 30 },
+    })
 
-                conversation(with: $friendId, first: $first, sort: true) {
+    return resp
+}
+
+function useSendMessageToServer() {
+    const DOC = gql`
+        mutation SendMessage($friendId: ID!, $message: String!) {
+            sendMessage(to: $friendId, message: $message) {
+                code
+                success
+                sentMessage {
                     id
-                    timestamp
                     message
+                    timestamp
                     from {
                         id
                         profile {
@@ -66,48 +96,82 @@ function useDataFetch() {
                     }
                 }
             }
-        `,
-        {
-            fetchPolicy: "cache-and-network",
-            variables: { friendId, first: 30 },
         }
-    )
+    `
 
-    return resp
-}
+    const [sendMessageToServer] = useMutation(DOC)
 
-function useSendMessageToServer() {
-    const [sendMessageToServer] = useMutation(
-        gql`
-            mutation SendMessage($friendId: ID!, $message: String!) {
-                sendMessage(to: $friendId, message: $message) {
-                    code
-                    success
-                    sentMessage {
-                        id
-                        message
-                        timestamp
-                        from {
-                            id
-                            profile {
-                                firstName
-                                picture
-                            }
-                        }
+    return async (message: string, friendId: string) => {
+        // create optimistic response
+        const optimisticResponse = {
+            sendMessage: {
+                code: "200",
+                success: true,
+                sentMessage: {
+                    __typename: "Message",
+                    id: null,
+                    message,
+                    timestamp: Date.now(),
+                    from: {
+                        id: "0",
+                        __typename: "User",
+                        profile: {
+                            // not needed as it's not shown
+                            firstName: "",
+                            picture: "",
+                            __typename: "Profile",
+                        },
+                    },
+                },
+            },
+        }
+
+        // update cache with new data
+        try {
+            const { data } = await sendMessageToServer({
+                variables: { message, friendId },
+                optimisticResponse,
+                update: (cache, resp) => {
+                    const data = cache.readQuery<any>({
+                        variables: { friendId, first: 30 },
+                        query: DATA_QUERY,
+                    })
+
+                    const newMessage = {
+                        __typename: "Message",
+                        ...resp.data.sendMessage.sentMessage,
                     }
-                }
-            }
-        `
-    )
 
-    return [sendMessageToServer]
+                    cache.writeQuery({
+                        query: DATA_QUERY,
+                        variables: { friendId, first: 30 },
+                        data: { conversation: [newMessage, ...data.conversation] },
+                    })
+                },
+            })
+
+            if (!data.sendMessage.success) {
+                toast.dark("Error sending message")
+                trackError(data.sendMessage.message)
+                return
+            }
+
+            return data.sendMessage.sentMessage
+        } catch (e) {
+            toast.dark("Error sending message. Check your network connection")
+            return
+        }
+    }
 }
 
-function useSubscibeToMessage(updateState: (data: any) => void) {
+/* === Data management === */
+function useMessages(data: any, subscribeToMore: any) {
     const { friendId } = useParams()
+    const messages = _sortBy(formatMessages(data?.conversation || [], friendId), ["timestamp"])
 
-    const { data, loading } = useSubscription(
-        gql`
+    // subscribe to new messages
+    useEffect(() => {
+        const MESSAGE_SUB = gql`
             subscription Messages($friendId: ID) {
                 messageSent(friendId: $friendId) {
                     id
@@ -122,55 +186,23 @@ function useSubscibeToMessage(updateState: (data: any) => void) {
                     }
                 }
             }
-        `,
-        {
+        `
+
+        subscribeToMore({
+            document: MESSAGE_SUB,
             variables: { friendId },
-        }
-    )
+            updateQuery: (data: any, { subscriptionData }: any) => {
+                if (!subscriptionData.data) return data
 
-    useEffect(() => {
-        if (!loading && data) {
-            const message = formatMessages([data.messageSent], friendId)
-            updateState(message)
-        }
-    }, [loading, data, updateState, friendId])
-}
+                const newMessage = subscriptionData.data.messageSent
 
-function useSubscribeToProfileLastSeen(updateState: (data: any) => void) {
-    const { friendId } = useParams()
+                // update conversation profile
+                return { ...data, conversation: [newMessage, ...data.conversation] }
+            },
+        })
+    }, [friendId, subscribeToMore])
 
-    const { data, loading } = useSubscription(
-        gql`
-            subscription LastSeen($friendId: ID!) {
-                lastSeen(friendId: $friendId)
-            }
-        `,
-        {
-            variables: { friendId },
-        }
-    )
-
-    useEffect(() => {
-        if (!loading && data) {
-            updateState(data.lastSeen)
-        }
-    }, [loading, data, updateState])
-}
-
-function useMessages(data: any) {
-    const { friendId } = useParams()
-
-    // FETCH MESSAGES
-    const [messages, updateMessageState] = useState<any[]>([])
-    useEffect(() => {
-        if (data) {
-            const messages = formatMessages(data.conversation, friendId)
-            updateMessageState(_sortBy(messages, ["timestamp"]))
-        }
-    }, [data, friendId])
-
-    // SEND MESSAGE
-    const [sendMessageToServer] = useSendMessageToServer()
+    const sendMessageToServer = useSendMessageToServer()
     const sendMessage = async (e: React.FormEvent) => {
         e.preventDefault()
 
@@ -180,29 +212,13 @@ function useMessages(data: any) {
         const messageText = messageTarget.value.trim()
         if (!messageText.length) return
 
-        // Send message to server
-        const {
-            data: { sendMessage },
-        } = await sendMessageToServer({
-            variables: { message: messageText, friendId },
-        })
-
-        if (!sendMessage.success) {
-            console.log("error", data.message)
-            return
-        }
-
-        // update state with new data
-        updateMessageState(messages.concat(...formatMessages([sendMessage.sentMessage], friendId)))
-
+        // clear message
         messageTarget.value = ""
-    }
 
-    // LISTEN FOR NEW MESSAGE
-    const messageCb = useCallback((message: any) => {
-        updateMessageState((oldMessages) => oldMessages.concat(...message))
-    }, [])
-    useSubscibeToMessage(messageCb)
+        // Send message to server
+        const sentMessage = await sendMessageToServer(messageText, friendId)
+        if (!sentMessage) return
+    }
 
     return {
         messages,
@@ -210,43 +226,47 @@ function useMessages(data: any) {
     }
 }
 
-function useProfile(data: any) {
-    const [profile, updateProfile] = useState<any>(null)
+function useProfile(data: any, subscribeToMore: any) {
+    const { friendId } = useParams()
+    const friend = data?.friend
 
+    // subscribe to last seen changes
     useEffect(() => {
-        if (data) {
-            const { friend } = data
-            updateProfile({
-                ...friend.profile,
-                isBot: friend.bot,
-                lastSeen:
-                    friend.lastSeen === null
-                        ? "Online"
-                        : `Last seen ${formatDate(parseInt(friend.lastSeen, 10), true)}`,
-            })
-        }
-    }, [data])
+        const LAST_SEEN_SUB = gql`
+            subscription LastSeen($friendId: ID!) {
+                lastSeen(friendId: $friendId)
+            }
+        `
 
-    const lastSeenCb = useCallback((lastSeen: any) => {
-        updateProfile((oldProfile: any) => ({
-            ...oldProfile,
-            lastSeen:
-                lastSeen === null
-                    ? "Online"
-                    : `Last seen ${formatDate(parseInt(lastSeen, 10), true)}`,
-        }))
-    }, [])
+        subscribeToMore({
+            document: LAST_SEEN_SUB,
+            variables: { friendId },
+            updateQuery: (data: any, { subscriptionData }: any) => {
+                if (!subscriptionData.data) return data
 
-    useSubscribeToProfileLastSeen(lastSeenCb)
+                const newLastSeen = subscriptionData.data.lastSeen
 
-    return { profile }
+                // update friend profile
+                return { ...data, friend: { ...data.friend, lastSeen: newLastSeen } }
+            },
+        })
+    }, [friendId, subscribeToMore])
+
+    return {
+        ...friend?.profile,
+        isBot: friend?.bot,
+        lastSeen:
+            friend?.lastSeen === null
+                ? "Online"
+                : `Last seen ${formatDate(parseInt(friend?.lastSeen, 10), true)}`,
+    }
 }
 
 // MAIN COMPONENT
 export function Chat() {
-    const { data, loading } = useDataFetch()
-    const { profile } = useProfile(data)
-    const { messages, sendMessage } = useMessages(data)
+    const { data, loading, subscribeToMore } = useDataQuery()
+    const { messages, sendMessage } = useMessages(data, subscribeToMore)
+    const profile = useProfile(data, subscribeToMore)
 
     return (
         <div className="chat-page">
