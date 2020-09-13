@@ -62,7 +62,7 @@
         "typescript": "^3.5.1"
     },
     "_moduleAliases": {
-        "@gql": "./dist/src/gql",
+        "src": "./dist/src",
         "@libs": "./dist/src/libs",
         "@models": "./dist/src/models",
         "@routes": "./dist/src/routes"

@@ -15,7 +15,7 @@
         "lib": ["esnext.asynciterable", "es5", "es2015", "dom"],
         "typeRoots": ["./types"],
         "paths": {
-            "@gql/*": ["src/gql/*"],
+            "src": ["src/*"],
             "@libs/*": ["src/libs/*"],
             "@models/*": ["src/models/*"],
             "@routes/*": ["src/routes/*"]
