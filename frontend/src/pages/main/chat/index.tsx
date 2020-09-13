@@ -173,6 +173,23 @@ function useSendMessageToServer() {
     }
 }
 
+function useViewPage() {
+    const { friendId } = useParams()
+    const [setViewConversation] = useMutation(gql`
+        mutation SetViewConversation($friendId: ID!, $viewing: Boolean) {
+            setViewConversation(viewing: $viewing, id: $friendId)
+        }
+    `)
+
+    useEffect(() => {
+        setViewConversation({ variables: { friendId, viewing: true } })
+
+        return () => {
+            setViewConversation({ variables: { friendId, viewing: false } })
+        }
+    }, [friendId, setViewConversation])
+}
+
 /* === Data management === */
 function useMessages(data: any, subscribeToMore: any) {
     const { friendId } = useParams()
@@ -284,6 +301,7 @@ export function Chat() {
     const { data, loading, subscribeToMore } = useDataQuery()
     const { messages, sendMessage } = useMessages(data, subscribeToMore)
     const profile = useProfile(data, subscribeToMore)
+    useViewPage()
 
     return (
         <div className="chat-page">

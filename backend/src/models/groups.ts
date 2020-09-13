@@ -35,6 +35,7 @@ export interface IGroup extends Document {
     users: Array<{
         user: Schema.Types.ObjectId | string | IUser
         role: { name: string; permission: number }
+        lastViewed?: Date | null
     }>
 }
 
@@ -54,6 +55,8 @@ export const groupSchema: Schema<IGroup> = new Schema(
             {
                 user: { type: Schema.Types.ObjectId, ref: 'User' },
                 role: { name: String, permission: Number },
+
+                lastViewed: Date,
             },
         ],
     },

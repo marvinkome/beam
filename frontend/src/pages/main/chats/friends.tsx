@@ -19,6 +19,7 @@ function formatItems(friends: any[]) {
                     isDefault: true,
                 },
                 timestamp: "",
+                unreadCount: friend.unreadCount,
                 image: getProfileImage(friend.profile),
             }
 
@@ -52,6 +53,7 @@ function useFriends() {
                 }
                 friends {
                     id
+                    unreadCount
                     lastMessage {
                         message
                         timestamp
@@ -127,7 +129,10 @@ export function FriendsTab() {
                             </p>
 
                             <p className={cls({ isDefault: friend.message.isDefault })}>
-                                {friend.message.text}
+                                <span>{friend.message.text}</span>
+                                {!!friend.unreadCount && (
+                                    <span className="unread-count">{friend.unreadCount}</span>
+                                )}
                             </p>
                         </div>
                     </Link>

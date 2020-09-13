@@ -24,6 +24,7 @@ type ConnectAccountInputType =
       }
 
 export const resolvers = {
+    /* === CONNECT ACCOUNTS ==== */
     connectAccount: authenticated(async (_: any, data: any, ctx: IContext) => {
         const user = ctx.currentUser
         if (!user) return false
@@ -128,6 +129,7 @@ export const resolvers = {
         }
     }),
 
+    /* ==== PROFILE ==== */
     setLocation: authenticated(async (_: any, { location }: any, ctx: IContext) => {
         const user = ctx.currentUser
         if (!user) return null
@@ -167,6 +169,7 @@ export const resolvers = {
         return true
     }),
 
+    /* ==== INVITE FRIEND ==== */
     createInviteLink: authenticated(async (_: any, __: any, ctx: IContext) => {
         const user = ctx.currentUser
         if (!user) return false
@@ -227,6 +230,7 @@ export const resolvers = {
         }
     }),
 
+    /* ==== ADD FRIEND ==== */
     addFriendById: authenticated(async (_: any, data: any, ctx: IContext) => {
         const { friendId } = data as { friendId: string }
         try {
@@ -253,6 +257,7 @@ export const resolvers = {
         }
     }),
 
+    /* ==== FRIEND REQUESTS ==== */
     sendFriendRequest: authenticated(async (_: any, data: any, ctx: IContext) => {
         const user = ctx.currentUser
         if (!user) return false

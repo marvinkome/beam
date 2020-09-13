@@ -75,7 +75,7 @@ export const userResolvers = {
                 },
             })
 
-            const conversationUser = conversation?.users.find((u) => u.user == ctx.currentUser)
+            const conversationUser = conversation?.users.find((u) => u.user == ctx.currentUser?.id)
             if (!conversationUser) return 0
 
             if (!conversationUser.lastViewed) return 0
