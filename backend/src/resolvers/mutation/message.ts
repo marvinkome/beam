@@ -1,9 +1,8 @@
-import { IContext, pubsub } from '@gql/index'
-import { IUser } from '@models/users'
 import Message from '@models/messages'
 import Conversation from '@models/conversations'
 import Group from '@models/groups'
-import { sendNewMessageEmail } from '@libs/emails'
+import { IContext, pubsub } from 'src/graphql'
+import { IUser } from '@models/users'
 import { sendNotification } from '@libs/helpers'
 
 type sendMessageData = {
@@ -35,14 +34,14 @@ export const resolvers = {
 
         // find or create a conversation
         let conversation = await Conversation.findOne({
-            users: {
+            'users.user': {
                 $all: [user.id, friend.id],
             },
         })
 
         if (!conversation) {
             conversation = new Conversation()
-            conversation.users = [user.id, friend.id]
+            conversation.users = [{ user: user.id }, { user: friend.id }]
 
             await conversation.save()
         }
@@ -51,7 +50,7 @@ export const resolvers = {
         const message = new Message()
         message.message = data.message
         message.from = user.id
-        message.to = conversation.id
+        message.toConversation = conversation.id
 
         await message.save()
 
@@ -110,7 +109,7 @@ export const resolvers = {
         const message = new Message()
         message.message = data.message
         message.from = user.id
-        message.to = group.id
+        message.toGroup = group.id
 
         await message.save()
 

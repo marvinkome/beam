@@ -1,11 +1,11 @@
 import express from 'express'
 import path from 'path'
 import admin from 'firebase-admin'
+import bodyParser from 'body-parser'
 import { createServer } from 'http'
 import { connect } from 'mongoose'
-import bodyParser from 'body-parser'
 
-import apolloServer from '@gql/index'
+import apolloServer from 'src/graphql'
 import setupStrategies from '@libs/strategies'
 import authRoutes from '@routes/auth'
 

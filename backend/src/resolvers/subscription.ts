@@ -1,4 +1,4 @@
-import { pubsub } from '..'
+import { pubsub } from 'src/graphql'
 import { withFilter } from 'apollo-server-express'
 
 export const subscriptionResolver = {
@@ -10,6 +10,10 @@ export const subscriptionResolver = {
                 (payload, variables, ctx) => {
                     const messageNotFromCurrentUser =
                         payload.messageSent.from != ctx.currentUser?.id
+
+                    if (variables.shouldNotFilter) {
+                        return true
+                    }
 
                     if (variables.friendId) {
                         const isFromSpecifiedFriend = payload.messageSent.from == variables.friendId

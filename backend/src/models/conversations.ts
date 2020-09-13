@@ -2,14 +2,25 @@ import { Schema, model, Document } from 'mongoose'
 import { IUser } from './users'
 
 export interface IConversation extends Document {
-    users: Schema.Types.ObjectId[] | string[] | IUser[]
+    users: Array<{
+        user: Schema.Types.ObjectId | string | IUser
+
+        lastViewed?: Date | null
+    }>
 }
 
 export const conversationSchema: Schema<IConversation> = new Schema({
     users: {
-        type: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+        type: [
+            {
+                user: { type: Schema.Types.ObjectId, ref: 'User' },
+
+                lastViewed: Date,
+            },
+        ],
         validate: [(val: []) => val.length <= 2, '{PATH} exceeds the limit of 2'],
     },
 })
 
-export default model<IConversation>('Conversation', conversationSchema)
+const Conversation = model<IConversation>('Conversation', conversationSchema)
+export default Conversation

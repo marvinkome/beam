@@ -20,15 +20,18 @@ const DATA_QUERY = gql`
             }
         }
 
-        conversation(with: $friendId, first: $first, sort: true) {
+        conversation(with: $friendId) {
             id
-            timestamp
-            message
-            from {
+            messages(first: $first) {
                 id
-                profile {
-                    firstName
-                    picture
+                timestamp
+                message
+                from {
+                    id
+                    profile {
+                        firstName
+                        picture
+                    }
                 }
             }
         }
@@ -145,7 +148,13 @@ function useSendMessageToServer() {
                     cache.writeQuery({
                         query: DATA_QUERY,
                         variables: { friendId, first: 30 },
-                        data: { conversation: [newMessage, ...data.conversation] },
+                        data: {
+                            ...data,
+                            conversation: {
+                                ...data.conversation,
+                                messages: [newMessage, ...data.conversation.messages],
+                            },
+                        },
                     })
                 },
             })
@@ -164,10 +173,29 @@ function useSendMessageToServer() {
     }
 }
 
+function useViewPage() {
+    const { friendId } = useParams()
+    const [setViewConversation] = useMutation(gql`
+        mutation SetViewConversation($friendId: ID!, $viewing: Boolean) {
+            setViewConversation(viewing: $viewing, id: $friendId)
+        }
+    `)
+
+    useEffect(() => {
+        setViewConversation({ variables: { friendId, viewing: true } })
+
+        return () => {
+            setViewConversation({ variables: { friendId, viewing: false } })
+        }
+    }, [friendId, setViewConversation])
+}
+
 /* === Data management === */
 function useMessages(data: any, subscribeToMore: any) {
     const { friendId } = useParams()
-    const messages = _sortBy(formatMessages(data?.conversation || [], friendId), ["timestamp"])
+    const messages = _sortBy(formatMessages(data?.conversation?.messages || [], friendId), [
+        "timestamp",
+    ])
 
     // subscribe to new messages
     useEffect(() => {
@@ -197,7 +225,13 @@ function useMessages(data: any, subscribeToMore: any) {
                 const newMessage = subscriptionData.data.messageSent
 
                 // update conversation profile
-                return { ...data, conversation: [newMessage, ...data.conversation] }
+                return {
+                    ...data,
+                    conversation: {
+                        ...data.conversation,
+                        messages: [newMessage, ...data.conversation.messages],
+                    },
+                }
             },
         })
     }, [friendId, subscribeToMore])
@@ -267,6 +301,7 @@ export function Chat() {
     const { data, loading, subscribeToMore } = useDataQuery()
     const { messages, sendMessage } = useMessages(data, subscribeToMore)
     const profile = useProfile(data, subscribeToMore)
+    useViewPage()
 
     return (
         <div className="chat-page">

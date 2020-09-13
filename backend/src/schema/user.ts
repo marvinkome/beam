@@ -45,14 +45,20 @@ export const userTypeDefs = gql`
         id: ID!
         email: String!
         createdAt: String
+        profile: Profile
+
         connectedAccounts: ConnectedAccounts
         interests: [Interest]
+
         requests: [Request]
         requestsCount: Int
-        profile: Profile
-        lastSeen: String
-        notificationToken: String
+
         bot: Boolean
-        lastMessage: Message
+        notificationToken: String
+
+        # chat information
+        lastSeen: String
+        lastMessage: Message # last message with current user
+        unreadCount: Int
     }
 `

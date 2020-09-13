@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import cls from "classnames"
 import orderBy from "lodash.orderby"
 import { useQuery, gql } from "@apollo/client"
@@ -19,6 +19,7 @@ function formatItems(friends: any[]) {
                     isDefault: true,
                 },
                 timestamp: "",
+                unreadCount: friend.unreadCount,
                 image: getProfileImage(friend.profile),
             }
 
@@ -43,7 +44,7 @@ function formatItems(friends: any[]) {
 }
 
 function useFriends() {
-    const { data, loading } = useQuery(
+    const { data, loading, subscribeToMore } = useQuery(
         gql`
             query Friend {
                 me {
@@ -52,6 +53,7 @@ function useFriends() {
                 }
                 friends {
                     id
+                    unreadCount
                     lastMessage {
                         message
                         timestamp
@@ -66,6 +68,52 @@ function useFriends() {
         `,
         { fetchPolicy: "cache-and-network" }
     )
+
+    // subscribe to new messages
+    useEffect(() => {
+        const MESSAGE_SUB = gql`
+            subscription Messages {
+                messageSent(shouldNotFilter: true) {
+                    id
+                    message
+                    timestamp
+                    from {
+                        id
+                        profile {
+                            firstName
+                            picture
+                        }
+                    }
+                }
+            }
+        `
+
+        subscribeToMore({
+            document: MESSAGE_SUB,
+            updateQuery: (data: any, { subscriptionData }: any) => {
+                if (!subscriptionData.data) return data
+
+                const newMessage = subscriptionData.data.messageSent
+
+                const newFriendsData = data.friends.map((friend: any) => {
+                    if (friend.id !== newMessage.from.id) return friend
+
+                    // update friend
+                    return {
+                        ...friend,
+                        unreadCount: friend.unreadCount + 1,
+                        lastMessage: newMessage,
+                    }
+                })
+
+                // update conversation profile
+                return {
+                    ...data,
+                    friends: newFriendsData,
+                }
+            },
+        })
+    }, [subscribeToMore])
 
     return { data, loading }
 }
@@ -127,7 +175,10 @@ export function FriendsTab() {
                             </p>
 
                             <p className={cls({ isDefault: friend.message.isDefault })}>
-                                {friend.message.text}
+                                <span>{friend.message.text}</span>
+                                {!!friend.unreadCount && (
+                                    <span className="unread-count">{friend.unreadCount}</span>
+                                )}
                             </p>
                         </div>
                     </Link>

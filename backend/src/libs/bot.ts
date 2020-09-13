@@ -1,14 +1,14 @@
 import User, { IUser } from '@models/users'
 import Conversation from '@models/conversations'
 import Message from '@models/messages'
-import { pubsub } from '@gql/index'
+import { pubsub } from 'src/graphql'
 
 export async function sendMessageFromBot(toUser: IUser, msg: string) {
     const bot = await User.findOne({ email: process.env.BOT_EMAIL })
     if (!bot) return false
 
     let conversation = await Conversation.findOne({
-        users: {
+        'users.user': {
             $all: [toUser.id, bot.id],
         },
     })
@@ -24,7 +24,7 @@ export async function sendMessageFromBot(toUser: IUser, msg: string) {
     const message = new Message()
     message.message = msg
     message.from = bot.id
-    message.to = conversation.id
+    message.toConversation = conversation.id
 
     await message.save()
 

@@ -1,8 +1,8 @@
-import User, { IUser } from '@models/users'
 import Conversation from '@models/conversations'
 import Message from '@models/messages'
 import Group from '@models/groups'
-import { IContext } from '..'
+import User, { IUser } from '@models/users'
+import { IContext } from 'src/graphql'
 import { getUsersSharedInterests } from '@libs/helpers'
 
 export const userResolvers = {
@@ -60,12 +60,31 @@ export const userResolvers = {
 
         lastMessage: async (user: IUser, _: any, ctx: IContext) => {
             const conversation = await Conversation.findOne({
-                users: {
+                'users.user': {
                     $all: [user.id, ctx.currentUser?.id],
                 },
             })
 
-            return Message.findOne({ to: conversation?.id }).sort('-timestamp')
+            return Message.findOne({ toConversation: conversation?.id }).sort('-timestamp')
+        },
+
+        unreadCount: async (user: IUser, _: any, ctx: IContext) => {
+            const conversation = await Conversation.findOne({
+                'users.user': {
+                    $all: [user.id, ctx.currentUser?.id],
+                },
+            })
+
+            const conversationUser = conversation?.users.find((u) => u.user == ctx.currentUser?.id)
+            if (!conversationUser) return 0
+
+            if (!conversationUser.lastViewed) return 0
+
+            return Message.find({ toConversation: conversation?.id })
+                .where('timestamp')
+                .gt(conversationUser.lastViewed)
+                .sort({ timestamp: -1 })
+                .countDocuments()
         },
 
         requestsCount: async (user: IUser) => {

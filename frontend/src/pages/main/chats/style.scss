@@ -43,12 +43,32 @@
                 }
 
                 p:last-child {
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
 
                     &.isDefault {
                         font-style: italic;
+                    }
+
+                    span:first-child {
+                        flex: 8;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        margin-right: 15px;
+                    }
+
+                    span.unread-count {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: var(--primary-color);
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 50%;
+                        padding-bottom: 2px;
+                        color: #fff;
                     }
                 }
             }

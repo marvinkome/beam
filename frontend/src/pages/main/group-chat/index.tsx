@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react"
+import React, { useState, useEffect } from "react"
 import sortBy from "lodash.sortby"
 import { ChatUi } from "components/chat"
 import { useParams, useHistory } from "react-router-dom"
-import { useQuery, gql, useMutation, useSubscription } from "@apollo/client"
+import { useQuery, gql, useMutation } from "@apollo/client"
 import { getProfileImage, pluralize } from "lib/helpers"
 import { trackError } from "lib/analytics"
 import { useJoinGroup, useLeaveGroup } from "hooks/groups"
@@ -256,11 +256,29 @@ function useMembership(defaultIsMember: boolean) {
     }
 }
 
+function useViewPage() {
+    const { groupId } = useParams()
+    const [setViewGroup] = useMutation(gql`
+        mutation SetViewGroup($groupId: ID!, $viewing: Boolean) {
+            setViewGroup(viewing: $viewing, id: $groupId)
+        }
+    `)
+
+    useEffect(() => {
+        setViewGroup({ variables: { groupId, viewing: true } })
+
+        return () => {
+            setViewGroup({ variables: { groupId, viewing: false } })
+        }
+    }, [groupId, setViewGroup])
+}
+
 export function GroupChat() {
     const { data, loading, subscribeToMore } = useDataQuery()
     const { isMember, joinGroup, leaveGroup } = useMembership(data?.group?.isMember)
 
     const { messages, sendMessage } = useMessages(data, subscribeToMore)
+    useViewPage()
 
     return (
         <div className="group-chat">

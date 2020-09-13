@@ -1,5 +1,5 @@
-import { IContext } from '@gql/index'
 import Group, { Roles } from '@models/groups'
+import { IContext } from 'src/graphql'
 import { IUser } from '@models/users'
 import { sendJoinGroupEmail } from '@libs/emails'
 import { sendNotification } from '@libs/helpers'

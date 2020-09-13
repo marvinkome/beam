@@ -25,20 +25,17 @@ export interface IContext {
     req: e.Request<any>
     res: e.Response<any>
 }
-const context: ApolloServerExpressConfig['context'] = async ({
-    req,
-    res,
-    connection,
-}): Promise<IContext> => {
-    if (connection) {
-        return { ...connection.context }
+const context: ApolloServerExpressConfig['context'] = async (ctx): Promise<IContext> => {
+    if (ctx.connection) {
+        return { ...ctx.connection.context }
     }
-    const authToken = getTokenFromHeaders(req)
+
+    const authToken = getTokenFromHeaders(ctx.req)
     const currentUser = await getUserFromToken(authToken || '')
 
     return {
-        req,
-        res,
+        req: ctx.req,
+        res: ctx.res,
         currentUser,
     }
 }
@@ -80,4 +77,5 @@ const subscriptions: Config['subscriptions'] = {
     },
 }
 
-export default new ApolloServer({ schema, context, subscriptions })
+const apolloServer = new ApolloServer({ schema, context, subscriptions })
+export default apolloServer

@@ -1,6 +1,7 @@
 import { gql } from 'apollo-server-express'
 
 export const queryTypeDef = gql`
+    # UNCATEGORIZED TYPES
     type SharedInterest {
         id: String
         name: String
@@ -13,6 +14,7 @@ export const queryTypeDef = gql`
         sharedInterests: [SharedInterest]
     }
 
+    # ROOT QUERY
     type Query {
         me: User
 
@@ -22,7 +24,7 @@ export const queryTypeDef = gql`
 
         suggestedFriends: [SuggestedFriend]
 
-        conversation(with: ID!, first: Int, sort: Boolean, after: Int): [Message]
+        conversation(with: ID!): Conversation
         group(id: ID!): Group
     }
 `

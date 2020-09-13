@@ -1,9 +1,8 @@
+import User, { IUser } from '@models/users'
+import jwt from 'express-jwt'
+import { IContext } from 'src/graphql'
 import { Request } from 'express'
 import { verify, sign } from 'jsonwebtoken'
-import jwt from 'express-jwt'
-
-import { IContext } from '@gql/index'
-import User, { IUser } from '@models/users'
 
 export function generateToken(user: IUser) {
     const today = new Date()

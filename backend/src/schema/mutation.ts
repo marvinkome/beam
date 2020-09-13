@@ -69,7 +69,7 @@ export const mutationTypeDefs = gql`
     type Mutation {
         # AUTH
         googleLogin(
-            token: String!
+            oken: String!
             inviteToken: String
             youtubeData: [YoutubeInput]
         ): LoginMutationResponse
@@ -78,13 +78,21 @@ export const mutationTypeDefs = gql`
         # USER
         connectAccount(input: ConnectAccountInput): Boolean
         disconnectAccount(account: String!): Boolean
+
         setLocation(location: LocationInput): User
+        setNotificationToken(token: String!): Boolean
+
         createInviteLink: String
         addFriend(inviteToken: String!): AddFriendMutationResponse
+
         addFriendById(friendId: ID!): Boolean
+
         sendFriendRequest(matchId: ID!): Boolean
         respondToFriendRequest(matchId: ID!, accepted: Boolean!): Boolean
-        setNotificationToken(token: String!): Boolean
+
+        # CHATS
+        setViewConversation(viewing: Boolean, id: ID!): Boolean
+        setViewGroup(viewing: Boolean, id: ID!): Boolean
 
         # GROUP
         createGroup(interestId: ID!): GroupMutationResponse
