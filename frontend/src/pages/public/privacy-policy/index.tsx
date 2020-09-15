@@ -541,6 +541,7 @@ export function PrivacyPolicy() {
                                 <strong>Functionality and Infrastructure Optimization</strong>
                             </p>
                             <p>MongoDB Atlas</p>
+                            <p>Firebase</p>
                         </li>
                         <li>
                             <p>
