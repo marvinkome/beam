@@ -79,6 +79,10 @@ export function useGoogleLogin(options: LoginOptions) {
                 })
             }
 
+            trackEvent("Auth successfull", {
+                category: "Auth",
+                label: options.loginType,
+            })
             if (options.onAuthCb) {
                 return options.onAuthCb()
             } else {
