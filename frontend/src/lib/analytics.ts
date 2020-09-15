@@ -15,6 +15,10 @@ export function initAnalytics() {
 
 // SETUP
 export function setUser(userId: string, props?: any) {
+    ReactGA.set({
+        user_id: userId,
+    })
+
     if (!MIXPANEL_ID) return
 
     mixpanel.identify(userId)
