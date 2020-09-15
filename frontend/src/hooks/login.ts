@@ -71,10 +71,13 @@ export function useGoogleLogin(options: LoginOptions) {
             })
 
             stopLoader && stopLoader()
-            trackEvent("Connected Youtube Account", {
-                category: "Connect",
-                label: "Auth",
-            })
+
+            if (options.loginType !== "login") {
+                trackEvent("Connected Youtube Account", {
+                    category: "Connect",
+                    label: "Auth",
+                })
+            }
 
             if (options.onAuthCb) {
                 return options.onAuthCb()
