@@ -53,7 +53,7 @@ export function useAppSetup() {
             const location = await getGeolocation()
             await setLocation({ variables: { location } })
         } catch (e) {
-            toast.dark(e)
+            toast.dark("You denied location access")
             trackError(`Location Error - ${e}`)
             return setAction("request-permission")
         }

@@ -13,7 +13,9 @@ export function LocationPermission(props: { getLocation: () => void }) {
         <div className="request-location">
             <header className="page-header">
                 <h1>We need your location to find friends near you</h1>
-                <p>Grant location access from site settings and try again</p>
+                <p>
+                    Grant Beam location access by going to Setting &gt; Site settings &gt; Location
+                </p>
             </header>
 
             <footer className="button-container">
