@@ -12,7 +12,7 @@ import { GOOGLE_CLIENT_ID, REDDIT_CLIENT_ID, APP_URL, SPOTIFY_CLIENT_ID } from "
 import { toQuery } from "lib/helpers"
 import { trackError, trackEvent } from "lib/analytics"
 
-function useConnectAccountMutation() {
+export function useConnectAccountMutation() {
     const [connectAccount] = useMutation(gql`
         mutation ConnectAccount($input: ConnectAccountInput) {
             connectAccount(input: $input)

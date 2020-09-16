@@ -15,11 +15,7 @@ function googleAuth(req: e.Request, res: e.Response): Promise<{ user: IUser; inf
 }
 
 export const resolver = {
-    googleLogin: async (
-        _: any,
-        { token, inviteToken, youtubeData }: any,
-        { req, res }: IContext
-    ) => {
+    googleLogin: async (_: any, { token, inviteToken }: any, { req, res }: IContext) => {
         req.body = { ...req.body, access_token: token }
 
         try {
@@ -52,17 +48,6 @@ export const resolver = {
 
                 // delete invite token
                 await invitation.remove()
-            }
-
-            if (youtubeData) {
-                user.connectedAccounts = user.connectedAccounts?.concat(
-                    youtubeData.map((sub: any) => ({
-                        ...sub,
-                        platform: 'youtube',
-                    }))
-                )
-
-                await user.save()
             }
 
             return {

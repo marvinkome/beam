@@ -6,6 +6,7 @@ import { startLoader } from "components/loader"
 import { ConnectYoutubeAccount } from "lib/connect-account"
 import { AUTH_TOKEN, GOOGLE_CLIENT_ID } from "lib/keys"
 import { trackError, setUser, trackEvent } from "lib/analytics"
+import { useConnectAccountMutation } from "./connect"
 
 type LoginOptions = {
     loginType: "register" | "invite" | "login"
@@ -15,17 +16,19 @@ type LoginOptions = {
 
 export function useGoogleLogin(options: LoginOptions) {
     const history = useHistory()
+    const connectAccount = useConnectAccountMutation()
 
     // create api login mutation function
     const [googleLogin] = useMutation(gql`
-        mutation GoogleLogin($token: String!, $inviteToken: String, $youtubeData: [YoutubeInput]) {
-            googleLogin(token: $token, inviteToken: $inviteToken, youtubeData: $youtubeData) {
+        mutation GoogleLogin($token: String!, $inviteToken: String) {
+            googleLogin(token: $token, inviteToken: $inviteToken) {
                 success
                 token
                 user {
                     id
                     email
                     createdAt
+                    hasConnectedAccount
                 }
             }
         }
@@ -40,59 +43,71 @@ export function useGoogleLogin(options: LoginOptions) {
             return
         }
 
-        // if we're login in, then no need to fetch youtube data
-        let stopLoader: any = undefined
-        let youtubeData: any = undefined
-        if (options.loginType !== "login") {
-            // start loader
-            stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
+        const stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
 
-            // get youtube subscriptions
-            const youtube = new ConnectYoutubeAccount(accessToken)
-            youtubeData = await youtube.getSubscriptions()
-        }
-
+        // authenticate user
         const loginResp = await googleLogin({
             variables: {
                 token: accessToken,
                 inviteToken: options.inviteToken,
-                youtubeData,
             },
         })
 
+        // destructure response
         const { token, success, message, user } = loginResp.data?.googleLogin
-
         if (success) {
-            // Post login activities
+            // setup user
             localStorage.setItem(AUTH_TOKEN, token)
             setUser(user.id, {
                 $email: user.email,
                 signUpDate: new Date(parseInt(user.createdAt, 10)).toISOString(),
             })
 
-            stopLoader && stopLoader()
+            // check if the user has already connect youtube account
+            if (user.hasConnectedAccount) {
+                stopLoader && stopLoader()
+                trackEvent("Auth successful", { category: "Auth", label: options.loginType })
 
-            if (options.loginType !== "login") {
-                trackEvent("Connected Youtube Account", {
-                    category: "Connect",
-                    label: "Auth",
-                })
+                if (options.onAuthCb) {
+                    return options.onAuthCb()
+                } else {
+                    // if user is signing in
+                    return history.push(
+                        options.loginType === "login" ? "/app/chats" : "/app/onboarding"
+                    )
+                }
             }
 
-            trackEvent("Auth successfull", {
-                category: "Auth",
-                label: options.loginType,
+            // else connect youtube data
+            // get youtube subscriptions
+            const youtube = new ConnectYoutubeAccount(accessToken)
+            const subs = await youtube.getSubscriptions()
+
+            const resp = await connectAccount({
+                variables: {
+                    input: {
+                        account: "youtube",
+                        subs,
+                    },
+                },
             })
-            if (options.onAuthCb) {
-                return options.onAuthCb()
-            } else {
-                // if user is signing in
-                return history.push(
-                    options.loginType === "login" ? "/app/chats" : "/app/onboarding"
-                )
+
+            if (resp.data.connectAccount) {
+                trackEvent("Connected youtube account", { category: "Auth", label: "Connect" })
+
+                stopLoader && stopLoader()
+                trackEvent("Auth successful", { category: "Auth", label: options.loginType })
+
+                if (options.onAuthCb) {
+                    return options.onAuthCb()
+                } else {
+                    // if user is signing in
+                    return history.push(
+                        options.loginType === "login" ? "/app/chats" : "/app/onboarding"
+                    )
+                }
             }
         } else {
-            // TODO:: ADD LOGGER
             trackError(`User auth failed - ${message}`)
             console.log(message)
             toast.dark(`Error signing up - ${message}`)

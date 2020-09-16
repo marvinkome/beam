@@ -7,6 +7,8 @@ import { getUsersSharedInterests } from '@libs/helpers'
 
 export const userResolvers = {
     User: {
+        hasConnectedAccount: (user: IUser) => !!user.connectedAccounts?.length,
+
         connectedAccounts: (user: IUser) => {
             const youtube = !!user.connectedAccounts?.filter((acc) => acc.platform === 'youtube')
                 .length

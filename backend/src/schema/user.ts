@@ -47,6 +47,7 @@ export const userTypeDefs = gql`
         createdAt: String
         profile: Profile
 
+        hasConnectedAccount: Boolean
         connectedAccounts: ConnectedAccounts
         interests: [Interest]
 
