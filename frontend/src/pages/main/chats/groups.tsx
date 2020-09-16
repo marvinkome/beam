@@ -111,25 +111,6 @@ export function GroupsTab() {
     const { data, loading } = useGroups()
     const groups = formatItems(data?.groups || [])
 
-    useIntroJs({
-        key: "done-group-intro",
-        start: groups?.length < 1,
-        steps: [
-            {
-                element: ".action-button-container",
-                intro: "You can now join or create groups based on your interests",
-                // @ts-ignore
-                dynamic: true,
-            },
-            {
-                element: "img.me",
-                intro: "Click on your profile icon to find new groups",
-                // @ts-ignore
-                dynamic: true,
-            },
-        ],
-    })
-
     if (loading && !data) {
         return (
             <div className="loading-container">

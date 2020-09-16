@@ -124,17 +124,11 @@ export function FriendsTab() {
 
     useIntroJs({
         key: "done-intro",
-        start: data?.friends.length < 2,
+        start: true,
         steps: [
             {
-                element: ".action-button-container",
-                intro: "To start chatting on Beam add your friend here",
-                // @ts-ignore
-                dynamic: true,
-            },
-            {
                 element: "img.me",
-                intro: "Click on your profile icon to see settings and find new friends",
+                intro: "Click on your profile to find friends and groups near you",
                 // @ts-ignore
                 dynamic: true,
             },
