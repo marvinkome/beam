@@ -38,6 +38,12 @@ export function useAppSetup() {
         mutation SetLocation($location: LocationInput) {
             setLocation(location: $location) {
                 id
+                profile {
+                    location {
+                        state
+                        city
+                    }
+                }
             }
         }
     `)
@@ -87,7 +93,7 @@ export function useAppSetup() {
         if (!loading && data) {
             const { location } = data.me.profile
             if (!location || !location.state) {
-                getLocation()
+                getLocation().then(() => setAction("render"))
                 return
             }
 
