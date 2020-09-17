@@ -35,6 +35,8 @@ export function useGoogleLogin(options: LoginOptions) {
     `)
 
     const onGoogleLoginSuccess = async (googleResp: any) => {
+        const stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
+
         // get access token from google
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
@@ -42,8 +44,6 @@ export function useGoogleLogin(options: LoginOptions) {
             trackError(`Authentication with Google failed - Access token not found`)
             return
         }
-
-        const stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
 
         // authenticate user
         const loginResp = await googleLogin({
@@ -137,11 +137,11 @@ export function useGoogleLogin(options: LoginOptions) {
 
     return {
         signIn: () => {
-            login.signIn()
             trackEvent(`clicked on google auth for - ${options.loginType}`, {
                 category: "Auth",
                 label: options.loginType,
             })
+            login.signIn()
         },
         loaded: login.loaded,
     }

@@ -2,6 +2,7 @@ import User, { IUser } from '@models/users'
 import Conversation from '@models/conversations'
 import Message from '@models/messages'
 import { pubsub } from 'src/graphql'
+import { sendNotification } from 'src/libs/helpers'
 
 export async function sendMessageFromBot(toUser: IUser, msg: string) {
     const bot = await User.findOne({ email: process.env.BOT_EMAIL })
@@ -33,4 +34,15 @@ export async function sendMessageFromBot(toUser: IUser, msg: string) {
         messageSent: message,
         friendId: bot.id,
     })
+
+    // send push notification
+    if (toUser.lastSeen) {
+        await sendNotification({
+            type: 'user',
+            userToken: toUser.notificationToken || '',
+            title: 'Beambot',
+            body: message.message,
+            linkPath: `/app/chat/${bot.id}`,
+        })
+    }
 }

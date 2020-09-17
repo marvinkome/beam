@@ -79,7 +79,7 @@ export class ConnectYoutubeAccount extends ConnectAccount {
 
             return resp?.data
         } catch (err) {
-            trackError("Error getting youtube data")
+            trackError(`Error getting youtube data - ${err.message}`)
             return {}
         }
     }
@@ -135,7 +135,7 @@ export class ConnectRedditAccount extends ConnectAccount {
 
             return resp?.data
         } catch (err) {
-            trackError("Error getting reddit data")
+            trackError(`Error getting reddit data  - ${err.message}`)
             return {}
         }
     }
@@ -188,7 +188,7 @@ export class ConnectSpotifyAccount extends ConnectAccount {
             const resp = await this.axios?.get(link || "/me/top/artists")
             return resp?.data
         } catch (err) {
-            trackError("Error getting spotify data")
+            trackError(`Error getting spotify data - ${err.message}`)
             return {}
         }
     }
