@@ -48,9 +48,15 @@ export function OnBoarding() {
                 ))}
             </div>
 
-            <Link to="/app/chats" className="btn btn-primary">
-                Continue to chats
-            </Link>
+            {isEmpty ? (
+                <Link to="/app/profile" className="btn btn-primary">
+                    Connect more accounts
+                </Link>
+            ) : (
+                <Link to="/app/chats" className="btn btn-primary">
+                    Continue to chats
+                </Link>
+            )}
         </div>
     )
 }
