@@ -124,7 +124,7 @@ export function FriendsTab() {
 
     useIntroJs({
         key: "done-intro",
-        start: true,
+        start: data?.friends.length,
         steps: [
             {
                 element: "img.me",
