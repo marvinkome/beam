@@ -72,9 +72,7 @@ export function useGoogleLogin(options: LoginOptions) {
                     return options.onAuthCb()
                 } else {
                     // if user is signing in
-                    return history.push(
-                        options.loginType === "login" ? "/app/chats" : "/app/onboarding"
-                    )
+                    return history.push("/app/chats")
                 }
             }
 
@@ -102,9 +100,7 @@ export function useGoogleLogin(options: LoginOptions) {
                     return options.onAuthCb()
                 } else {
                     // if user is signing in
-                    return history.push(
-                        options.loginType === "login" ? "/app/chats" : "/app/onboarding"
-                    )
+                    return history.push("/app/onboarding")
                 }
             }
         } else {
