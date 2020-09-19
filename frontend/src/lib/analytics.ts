@@ -37,8 +37,8 @@ export function trackLinks() {
     }
 }
 
-export function trackEvent(event: string, props?: any) {
-    if (MIXPANEL_ID) mixpanel.track(event, props)
+export function trackEvent(event: string, props?: any, forMixpanel = true) {
+    if (MIXPANEL_ID && forMixpanel) mixpanel.track(event, props)
     ReactGA.event({ action: event, category: props?.category || "User", label: props?.label })
 }
 

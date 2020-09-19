@@ -35,6 +35,15 @@ export function useGoogleLogin(options: LoginOptions) {
     `)
 
     const onGoogleLoginSuccess = async (googleResp: any) => {
+        trackEvent(
+            `Google auth successful - ${options.loginType}`,
+            {
+                category: "Auth",
+                label: options.loginType,
+            },
+            false
+        )
+
         const stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
 
         // get access token from google
