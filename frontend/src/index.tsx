@@ -3,8 +3,18 @@ import ReactDOM from "react-dom"
 import * as serviceWorker from "lib/serviceWorker"
 import App from "pages"
 
+import * as Sentry from "@sentry/react"
+import { Integrations } from "@sentry/tracing"
+
 import "intro.js/introjs.css"
 import "styles/index.scss"
+
+// setup sentry
+Sentry.init({
+    dsn: "https://fc9d104893984167822c55e29543a67f@o450307.ingest.sentry.io/5434675",
+    integrations: [new Integrations.BrowserTracing()],
+    tracesSampleRate: 1.0,
+})
 
 ReactDOM.render(<App />, document.getElementById("root"))
 
