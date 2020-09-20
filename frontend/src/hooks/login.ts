@@ -122,6 +122,13 @@ export function useGoogleLogin(options: LoginOptions) {
         clientId: GOOGLE_CLIENT_ID,
         scope: "https://www.googleapis.com/auth/youtube.readonly",
         onSuccess: onGoogleLoginSuccess,
+        onRequest: () => {
+            Sentry.addBreadcrumb({
+                category: options.loginType,
+                message: "Google auth request started",
+                level: Sentry.Severity.Info,
+            })
+        },
         onFailure: (resp) => {
             console.error(resp)
             switch (resp.error) {
@@ -133,7 +140,7 @@ export function useGoogleLogin(options: LoginOptions) {
                     break
             }
 
-            Sentry.captureMessage(`Google auth failed - ${resp.error}`)
+            Sentry.captureMessage(resp.error)
         },
     })
 
