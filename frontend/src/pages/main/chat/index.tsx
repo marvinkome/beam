@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react"
 import React, { useEffect } from "react"
 import _sortBy from "lodash.sortby"
 import { useQuery, gql, useMutation } from "@apollo/client"
@@ -5,7 +6,6 @@ import { useParams } from "react-router-dom"
 import { formatDate, getProfileImage } from "lib/helpers"
 import { ChatUi } from "components/chat"
 import { toast } from "react-toastify"
-import { trackError } from "lib/analytics"
 
 /* === GQL DOCS === */
 const DATA_QUERY = gql`
@@ -161,7 +161,7 @@ function useSendMessageToServer() {
 
             if (!data.sendMessage.success) {
                 toast.dark("Error sending message")
-                trackError(data.sendMessage.message)
+                Sentry.captureMessage(data.sendMessage.message)
                 return
             }
 

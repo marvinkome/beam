@@ -1,6 +1,6 @@
+import * as Sentry from "@sentry/react"
 import axios, { AxiosInstance } from "axios"
 import { GOOGLE_CLIENT_ID } from "./keys"
-import { trackError } from "./analytics"
 
 class ConnectAccount {
     private accessToken: string
@@ -79,7 +79,7 @@ export class ConnectYoutubeAccount extends ConnectAccount {
 
             return resp?.data
         } catch (err) {
-            trackError(`Error getting youtube data - ${err.message}`)
+            Sentry.captureException(err)
             return {}
         }
     }
@@ -135,7 +135,7 @@ export class ConnectRedditAccount extends ConnectAccount {
 
             return resp?.data
         } catch (err) {
-            trackError(`Error getting reddit data  - ${err.message}`)
+            Sentry.captureException(err)
             return {}
         }
     }
@@ -188,7 +188,7 @@ export class ConnectSpotifyAccount extends ConnectAccount {
             const resp = await this.axios?.get(link || "/me/top/artists")
             return resp?.data
         } catch (err) {
-            trackError(`Error getting spotify data - ${err.message}`)
+            Sentry.captureException(err)
             return {}
         }
     }

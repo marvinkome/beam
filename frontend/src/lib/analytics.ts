@@ -1,5 +1,6 @@
 import ReactGA from "react-ga"
 import mixpanel from "mixpanel-browser"
+import * as Sentry from "@sentry/react"
 import { GA_TRACKING_ID, MIXPANEL_ID } from "./keys"
 
 // INIT
@@ -15,6 +16,7 @@ export function initAnalytics() {
 
 // SETUP
 export function setUser(userId: string, props?: any) {
+    Sentry.setUser({ id: userId })
     ReactGA.set({
         user_id: userId,
     })

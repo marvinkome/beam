@@ -1,10 +1,10 @@
+import * as Sentry from "@sentry/react"
 import React, { useState, useEffect } from "react"
 import sortBy from "lodash.sortby"
 import { ChatUi } from "components/chat"
 import { useParams, useHistory } from "react-router-dom"
 import { useQuery, gql, useMutation } from "@apollo/client"
 import { getProfileImage, pluralize } from "lib/helpers"
-import { trackError } from "lib/analytics"
 import { useJoinGroup, useLeaveGroup } from "hooks/groups"
 import { toast } from "react-toastify"
 
@@ -156,7 +156,7 @@ function useSendMessageToServer() {
 
             if (!data.sendMessageToGroup.success) {
                 toast.dark("Error sending message")
-                trackError(data.sendMessageToGroup.message)
+                Sentry.captureMessage(data.sendMessageToGroup.message)
                 return
             }
 

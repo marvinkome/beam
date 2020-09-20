@@ -1,9 +1,10 @@
+import * as Sentry from "@sentry/react"
 import { useEffect, useState, useCallback } from "react"
 import { gql, useMutation, useQuery } from "@apollo/client"
 import { useHistory } from "react-router-dom"
 import { AUTH_TOKEN } from "lib/keys"
 import { isMobile, getGeolocation } from "lib/helpers"
-import { setUser, trackError } from "lib/analytics"
+import { setUser } from "lib/analytics"
 import { toast } from "react-toastify"
 import { messaging } from "lib/notifications"
 
@@ -60,7 +61,7 @@ export function useAppSetup() {
             await setLocation({ variables: { location } })
         } catch (e) {
             toast.dark("You denied location access")
-            trackError(`Location Error - ${e}`)
+            Sentry.captureException(e)
             return setAction("request-permission")
         }
     }, [setLocation])
@@ -72,7 +73,7 @@ export function useAppSetup() {
                 setNotificationToken({ variables: { token } })
             }
         } catch (e) {
-            trackError(e)
+            Sentry.captureException(e)
         }
     }, [data, setNotificationToken])
 

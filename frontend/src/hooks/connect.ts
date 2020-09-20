@@ -1,4 +1,5 @@
 import PopupWindow from "lib/popupWindow"
+import * as Sentry from "@sentry/react"
 import { useGoogleLogin as _useGoogleLogin, GoogleLoginResponse } from "react-google-login"
 import { useMutation, gql } from "@apollo/client"
 import { startLoader } from "components"
@@ -10,7 +11,7 @@ import {
 import { toast } from "react-toastify"
 import { GOOGLE_CLIENT_ID, REDDIT_CLIENT_ID, APP_URL, SPOTIFY_CLIENT_ID } from "lib/keys"
 import { toQuery } from "lib/helpers"
-import { trackError, trackEvent } from "lib/analytics"
+import { trackEvent } from "lib/analytics"
 
 export function useConnectAccountMutation() {
     const [connectAccount] = useMutation(gql`
@@ -30,7 +31,7 @@ export function useYouTubeConnect(onCompleted: (completed: boolean) => void) {
 
         if (!token) {
             toast.error("Failed to connect your YouTube account. Please try again")
-            trackError("Failed to connect with Youtube")
+            Sentry.captureMessage("Failed to connect with Youtube")
             onCompleted(false)
             return
         }
@@ -73,7 +74,7 @@ export function useRedditConnect(onCompleted: (completed: boolean) => void) {
 
         if (!token) {
             toast.dark("Failed to connect your Reddit account. Please try again")
-            trackError("Failed to connect with Reddit")
+            Sentry.captureMessage("Failed to connect with Reddit")
             onCompleted(false)
 
             return
@@ -119,7 +120,7 @@ export function useRedditConnect(onCompleted: (completed: boolean) => void) {
             }
         )
             ?.then((data) => onRedditLogin(data))
-            .catch(() => trackError("Authentication with Reddit failed"))
+            .catch(() => Sentry.captureMessage("Authentication with Reddit failed"))
     }
 
     return signIn
@@ -133,7 +134,7 @@ export function useSpotifyConnect(onCompleted: (completed: boolean) => void) {
 
         if (!token) {
             toast.dark("Failed to connect your Spotify account. Please try again")
-            trackError("Failed to connect with Spotify")
+            Sentry.captureMessage("Failed to connect with Spotify")
             onCompleted(false)
 
             return
@@ -175,7 +176,7 @@ export function useSpotifyConnect(onCompleted: (completed: boolean) => void) {
             width: 600,
         })
             ?.then((data) => onSpotifyLogin(data))
-            .catch(() => trackError("Authentication with Spotify failed"))
+            .catch(() => Sentry.captureMessage("Authentication with Spotify failed"))
     }
 
     return signIn

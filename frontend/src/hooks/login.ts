@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react"
 import { useHistory } from "react-router-dom"
 import { useGoogleLogin as useReactGoogleLogin } from "react-google-login"
 import { useMutation, gql } from "@apollo/client"
@@ -5,7 +6,7 @@ import { toast } from "react-toastify"
 import { startLoader } from "components/loader"
 import { ConnectYoutubeAccount } from "lib/connect-account"
 import { AUTH_TOKEN, GOOGLE_CLIENT_ID } from "lib/keys"
-import { trackError, setUser, trackEvent } from "lib/analytics"
+import { setUser, trackEvent } from "lib/analytics"
 import { useConnectAccountMutation } from "./connect"
 
 type LoginOptions = {
@@ -35,14 +36,11 @@ export function useGoogleLogin(options: LoginOptions) {
     `)
 
     const onGoogleLoginSuccess = async (googleResp: any) => {
-        trackEvent(
-            `Google auth successful - ${options.loginType}`,
-            {
-                category: "Auth",
-                label: options.loginType,
-            },
-            false
-        )
+        Sentry.addBreadcrumb({
+            category: options.loginType,
+            message: "Google auth successful",
+            level: Sentry.Severity.Info,
+        })
 
         const stopLoader = startLoader("fullscreen", "Setting up your Beam account.")
 
@@ -50,7 +48,7 @@ export function useGoogleLogin(options: LoginOptions) {
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
             toast.dark("Failed to authenticate with Google")
-            trackError(`Authentication with Google failed - Access token not found`)
+            Sentry.captureMessage(`Authentication with Google failed - Access token not found`)
             return
         }
 
@@ -113,9 +111,8 @@ export function useGoogleLogin(options: LoginOptions) {
                 }
             }
         } else {
-            trackError(`User auth failed - ${message}`)
-            console.log(message)
             toast.dark(`Error signing up - ${message}`)
+            Sentry.captureMessage(`User auth failed - ${message}`)
             stopLoader && stopLoader()
         }
     }
@@ -136,7 +133,7 @@ export function useGoogleLogin(options: LoginOptions) {
                     break
             }
 
-            trackError(`Google auth failed - ${resp.error}`)
+            Sentry.captureMessage(`Google auth failed - ${resp.error}`)
         },
     })
 
