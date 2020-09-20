@@ -13,7 +13,8 @@ import "styles/index.scss"
 Sentry.init({
     dsn: "https://fc9d104893984167822c55e29543a67f@o450307.ingest.sentry.io/5434675",
     integrations: [new Integrations.BrowserTracing()],
-    tracesSampleRate: 1.0,
+    environment: process.env.NODE_ENV,
+    tracesSampleRate: 0.5,
 })
 
 ReactDOM.render(<App />, document.getElementById("root"))
