@@ -1,0 +1,118 @@
+exports[`Landing page > loads page <snapshot> #0`] = `
+<div class="landing-page">
+  <div class="header-container">
+    <nav class="public-navbar">
+      <div>
+        <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+      </div>
+    </nav>
+    <div class="header-grid">
+      <div class="text-grid">
+        <h1>Chat with friends in your city who share your interests</h1>
+        <div class="check-list">
+          <div class="check">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="icon"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+              ></path>
+            </svg>
+            <p>
+              Find people with similar interests on YouTube, Spotify, and Reddit
+            </p>
+          </div>
+          <div class="check">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="icon"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+              ></path>
+            </svg>
+            <p>Join a local group for your YouTube subscriptions</p>
+          </div>
+          <div class="check">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="icon"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+              ></path>
+            </svg>
+            <p>No Ads</p>
+          </div>
+          <div class="check">
+            <svg
+              stroke="currentColor"
+              fill="currentColor"
+              stroke-width="0"
+              viewBox="0 0 512 512"
+              class="icon"
+              height="1em"
+              width="1em"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M173.898 439.404l-166.4-166.4c-9.997-9.997-9.997-26.206 0-36.204l36.203-36.204c9.997-9.998 26.207-9.998 36.204 0L192 312.69 432.095 72.596c9.997-9.997 26.207-9.997 36.204 0l36.203 36.204c9.997 9.997 9.997 26.206 0 36.204l-294.4 294.401c-9.998 9.997-26.207 9.997-36.204-.001z"
+              ></path>
+            </svg>
+            <p>No blue theme</p>
+          </div>
+        </div>
+        <div class="header-cta">
+          <button class="btn btn-primary disabled">Sign up with Google</button>
+          <p>
+            Already have an account?
+            <button class="link-button disabled">Log In</button>
+          </p>
+        </div>
+      </div>
+      <div class="image-grid">
+        <img
+          alt="Mobile screenshot of beam"
+          src="/static/media/screenshot.67cf2ba9.png"
+        />
+      </div>
+    </div>
+  </div>
+  <footer class="public-footer">
+    <p class="feedback-text">
+      If you’ve got any questions, feedback or improvement ideas, we’ve created
+      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
+      where you can tell us about it.
+    </p>
+    <div class="grid-container-footer">
+      <div class="grid-1-footer">
+        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
+      </div>
+      <div class="grid-2-footer">
+        <p>
+          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
+`;

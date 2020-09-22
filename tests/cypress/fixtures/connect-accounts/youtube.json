@@ -1,0 +1,192 @@
+{
+    "kind": "youtube#SubscriptionListResponse",
+    "etag": "tRrgO2zCeJNoXfI64ph1hHmVk5o",
+    "pageInfo": {
+        "totalResults": 7,
+        "resultsPerPage": 50
+    },
+    "items": [
+        {
+            "kind": "youtube#subscription",
+            "etag": "zEXxenIM_FvLzalar7yPJLY_tI0",
+            "id": "MY1BgysluqYFmDKdEc8rMzbjw2wPGbaF_hezq56mshU",
+            "snippet": {
+                "publishedAt": "2020-08-05T15:58:38.449000Z",
+                "title": "Casually Explained",
+                "description": "If you're looking for the answers to life's questions and Wikipedia was under scheduled maintenance, look no further, Casually Explained is here to help.\nhttps://www.twitch.tv/casuallyexplained",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UCr3cBLTYmIK9kY0F_OdFWFQ"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-szMs8icRWHI/AAAAAAAAAAI/AAAAAAAAAAA/LRgrc41CiXA/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-szMs8icRWHI/AAAAAAAAAAI/AAAAAAAAAAA/LRgrc41CiXA/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-szMs8icRWHI/AAAAAAAAAAI/AAAAAAAAAAA/LRgrc41CiXA/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "youtube#subscription",
+            "etag": "x0eMfLquV8Rffu5w_y02b3BL3r4",
+            "id": "MY1BgysluqYFmDKdEc8rM4wnx-9jLJ_lgEBXGmdA7Gw",
+            "snippet": {
+                "publishedAt": "2020-09-02T00:09:12.409000Z",
+                "title": "Hussein Nasser",
+                "description": "Join me as we discuss various software engineering topics with examples and adding fun elements to it. We always try to learn by example here in this educational Youtube channel which we believe is the right way to learn. I love Software engineering (especially the backend) and I strive to be a better software engineer every day. Join me on this journey and let us learn together.  \n\nAll opinions, suggestions, and tips I provide in all of this channel's content are my own. Information provided is for educational purposes only. \n\nStay awesome!\nHussein Nasser,\nhttp://www.husseinnasser.com\nFeel free to shoot me an email h@husseinnasser.com\ntwitter: @hnasr",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UC_ML5xP23TOWKUcc-oAE_Eg"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-zD_ahfPupdA/AAAAAAAAAAI/AAAAAAAAAAA/Y5OZh5FBi_c/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-zD_ahfPupdA/AAAAAAAAAAI/AAAAAAAAAAA/Y5OZh5FBi_c/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-zD_ahfPupdA/AAAAAAAAAAI/AAAAAAAAAAA/Y5OZh5FBi_c/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "youtube#subscription",
+            "etag": "sOeyJIPBu50BFFSin0R9FsOW_ME",
+            "id": "MY1BgysluqYFmDKdEc8rM_6InnIHJ0yjAu1bMNcKwPE",
+            "snippet": {
+                "publishedAt": "2020-02-01T09:07:47.397000Z",
+                "title": "twenty one pilots",
+                "description": "welcome to the official twenty one pilots YouTube channel. \n\n\nstay strong. live on. pass on these songs.\n\n\nsubscribe for more official content from twenty one pilots: https://top.lnk.to/subscribe",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UCBQZwaNPFfJ1gZ1fLZpAEGw"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-Pr2108j6qKs/AAAAAAAAAAI/AAAAAAAAAAA/-cia2SakDYA/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-Pr2108j6qKs/AAAAAAAAAAI/AAAAAAAAAAA/-cia2SakDYA/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-Pr2108j6qKs/AAAAAAAAAAI/AAAAAAAAAAA/-cia2SakDYA/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "youtube#subscription",
+            "etag": "85B5MsuNoJv2997HziSiJmqYGZg",
+            "id": "MY1BgysluqYFmDKdEc8rMzj4wCRcn07g1fmk_UqNN6Y",
+            "snippet": {
+                "publishedAt": "2019-12-22T12:23:27.823000Z",
+                "title": "Vox",
+                "description": "Vox helps you cut through the noise and understand what's driving events in the headlines and in our lives.\n\nVox video is Joe Posner, Mona Lalwani, Valerie Lapinski, Dion Lee, Ashley Sather, Joss Fong, Estelle Caswell, Adam Freelander, Kim Mas, Coleman Lowndes, Christophe Haubursin, Mac Schneider, Sam Ellis, Ranjani Chakraborty, Liz Scheltens, Phil Edwards, Bridgett Henwood, Rajaa Elidissi, Christina Thornell, Danush Parvaneh, Madeline Marshall, Laura Bult and Melissa Hirsch, with contributions from Johnny Harris and engagement support from Agnes Mazur and Blair Hickman. \n\nIf you want to help Vox video create more ambitious explainers and series that teach you things about the world, become a member of the Vox Video Lab: http://www.vox.com/join \n\nCheck out our FAQ on permissions and licensing of our videos: https://www.voxmedia.com/pages/licensing\n✉️ Write us: voxvideo@vox.com\n✉️ For questions about the Video Lab: videolab@voxmedia.com",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UCLXo7UDZvByw2ixzpQCufnA"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-moy7q66uDVs/AAAAAAAAAAI/AAAAAAAAAAA/3kiAD7O0Q_E/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-moy7q66uDVs/AAAAAAAAAAI/AAAAAAAAAAA/3kiAD7O0Q_E/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-moy7q66uDVs/AAAAAAAAAAI/AAAAAAAAAAA/3kiAD7O0Q_E/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "youtube#subscription",
+            "etag": "NKqGIR-VhAHeQmk0rQYi1twHNEw",
+            "id": "MY1BgysluqYFmDKdEc8rM2aQIa_XViCMprNlwDeSOkI",
+            "snippet": {
+                "publishedAt": "2019-09-09T10:26:54.992000Z",
+                "title": "Kurzgesagt – In a Nutshell",
+                "description": "Videos explaining things with optimistic nihilism. \n\nWe are a small team who want to make science look beautiful. Because it is beautiful. \n\nCurrently we make one animation video per month. Follow us on Twitter, Facebook to get notified when a new one comes out.\n\nFAQ:\n \n- We do the videos with After Effects and Illustrator.",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UCsXVk37bltHxD1rDPwtNM8Q"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-UwENvFjc4vI/AAAAAAAAAAI/AAAAAAAAAAA/04dXvZ_jl0I/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-UwENvFjc4vI/AAAAAAAAAAI/AAAAAAAAAAA/04dXvZ_jl0I/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-UwENvFjc4vI/AAAAAAAAAAI/AAAAAAAAAAA/04dXvZ_jl0I/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "youtube#subscription",
+            "etag": "BAYj-Ie8fme4taY6aKRQuIs4JGA",
+            "id": "MY1BgysluqYFmDKdEc8rM63d11NEvyXK5jNIyo_Zpko",
+            "snippet": {
+                "publishedAt": "2020-09-06T13:51:41.451000Z",
+                "title": "TheBrokenMachine",
+                "description": "Optimised for Battlefield 5, Battlefield 1 and much more! TheBrokenMachine is my name, come say hello - livestreams here almost everyday 2pm UK time! \n\nGet 10% off KontrolFreeks with code BROKENMACHINE http://www.kontrolfreek.com/?a_aid=BROKENMACHINE\n\nChannel Thumbnail includes image by: https://twitter.com/Shadow6ix",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UC82hr_TycIBi_BvEnWVoGIw"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-RYKLbps6adI/AAAAAAAAAAI/AAAAAAAAAAA/85sqVgcTFSs/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-RYKLbps6adI/AAAAAAAAAAI/AAAAAAAAAAA/85sqVgcTFSs/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-RYKLbps6adI/AAAAAAAAAAI/AAAAAAAAAAA/85sqVgcTFSs/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        },
+        {
+            "kind": "youtube#subscription",
+            "etag": "mdHLEJUj9VrwRMZlADe0xLwUowo",
+            "id": "MY1BgysluqYFmDKdEc8rMzrGHbd7kT2whL65nqS61SU",
+            "snippet": {
+                "publishedAt": "2019-07-17T11:29:10.975000Z",
+                "title": "JohnnyTsunami01",
+                "description": "Hey I'm JohnnyTsunami01 and I specialize in Fifa 17 videos that help improve viewer's skills at the game while entertaining them. I make in-depth Fifa 17 tutorials and tip videos to improve your Fifa 17 comprehension and skill. Everything from Fifa 17 Top 5 videos, Fifa 17 ultimate team series, and Fifa 17 formation review/guides can be found on this channel. Make sure to subscribe now to improve your game",
+                "resourceId": {
+                    "kind": "youtube#channel",
+                    "channelId": "UC5YAzJs9afnc_Gzc8dWRdRQ"
+                },
+                "channelId": "UCt2qIbAC23aD5kTfRzln3LQ",
+                "thumbnails": {
+                    "default": {
+                        "url": "https://yt3.ggpht.com/-NbcNCOW6HQQ/AAAAAAAAAAI/AAAAAAAAAAA/zYiy37ckBBw/s88-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "medium": {
+                        "url": "https://yt3.ggpht.com/-NbcNCOW6HQQ/AAAAAAAAAAI/AAAAAAAAAAA/zYiy37ckBBw/s240-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    },
+                    "high": {
+                        "url": "https://yt3.ggpht.com/-NbcNCOW6HQQ/AAAAAAAAAAI/AAAAAAAAAAA/zYiy37ckBBw/s800-c-k-no-mo-rj-c0xffffff/photo.jpg"
+                    }
+                }
+            }
+        }
+    ]
+}

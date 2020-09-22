@@ -24,6 +24,7 @@ export function useGoogleLogin(options: LoginOptions) {
         mutation GoogleLogin($token: String!, $inviteToken: String) {
             googleLogin(token: $token, inviteToken: $inviteToken) {
                 success
+                message
                 token
                 user {
                     id
@@ -109,6 +110,10 @@ export function useGoogleLogin(options: LoginOptions) {
                     // if user is signing in
                     return history.push("/app/onboarding")
                 }
+            } else {
+                stopLoader && stopLoader()
+                toast.dark("Failed to connect youtube account")
+                Sentry.captureMessage(`Saving youtube subsriptions failed`)
             }
         } else {
             toast.dark(`Error signing up - ${message}`)
@@ -133,7 +138,7 @@ export function useGoogleLogin(options: LoginOptions) {
             console.error(resp)
             switch (resp.error) {
                 case "popup_closed_by_user":
-                    toast.dark("Please complete sign up before closing the tab")
+                    toast.dark("Please complete Google login before closing the tab")
                     break
                 case "access_denied":
                     toast.dark("You need to give access to continue on Beam")

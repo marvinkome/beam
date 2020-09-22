@@ -5,6 +5,7 @@
     "screenshotOnRunFailure": false,
     "viewportWidth": 360,
     "viewportHeight": 760,
+    "userAgent": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Mobile Safari/537.36",
     "env": {
         "serverUrl": "http://localhost:5055"
     }
