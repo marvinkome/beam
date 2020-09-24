@@ -1,5 +1,5 @@
 {
-    "baseUrl": "http://localhost:3033",
+    "baseUrl": "http://localhost:3000",
     "ignoreTestFiles": ["**/__snapshots__/*", "**/__image_snapshots__/*"],
     "video": false,
     "screenshotOnRunFailure": false,
@@ -7,6 +7,9 @@
     "viewportHeight": 760,
     "userAgent": "Mozilla/5.0 (Linux; Android 8.0.0; Pixel 2 XL Build/OPD1.170816.004) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.125 Mobile Safari/537.36",
     "env": {
-        "serverUrl": "http://localhost:5055"
+        "serverUrl": "http://localhost:5055",
+        "codeCoverage": {
+            "url": "http://localhost:5055/__coverage__"
+        }
     }
 }
