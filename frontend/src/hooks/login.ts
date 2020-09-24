@@ -20,9 +20,9 @@ export function useGoogleLogin(options: LoginOptions) {
     const connectAccount = useConnectAccountMutation()
 
     // create api login mutation function
-    const [googleLogin] = useMutation(gql`
-        mutation GoogleLogin($token: String!, $inviteToken: String) {
-            googleLogin(token: $token, inviteToken: $inviteToken) {
+    const [loginMutation] = useMutation(gql`
+        mutation Login($data: LoginInput, $inviteToken: String) {
+            login(authData: $data, inviteToken: $inviteToken) {
                 success
                 message
                 token
@@ -49,20 +49,26 @@ export function useGoogleLogin(options: LoginOptions) {
         const accessToken = googleResp.accessToken || googleResp.wc.access_token
         if (!accessToken) {
             toast.dark("Failed to authenticate with Google")
-            Sentry.captureMessage(`Authentication with Google failed - Access token not found`)
+            Sentry.captureMessage("Authentication with Google failed - Access token not found")
             return
         }
 
         // authenticate user
-        const loginResp = await googleLogin({
+        const loginResp = await loginMutation({
             variables: {
-                token: accessToken,
                 inviteToken: options.inviteToken,
+                data: {
+                    authType: "googleId",
+                    id: googleResp.profileObj.googleId,
+                    email: googleResp.profileObj.email,
+                    name: `${googleResp.profileObj.givenName} ${googleResp.profileObj.familyName}`,
+                    picture: googleResp.profileObj.imageUrl,
+                },
             },
         })
 
         // destructure response
-        const { token, success, message, user } = loginResp.data?.googleLogin
+        const { token, success, message, user } = loginResp.data?.login
         if (success) {
             // setup user
             localStorage.setItem(AUTH_TOKEN, token)

@@ -1,0 +1,1897 @@
+exports[`Public pages tests > loads terms page <snapshot> #0`] = `
+<div class="terms">
+  <nav class="public-navbar">
+    <div>
+      <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+    </div>
+  </nav>
+  <div class="text-container">
+    <div class="text-box">
+      <h1>Terms and Conditions</h1>
+      <p><strong>Last updated 5th August 2020</strong></p>
+      <p><strong>1.&nbsp;&nbsp;Agreement to Terms</strong></p>
+      <p>
+        1.1&nbsp;These Terms and Conditions constitute a legally binding
+        agreement made between you, whether personally or on behalf of an entity
+        (<strong>you</strong>), and <strong>Beam</strong>,&nbsp;located
+        at&nbsp;<strong
+          >3 Ayinke street,&nbsp;Yaba, Lagos&nbsp;100001 Nigeria</strong
+        >&nbsp;(<strong>we</strong>, <strong>us</strong>), concerning your
+        access to and use of the
+        <strong
+          >Beam (<a href="http://usebeam.chat">http://usebeam.chat</a>)</strong
+        >&nbsp;website as well as any related applications (the
+        <strong>Site</strong>).
+      </p>
+      <p>
+        The Site provides the following services: An online platform where you
+        can chat with others who share your interests. You agree that by
+        accessing the Site and/or Services, you have read, understood, and agree
+        to be bound by all of these Terms and Conditions.
+      </p>
+      <p>
+        <strong
+          >If you do not agree with all of these Terms and Conditions, then you
+          are prohibited from using the Site and Services and you must
+          discontinue use immediately</strong
+        >. We recommend that you print a copy of these Terms and Conditions for
+        future reference.
+      </p>
+      <p>
+        1.2&nbsp;The supplemental policies set out in Section 1.7 below, as well
+        as any supplemental terms and condition or documents that may be posted
+        on the Site from time to time, are expressly incorporated by reference.
+      </p>
+      <p>
+        1.3&nbsp;We may make changes to these Terms and Conditions at any time.
+        The updated version of these Terms and Conditions will be indicated by
+        an updated “Revised” date and the updated version will be effective as
+        soon as it is accessible. You are responsible for reviewing these Terms
+        and Conditions to stay informed of updates. Your continued use of the
+        Site represents that you have accepted such changes.
+      </p>
+      <p>
+        1.4&nbsp;We may update or change the Site from time to time to reflect
+        changes to our products, our users' needs and/or our business
+        priorities.
+      </p>
+      <p>
+        1.5&nbsp;Our site is directed to people residing in the United States of
+        America. The information provided on the Site is not intended for
+        distribution to or use by any person or entity in any jurisdiction or
+        country where such distribution or use would be contrary to law or
+        regulation or which would subject us to any registration requirement
+        within such jurisdiction or country.
+      </p>
+      <p>
+        1.6&nbsp;The Site is intended for users who are at least 13 years
+        old.&nbsp;If you are under the age of 13, you are not permitted to
+        register for the Site or use the Services without parental permission.
+      </p>
+      <p>
+        1.7&nbsp;Additional policies which also apply to your use of the Site
+        include:
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Our Privacy Notice
+        <a href="https://usebeam.chat/privacy-policy">here</a>, which sets out
+        the terms on which we process any personal data we collect from you, or
+        that you provide to us. By using the Site, you consent to such
+        processing and you warrant that all data provided by you is accurate.
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Our Acceptable Use Policy
+        <a href="https://usebeam.chat/acceptable-use"
+          >https://usebeam.chat/acceptable-use</a
+        >, which sets out the permitted uses and prohibited uses of the Site.
+        When using the Site, you must comply with this Acceptable Use Policy.
+      </p>
+      <p>&nbsp;</p>
+      <p><strong>2.</strong>&nbsp;&nbsp;<strong>Acceptable Use</strong></p>
+      <p>
+        2.1&nbsp;Our full Acceptable Use Policy
+        <a href="https://usebeam.chat/acceptable-use"
+          >https://usebeam.chat/acceptable-use</a
+        >, sets out all the permitted uses and prohibited uses of this site.
+      </p>
+      <p>
+        2.2&nbsp;You may not access or use the Site for any purpose other than
+        that for which we make the site and our services available. The Site may
+        not be used in connection with any commercial endeavors except those
+        that are specifically endorsed or approved by us.
+      </p>
+      <p>2.3&nbsp;As a user of this Site, you agree not to:</p>
+      <p>
+        <strong>●</strong>&nbsp;Systematically retrieve data or other content
+        from the Site to a compile database or directory without written
+        permission from us
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Make any unauthorized use of the Site, including
+        collecting usernames and/or email addresses of users to send unsolicited
+        email or creating user accounts under false pretenses
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Use the Site to advertise or sell goods and
+        services
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Circumvent, disable, or otherwise interfere with
+        security-related features of the Site, including features that prevent
+        or restrict the use or copying of any content or enforce limitations on
+        the use
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Engage in unauthorized framing of or linking to
+        the Site
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Trick, defraud, or mislead us and other users,
+        especially in any attempt to learn sensitive account information such as
+        user passwords
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Make improper use of our support services, or
+        submit false reports of abuse or misconduct
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Engage in any automated use of the system, such
+        as using scripts to send comments or messages, or using any data mining,
+        robots, or similar data gathering and extraction tools
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Interfere with, disrupt, or create an undue
+        burden on the Site or the networks and services connected to the Site
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Attempt to impersonate another user or person,
+        or use the username of another user
+      </p>
+      <p><strong>●</strong>&nbsp;Sell or otherwise transfer your profile</p>
+      <p>
+        <strong>●</strong>&nbsp;Use any information obtained from the Site in
+        order to harass, abuse, or harm another person
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Use the Site or our content as part of any
+        effort to compete with us or to create a revenue-generating endeavor or
+        commercial enterprise
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Decipher, decompile, disassemble, or reverse
+        engineer any of the software comprising or in any way making up a part
+        of the Site
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Attempt to access any portions of the Site that
+        you are restricted from accessing
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Harass, annoy, intimidate, or threaten any of
+        our employees, agents, or other users
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Delete the copyright or other proprietary rights
+        notice from any of the content
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Copy or adapt the Site’s software, including but
+        not limited to Flash, PHP, HTML, JavaScript, or other code
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Upload or transmit (or attempt to upload or to
+        transmit) viruses, Trojan horses, or other material that interferes with
+        any party’s uninterrupted use and enjoyment of the Site, or any material
+        that acts as a passive or active information collection or transmission
+        mechanism
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Use, launch, or engage in any automated use of
+        the system, such as using scripts to send comments or messages, robots,
+        scrapers, offline readers, or similar data gathering and extraction
+        tools
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Disparage, tarnish, or otherwise harm, in our
+        opinion, us and/or the Site
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Use the Site in a manner inconsistent with any
+        applicable laws or regulations
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Threaten users with negative feedback or
+        offering services solely to give positive feedback to users
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Misrepresent experience, skills, or information
+        about a User
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Advertise products or services not intended by
+        us
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;Falsely imply a relationship with us or another
+        company with whom you do not have a relationship
+      </p>
+      <p><strong>3. Information you provide to us</strong></p>
+      <p>3.1&nbsp;You represent and warrant that:</p>
+      <p>
+        (a) all registration information you submit will be true, accurate,
+        current, and complete and relate to you and not a third party; (b) you
+        will maintain the accuracy of such information and promptly update such
+        information as necessary; (c) you will keep your password confidential
+        and will be responsible for all use of your password and account; (d)
+        you have the legal capacity and you agree to comply with these Terms and
+        Conditions; and (e) you are not a minor in the jurisdiction in which you
+        reside, or if a minor, you have received parental permission to use the
+        Site.
+      </p>
+      <p>
+        If you know or suspect that anyone other than you knows your user
+        information (such as an identification code or user name) and/or
+        password you must promptly notify us at team@usebeam.chat.
+      </p>
+      <p>
+        3.2&nbsp;If you provide any information that is untrue, inaccurate, not
+        current or incomplete, we may suspend or terminate your account. We may
+        remove or change a user name you select if we determine that such user
+        name is inappropriate.
+      </p>
+      <p>
+        3.3&nbsp;As part of the functionality of the Site, you may link your
+        account with online accounts you may have with third party service
+        providers (each such account, a <strong>Third Party Account</strong>) by
+        either:
+      </p>
+      <p>
+        (a) providing your Third Party Account login information through the
+        Site; or (b) allowing us to access your Third Party Account, as is
+        permitted under the applicable terms and conditions that govern your use
+        of each Third Party Account.
+      </p>
+      <p>
+        You represent that you are entitled to disclose your Third Party Account
+        login information to us and/or grant us access to your Third Party
+        Account without breach by you of any of the terms and conditions that
+        govern your use of the applicable Third Party Account and without
+        obligating us to pay any fees or making us subject to any usage
+        limitations imposed by such third party service providers.
+      </p>
+      <p>
+        3.4&nbsp;By granting us access to any Third Party Accounts, you
+        understand that (a) we may access, make available and store (if
+        applicable) any content that you have provided to and stored in your
+        Third Party Account (the “<strong>Social Network Content</strong>”) so
+        that it is available on and through the Site via your account, including
+        without limitation any friend lists;&nbsp;and (b) we may submit and
+        receive additional information to your Third Party Account to the extent
+        you are notified when you link your account with the Third Party
+        Account.
+      </p>
+      <p>
+        Depending on the Third Party Accounts you choose and subject to the
+        privacy settings that you have set in such Third Party Accounts,
+        personally identifiable information that you post to your Third Party
+        Accounts may be available on and through your account on the Site.
+        Please note that if a Third Party Account or associated service becomes
+        unavailable or our access to such Third Party Account is terminated by
+        the third party service provider, then Social Network Content may no
+        longer be available on and through the Site.
+      </p>
+      <p>
+        You will have the ability to disable the connection between your account
+        on the Site and your Third Party Accounts at any time.
+        <strong
+          >Please note that your relationship with the third party service
+          providers associated with your third party accounts is governed solely
+          by your agreement(s) with such third party service providers.</strong
+        >
+        We make no effort to review any Social Network Content for any purpose,
+        including but not limited to, for accuracy, legality or
+        non-infringement, and we are not responsible for any Social Network
+        Content.
+      </p>
+      <p>
+        You acknowledge and agree that we may access your email address book
+        associated with a Third Party Account and your contacts list stored on
+        your mobile device or tablet computer solely for purposes of identifying
+        and informing you of those contacts who have also registered to use the
+        Site. At your email request to team@usebeam.chat or through your account
+        settings (if applicable), we will deactivate the connection between the
+        Site and your Third Party Account and attempt to delete any information
+        stored on our servers that was obtained through such Third Party
+        Account, except the username and profile picture that became associated
+        with your account.
+      </p>
+      <p><strong>4.</strong>&nbsp;&nbsp;**&nbsp;Content you provide to us**</p>
+      <p>
+        4.1&nbsp;There may be opportunities for you to post content to the Site
+        or send feedback to us (<strong>User Content</strong>). You understand
+        and agree that your User Content may be viewed by other users on the
+        Site, and that they may be able to see who has posted that User Content.
+      </p>
+      <p>
+        4.2&nbsp;<em
+          >You further agree that we can use your User Content for any other
+          purposes whatsoever in perpetuity without payment to you, and combine
+          your User Content with other content for use within the Site and
+          otherwise. We do not have to attribute your User Content to you</em
+        >.
+      </p>
+      <p>
+        4.3&nbsp;In posting User Content, including reviews or making contact
+        with other users of the Site you shall comply with our Acceptable Use
+        Policy
+        <a href="https://usebeam.chat/acceptable-use"
+          >https://usebeam.chat/acceptable-use</a
+        >.
+      </p>
+      <p>
+        4.4&nbsp;You warrant that any User Content does comply with our
+        Acceptable Use Policy, and you will be liable to us and indemnify us for
+        any breach of that warranty. This means you will be responsible for any
+        loss or damage we suffer as a result of your breach of this warranty.
+      </p>
+      <p>
+        4.5&nbsp;We have the right to remove any User Content you put on the
+        Site if, in our opinion, such User Content does not comply with the
+        Acceptable Use Policy.
+      </p>
+      <p>
+        4.6&nbsp;We are not responsible and accept no liability for any User
+        Content including any such content that contains incorrect information
+        or is defamatory or loss of User Content. We accept no obligation to
+        screen, edit or monitor any User Content but we reserve the right to
+        remove, screen and/or edit any User Content without notice and at any
+        time. User Content has not been verified or approved by us and the views
+        expressed by other users on the Site do not represent our views or
+        values.
+      </p>
+      <p>
+        4.7&nbsp;If you wish to complain about User Content uploaded by other
+        users please contact us at team@usebeam.chat.
+      </p>
+      <p><strong>5.&nbsp;Our content</strong></p>
+      <p>
+        5.1&nbsp;Unless otherwise indicated, the Site and Services including
+        source code, databases, functionality, software, website designs, audio,
+        video, text, photographs, and graphics on the Site (<strong
+          >Our Content</strong
+        >) are owned or licensed to us, and are protected by copyright and trade
+        mark laws.
+      </p>
+      <p>
+        5.2&nbsp;Except as expressly provided in these Terms and Conditions, no
+        part of the Site, Services or Our Content may be copied, reproduced,
+        aggregated, republished, uploaded, posted, publicly displayed, encoded,
+        translated, transmitted, distributed, sold, licensed, or otherwise
+        exploited for any commercial purpose whatsoever, without our express
+        prior written permission.
+      </p>
+      <p>
+        5.3&nbsp;Provided that you are eligible to use the Site, you are granted
+        a limited licence to access and use the Site and Our Content and to
+        download or print a copy of any portion of the Content to which you have
+        properly gained access solely for your personal, non-commercial use.
+      </p>
+      <p>
+        5.4&nbsp;You shall not (a) try to gain unauthorised access to the Site
+        or any networks, servers or computer systems connected to the Site;
+        and/or (b) make for any purpose including error correction, any
+        modifications, adaptions, additions or enhancements to the Site or Our
+        Content, including the modification of the paper or digital copies you
+        may have downloaded.
+      </p>
+      <p>
+        5.5&nbsp;We shall (a) prepare the Site and Our Content with reasonable
+        skill and care; and (b) use industry standard virus detection software
+        to try to block the uploading of content to the Site that contains
+        viruses.
+      </p>
+      <p>
+        5.6&nbsp;The content on the Site is provided for general information
+        only. It is not intended to amount to advice on which you should rely.
+        You must obtain professional or specialist advice before taking, or
+        refraining from taking, any action on the basis of the content on the
+        Site.
+      </p>
+      <p>
+        5.7&nbsp;Although we make reasonable efforts to update the information
+        on our site, we make no representations, warranties or guarantees,
+        whether express or implied, that Our Content on the Site is accurate,
+        complete or up to date.
+      </p>
+      <p><strong>6.</strong>&nbsp;&nbsp;&nbsp;**&nbsp;Site Management**</p>
+      <p>
+        6.1&nbsp;We reserve the right at our sole discretion, to (1) monitor the
+        Site for breaches of these Terms and Conditions; (2) take appropriate
+        legal action against anyone in breach of applicable laws or these Terms
+        and Conditions; (3) refuse, restrict access to or availability of, or
+        disable (to the extent technologically feasible) any of your
+        Contributions; (4) remove from the Site or otherwise disable all files
+        and content that are excessive in size or are in any way a burden to our
+        systems; and (5) otherwise manage the Site in a manner designed to
+        protect our rights and property and to facilitate the proper functioning
+        of the Site and Services.
+      </p>
+      <p>
+        6.2&nbsp;We do not guarantee that the Site will be secure or free from
+        bugs or viruses.
+      </p>
+      <p>
+        6.3&nbsp;You are responsible for configuring your information
+        technology, computer programs and platform to access the Site and you
+        should use your own virus protection software.
+      </p>
+      <p>
+        <strong>7.</strong>&nbsp;&nbsp;**&nbsp;Modifications to and availability
+        of the Site**
+      </p>
+      <p>
+        7.1&nbsp;We reserve the right to change, modify, or remove the contents
+        of the Site at any time or for any reason at our sole discretion without
+        notice. We also reserve the right to modify or discontinue all or part
+        of the Services without notice at any time.
+      </p>
+      <p>
+        7.2&nbsp;We cannot guarantee the Site and Services will be available at
+        all times.We may experience hardware, software, or other problems or
+        need to perform maintenance related to the Site, resulting in
+        interruptions, delays, or errors. You agree that we have no liability
+        whatsoever for any loss, damage, or inconvenience caused by your
+        inability to access or use the Site or Services during any downtime or
+        discontinuance of the Site or Services.We are not obliged to maintain
+        and support the Site or Services or to supply any corrections, updates,
+        or releases.
+      </p>
+      <p>
+        7.3&nbsp;There may be information on the Site that contains
+        typographical errors, inaccuracies, or omissions that may relate to the
+        Services, including descriptions, pricing, availability, and various
+        other information. We reserve the right to correct any errors,
+        inaccuracies, or omissions and to change or update the information at
+        any time, without prior notice.
+      </p>
+      <p>
+        <strong>8.</strong>&nbsp;&nbsp;**&nbsp;Disclaimer/Limitation of
+        Liability**
+      </p>
+      <p>
+        8.1&nbsp;The Site and Services are provided on an as-is and as-available
+        basis. You agree that your use of the Site and/or Services will be at
+        your sole risk except as expressly set out in these Terms and
+        Conditions. All warranties, terms, conditions and undertakings, express
+        or implied (including by statute, custom or usage, a course of dealing,
+        or common law) in connection with the Site and Services and your use
+        thereof including, without limitation, the implied warranties of
+        satisfactory quality, fitness for a particular purpose and
+        non-infringement are excluded to the fullest extent permitted by
+        applicable law.
+      </p>
+      <p>
+        We make no warranties or representations about the accuracy or
+        completeness of the Site’s content and are not liable for any (1) errors
+        or omissions in content: (2) any unauthorized access to or use of our
+        servers and/or any and all personal information and/or financial
+        information stored on our server; (3) any interruption or cessation of
+        transmission to or from the site or services; and/or (4) any bugs,
+        viruses, trojan horses, or the like which may be transmitted to or
+        through the site by any third party. We will not be responsible for any
+        delay or failure to comply with our obligations under these Terms and
+        Conditions if such delay or failure is caused by an event beyond our
+        reasonable control.
+      </p>
+      <p>8.2&nbsp;Our responsibility for loss or damage suffered by you:</p>
+      <p><strong>Whether you are a consumer or a business user:</strong></p>
+      <p>
+        <strong>●</strong>&nbsp;We do not exclude or limit in any way our
+        liability to you where it would be unlawful to do so. This includes
+        liability for death or personal injury caused by our negligence or the
+        negligence of our employees, agents or subcontractors and for fraud or
+        fraudulent misrepresentation.
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;If we fail to comply with these Terms and
+        Conditions, we will be responsible for loss or damage you suffer that is
+        a foreseeable result of our breach of these Terms and Conditions, but we
+        would not be responsible for any loss or damage that were not
+        foreseeable at the time you started using the Site/Services.
+      </p>
+      <p>
+        Notwithstanding anything to the contrary contained in the
+        Disclaimer/Limitation of Liability section, our liability to you for any
+        cause whatsoever and regardless of the form of the action, will at all
+        times be limited to a total aggregate amount equal to the greater of (a)
+        the sum of £5000 or (b) the amount paid, if any, by you to us for the
+        Services/Site during the six (6) month period prior to any cause of
+        action arising.
+      </p>
+      <p><strong>If you are a consumer user:</strong></p>
+      <p>
+        <strong>●</strong>&nbsp;Please note that we only provide our Site for
+        domestic and private use. You agree not to use our Site for any
+        commercial or business purposes, and we have no liability to you for any
+        loss of profit, loss of business, business interruption, or loss of
+        business opportunity.
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;If defective digital content that we have
+        supplied, damages a device or digital content belonging to you and this
+        is caused by our failure to use reasonable care and skill, we will
+        either repair the damage or pay you compensation.
+      </p>
+      <p>
+        <strong>●</strong>&nbsp;You have legal rights in relation to goods that
+        are faulty or not as described. Advice about your legal rights is
+        available from your local Citizens' Advice Bureau or Trading Standards
+        office. Nothing in these Terms and Conditions will affect these legal
+        rights.
+      </p>
+      <p><strong>9.</strong>&nbsp;&nbsp;&nbsp;**&nbsp;Term and Termination**</p>
+      <p>
+        9.1&nbsp;These Terms and Conditions shall remain in full force and
+        effect while you use the Site or Services or are otherwise a user of the
+        Site, as applicable. You may terminate your use or participation at any
+        time, for any reason, by following the instructions for terminating user
+        accounts in your account settings, if available, or by contacting us at
+        team@usebeam.chat.
+      </p>
+      <p>
+        9.2&nbsp;Without limiting any other provision of these Terms and
+        Conditions, we reserve the right to, in our sole discretion and without
+        notice or liability, deny access to and use of the Site and the Services
+        (including blocking certain IP addresses), to any person for any reason
+        including without limitation for breach of any representation, warranty
+        or covenant contained in these Terms andConditions or of any applicable
+        law or regulation.
+      </p>
+      <p>
+        If we determine, in our sole discretion, that your use of the
+        Site/Services is in breach of these Terms and Conditions or of any
+        applicable law or regulation, we may terminate your use or participation
+        in the Site and the Services or delete your profile and any content or
+        information that you posted at any time, without warning, in our sole
+        discretion.
+      </p>
+      <p>
+        9.3&nbsp;If we terminate or suspend your account for any reason set out
+        in this Section 9, you are prohibited from registering and creating a
+        new account under your name, a fake or borrowed name, or the name of any
+        third party, even if you may be acting on behalf of the third party. In
+        addition to terminating or suspending your account, we reserve the right
+        to take appropriate legal action, including without limitation pursuing
+        civil, criminal, and injunctive redress.
+      </p>
+      <p><strong>10.</strong>&nbsp;&nbsp;**&nbsp;Mobile Application**</p>
+      <p>
+        10.1&nbsp;If you access the Services via a mobile application, then we
+        grant you a revocable, non exclusive, non-transferable, limited right to
+        install and use the mobile application on wireless electronic devices
+        owned or controlled by you, and to access and use the mobile application
+        on such devices strictly in accordance with the terms and conditions of
+        this license.
+      </p>
+      <p>
+        10.2&nbsp;<em
+          ><strong>For consumers only</strong> - If you are a customer in the
+          European Union, you have certain rights to decompile the Software
+          if:</em
+        >
+      </p>
+      <p>
+        <em
+          ><strong>●</strong>&nbsp;this is necessary to obtain the information
+          that you need to make the software interoperable with other software
+          and <strong>●</strong>&nbsp;we have not made that information
+          available to you.</em
+        >
+      </p>
+      <p>
+        <em
+          >Before reverse engineering or decompiling the software, you must
+          first write to us and ask us to provide you with the interoperability
+          information that you need. Please provide us with full details of your
+          requirement so that we can assess what information you need. We may
+          impose reasonable conditions on providing you with interoperability
+          information. You must use that information only for the purpose of
+          making the software interoperable with other software. You must not
+          use that information for any other purpose.</em
+        >
+      </p>
+      <p>
+        10.3&nbsp;The following terms apply when you use a mobile application
+        obtained from either the Apple Store or Google Play (each an App
+        Distributor) to access the Services:
+      </p>
+      <p>
+        (a) The licence granted to you for our mobile application is limited to
+        a non-transferable licence to use the application on a device that
+        utilizes the Apple iOS or Android operating system, as applicable, and
+        in accordance with the usage rules set forth in the applicable App
+        Distributor terms of service;
+      </p>
+      <p>
+        (b) We are responsible for providing any maintenance and support
+        services with respect to the mobile application as specified in these
+        Terms and Conditions or as otherwise required under applicable law. You
+        acknowledge that each App Distributor has no obligation whatsoever to
+        furnish any maintenance and support services with respect to the mobile
+        application;
+      </p>
+      <p>
+        (c) In the event of any failure of the mobile application to conform to
+        any applicable warranty, you may notify an App Distributor, and the App
+        Distributor, in accordance with its terms and policies, may refund the
+        purchase price, if any, paid for the mobile application, and to the
+        maximum extent permitted by applicable law, an App Distributor will have
+        no other warranty obligation whatsoever with respect to the mobile
+        application;
+      </p>
+      <p>
+        (d) You represent and warrant that (i) you are not located in a country
+        that is subject to a U.S. government embargo, or that has been
+        designated by the U.S. government as a “terrorist supporting” country;
+        and (ii) you are not listed on any U.S. government list of prohibited or
+        restricted parties;
+      </p>
+      <p>
+        (e) You must comply with applicable third party terms of agreement when
+        using the mobile application, e.g., if you have a VoIP application, then
+        you must not be in breach of their wireless data service agreement when
+        using the mobile application; and
+      </p>
+      <p>
+        (f) You acknowledge and agree that the App Distributors are third party
+        beneficiaries of these Terms and Conditions, and that each App
+        Distributor will have the right (and will be deemed to have accepted the
+        right) to enforce these Terms and Conditions against you as a third
+        party beneficiary thereof.
+      </p>
+      <p><strong>11.</strong>&nbsp;&nbsp;**&nbsp;General**</p>
+      <p>
+        11.1&nbsp;Visiting the Site, sending us emails, and completing online
+        forms constitute electronic communications. You consent to receive
+        electronic communications and you agree that all agreements, notices,
+        disclosures, and other communications we provide to you electronically,
+        via email and on the Site, satisfy any legal requirement that such
+        communication be in writing.
+      </p>
+      <p>
+        <strong
+          >You hereby agree to the use of electronic signatures, contracts,
+          orders and other records and to electronic delivery of notices,
+          policies and records of transactions initiated or completed by us or
+          via the Site.</strong
+        >
+        You hereby waive any rights or requirements under any statutes,
+        regulations, rules, ordinances or other laws in any jurisdiction which
+        require an original signature or delivery or retention of non-electronic
+        records, or to payments or the granting of credits by other than
+        electronic means.
+      </p>
+      <p>
+        11.2&nbsp;These Terms and Conditions and any policies or operating rules
+        posted by us on the Site or in respect to the Services constitute the
+        entire agreement and understanding between you and us.
+      </p>
+      <p>
+        11.3&nbsp;Our failure to exercise or enforce any right or provision of
+        these Terms and Conditions shall not operate as a waiver of such right
+        or provision.
+      </p>
+      <p>
+        11.4&nbsp;We may assign any or all of our rights and obligations to
+        others at any time.
+      </p>
+      <p>
+        11.5&nbsp;We shall not be responsible or liable for any loss, damage,
+        delay or failure to act caused by any cause beyond or reasonable
+        control.
+      </p>
+      <p>
+        11.6&nbsp;If any provision or part of a provision of these Terms and
+        Conditions is unlawful, void or unenforceable, that provision or part of
+        the provision is deemed severable from these Terms and Conditions and
+        does not affect the validity and enforceability of any remaining
+        provisions.
+      </p>
+      <p>
+        11.7&nbsp;There is no joint venture, partnership, employment or agency
+        relationship created between you and us as a result of these Terms and
+        Conditions or use of the Site or Services.
+      </p>
+      <p>
+        11.8&nbsp;<em
+          ><strong>For consumers only</strong>&nbsp;&nbsp;- Please note that
+          these Terms and Conditions, their subject matter and their formation,
+          are governed by English law. You and we both agree that the courts of
+          England and Wales will have exclusive jurisdiction expect that if you
+          are a resident of Northern Ireland you may also bring proceedings in
+          Northern Ireland, and if you are resident of Scotland, you may also
+          bring proceedings in Scotland. If you have any complaint or wish to
+          raise a dispute under these Terms and Conditions or otherwise in
+          relation to the Site please follow this link</em
+        >
+        <em><a href="http://ec.europa.eu/odr">http://ec.europa.eu/odr</a></em>
+      </p>
+      <p>
+        11.9 Except as stated under the Mobile Application section,
+        a&nbsp;person who is not a party to these Terms and Conditions shall
+        have no rightunder the Contracts (Rights of Third Parties) Act 1999 to
+        enforce any term of these Terms and Conditions.
+      </p>
+      <p>
+        11.10&nbsp;In order to resolve a complaint regarding the Services or to
+        receive further information regarding use of the Services, please
+        contact us by email at team@usebeam.chat or by post to:
+      </p>
+      <p>Beam</p>
+      <p>3 Ayinke street</p>
+      <p>Yaba, Lagos 100001</p>
+      <p>Nigeria</p>
+    </div>
+  </div>
+  <footer class="public-footer">
+    <p class="feedback-text">
+      If you’ve got any questions, feedback or improvement ideas, we’ve created
+      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
+      where you can tell us about it.
+    </p>
+    <div class="grid-container-footer">
+      <div class="grid-1-footer">
+        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
+      </div>
+      <div class="grid-2-footer">
+        <p>
+          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Public pages tests > loads acceptable use page <snapshot> #0`] = `
+<div class="terms">
+  <nav class="public-navbar">
+    <div>
+      <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+    </div>
+  </nav>
+  <div class="text-container">
+    <div class="text-box">
+      <h1>Acceptable Use Policy</h1>
+      <p>Last updated 5th <strong>August, 2020</strong></p>
+      <p>
+        This Acceptable Use Policy (this&nbsp;“Policy”) describes prohibited
+        uses of the products and/or services offered by
+        <a href="http://Beam.com">Beam.com</a>, (the&nbsp;“Services”) and the
+        website located at&nbsp;<a href="http://www.beam.com">www.beam.com</a
+        >&nbsp;(the&nbsp;“Beam Site”). The examples described in this Policy are
+        not exhaustive. We may modify this Policy at any time by posting a
+        revised version on the Beam Site. By using the Services or accessing the
+        Beam Site, you agree to the latest version of this Policy. If you
+        violate the Policy or authorize or help others to do so, we may suspend
+        or terminate your use of the Services.
+      </p>
+      <p><strong>NO ILLEGAL, HARMFUL, OR OFFENSIVE USE OF CONTENT</strong></p>
+      <p>
+        You may not use, or encourage, promote, facilitate or instruct others to
+        use, the Services or Beam Site for any illegal, harmful, fraudulent,
+        infringing or offensive use, or to transmit, store, display, distribute
+        or otherwise make available content that is illegal, harmful,
+        fraudulent, infringing or offensive.
+      </p>
+      <p>Prohibited activities or content include, but are not limited to:</p>
+      <p>
+        <strong>Illegal, Harmful or Fraudulent Activities:</strong>&nbsp;Any
+        activities that are illegal, that violate the rights of others, or that
+        may be harmful to others, our operations or reputation, including
+        disseminating, promoting or facilitating child pornography, offering or
+        disseminating fraudulent goods, services, schemes, or promotions,
+        make-money-fast schemes, or Ponzi and pyramid schemes.
+      </p>
+      <p>
+        <strong>Infringing Content:</strong>&nbsp;Content that infringes or
+        misappropriates the intellectual property or proprietary rights of
+        others.
+      </p>
+      <p>
+        <strong>Offensive Content:</strong>&nbsp;Content that is defamatory,
+        obscene, abusive, invasive of privacy, or otherwise objectionable,
+        including content that is pornographic in nature or discriminatory
+        against any race, religion, or creed.
+      </p>
+      <p>
+        <strong>Harmful Content:</strong>&nbsp;Content or other computer
+        technology that may damage, interfere with, surreptitiously intercept,
+        or expropriate any system, program, or data, including viruses, Trojan
+        horses, worms, time bombs, or cancelbots.
+      </p>
+      <p><strong>NO SECURITY VIOLATIONS</strong></p>
+      <p>
+        You may not violate the security or integrity of any network, computer
+        or communications system, software application, or network or computing
+        device (each, a “System”). Prohibited activities include, but are not
+        limited to:
+      </p>
+      <p>
+        <strong>Unauthorized Access:</strong>&nbsp;Accessing or using any System
+        without permission, including attempting to probe, scan, or test the
+        vulnerability of a System or to breach any security or authentication
+        measures used by a System.
+      </p>
+      <p>
+        <strong>Interception:</strong>&nbsp;Monitoring of data or traffic on a
+        System without permission.
+      </p>
+      <p>
+        <strong>Third-Party Services:</strong>&nbsp;Developing any applications
+        that interact with the Services or other users’ content or information
+        without our written consent.
+      </p>
+      <p><strong>NO NETWORK ABUSE</strong></p>
+      <p>
+        You may not make network connections to any users, hosts, or networks
+        unless you have permission to communicate with them. Prohibited
+        activities include, but are not limited to:
+      </p>
+      <p>
+        <strong>User Solicitation:</strong>&nbsp;Soliciting login credentials
+        from another user or using or attempting to use another user’s account,
+        username, or password without their permission.
+      </p>
+      <p>
+        <strong>Monitoring or Crawling</strong>:&nbsp;Monitoring or crawling of
+        a System that impairs or disrupts the System being monitored or crawled.
+      </p>
+      <p>
+        <strong>Intentional Interference:</strong>&nbsp;Interfering with the
+        proper functioning of the Services, including any deliberate attempt to
+        overload a network or System.
+      </p>
+      <p>
+        <strong>Avoiding System Restrictions:</strong>&nbsp;Using manual or
+        electronic means to avoid any use limitations placed on a System, such
+        as access, message, seat, API, bot, or contact restrictions.
+      </p>
+      <p><strong>NO E-MAIL OR OTHER MESSAGE ABUSE</strong></p>
+      <p>
+        You will not distribute, publish, send, or facilitate the sending of
+        unsolicited mass e-mail or other messages, promotions, advertising, or
+        solicitations (like “spam”), including commercial advertising and
+        informational announcements. You will not alter or obscure mail headers
+        or assume a sender’s identity without the sender’s explicit permission.
+        You will not collect replies to messages sent from another internet
+        service provider if those messages violate this Policy or the acceptable
+        use policy of that provider.
+      </p>
+      <p><strong>OUR MONITORING AND ENFORCEMENT</strong></p>
+      <p>
+        We reserve the right, but do not assume the obligation, to investigate
+        any violation of this Policy or misuse of the Services or Beam Site. We
+        may:
+      </p>
+      <p>
+        investigate violations of this Policy or misuse of the Services or Beam
+        Site; or
+      </p>
+      <p>
+        remove, disable access to, or modify any content or resource that
+        violates this Policy or any other agreement we have with you for use of
+        the Services or the Beam Site.
+      </p>
+      <p>
+        We may report any activity that we suspect violates any law or
+        regulation to appropriate law enforcement officials, regulators, or
+        other appropriate third parties. Our reporting may include disclosing
+        appropriate customer information. We also may cooperate with appropriate
+        law enforcement agencies, regulators, or other appropriate third parties
+        to help with the investigation and prosecution of illegal conduct by
+        providing network and systems information related to alleged violations
+        of this Policy.
+      </p>
+      <p><strong>REPORTING OF VIOLATIONS OF THIS POLICY</strong></p>
+      <p>
+        If you become aware of any violation of this Policy, please&nbsp;<a
+          href="mailto:team@usebeam.chat"
+          >contact us</a
+        >&nbsp;immediately&nbsp;and provide us with assistance, as requested, to
+        stop or remedy the violation.
+      </p>
+    </div>
+  </div>
+  <footer class="public-footer">
+    <p class="feedback-text">
+      If you’ve got any questions, feedback or improvement ideas, we’ve created
+      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
+      where you can tell us about it.
+    </p>
+    <div class="grid-container-footer">
+      <div class="grid-1-footer">
+        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
+      </div>
+      <div class="grid-2-footer">
+        <p>
+          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`Public pages tests > loads privacy policy Ppge <snapshot> #0`] = `
+<div class="privacy-policy">
+  <nav class="public-navbar">
+    <div>
+      <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+    </div>
+  </nav>
+  <div class="text-container">
+    <div class="text-box">
+      <h1>PRIVACY NOTICE</h1>
+      <p><strong>Last updated August 05, 2020</strong></p>
+      <p>
+        Thank you for choosing to be part of our community at Beam
+        (“<strong>we</strong>”, “<strong>us</strong>”, or
+        “<strong>our</strong>”). We are committed to protecting your personal
+        information and your right to privacy. If you have any questions or
+        concerns about this privacy notice, or our practices with regards to
+        your personal information, please contact us at team@usebeam.chat.
+      </p>
+      <p>
+        When you visit our website
+        <a href="https://usebeam.chat">https://usebeam.chat</a> (the
+        "<strong>Website</strong>"), use our mobile application, as the case may
+        be (the "<strong>App</strong>") and more generally, use any of our
+        services (the "<strong>Services</strong>", which include the Website and
+        App), we appreciate that you are trusting us with your personal
+        information. We take your privacy very seriously. In this privacy
+        notice, we seek to explain to you in the clearest way possible what
+        information we collect, how we use it and what rights you have in
+        relation to it. We hope you take some time to read through it carefully,
+        as it is important. If there are any terms in this privacy
+        notice&nbsp;that you do not agree with, please discontinue use of our
+        Services immediately.
+      </p>
+      <p>
+        This privacy notice applies to all information collected through our
+        Services (which, as described above, includes our Website and App), as
+        well as any related services, sales, marketing or events.
+      </p>
+      <p>
+        <strong
+          >Please read this privacy notice&nbsp;carefully as it will help you
+          understand what we do with the information that we collect.</strong
+        >
+      </p>
+      <p><strong>TABLE OF CONTENTS</strong></p>
+      <ol>
+        <li><p>WHAT INFORMATION DO WE COLLECT?</p></li>
+        <li><p>HOW DO WE USE YOUR INFORMATION?</p></li>
+        <li><p>WILL YOUR INFORMATION BE SHARED WITH ANYONE?</p></li>
+        <li><p>WHO WILL YOUR INFORMATION BE SHARED WITH?</p></li>
+        <li><p>DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</p></li>
+        <li><p>HOW DO WE HANDLE YOUR SOCIAL LOGINS?</p></li>
+        <li><p>HOW LONG DO WE KEEP YOUR INFORMATION?</p></li>
+        <li><p>HOW DO WE KEEP YOUR INFORMATION SAFE?</p></li>
+        <li><p>DO WE COLLECT INFORMATION FROM MINORS?</p></li>
+        <li><p>WHAT ARE YOUR PRIVACY RIGHTS?</p></li>
+        <li><p>CONTROLS FOR DO-NOT-TRACK FEATURES</p></li>
+        <li><p>DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</p></li>
+        <li><p>DO WE MAKE UPDATES TO THIS NOTICE?</p></li>
+        <li><p>HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</p></li>
+      </ol>
+      <p><strong>Personal information you disclose to us</strong></p>
+      <p>
+        <em
+          ><strong>In Short:</strong>&nbsp;We collect information that you
+          provide to us.</em
+        >
+      </p>
+      <p>
+        We collect personal information that you voluntarily provide to us when
+        you register on the Services, express an interest in obtaining
+        information about us or our products and Services, when you participate
+        in activities on the Services (such as by posting messages in our online
+        forums or entering competitions, contests or giveaways) or otherwise
+        when you contact us.
+      </p>
+      <p>
+        The personal information that we collect depends on the context of your
+        interactions with us and the Services, the choices you make and the
+        products and features you use. The personal information we collect may
+        include the following:
+      </p>
+      <p>
+        <strong>Personal Information Provided by You.</strong> We collect names;
+        email addresses; and other similar information.
+      </p>
+      <p>
+        <strong>Social Media Login Data.</strong> We may provide you with the
+        option to register with us using your existing social media account
+        details, like your Facebook, Twitter or other social media account. If
+        you choose to register in this way, we will collect the information
+        described in the section called "HOW DO WE HANDLE YOUR SOCIAL LOGINS"
+        below.
+      </p>
+      <p>
+        All personal information that you provide to us must be true, complete
+        and accurate, and you must notify us of any changes to such personal
+        information.
+      </p>
+      <p><strong>Information automatically collected</strong></p>
+      <p>
+        <em
+          ><strong>In Short:</strong>&nbsp;Some information — such as your
+          Internet Protocol (IP) address and/or browser and device
+          characteristics — is collected automatically when you visit our
+          Services.</em
+        >
+      </p>
+      <p>
+        We automatically collect certain information when you visit, use or
+        navigate the Services. This information does not reveal your specific
+        identity (like your name or contact information) but may include device
+        and usage information, such as your IP address, browser and device
+        characteristics, operating system, language preferences, referring URLs,
+        device name, country, location, information about who and when you use
+        our Services and other technical information. This information is
+        primarily needed to maintain the security and operation of our Services,
+        and for our internal analytics and reporting purposes. Like many
+        businesses, we also collect information through cookies and similar
+        technologies.
+      </p>
+      <p>The information we collect includes:</p>
+      <ul>
+        <li>
+          <em>Log and Usage Data.</em> Log and usage data is service-related,
+          diagnostic usage and performance information our servers automatically
+          collect when you access or use our Services and which we record in log
+          files. Depending on how you interact with us, this log data may
+          include your IP address, device information, browser type and settings
+          and information about your activity in the Services (such as the
+          date/time stamps associated with your usage, pages and files viewed,
+          searches and other actions you take such as which features you use),
+          device event information (such as system activity, error reports
+          (sometimes called 'crash dumps') and hardware settings).
+        </li>
+        <li>
+          <em>Device Data.</em>&nbsp;We collect device data such as information
+          about your computer, phone, tablet or other device you use to access
+          the&nbsp;Services. Depending on the device used, this device data may
+          include information such as your IP address (or proxy server), device
+          application identification numbers, location, browser type, hardware
+          model Internet service provider and/or mobile carrier, operating
+          system configuration&nbsp;information.
+        </li>
+        <li>
+          <em>Location Data.</em> We collect information data such as
+          information about your device's location, which can be either precise
+          or imprecise. How much information we collect depends on the type of
+          settings of the device you use to access the Services. For example, we
+          may use GPS and other technologies to collect geolocation data that
+          tells us your current location (based on your IP address). You can opt
+          out of allowing us to collect this information either by refusing
+          access to the information or by disabling your Locations settings on
+          your device. Note however, if you choose to opt out, you may not be
+          able to use certain aspects of the Services.
+        </li>
+      </ul>
+      <p><strong>Information collected through our App</strong></p>
+      <p>
+        <em
+          ><strong>In Short:</strong>&nbsp;We collect information regarding your
+          geo-location, mobile device, push notifications, when you use our
+          App.</em
+        >
+      </p>
+      <p>If you use our App, we also collect the following information:</p>
+      <ul>
+        <li>
+          <em>Geo-Location Information.</em> We may request access or permission
+          to and track location-based information from your mobile device,
+          either continuously or while you are using our App, to provide certain
+          location-based services. If you wish to change our access or
+          permissions, you may do so in your device's settings.
+        </li>
+        <li>
+          <em>Mobile Device Access.</em>&nbsp;We may request access or
+          permission to certain features from your mobile device, including your
+          mobile device's storage, and other features. If you wish to change our
+          access or permissions, you may do so in your device's settings.
+        </li>
+        <li>
+          <em>Mobile Device Data.</em> We automatically collect device
+          information (such as your mobile device ID, model and manufacturer),
+          operating system, version information and system configuration
+          information, device and application identification numbers, browser
+          type and version, hardware model Internet service provider and/or
+          mobile carrier, and Internet Protocol (IP) address (or proxy server).
+          If you are using our App, we may also collect information about the
+          phone network associated with your mobile device, your mobile device's
+          operating system or platform, the type of mobile device you use, your
+          mobile device's unique device ID and information about the features of
+          our App you accessed.
+        </li>
+        <li>
+          <em>Push Notifications.</em>&nbsp;We may request to send you push
+          notifications regarding your account or certain features of the App.
+          If you wish to opt-out from receiving these types of communications,
+          you may turn them off in your device's settings.
+        </li>
+      </ul>
+      <p>
+        The information is primarily needed to maintain the security and
+        operation of our App, for troubleshooting and for our internal analytics
+        and reporting purposes.
+      </p>
+      <p><strong>Information collected from other sources</strong></p>
+      <p>
+        <em
+          ><strong>In Short:</strong>&nbsp;We may collect limited data from
+          public databases, marketing partners, social media platforms, and
+          other outside sources.</em
+        >
+      </p>
+      <p>
+        In order to enhance our ability to provide relevant marketing, offers
+        and services to you and update our records, we may obtain information
+        about you from other sources, such as public databases, joint marketing
+        partners, affiliate programs, data providers, social media platforms, as
+        well as from other third parties. This information includes mailing
+        addresses, job titles, email addresses, phone numbers, intent data (or
+        user behavior data), Internet Protocol (IP) addresses, social media
+        profiles, social media URLs and custom profiles, for purposes of
+        targeted advertising and event promotion. If you interact with us on a
+        social media platform using your social media account (e.g. Facebook or
+        Twitter), we receive personal information about you such as your name,
+        email address, and gender. Any personal information that we collect from
+        your social media account depends on your social media account's privacy
+        settings.
+      </p>
+      <p><strong>2. HOW DO WE USE YOUR INFORMATION?</strong></p>
+      <p>
+        <em
+          ><strong>In Short:</strong>&nbsp;We process your information for
+          purposes based on legitimate business interests, the fulfillment of
+          our contract with you, compliance with our legal obligations, and/or
+          your consent.</em
+        >
+      </p>
+      <p>
+        We use personal information collected via our Services for a variety of
+        business purposes described below. We process your personal information
+        for these purposes in reliance on our legitimate business interests, in
+        order to enter into or perform a contract with you, with your consent,
+        and/or for compliance with our legal obligations. We indicate the
+        specific processing grounds we rely on next to each purpose listed
+        below.
+      </p>
+      <p>We use the information we collect or receive:</p>
+      <ul>
+        <li>
+          <p>
+            <strong>To facilitate account creation and logon process.</strong
+            >&nbsp;If you choose to link your account with us to a third-party
+            account (such as your Google or Facebook account), we use the
+            information you allowed us to collect from those third parties to
+            facilitate account creation and logon process for the performance of
+            the contract. See the section below headed "HOW DO WE HANDLE YOUR
+            SOCIAL LOGINS" for further information.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>To post testimonials.</strong>&nbsp;We post testimonials on
+            our Services that may contain personal information. Prior to posting
+            a testimonial, we will obtain your consent to use your name and the
+            consent of the testimonial. If you wish to update, or delete your
+            testimonial, please contact us at lenny@usebeam.chat and be sure to
+            include your name, testimonial location, and contact information.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Request feedback.</strong>&nbsp;We may use your information
+            to request feedback and to contact you about your use of our
+            Services.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>To enable user-to-user communications.</strong>&nbsp;We may
+            use your information in order to enable user-to-user communications
+            with each user's consent.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>To manage user accounts</strong>. We may use your
+            information for the purposes of managing our account and keeping it
+            in working order.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>To send administrative information to you.</strong>&nbsp;We
+            may use your personal information to send you product, service and
+            new feature information and/or information about changes to our
+            terms, conditions, and policies.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>To protect our Services.</strong>&nbsp;We may use your
+            information as part of our efforts to keep our Services safe and
+            secure (for example, for fraud monitoring and prevention).
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong
+              >To enforce our terms, conditions and policies for business
+              purposes, to comply with legal and regulatory requirements or in
+              connection with our contract.</strong
+            >
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>To respond to legal requests and prevent harm.</strong
+            >&nbsp;If we receive a subpoena or other legal request, we may need
+            to inspect the data we hold to determine how to respond.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Fulfill and manage your orders.</strong>&nbsp;We may use
+            your information to fulfill and manage your orders, payments,
+            returns, and exchanges made through the Services.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>Administer prize draws and competitions.</strong>&nbsp;We
+            may use your information to administer prize draws and competitions
+            when you elect to participate in our competitions.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong
+              >To deliver and facilitate delivery of services to the
+              user.</strong
+            >
+            We may use your information to provide you with the requested
+            service.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong
+              >To respond to user inquiries/offer support to users.</strong
+            >
+            We may use your information to respond to your inquiries and solve
+            any potential issues you might have with the use of our Services.
+          </p>
+        </li>
+        <li>
+          <p>
+            <strong>For other business purposes.</strong>&nbsp;We may use your
+            information for other business purposes, such as data analysis,
+            identifying usage trends, determining the effectiveness of our
+            promotional campaigns and to evaluate and improve our Services,
+            products, marketing and your experience.&nbsp;We may use and store
+            this information in aggregated and anonymized form so that it is not
+            associated with individual end users and does not include personal
+            information. We will not use identifiable personal information
+            without your consent.
+          </p>
+        </li>
+      </ul>
+      <p><strong>3. WILL YOUR INFORMATION BE SHARED WITH ANYONE?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >We only share information with your consent, to comply with laws, to
+          provide you with services, to protect your rights, or to fulfill
+          business obligations.</em
+        >
+      </p>
+      <p>
+        We may process or share your data that we hold based on the following
+        legal basis:
+      </p>
+      <ul>
+        <li>
+          <strong>Consent:</strong> We may process your data if you have given
+          us specific consent to use your personal information in a specific
+          purpose.
+        </li>
+        <li>
+          <strong>Legitimate Interests:</strong> We may process your data when
+          it is reasonably necessary to achieve our legitimate business
+          interests.
+        </li>
+        <li>
+          <strong>Performance of a Contract:</strong>&nbsp;Where we have entered
+          into a contract with you, we may process your personal information to
+          fulfill the terms of our contract.
+        </li>
+        <li>
+          <strong>Legal Obligations:</strong> We may disclose your information
+          where we are legally required to do so in order to comply with
+          applicable law, governmental requests, a judicial proceeding, court
+          order, or legal process, such as in response to a court order or a
+          subpoena (including in response to public authorities to meet national
+          security or law enforcement requirements).
+        </li>
+        <li>
+          <strong>Vital Interests:</strong> We may disclose your information
+          where we believe it is necessary to investigate, prevent, or take
+          action regarding potential violations of our policies, suspected
+          fraud, situations involving potential threats to the safety of any
+          person and illegal activities, or as evidence in litigation in which
+          we are involved.
+        </li>
+      </ul>
+      <p>
+        More specifically, we may need to process your data or share your
+        personal information in the following situations:
+      </p>
+      <ul>
+        <li>
+          <strong>Business Transfers.</strong>&nbsp;We may share or transfer
+          your information in connection with, or during negotiations of, any
+          merger, sale of company assets, financing, or acquisition of all or a
+          portion of our business to another company.
+        </li>
+        <li>
+          <strong
+            >Vendors, Consultants and Other Third-Party Service
+            Providers.</strong
+          >&nbsp;We may share your data with third-party vendors, service
+          providers, contractors or agents who perform services for us or on our
+          behalf and require access to such information to do that work.
+          Examples include: payment processing, data analysis, email delivery,
+          hosting services, customer service and marketing efforts. We may allow
+          selected third parties to use tracking technology on the Services,
+          which will enable them to collect data on our behalf about how you
+          interact with our Services over time. This information may be used to,
+          among other things, analyze and track data, determine the popularity
+          of certain content, pages or features, and better understand online
+          activity. Unless described in this notice, we do not share, sell, rent
+          or trade any of your information with third parties for their
+          promotional purposes.
+        </li>
+        <li>
+          <strong>Other Users.</strong>&nbsp;When you share personal information
+          (for example, by posting comments, contributions or other content to
+          the Services) or otherwise interact with public areas of the Services,
+          such personal information may be viewed by all users and may be
+          publicly made available outside the Services in perpetuity. If you
+          interact with other users of our Services and register for our
+          Services through a social network (such as Facebook), your contacts on
+          the social network will see your name, profile photo, and descriptions
+          of your activity. Similarly, other users will be able to view
+          descriptions of your activity, communicate with you within our
+          Services, and view your profile.
+        </li>
+      </ul>
+      <p><strong>4. WHO WILL YOUR INFORMATION BE SHARED WITH?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >We only share information with the following third parties.</em
+        >
+      </p>
+      <p>
+        We only share and disclose your information with the following third
+        parties. We have categorized each party so that you may easily
+        understand the purpose of our data collection and processing practices.
+        If we have processed your data based on your consent and you wish to
+        revoke your consent, please contact us using the contact details
+        provided in the section below titled "
+      </p>
+      <p>HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</p>
+      <p>".</p>
+      <ul>
+        <li>
+          <p>
+            <strong>Allow Users to Connect to Their Third-Party Accounts</strong
+            >,&nbsp;,&nbsp;,&nbsp; and
+          </p>
+          <p>Facebook account</p>
+          <p>Google account</p>
+          <p>Spotify account</p>
+          <p>Reddit account</p>
+          <p>Youtube account</p>
+        </li>
+        <li>
+          <p><strong>Cloud Computing Services</strong></p>
+          <p>Digital Ocean</p>
+        </li>
+        <li>
+          <p><strong>Functionality and Infrastructure Optimization</strong></p>
+          <p>MongoDB Atlas</p>
+          <p>Firebase</p>
+        </li>
+        <li>
+          <p>
+            <strong>User Account Registration and Authentication</strong> and
+          </p>
+          <p>Facebook Login</p>
+          <p>Google OAuth 2.0</p>
+        </li>
+        <li>
+          <p><strong>Web and Mobile Analytics</strong></p>
+          <p>Google Analytics</p>
+          <p>Mixpanel</p>
+        </li>
+        <li>
+          <p><strong>Website Hosting</strong></p>
+          <p>Digital Ocean</p>
+        </li>
+      </ul>
+      <p>
+        <strong>5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?</strong>
+      </p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >We may use cookies and other tracking technologies to collect and
+          store your information.</em
+        >
+      </p>
+      <p>
+        We may use cookies and similar tracking technologies (like web beacons
+        and pixels) to access or store information. Specific information about
+        how we use such technologies and how you can refuse certain cookies is
+        set out in our Cookie Notice.
+      </p>
+      <p><strong>6. HOW DO WE HANDLE YOUR SOCIAL LOGINS?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >If you choose to register or log in to our services using a social
+          media account, we may have access to certain information about
+          you.</em
+        >
+      </p>
+      <p>
+        Our Services offers you the ability to register and login using your
+        third-party social media account details (like your Facebook or Twitter
+        logins).
+      </p>
+      <p>
+        Where you choose to do this, we will receive certain profile information
+        about you from your social media provider. The profile Information we
+        receive may vary depending on the social media provider concerned, but
+        will often include your name, email address, friends list, profile
+        picture as well as other information you choose to make public on such
+        social media platform.
+      </p>
+      <p>
+        We will use the information we receive only for the purposes that are
+        described in this privacy notice&nbsp;or that are otherwise made clear
+        to you on the relevant Services. Please note that we do not control, and
+        are not responsible for, other uses of your personal information by your
+        third-party social media provider. We recommend that you review their
+        privacy notice to understand how they collect, use and share your
+        personal information, and how you can set your privacy preferences on
+        their sites and apps.
+      </p>
+      <p><strong>7. HOW LONG DO WE KEEP YOUR INFORMATION?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >We keep your information for as long as necessary to fulfill the
+          purposes outlined in this privacy notice&nbsp;unless otherwise
+          required by law.</em
+        >
+      </p>
+      <p>
+        We will only keep your personal information for as long as it is
+        necessary for the purposes set out in this privacy notice, unless a
+        longer retention period is required or permitted by law (such as tax,
+        accounting or other legal requirements). No purpose in this notice will
+        require us keeping your personal information for longer than the period
+        of time in which users have an account with us.
+      </p>
+      <p>
+        When we have no ongoing legitimate business need to process your
+        personal information, we will either delete or anonymize such
+        information, or, if this is not possible (for example, because your
+        personal information has been stored in backup archives), then we will
+        securely store your personal information and isolate it from any further
+        processing until deletion is possible.
+      </p>
+      <p><strong>8. HOW DO WE KEEP YOUR INFORMATION SAFE?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >We aim to protect your personal information through a system of
+          organizational and technical security measures.</em
+        >
+      </p>
+      <p>
+        We have implemented appropriate technical and organizational security
+        measures designed to protect the security of any personal information we
+        process. However, despite our safeguards and efforts to secure your
+        information, no electronic transmission over the Internet or information
+        storage technology can be guaranteed to be 100% secure, so we cannot
+        promise or guarantee that hackers, cybercriminals, or other unauthorized
+        third parties will not be able to defeat our security, and improperly
+        collect, access, steal, or modify your information. Although we will do
+        our best to protect your personal information, transmission of personal
+        information to and from our Services is at your own risk. You should
+        only access the Services within a secure environment.
+      </p>
+      <p><strong>9. WHAT ARE YOUR PRIVACY RIGHTS?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >You may review, change, or terminate your account at any time.</em
+        >
+      </p>
+      <p>
+        If you are resident in the European Economic Area and you believe we are
+        unlawfully processing your personal information, you also have the right
+        to complain to your local data protection supervisory authority. You can
+        find their contact details here:&nbsp;<a
+          href="http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm"
+          >http://ec.europa.eu/justice/data-protection/bodies/authorities/index_en.htm</a
+        >.
+      </p>
+      <p>
+        If you are resident in Switzerland, the contact details for the data
+        protection authorities are available here:
+        <a href="https://www.edoeb.admin.ch/edoeb/en/home.html"
+          >https://www.edoeb.admin.ch/edoeb/en/home.html</a
+        >.
+      </p>
+      <p><strong>Account Information</strong></p>
+      <p>
+        If you would at any time like to review or change the information in
+        your account or terminate your account, you can:
+      </p>
+      <p>■&nbsp;Contact us using the contact information provided.</p>
+      <p>
+        Upon your request to terminate your account, we will deactivate or
+        delete your account and information from our active databases. However,
+        we may retain some information in our files to prevent fraud,
+        troubleshoot problems, assist with any investigations, enforce our Terms
+        of Use and/or comply with applicable legal requirements.
+      </p>
+      <p>
+        <strong>Cookies and similar technologies:</strong>&nbsp;Most Web
+        browsers are set to accept cookies by default. If you prefer, you can
+        usually choose to set your browser to remove cookies and to reject
+        cookies. If you choose to remove cookies or reject cookies, this could
+        affect certain features or services of our Services. To opt-out of
+        interest-based advertising by advertisers on our
+        Services&nbsp;visit&nbsp;<a href="http://www.aboutads.info/choices/"
+          >http://www.aboutads.info/choices/</a
+        >.
+      </p>
+      <p>
+        <strong>Opting out of email marketing:</strong>&nbsp;You can unsubscribe
+        from our marketing email list at any time by clicking on the unsubscribe
+        link in the emails that we send or by contacting us using the details
+        provided below. You will then be removed from the marketing email list –
+        however, we may still communicate with you, for example to send you
+        service-related emails that are necessary for the administration and use
+        of your account, to respond to service requests, or for other
+        non-marketing purposes. To otherwise opt-out, you may: contact us at
+        team@usebeam.chat.
+      </p>
+      <p><strong>10. CONTROLS FOR DO-NOT-TRACK FEATURES</strong></p>
+      <p>
+        Most web browsers and some mobile operating systems and mobile
+        applications include a Do-Not-Track (“DNT”) feature or setting you can
+        activate to signal your privacy preference not to have data about your
+        online browsing activities monitored and collected. At this stage, no
+        uniform technology standard for recognizing and implementing DNT signals
+        has been finalized. As such, we do not currently respond to DNT browser
+        signals or any other mechanism that automatically communicates your
+        choice not to be tracked online. If a standard for online tracking is
+        adopted that we must follow in the future, we will inform you about that
+        practice in a revised version of this privacy notice.
+      </p>
+      <p>
+        <strong
+          >11. DO CALIFORNIA RESIDENTS HAVE SPECIFIC PRIVACY RIGHTS?</strong
+        >
+      </p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >Yes, if you are a resident of California, you are granted specific
+          rights regarding access to your personal information.</em
+        >
+      </p>
+      <p>
+        California Civil Code Section 1798.83, also known as the “Shine The
+        Light” law, permits our users who are California residents to request
+        and obtain from us, once a year and free of charge, information about
+        categories of personal information (if any) we disclosed to third
+        parties for direct marketing purposes and the names and addresses of all
+        third parties with which we shared personal information in the
+        immediately preceding calendar year. If you are a California resident
+        and would like to make such a request, please submit your request in
+        writing to us using the contact information provided below.
+      </p>
+      <p>
+        If you are under 18 years of age, reside in California, and have a
+        registered account with a Service, you have the right to request removal
+        of unwanted data that you publicly post on the Services. To request the
+        removal of such data, please contact us using the contact information
+        provided below, and include the email address associated with your
+        account and a statement that you reside in California. We will make sure
+        the data is not publicly displayed on the Services, but please be aware
+        that the data may not be completely or comprehensively removed from all
+        our systems (e.g. backups, etc.).
+      </p>
+      <p><strong>CCPA Privacy Notice</strong></p>
+      <p>The California Code of Regulations defines a "resident" as:</p>
+      <p>
+        (1) every individual who is in the State of California for other than a
+        temporary or transitory purpose and
+      </p>
+      <p>
+        (2) every individual who is domiciled in the State of California who is
+        outside the State of California for a temporary or transitory purpose.
+        All other individuals are defined as "non-residents."
+      </p>
+      <p>
+        If this definition of "resident" applies to you, certain rights and
+        obligations apply regarding your personal information.
+      </p>
+      <p>
+        <strong>What categories of personal information do we collect?</strong>
+      </p>
+      <p>
+        We have collected the following categories of personal information in
+        the past twelve (12) months:
+      </p>
+      <p>
+        <a href="https://www.notion.so/3b8733bd6db643f89918f6da25077461"
+          >Untitled</a
+        >
+      </p>
+      <p>
+        We may also collect other personal information outside of these
+        categories in instances where you interact with us in-person, online, or
+        by phone or mail in the context of:
+      </p>
+      <ul>
+        <li>Receiving help through our customer support channels</li>
+        <li>Participation in customer surveys or contests; and</li>
+        <li>
+          Facilitation in the delivery of our Services and to respond to your
+          inquiries
+        </li>
+      </ul>
+      <p><strong>How do we use and share your personal information?</strong></p>
+      <p>
+        More information about our data collection and sharing practices can be
+        found in this privacy notice.
+      </p>
+      <p>
+        You may contact us by email at team@usebeam.chat, or by referring to the
+        contact details at the bottom of this document.
+      </p>
+      <p>
+        If you are using an authorized agent to exercise your right to opt-out,
+        we may deny a request if the authorized agent does not submit proof that
+        they have been validly authorized to act on your behalf.
+      </p>
+      <p><strong>Will your information be shared with anyone else?</strong></p>
+      <p>
+        We may disclose your personal information with our service providers
+        pursuant to a written contract between us and each service provider.
+        Each service provider is a for-profit entity that processes the
+        information on our behalf.
+      </p>
+      <p>The current list of our service providers can be found below.</p>
+      <p>
+        We may use your personal information for our own business purposes, such
+        as for undertaking internal research for technological development and
+        demonstration. This is not considered to be "selling" of your personal
+        data.
+      </p>
+      <p>
+        Beam has disclosed the following categories or personal information to
+        third parties for a business or commercial purpose in the preceding
+        twelve (12) months:
+      </p>
+      <ul>
+        <li>
+          Category A. Identifiers, such as contact details, like your real name,
+          alias, postal address, telephone or mobile contact number, unique
+          personal identifier, online identifier, Internet Protocol address,
+          email address and account name.
+        </li>
+        <li>
+          Category B. Personal information, as defined in the California
+          Customer Records law, such as your name, contact information,
+          education, employment, employment history and financial information.
+        </li>
+        <li>
+          Category C. Characteristics of protected classifications under
+          California or federal law, such as gender or date of birth.
+        </li>
+        <li>
+          Category F. Internet or other electronic network activity information,
+          such as browsing history, search history, online behavior, interest
+          data, and interactions with our and other website, applications,
+          systems and advertisements.
+        </li>
+        <li>Category G. Geolocation data, such as device location.</li>
+      </ul>
+      <p>
+        The categories of third parties to whom we disclosed personal
+        information for a business or commercial purpose can be found under "WHO
+        WILL YOUR INFORMATION BE SHARED WITH?".
+      </p>
+      <p><strong>Your rights with respect to your personal data</strong></p>
+      <p>Right to request deletion of the data - Request to delete</p>
+      <p>
+        You can ask for the deletion of your personal information. If you ask us
+        to delete your personal information, we will respect your request and
+        delete your personal information, subject to certain exceptions provided
+        by law, such as (but not limited to) the exercise by another consumer of
+        his or her right to free speech, our compliance requirements resulting
+        from a legal obligation or any processing that may be required to
+        protect against illegal activities.
+      </p>
+      <p>Right to be informed - Request to know</p>
+      <p>Depending on the circumstances, you have a right to know:</p>
+      <ul>
+        <li>whether we collect and use your personal information;</li>
+        <li>the categories of personal information that we collect;</li>
+        <li>
+          the purposes for which the collected personal information is used;
+        </li>
+        <li>whether we sell your personal information to third parties;</li>
+        <li>
+          the categories of personal information that we sold or disclosed for a
+          business purpose;
+        </li>
+        <li>
+          the categories of third parties to whom the personal information was
+          sold or disclosed for a business purpose; and
+        </li>
+        <li>
+          the business or commercial purpose for collecting or selling personal
+          information.
+        </li>
+      </ul>
+      <p>
+        In accordance with applicable law, we are not obligated to provide or
+        delete consumer information that is de-identified in response to a
+        consumer request or to re-identify individual data to verify a consumer
+        request.
+      </p>
+      <p>
+        Right to Non-Discrimination for the Exercise of a Consumer's Privacy
+        Rights We will not discriminate against you if you exercise your privacy
+        rights.
+      </p>
+      <p>Verification process</p>
+      <p>
+        Upon receiving your request, we will need to verify your identity to
+        determine you are the same person about whom we have the information in
+        our system. These verification efforts require us to ask you to provide
+        information so that we can match it with the information you have
+        previously provided us. For instance, depending on the type of request
+        you submit, we may ask you to provide certain information so that we can
+        match the information you provide with the information we already have
+        on file, or we may contact you through a communication method (e.g.
+        phone or email) that you have previously provided to us. We may also use
+        other verification methods as the circumstances dictate.
+      </p>
+      <p>
+        We will only use personal information provided in your request to verify
+        your identity or authority to make the request. To the extent possible,
+        we will avoid requesting additional information from you for the
+        purposes of verification. If, however, if we cannot verify your identity
+        from the information already maintained by us, we may request that you
+        provide additional information for the purposes of verifying your
+        identity, and for security or fraud-prevention purposes. We will delete
+        such additionally provided information as soon as we finish verifying
+        you.
+      </p>
+      <p>Other privacy rights</p>
+      <ul>
+        <li>you may object to the processing of your personal data</li>
+        <li>
+          you may request correction of your personal data if it is incorrect or
+          no longer relevant, or ask to restrict the processing of the data
+        </li>
+        <li>
+          you can designate an authorized agent to make a request under the CCPA
+          on your behalf. We may deny a request from an authorized agent that
+          does not submit proof that they have been validly authorized to act on
+          your behalf in accordance with the CCPA.
+        </li>
+        <li>
+          you may request to opt-out from future selling of your personal
+          information to third parties. Upon receiving a request to opt-out, we
+          will act upon the request as soon as feasibly possible, but no later
+          than 15 days from the date of the request submission.
+        </li>
+      </ul>
+      <p>
+        To exercise these rights, you can contact us by email at
+        team@usebeam.chat, or by referring to the contact details at the bottom
+        of this document. If you have a complaint about how we handle your data,
+        we would like to hear from you.
+      </p>
+      <p><strong>12. DO WE MAKE UPDATES TO THIS NOTICE?</strong></p>
+      <p>
+        <strong><em>In Short:</em></strong
+        >&nbsp;&nbsp;<em
+          >Yes, we will update this notice as necessary to stay compliant with
+          relevant laws.</em
+        >
+      </p>
+      <p>
+        We may update this privacy notice&nbsp;from time to time. The updated
+        version will be indicated by an updated “Revised” date and the updated
+        version will be effective as soon as it is accessible. If we make
+        material changes to this privacy notice, we may notify you either by
+        prominently posting a notice of such changes or by directly sending you
+        a notification. We encourage you to review this privacy
+        notice&nbsp;frequently to be informed of how we are protecting your
+        information.
+      </p>
+      <p><strong>13. HOW CAN YOU CONTACT US ABOUT THIS NOTICE?</strong></p>
+      <p>
+        If you have questions or comments about this notice, you may contact our
+        Data Protection Officer (DPO),&nbsp;Lenny Johnson, by email at
+        lenny@usebeam.chat,&nbsp;by phone at +2348138538619, or by post to:
+      </p>
+      <p>Beam</p>
+      <p>Lenny Johnson</p>
+      <p>3 Ayinke street</p>
+      <p>Yaba, Lagos 100001</p>
+      <p>Nigeria</p>
+      <p>
+        <strong
+          >HOW CAN YOU REVIEW, UPDATE, OR DELETE THE DATA WE COLLECT FROM
+          YOU?</strong
+        >
+      </p>
+      <p>
+        Based on the applicable laws of your country, you may have the right to
+        request access to the personal information we collect from you, change
+        that information, or delete it in some circumstances. To request to
+        review, update, or delete your personal information, please visit:
+        team@usebeam.chat. We will respond to your request within 30 days.
+      </p>
+    </div>
+  </div>
+  <footer class="public-footer">
+    <p class="feedback-text">
+      If you’ve got any questions, feedback or improvement ideas, we’ve created
+      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
+      where you can tell us about it.
+    </p>
+    <div class="grid-container-footer">
+      <div class="grid-1-footer">
+        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
+      </div>
+      <div class="grid-2-footer">
+        <p>
+          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
+`;

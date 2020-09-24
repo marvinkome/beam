@@ -9,14 +9,12 @@ export async function sendMessageFromBot(toUser: IUser, msg: string) {
     if (!bot) return false
 
     let conversation = await Conversation.findOne({
-        'users.user': {
-            $all: [toUser.id, bot.id],
-        },
+        'users.user': { $all: [toUser, bot] },
     })
 
     if (!conversation) {
         conversation = new Conversation()
-        conversation.users = [toUser.id, bot.id]
+        conversation.users = [{ user: toUser.id }, { user: bot.id }]
 
         await conversation.save()
     }

@@ -17,7 +17,7 @@ const email = new Email({
         },
     },
     preview: false,
-    send: true,
+    send: false,
 })
 
 // emails

@@ -2,6 +2,15 @@ import { gql } from 'apollo-server-express'
 
 export const mutationTypeDefs = gql`
     # INPUTS
+    input LoginInput {
+        id: String
+        authType: String
+
+        email: String!
+        name: String!
+        picture: String
+    }
+
     input YoutubeInput {
         name: String!
         id: String!
@@ -40,7 +49,6 @@ export const mutationTypeDefs = gql`
 
     # MUTATIONS RESPONSES
     type LoginMutationResponse {
-        code: String!
         success: Boolean!
         message: String
         token: String
@@ -70,6 +78,7 @@ export const mutationTypeDefs = gql`
         # AUTH
         googleLogin(token: String!, inviteToken: String): LoginMutationResponse
         facebookLogin(token: String!, inviteToken: String): LoginMutationResponse
+        login(authData: LoginInput, inviteToken: String): LoginMutationResponse
 
         # USER
         connectAccount(input: ConnectAccountInput): Boolean

@@ -8,6 +8,7 @@ import { connect } from 'mongoose'
 import apolloServer from 'src/graphql'
 import setupStrategies from '@libs/strategies'
 import authRoutes from '@routes/auth'
+import testRoutes from '@routes/test'
 
 export default function createApp() {
     const app = express()
@@ -48,6 +49,9 @@ export default function createApp() {
 
     // api routes
     app.use('/auth', authRoutes)
+    if (process.env.NODE_ENV === 'staging') {
+        app.use('/test', testRoutes)
+    }
 
     app.get('/', (_, res) => res.json({ message: 'welcome to beam' }))
     app.use('*', (_, res) => res.send('404 page not found'))

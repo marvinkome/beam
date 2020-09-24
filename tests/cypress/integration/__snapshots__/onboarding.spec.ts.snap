@@ -1,0 +1,13 @@
+exports[`Onboarding Flow > onboards user <spapshot> #0`] = `
+<div class="onboarding-page">
+  <header>
+    <h1>Find a friend to chat with</h1>
+    <p>
+      <a href="/app/profile">Connect</a> your Spotify and Reddit to get more
+      matches
+    </p>
+  </header>
+  <div class="suggested-friends"></div>
+  <a class="btn btn-primary" href="/app/chats">Continue to chats</a>
+</div>
+`;

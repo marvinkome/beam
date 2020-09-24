@@ -10,6 +10,7 @@
         "test:run": "cypress run --config-file cypress.local.json"
     },
     "dependencies": {
+        "@cypress/code-coverage": "^3.8.1",
         "@iam4x/cypress-graphql-mock": "^0.0.1",
         "cypress": "4.12.1",
         "cypress-plugin-snapshots": "1.4.4",
