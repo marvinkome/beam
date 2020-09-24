@@ -21,7 +21,7 @@ jobs:
         uses: cypress-io/github-action@v1
         with:
           working-directory: tests
-          wait-on: "http://localhost:5055"
+          wait-on: "http://localhost:3000"
           wait-on-timeout: 200
 
   deploy:

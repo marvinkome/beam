@@ -10,6 +10,22 @@ import setupStrategies from '@libs/strategies'
 import authRoutes from '@routes/auth'
 import testRoutes from '@routes/test'
 
+const serviceAccount = () => {
+    switch (process.env.NODE_ENV) {
+        case 'production':
+            return require('/opt/firebase/firebase_secret.json')
+        case 'development':
+            return require('../firebase_secret.json')
+        case 'staging': {
+            return {
+                projectId: process.env.FIREBASE_PROJECT_ID,
+                clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+                privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+            }
+        }
+    }
+}
+
 export default function createApp() {
     const app = express()
 
@@ -37,14 +53,8 @@ export default function createApp() {
     setupStrategies()
 
     // setup firebase
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const serviceAccount =
-        process.env.NODE_ENV === 'production'
-            ? require('/opt/firebase/firebase_secret.json')
-            : require('../firebase_secret.json')
-
     admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
+        credential: admin.credential.cert(serviceAccount()),
     })
 
     // api routes
