@@ -58,6 +58,7 @@
     },
     "scripts": {
         "start": "react-scripts start",
+        "start:coverage": "react-scripts -r @cypress/instrument-cra start",
         "build": "react-scripts build",
         "build:staging": "env-cmd -f .env.staging yarn build",
         "test": "react-scripts test",
@@ -80,6 +81,7 @@
         ]
     },
     "devDependencies": {
+        "@cypress/instrument-cra": "^1.3.2",
         "@typescript-eslint/eslint-plugin": "3.7.1",
         "@typescript-eslint/parser": "3.7.1",
         "eslint-config-prettier": "6.11.0",

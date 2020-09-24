@@ -3,7 +3,9 @@ version: "3"
 services:
   backend:
     container_name: beam-server
-    build: ./backend
+    build:
+      context: ./backend
+      dockerfile: test.Dockerfile
     depends_on:
       - db
     ports:
@@ -20,17 +22,23 @@ services:
       - FACEBOOK_SECRET=fff24cbe988ec72cda051078b477a906
       - CLIENT_URL=http://localhost:3000
       - BOT_EMAIL=team@usebeam.chat
+    volumes:
+      - ./backend:/app/
+      - /app/node_modules
 
   frontend:
     container_name: beam-web
     build:
       context: ./frontend
-      args:
-        - STAGING=true
+      dockerfile: test.Dockerfile
     ports:
-      - "3033:3033"
+      - "3000:3000"
     depends_on:
       - backend
+    tty: true
+    volumes:
+      - ./frontend:/app/
+      - /app/node_modules
 
   db:
     container_name: beam-db
@@ -45,3 +53,5 @@ services:
 
 volumes:
   mongodb_data_container:
+  server:
+  client:

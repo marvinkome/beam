@@ -11,10 +11,7 @@ RUN yarn --frozen-lockfile
 # Bundle app source
 COPY . .
 
-# yarn build
-RUN yarn build
-
 # expose port
-EXPOSE 3033
+EXPOSE 3000
 
-CMD ["yarn", "serve"]
+CMD ["yarn", "start:coverage"]

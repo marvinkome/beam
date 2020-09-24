@@ -17,7 +17,7 @@ export function useAppSetup() {
 
     // set location and cache user data
     const { data, loading } = useQuery(gql`
-        {
+        query GetUserDetails {
             me {
                 id
                 email
@@ -102,7 +102,7 @@ export function useAppSetup() {
             setupNotification()
         }
 
-        // 4 - if done loading and data is available
+        // 3 - if done loading and data is available
         if (!loading && data) {
             setUser(data.me.id, {
                 $email: data.me.email,

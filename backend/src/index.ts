@@ -12,6 +12,9 @@ import authRoutes from '@routes/auth'
 export default function createApp() {
     const app = express()
 
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    require('@cypress/code-coverage/middleware/express')(app)
+
     // setup mongoose
     connect(process.env.DB_URL || '', {
         useNewUrlParser: true,
