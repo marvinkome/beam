@@ -1,226 +1,73 @@
 @import "styles/utils/mixins.scss";
 
 .landing-page {
-    width: 100%;
-    height: 100%;
     color: #32294d;
 
-    .icon {
-        color: #9175db;
-        font-size: 1.5em;
-    }
+    .page-content {
+        display: grid;
+        column-gap: 5em;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
 
-    .header-container {
-        position: relative;
+        @include for-phone-only {
+            display: block;
+            padding: 0em 1.5em 1em;
+        }
 
-        .public-navbar {
-            position: absolute;
-            top: 0;
+        h1 {
+            width: 60%;
+            align-self: end;
+            justify-self: end;
 
-            img {
-                width: 120px;
-                margin-left: 20px;
+            @include for-phone-only {
+                width: 100%;
+            }
+
+            font-weight: 600;
+            line-height: 1.3;
+            margin-bottom: 1em;
+        }
+
+        .header-actions {
+            width: 60%;
+            justify-self: end;
+            text-align: center;
+
+            @include for-phone-only {
+                width: 100%;
             }
 
             .btn {
-                border: 1px solid white;
-                color: white;
-                background-color: transparent;
+                width: 65%;
+                font-size: var(--small-text);
+                text-transform: uppercase;
 
                 @include for-phone-only {
-                    color: #9175db;
-                    border: 2px solid #9175db;
-                }
-            }
-        }
-
-        .header-grid {
-            display: grid;
-            height: 100%;
-            grid-template-columns: 1fr 1fr;
-
-            @include for-phone-only {
-                grid-template-columns: 100%;
-            }
-
-            .text-grid,
-            .image-grid {
-                padding-top: 7em;
-            }
-
-            .text-grid {
-                margin-top: 5%;
-                padding-left: 6em;
-                padding-right: 6em;
-                
-
-                @include for-phone-only {
-                    padding: 6em 2em 4em;
-                }
-
-                h1 {
-                    font-size: 32px;
-                    font-weight: 700;
-                }
-
-                .check-list {
-                    margin-top: 2.5em;
-
-                    .check {
-                        display: flex;
-                        align-items: center;
-                        margin-bottom: 25px;
-
-                        .icon {
-                            width: 20px;
-                            height: 20px;
-                            margin-right: 20px;
-                            background-color: #9175db;
-                            color: white;
-                            border-radius: 50%;
-                            padding: 5px;
-                            font-size: 1.2em;
-                        }
-
-                        p {
-                            flex: 1;
-                        }
-                    }
-                }
-
-                .header-cta {
-                    text-align: center;
-
-                    .btn {
-                        font-weight: 600;
-                        padding: 25px 40px;
-                        margin-top: 3.5em;
-                        border-radius: 50px;
-                        border: none;
-                        background-color: #9175db;
-                        color: white;
-                        font-size: 16px;
-                        cursor: pointer;
-
-                        @include for-phone-only {
-                            width: 100%;
-                            padding: 15px 25px;
-                        }
-
-                        &:focus {
-                            border: none;
-                            outline: none;
-                        }
-
-                        .loader {
-                            border-width: 3px;
-                            border-top-color: var(--primary-color);
-                            border-right-color: var(--primary-color);
-                            border-radius: 50%;
-                            width: 20px;
-                            height: 20px;
-                            margin-top: 0px;
-                            margin-left: 15px;
-                        }
-                    }
-
-                    p {
-                        margin-top: 25px;
-                        text-align: left;
-                        
-                        @include for-phone-only {
-                            text-align: center;
-                            margin-top: 15px;
-                        }
-                    }
-                }
-            }
-
-            .image-grid {
-                background-color: #9175db;
-                border-bottom-left-radius: 10px;
-
-                @include for-phone-only {
-                    padding-top: 2em;
-                    text-align: center;
-                    border-bottom-left-radius: 0px;
-                }
-
-                img {
-                    height: 80vh;
-
-                    @include for-phone-only {
-                        margin: 0 auto;
-                        height: 60vh;
-                    }
-                }
-            }
-        }
-    }
-
-    .text-container {
-        padding: 7em;
-        width: 60%;
-        margin: 0 auto;
-
-        @include for-phone-only {
-            width: 90%;
-            padding: 10px;
-            padding-top: 7em;
-        }
-
-        .text-box {
-            background-color: #f5f3f8;
-            padding: 1px 3em;
-            border-radius: 10px;
-            -webkit-box-shadow: -1px 4px 4px 0px #ccc; /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
-            -moz-box-shadow: -1px 4px 4px 0px #ccc; /* Firefox 3.5 - 3.6 */
-            box-shadow: -1px 4px 4px 0px #ccc; /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
-            font-size: 20px;
-
-            @include for-phone-only {
-                padding: 40px 40px;
-            }
-
-            h2 {
-                margin-top: 6em;
-                margin-bottom: 10px;
-
-                @include for-phone-only {
-                    margin-top: 2em;
+                    width: 100%;
                 }
             }
 
             p {
-                margin: 40px 0px;
-                line-height: 40px;
-            }
+                width: 65%;
+                font-size: var(--small-text);
+                margin-top: 15px;
 
-            .text-link {
-                color: var(--primary-color);
-            }
-
-            .text-box-cta {
-                display: flex;
-                justify-content: center;
-                margin: 50px 0;
-
-                .btn {
-                    font-weight: 600;
-                    padding: 15px 25px;
-                    margin-top: 2.5em;
-                    border-radius: 10px;
-                    border: none;
-                    background-color: #48d38a;
-                    color: white;
-                    font-size: 16px;
-                    cursor: pointer;
-
-                    &:focus {
-                        border: none;
-                        outline: none;
-                    }
+                @include for-phone-only {
+                    width: 100%;
                 }
+            }
+        }
+
+        img {
+            grid-row: span 2;
+            width: 40%;
+            margin-bottom: 2em;
+
+            @include for-phone-only {
+                display: block;
+                width: 60%;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
     }

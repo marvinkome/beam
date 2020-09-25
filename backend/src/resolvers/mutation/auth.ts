@@ -108,7 +108,8 @@ export const resolver = {
             if (!invitation) {
                 return {
                     success: false,
-                    message: 'Invitation expired',
+                    message:
+                        'Invitation expired. Please request a new invite link from your friend',
                 }
             }
 
@@ -117,14 +118,14 @@ export const resolver = {
             if (!friend) {
                 return {
                     success: false,
-                    message: 'Friend not found',
+                    message: 'Invalid invite link',
                 }
             }
 
             if (friend.id === user.id) {
                 return {
                     success: false,
-                    message: 'Friend not found',
+                    message: 'Invalid invite link',
                 }
             }
 

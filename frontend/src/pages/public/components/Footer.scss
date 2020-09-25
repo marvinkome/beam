@@ -2,46 +2,22 @@
 
 .public-footer {
     font-size: 14px;
-    padding: 50px 100px;
-    text-align: center;
-    // color: #9175db;
-    background-color: white;
+    padding: 2em;
+    margin: 0 18%;
+    margin-top: 3em;
 
     @include for-phone-only {
-        padding: 50px 10px;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0;
     }
 
     a {
         color: var(--primary-color);
-    }
-
-    .feedback-text {
-        padding: 0 20%;
+        margin-right: 5em;
 
         @include for-phone-only {
-            padding: 0 5%;
-        }
-    }
-
-    .grid-container-footer {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        margin-top: 50px;
-
-        .grid-1-footer {
-            margin-left: 50%;
-
-            @include for-phone-only {
-                margin-left: 20%;
-            }
-        }
-
-        .grid-2-footer {
-            margin-right: 50%;
-
-            @include for-phone-only {
-                margin-right: 20%;
-            }
+            margin-right: 0;
         }
     }
 }

@@ -4,10 +4,8 @@ import { useGoogleLogin as useReactGoogleLogin } from "react-google-login"
 import { useMutation, gql } from "@apollo/client"
 import { toast } from "react-toastify"
 import { startLoader } from "components/loader"
-import { ConnectYoutubeAccount } from "lib/connect-account"
 import { AUTH_TOKEN, GOOGLE_CLIENT_ID } from "lib/keys"
 import { setUser, trackEvent } from "lib/analytics"
-import { useConnectAccountMutation } from "./connect"
 
 type LoginOptions = {
     loginType: "register" | "invite" | "login"
@@ -17,7 +15,6 @@ type LoginOptions = {
 
 export function useGoogleLogin(options: LoginOptions) {
     const history = useHistory()
-    const connectAccount = useConnectAccountMutation()
 
     // create api login mutation function
     const [loginMutation] = useMutation(gql`
@@ -77,52 +74,16 @@ export function useGoogleLogin(options: LoginOptions) {
                 signUpDate: new Date(parseInt(user.createdAt, 10)).toISOString(),
             })
 
-            // check if the user has already connect youtube account
-            if (user.hasConnectedAccount) {
-                stopLoader && stopLoader()
-                trackEvent("Auth successful", { category: "Auth", label: options.loginType })
+            stopLoader && stopLoader()
+            trackEvent("Auth successful", { category: "Auth", label: options.loginType })
 
-                if (options.onAuthCb) {
-                    return options.onAuthCb()
-                } else {
-                    // if user is signing in
-                    return history.push("/app/chats")
-                }
-            }
+            if (options.onAuthCb) return options.onAuthCb()
 
-            // else connect youtube data
-            // get youtube subscriptions
-            const youtube = new ConnectYoutubeAccount(accessToken)
-            const subs = await youtube.getSubscriptions()
-
-            const resp = await connectAccount({
-                variables: {
-                    input: {
-                        account: "youtube",
-                        subs,
-                    },
-                },
-            })
-
-            if (resp.data.connectAccount) {
-                trackEvent("Connected youtube account", { category: "Auth", label: "Connect" })
-
-                stopLoader && stopLoader()
-                trackEvent("Auth successful", { category: "Auth", label: options.loginType })
-
-                if (options.onAuthCb) {
-                    return options.onAuthCb()
-                } else {
-                    // if user is signing in
-                    return history.push("/app/onboarding")
-                }
-            } else {
-                stopLoader && stopLoader()
-                toast.dark("Failed to connect youtube account")
-                Sentry.captureMessage(`Saving youtube subsriptions failed`)
-            }
+            return user.hasConnectedAccount
+                ? history.push("/app/chats")
+                : history.push("/app/onboarding")
         } else {
-            toast.dark(`Error signing up - ${message}`)
+            toast.dark(message)
             Sentry.captureMessage(`User auth failed - ${message}`)
             stopLoader && stopLoader()
         }
@@ -131,7 +92,6 @@ export function useGoogleLogin(options: LoginOptions) {
     // setup google login action
     const login = useReactGoogleLogin({
         clientId: GOOGLE_CLIENT_ID,
-        scope: "https://www.googleapis.com/auth/youtube.readonly",
         onSuccess: onGoogleLoginSuccess,
         onRequest: () => {
             Sentry.addBreadcrumb({
