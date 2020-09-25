@@ -1,4 +1,4 @@
-.connect-account-page {
+.find-friends-page {
     padding: 2em 0px;
 
     .page-header {
@@ -8,12 +8,8 @@
         }
     }
 
-    .page-content {
-        margin-bottom: 5em;
-    }
-
-    .btn {
-        margin-top: auto;
+    & > .btn {
+        margin-top: 5em;
         width: 100%;
     }
 }

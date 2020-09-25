@@ -22,9 +22,13 @@ body {
 }
 
 body {
-    margin: 0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+
+    margin: 0;
     background: var(--bg-color);
     color: var(--text-color);
     position: relative;

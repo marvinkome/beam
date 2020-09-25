@@ -1,39 +1,9 @@
 .onboarding-page {
-    padding: 3em 20px;
+    padding: 1.2em 2em;
 
     header {
-        h1 {
-            font-size: 2em;
-        }
-
-        p {
-            margin-top: 15px;
-        }
-    }
-
-    & > .btn-primary {
-        margin-top: 5em;
-        width: 100%;
-    }
-
-    .share-box {
-        text-align: center;
-        border: 1px solid hsl(0, 0%, 80%);
-        border-radius: 10px;
-        margin-top: 2.5em;
-
-        .share-box-header {
-            padding: 20px 15px;
-            border-bottom: 1px solid hsl(0, 0%, 80%);
-            font-weight: 600;
-        }
-
-        .share-box-content {
-            padding: 10px 15px;
-
-            & > p {
-                font-size: var(--small-text);
-            }
+        img {
+            width: 30%;
         }
     }
 }

@@ -1,0 +1,103 @@
+.connect-accounts {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0px;
+
+    .account {
+        display: flex;
+        align-items: center;
+        border: 1px dashed;
+        border-radius: 20px;
+        padding: 15px 20px;
+        margin-top: 20px;
+        cursor: pointer;
+
+        .loader {
+            width: 40px;
+            height: 40px;
+            margin: 0px;
+            border-width: 5px;
+        }
+
+        img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .account-details {
+            margin-left: 20px;
+            margin-right: auto;
+
+            p {
+                color: #121212;
+                font-size: var(--small-text);
+                margin-top: 5px;
+
+                &::first-letter {
+                    text-transform: capitalize;
+                }
+
+                &.account-type {
+                    font-weight: 600;
+                    font-size: 16px;
+                }
+            }
+        }
+
+        &.youtube {
+            border-color: rgba(255, 0, 0, 0.5);
+
+            .loader {
+                border-top-color: rgb(255, 0, 0);
+            }
+
+            .account-type {
+                color: rgb(255, 0, 0);
+            }
+        }
+
+        &.spotify {
+            border-color: rgb(30, 215, 96);
+
+            .loader {
+                border-top-color: rgb(30, 215, 96);
+            }
+
+            .account-type {
+                color: rgb(30, 215, 96);
+            }
+        }
+
+        &.reddit {
+            border-color: #ff4500;
+
+            .loader {
+                border-top-color: #ff4500;
+            }
+
+            .account-type {
+                color: #ff4500;
+            }
+        }
+
+        &.connected {
+            background-color: #9ed3b7;
+            border: none;
+            opacity: 1;
+
+            .loader {
+                border-top-color: #79c39c;
+            }
+
+            img {
+                width: 30px;
+                height: 25px;
+            }
+
+            .account-details p {
+                color: #fff;
+            }
+        }
+    }
+}

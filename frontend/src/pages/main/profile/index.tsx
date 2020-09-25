@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react"
-import { ProfileAccount } from "./account"
+import { ConnectAccount } from "components/connect-account"
 import { Link } from "react-router-dom"
 import { StackHeader } from "components/header"
 import { useQuery, gql } from "@apollo/client"
@@ -12,12 +12,6 @@ function useFetchData() {
             {
                 me {
                     id
-                    connectedAccounts {
-                        reddit
-                        spotify
-                        youtube
-                    }
-
                     profile {
                         firstName
                         picture
@@ -47,40 +41,9 @@ function useFetchData() {
     }
 }
 
-function useConnectedAccounts(data: any) {
-    const [showingSearchPrompt, showSearchPrompt] = useState(false)
-    const [connectedAccounts, setConnectedAccounts] = useState({
-        youtube: false,
-        spotify: false,
-        reddit: false,
-    })
-
-    useEffect(() => {
-        if (data?.me?.connectedAccounts) {
-            setConnectedAccounts(data.me.connectedAccounts)
-        }
-    }, [data])
-
-    return {
-        connectedAccounts,
-        showingSearchPrompt,
-
-        setConnectedAccount: (account: "youtube" | "reddit" | "spotify", isConnected: boolean) => {
-            setConnectedAccounts({
-                ...connectedAccounts,
-                [account]: isConnected,
-            })
-
-            if (isConnected) {
-                showSearchPrompt(true)
-            }
-        },
-    }
-}
-
 export function Profile() {
     const { loading, data } = useFetchData()
-    const connectedAccountsData = useConnectedAccounts(data)
+    const [showingSearchPrompt, showSearchPrompt] = useState(false)
     const profile = data?.me.profile
 
     return (
@@ -103,7 +66,7 @@ export function Profile() {
                 <section className="linked-accounts">
                     <p>Linked accounts</p>
 
-                    {connectedAccountsData.showingSearchPrompt && (
+                    {showingSearchPrompt && (
                         <div className="after-connect">
                             <p>You connected a new account</p>
                             <Link to="/app/find-friend">Click here to search for friends</Link>
@@ -111,28 +74,7 @@ export function Profile() {
                     )}
 
                     {/* youtube */}
-                    <ProfileAccount
-                        account="youtube"
-                        description="We only scan your subscriptions"
-                        isConnected={connectedAccountsData.connectedAccounts["youtube"]}
-                        onAction={connectedAccountsData.setConnectedAccount}
-                    />
-
-                    {/* spotify */}
-                    <ProfileAccount
-                        account="spotify"
-                        description="We only scan your genre and top artists"
-                        isConnected={connectedAccountsData.connectedAccounts["spotify"]}
-                        onAction={connectedAccountsData.setConnectedAccount}
-                    />
-
-                    {/* reddit */}
-                    <ProfileAccount
-                        account="reddit"
-                        description="We only scan your subreddits"
-                        isConnected={connectedAccountsData.connectedAccounts["reddit"]}
-                        onAction={connectedAccountsData.setConnectedAccount}
-                    />
+                    <ConnectAccount onConnect={() => showSearchPrompt(true)} hasDisconnect />
                 </section>
             )}
         </div>

@@ -36,8 +36,7 @@ export function FindFriend() {
                     )}
 
                     <span>
-                        <Link to="/app/profile">Connect</Link> your Spotify and Reddit to get more
-                        matches
+                        <Link to="/app/profile">Connect</Link> all your accounts to get more matches
                     </span>
                 </div>
 
