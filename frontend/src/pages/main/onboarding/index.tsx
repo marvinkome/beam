@@ -4,7 +4,7 @@ import { FindFriends } from "./steps/find-friends"
 import "./style.scss"
 
 export function OnBoarding() {
-    const [step, changeStep] = useState(1)
+    const [step, changeStep] = useState(0)
 
     return (
         <div className="onboarding-page">

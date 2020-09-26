@@ -43,7 +43,7 @@ class PopupWindow {
                         return
                     }
 
-                    if (popup.location.href === this.url || popup.location.pathname === "blank") {
+                    if (popup.location.pathname === "blank") {
                         return
                     }
 

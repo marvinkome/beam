@@ -7,3 +7,5 @@ Cypress.Commands.add("setup", (pageUrl, visitOptions) => {
     cy.server()
     cy.visit(pageUrl, visitOptions)
 })
+
+require("@cypress/snapshot").register()

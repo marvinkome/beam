@@ -2,7 +2,10 @@ exports[`Public pages tests > loads terms page <snapshot> #0`] = `
 <div class="terms">
   <nav class="public-navbar">
     <div>
-      <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+      <img
+        alt="beam"
+        src="data:image/png;base64,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"
+      />
     </div>
   </nav>
   <div class="text-container">
@@ -734,21 +737,8 @@ exports[`Public pages tests > loads terms page <snapshot> #0`] = `
     </div>
   </div>
   <footer class="public-footer">
-    <p class="feedback-text">
-      If you’ve got any questions, feedback or improvement ideas, we’ve created
-      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
-      where you can tell us about it.
-    </p>
-    <div class="grid-container-footer">
-      <div class="grid-1-footer">
-        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
-      </div>
-      <div class="grid-2-footer">
-        <p>
-          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
-        </p>
-      </div>
-    </div>
+    <a href="https://usebeam.chat/privacy-policy">Privacy Policy</a
+    ><a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
   </footer>
 </div>
 `;
@@ -757,7 +747,10 @@ exports[`Public pages tests > loads acceptable use page <snapshot> #0`] = `
 <div class="terms">
   <nav class="public-navbar">
     <div>
-      <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+      <img
+        alt="beam"
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAF0AAAAoCAYAAACcnvaxAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAjFSURBVHgB7VgLcJTVFT73/rsJeRCTQHjJlEAeEHmNBS0t02nQ6Ti00w4zCJRhWotDoSAku8kuAdpp11dDsiGbR6Gg00qt2CpF1IoOLS1Kpa1WDQolJLshRMeCUxGwScxj/3v63T9Jm+fu4lhhxv+byd6be8/9/nvOPffccy+RDRs2bNiwYeNjQ0TqrPKENgrBBYroW25/zhtk4xOBjNgpeCmKHGKVTzY+MUiy8anDNvo1gG30awDb6NcADrpKBFx1qUZcym2KzZuJhRPZzXlm+purIudVJEMcK0/Z3S+Pjhszdo5BjkWKORkDr0hh1nUIOl5SPuPfsXD4PReSpLo012nIfCVkiiDRhjm9bji6XtlYmncx0tiaHwdTVDvdEW7vftWz86aWXetb0rqTOpcIcuSxME1iqnM64v6wYfuUS/3H/bSkZWa32b1ESk4nJdpYqj8XluUcESJ23SOmjDXe4FEw5StWxVeSc6vS2ho8xI6tsG3qUGl+SxrSvWl79p8oCqq8wWX4cCWqk4dMiCnEgqoK/Tk7I3J4Qt8TxD+ABlOGdAq6gN9HxEd0b0FtTudw4wPFZ1ZJaTwG4f1C0DFWdP9QvUSTFLJoU/m0ZwOu+kzhMHZD9na0D3RW5mMqbN7lrso7RzEgJqPDe37IxIvxwYVohjPKx5Uwz8A4LE2aR0Lko32CRSjkloLyrLKROGHwB/HRbT2yVAcvP8RKtEiDJmPHfB1983tmJksLy7O2DR7v8x11pLZNPgC5b/Y21UPr37OQZw3FE0xB+Vi4BdAMBb+lwl2LigKzPhjMEygKuvDNgN5h4LoBTWFm8Szq9dDrRtL6Eo0HSyvmtRKTDYAwGypfYSwU2s9jN8yCbb6KbyVj/AXV3Zrnrrr5MkVBTOGFSRVg+4zDRx81w84t7qrM8/37d244lWwmxpdishuZ1fbqkmAzttyTg3ngneswaW3Ibky6oKA8d/cgEV/15sbvM8lywWprlbfhTZd/+hP9BdLaJleRZXBxWZFyX0nKedTnE6q/TMB7ZqHBxl4Yao7hiHuBmReMtP0tg2NnMJn5Lv+Mhr72iuKGsYidxyCRhzkfhBEcLMQhYdDqwtKcf/XJ1W5tngEvPworTZBxo7WzraMoiOkg1QaH1xz8INmxbrDBNe7ZNau1oCJnE2T2WA2K/L58HrCge3yvJWJi91kfFdJVONTgFqx2Jd29cg/4fM2j+voC3pDeaffoOrxtjdufu3ewwTXc/hnHTcl6JyDMiFtrS5qKKAJY8RJX+f8MruHZMf190zBXYKU6e8PJe9jjGwr6GVxjU+nUM9gJP+rRW90JtojRw9KLYgCMedE0ZaHPN7Ujklxhec56FC34+1zqrc139e/rak1bgXAyDrv+RcTIn0XicVVM+zmUPQVlstPbwl/oa4fH3W+VzDUuf9aBSBzu8tx6WNNaPHh6yZ61rzlpWN3otKsi95Xh+orK8k6iONkr96KrJuvt4eQmtWT9gvTiCJFeublhHkVBjCmjOFJcmf1OVClsYRj1t1adzQX9+0zR85QQJj4cY5ZzWP+AcJEuazYF46H5l3Qd58BjMYwn0Smfx+97qGZ0jE6aM5yMFJaTjMzBImSVghtHklm+X5hQyIrlOBfGURTEFNPhYTE/djGbx3EIFmPQACVh5kwdQA2itdXe0KoYmKyDmZUaY/2bQBngiAfTpXRxw2mKAchcPkQy8C4MMl5I52w0vT50vmRGJBEc1oVCChdRzNoMGtFNGkVChHu5PqJYoehDbdnBgMfGW8GOeQzqSRQdCrvmAnZPqIdAG1yXquNy5/gwxQiElnadJillJtJ1gohGN0m9LbWfKx5LMYKlMU3ohVI0MHVivqiVF4b0XLp0eV+sfL6H5rfrMl4lXumQ7Xqfp4mEBu39/4yRIoWuMzhqi0NLcKtajnQo3HuZaOrrlML4Oyx+N0m5FAfRA+semt8djRDevNgqhTw+oIMZYUd8jUy+BYZ8mK4SaysmXawpaUJuzBOZnDrOR124ak9oFgueFTWd+JQhleCnkH6thHN+W42iukp3cGZfZzjcfoitbU4zu5JvWByNLOANfh4HzhJrrKSD/ftYxj3fU9LKwObGPLpKWHk20690HQfp5mXLnjSijWGhisV1+L6ko8d/HQGV0dJQG/r+L66c/Q5Chb6ukzKoVnvOSESBLc2ZUojnuOdM2VdUlnWyf7/bP/UE+p6G4ZIlyafLvacmjMRVtvGNSdWe4PLBOa+h5C4U72NOcxZmzv21z8cjGrTWG9wC1b5L1yGGxnQhByha6M/1Vnsab4GrfUW/r9R4Q6WK5RPO9vazrR2XhXNcRobDlBvYDH8H4hnY/m+quDjvcB9LSEpc1dnWfgKHW248x9fXepvuC3fLg4ZZfz7sSJWmkT4hXjjW4Fa7Gks3sab4bLhgBz3VN37jjmkt1Z4za3Dl34eniGVpraG5VZ76e2Vn17Gwo+1igjFudJcUs4nDW5Fq4I2ETmORU8A1ma4jDPAUHUpYit8NFuqQ6hvIP2t63zO2CWGeCCfHnxuVPv6sYYoGjCsmbXASB1PCznz3T4beWjXW+W5sd8YpxGM+AK5UXOMrpbM7yAnZzdKR0RwnZKPmx/kyEYu8m6ZMOzSYo7BixjN4JriD9Q1RUK4Qjn0qIbFJGhnnuoiDOIOOQK3b0f9X3CPzEZYuUAQwRb4yXM3rYQ+iJ1YOlnIr8qkVsL5+Ft3hKst+YbBQ71NrYcDV+Ihw0mZshS9CNrMnMFlK/RHVhwv82S9F++D6B6e/i+LOWk/oNlyY3Eho5oFrYm93A3Q8jCN9b0Fldt1IHG5/9vFK96mbpHPUasm8FLn2PH3bhXWQ3vBzUtHjeJb4jTZYtbdxP86seJMdR/pzsMP4C+4UJ+FHz0SaL/Lzl6DbPHC/HEkOc/glEtMvg/Mf9P8C4qljpKv11WLPWnZqPvqYQLgS+o1Gl2TDhg0bNmzYsGHDhg0bNmzYsGHjM43/ACtigkve1T+vAAAAAElFTkSuQmCC"
+      />
     </div>
   </nav>
   <div class="text-container">
@@ -904,21 +897,8 @@ exports[`Public pages tests > loads acceptable use page <snapshot> #0`] = `
     </div>
   </div>
   <footer class="public-footer">
-    <p class="feedback-text">
-      If you’ve got any questions, feedback or improvement ideas, we’ve created
-      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
-      where you can tell us about it.
-    </p>
-    <div class="grid-container-footer">
-      <div class="grid-1-footer">
-        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
-      </div>
-      <div class="grid-2-footer">
-        <p>
-          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
-        </p>
-      </div>
-    </div>
+    <a href="https://usebeam.chat/privacy-policy">Privacy Policy</a
+    ><a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
   </footer>
 </div>
 `;
@@ -927,7 +907,10 @@ exports[`Public pages tests > loads privacy policy Ppge <snapshot> #0`] = `
 <div class="privacy-policy">
   <nav class="public-navbar">
     <div>
-      <img alt="beam" src="/static/media/beam-logo-dark.f3a266f1.png" />
+      <img
+        alt="beam"
+        src="data:image/png;base64,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"
+      />
     </div>
   </nav>
   <div class="text-container">
@@ -1877,21 +1860,8 @@ exports[`Public pages tests > loads privacy policy Ppge <snapshot> #0`] = `
     </div>
   </div>
   <footer class="public-footer">
-    <p class="feedback-text">
-      If you’ve got any questions, feedback or improvement ideas, we’ve created
-      a subreddit (<a href="https://www.reddit.com/r/beam_me/">r/beam_me</a>),
-      where you can tell us about it.
-    </p>
-    <div class="grid-container-footer">
-      <div class="grid-1-footer">
-        <p><a href="https://usebeam.chat/privacy-policy">Privacy Policy</a></p>
-      </div>
-      <div class="grid-2-footer">
-        <p>
-          <a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
-        </p>
-      </div>
-    </div>
+    <a href="https://usebeam.chat/privacy-policy">Privacy Policy</a
+    ><a href="https://usebeam.chat/terms-and-condition">Terms of Use</a>
   </footer>
 </div>
 `;
