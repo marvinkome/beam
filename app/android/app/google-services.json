@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "980384508798",
+    "firebase_url": "https://beam-abf91.firebaseio.com",
+    "project_id": "beam-abf91",
+    "storage_bucket": "beam-abf91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:980384508798:android:344871a6546bbc8abde12f",
+        "android_client_info": {
+          "package_name": "com.beam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "980384508798-j4vg223s8en29rudatpcerdl8jum7ka9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.beam",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "980384508798-0hm6vh77uo52mk32chqlead5rud5i48r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsowJI0Jah1fC8J_Y0oXdqNKwOCIwF8Vc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "980384508798-0hm6vh77uo52mk32chqlead5rud5i48r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

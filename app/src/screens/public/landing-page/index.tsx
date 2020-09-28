@@ -1,9 +1,33 @@
 import React from "react"
+import Toast from "react-native-toast-message"
 import { ScrollView, View, StyleSheet } from "react-native"
 import { Text, Button, Image } from "react-native-elements"
 import { TextButton, TextLink } from "components"
+import { GoogleSignin, statusCodes } from "@react-native-community/google-signin"
 
 export function LandingPage() {
+    const signIn = async () => {
+        try {
+            await GoogleSignin.hasPlayServices()
+            const userInfo = await GoogleSignin.signIn()
+
+            console.log(userInfo)
+        } catch (e) {
+            let error = "Something went wrong"
+            if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+                error = "Please sign in to continue"
+            } else if (e.code === statusCodes.IN_PROGRESS) {
+                error = "Already signing in"
+            } else if (e.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+                error = "Play service required to sign in"
+                // play services not available or outdated
+            }
+
+            console.log(e)
+            Toast.show({ text1: "ERROR", text2: error, type: "error", position: "bottom" })
+        }
+    }
+
     return (
         <ScrollView style={styles.container}>
             {/* navbar */}
@@ -35,7 +59,7 @@ export function LandingPage() {
                         containerStyle={styles.mainButton}
                         titleStyle={styles.mainButtonText}
                         title="Sign up with Google"
-                        onPress={() => null}
+                        onPress={signIn}
                     />
 
                     <Text>
@@ -67,12 +91,12 @@ const styles = StyleSheet.create({
 
     pageContent: {
         paddingBottom: 16,
-        paddingVertical: 24,
+        paddingVertical: 10,
     },
 
     headerText: {
         textAlign: "center",
-        marginBottom: 20,
+        marginBottom: 36,
     },
 
     screenshot: {
