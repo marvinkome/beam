@@ -19,7 +19,7 @@ export function LandingPageView(props: { onRegister: () => void }) {
             <Navbar />
 
             <div className="page-content">
-                <h1>Chat with local friends who love what you love</h1>
+                <h1>Find friends nearby who share your interests</h1>
 
                 {/* image */}
                 <img
