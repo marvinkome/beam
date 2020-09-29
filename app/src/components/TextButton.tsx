@@ -5,10 +5,15 @@ import { theme } from "styles/theme"
 
 type IProps = {
     children: string
+    onPress: () => void
     style?: any
 }
 export function TextButton(props: IProps) {
-    return <Text style={[styles.textStyle, props.style]}>{props.children}</Text>
+    return (
+        <Text onPress={props.onPress} style={[styles.textStyle, props.style]}>
+            {props.children}
+        </Text>
+    )
 }
 
 const styles = StyleSheet.create({

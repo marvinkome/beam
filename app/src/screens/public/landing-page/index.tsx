@@ -1,32 +1,11 @@
 import React from "react"
-import Toast from "react-native-toast-message"
 import { ScrollView, View, StyleSheet } from "react-native"
 import { Text, Button, Image } from "react-native-elements"
 import { TextButton, TextLink } from "components"
-import { GoogleSignin, statusCodes } from "@react-native-community/google-signin"
+import { useGoogleAuth } from "hooks"
 
 export function LandingPage() {
-    const signIn = async () => {
-        try {
-            await GoogleSignin.hasPlayServices()
-            const userInfo = await GoogleSignin.signIn()
-
-            console.log(userInfo)
-        } catch (e) {
-            let error = "Something went wrong"
-            if (e.code === statusCodes.SIGN_IN_CANCELLED) {
-                error = "Please sign in to continue"
-            } else if (e.code === statusCodes.IN_PROGRESS) {
-                error = "Already signing in"
-            } else if (e.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                error = "Play service required to sign in"
-                // play services not available or outdated
-            }
-
-            console.log(e)
-            Toast.show({ text1: "ERROR", text2: error, type: "error", position: "bottom" })
-        }
-    }
+    const { signIn, loading } = useGoogleAuth()
 
     return (
         <ScrollView style={styles.container}>
@@ -60,10 +39,11 @@ export function LandingPage() {
                         titleStyle={styles.mainButtonText}
                         title="Sign up with Google"
                         onPress={signIn}
+                        loading={loading}
                     />
 
                     <Text>
-                        Already have an account? <TextButton>Login</TextButton>
+                        Already have an account? <TextButton onPress={signIn}>Login</TextButton>
                     </Text>
                 </View>
             </View>
@@ -105,7 +85,7 @@ const styles = StyleSheet.create({
     },
 
     headerActions: {
-        marginTop: 24,
+        marginTop: 30,
         alignItems: "center",
     },
 
@@ -120,7 +100,7 @@ const styles = StyleSheet.create({
     footer: {
         flexDirection: "row",
         justifyContent: "space-around",
-        marginTop: 40,
+        marginTop: "20%",
         marginBottom: 16,
     },
 })

@@ -49,6 +49,7 @@ export const theme: Theme = {
         titleStyle: {
             fontSize: 16,
             fontFamily: "SourceSansPro-SemiBold",
+            letterSpacing: 1,
         },
     },
 }
