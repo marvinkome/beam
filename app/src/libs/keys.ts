@@ -1,6 +1,6 @@
 function getConfig(dev: string, prod: string) {
-    if (process.env.NODE_ENV === "production") return prod
-    return dev
+    if (__DEV__) return dev
+    return prod
 }
 
 export const AUTH_TOKEN = getConfig("Beam_Auth_Token_Dev", "Beam_Auth_Token_Prod")

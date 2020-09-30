@@ -8,12 +8,19 @@ import { Onboarding } from "./onboarding"
 
 const MainStack = createStackNavigator()
 export function MainPages() {
-    console.log("call me maybe")
+    // TODO:: track page view
+
+    // setup app
 
     return (
         <MainStack.Navigator>
+            <MainStack.Screen
+                name={routesName.Onboarding}
+                component={Onboarding}
+                options={{ headerShown: false }}
+            />
+
             <MainStack.Screen name={routesName.Chats} component={Chats} />
-            <MainStack.Screen name={routesName.Onboarding} component={Onboarding} />
         </MainStack.Navigator>
     )
 }

@@ -3,6 +3,7 @@ import { ScrollView, View, StyleSheet } from "react-native"
 import { Text, Button, Image } from "react-native-elements"
 import { TextButton, TextLink } from "components"
 import { useGoogleAuth } from "hooks"
+import { theme } from "styles/theme"
 
 export function LandingPage() {
     const { signIn, loading } = useGoogleAuth()
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         paddingHorizontal: 15,
-        backgroundColor: "#fff",
+        backgroundColor: theme.colors?.background,
     },
 
     logo: {
