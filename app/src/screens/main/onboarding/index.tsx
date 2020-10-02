@@ -1,17 +1,16 @@
 import React from "react"
-import { View, Text } from "react-native"
 import { createStackNavigator } from "@react-navigation/stack"
 
 // steps
-import { Profile } from "./profile"
-import { ConnectAccount } from "./connect-account"
+import { ConnectAccount } from "./connect"
 import { SendInvite } from "./send-invite"
+import { Location } from "./location"
 
 const OnboardingStack = createStackNavigator()
 export function Onboarding() {
     return (
-        <OnboardingStack.Navigator headerMode="none">
-            <OnboardingStack.Screen name="OnboardingProfile" component={Profile} />
+        <OnboardingStack.Navigator initialRouteName="OnboardingConnect" headerMode="none">
+            <OnboardingStack.Screen name="OnboardingLocation" component={Location} />
             <OnboardingStack.Screen name="OnboardingConnect" component={ConnectAccount} />
             <OnboardingStack.Screen name="OnboardingSendInvite" component={SendInvite} />
         </OnboardingStack.Navigator>
