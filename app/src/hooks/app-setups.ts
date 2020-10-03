@@ -30,13 +30,11 @@ export function useAppSetup() {
         init()
     }, [])
 
-    const authContext = useMemo(
-        () => ({
-            signIn: () => setLoggedIn(true),
-            signOut: () => setLoggedIn(false),
-        }),
-        []
-    )
+    const authContext = {
+        signIn: () => setLoggedIn(true),
+        signOut: () => setLoggedIn(false),
+        isLoggedIn,
+    }
 
     return {
         isLoading,

@@ -45,6 +45,7 @@ export const theme: Theme = {
         buttonStyle: {
             borderRadius: 50,
             padding: 15,
+            marginBottom: 10,
         },
 
         titleStyle: {

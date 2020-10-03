@@ -4,8 +4,7 @@ import { useState, useContext } from "react"
 import { GoogleSignin, statusCodes, User } from "@react-native-community/google-signin"
 import { useMutation, gql } from "@apollo/client"
 import { AUTH_TOKEN } from "libs/keys"
-import { navigate, routesName } from "libs/navigator"
-import { AuthContext } from "screens/auth-context"
+import { AuthContext } from "libs/auth-context"
 
 type AuthOptions = {
     inviteToken?: string
