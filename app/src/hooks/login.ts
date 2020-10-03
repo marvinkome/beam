@@ -59,20 +59,32 @@ export function useGoogleAuth(options?: AuthOptions) {
 
         // authenticate user on our server
         setLoading(true)
-        const loginResp = await loginMutation({
-            variables: {
-                inviteToken: options?.inviteToken,
-                data: {
-                    authType: "googleId",
-                    id: userInfo.user.id,
-                    email: userInfo.user.email,
-                    name: userInfo.user.givenName,
-                    picture: userInfo.user.photo,
-                },
-            },
-        })
+        let loginResp = null
 
-        const { token, success, message, user } = loginResp.data?.login
+        try {
+            loginResp = await loginMutation({
+                variables: {
+                    inviteToken: options?.inviteToken,
+                    data: {
+                        authType: "googleId",
+                        id: userInfo.user.id,
+                        email: userInfo.user.email,
+                        name: userInfo.user.givenName,
+                        picture: userInfo.user.photo,
+                    },
+                },
+            })
+        } catch (e) {
+            Toast.show({
+                text1: "Failed to sign in",
+                text2: "Check your internet connection and try again",
+                type: "error",
+                position: "bottom",
+            })
+            return
+        }
+
+        const { token, success, message } = loginResp?.data?.login
         if (!success) {
             // TODO:: sentry capture error - server login failed
 
