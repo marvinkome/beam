@@ -1,8 +1,12 @@
-import React from "react"
+import React, { useContext } from "react"
+import Beam from "assets/icons/beam.svg"
+import { View } from "react-native"
+import { Icon } from "react-native-elements"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { AuthContext } from "libs/auth-context"
-import { useContext } from "react"
+import { navigationStyle } from "styles/navigator"
+import { theme } from "styles/theme"
 
 // screens
 import { LandingPage } from "screens/LandingPage"
@@ -18,10 +22,42 @@ import { Profile } from "screens/Profile"
 const HomeTab = createBottomTabNavigator()
 export function HomeTabNavigator() {
     return (
-        <HomeTab.Navigator>
-            <HomeTab.Screen name="Status" component={Status} />
-            <HomeTab.Screen name="CreateStatus" component={CreateStatus} />
-            <HomeTab.Screen name="Chats" component={Chats} />
+        <HomeTab.Navigator tabBarOptions={{ showLabel: false, style: navigationStyle.tabBar }}>
+            <HomeTab.Screen
+                name="Status"
+                component={Status}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <Beam color={focused ? theme.colors?.primary : theme.colors?.white} />
+                    ),
+                }}
+            />
+
+            <HomeTab.Screen
+                name="CreateStatus"
+                component={CreateStatus}
+                options={{
+                    tabBarIcon: () => (
+                        <View style={navigationStyle.createStatusIconContainer}>
+                            <Icon name="pencil" type="octicon" color={theme.colors?.white} />
+                        </View>
+                    ),
+                }}
+            />
+
+            <HomeTab.Screen
+                name="Chats"
+                component={Chats}
+                options={{
+                    tabBarIcon: ({ focused }) => (
+                        <Icon
+                            name="chatbubbles-outline"
+                            type="ionicon"
+                            color={focused ? theme.colors?.primary : theme.colors?.white}
+                        />
+                    ),
+                }}
+            />
         </HomeTab.Navigator>
     )
 }

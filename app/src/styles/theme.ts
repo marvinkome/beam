@@ -1,11 +1,19 @@
-import { Theme } from "react-native-elements"
+import { DarkTheme } from "@react-navigation/native"
+import { Theme, colors } from "react-native-elements"
+
+const appColors = {
+    primary: "#9175DB",
+    background: "#32294D",
+    white: "#E8EAED",
+    black: "#39324D",
+    grey1: "rgba(50, 41, 77, 0.5)",
+    grey0: "#32294D",
+}
 
 export const theme: Theme = {
     colors: {
-        background: "#ffffff",
-        primary: "#9175DB",
-        grey0: "#32294D",
-        grey1: "rgba(50, 41, 77, 0.5)",
+        ...colors,
+        ...appColors,
     },
 
     // component styles
@@ -70,5 +78,15 @@ export const theme: Theme = {
             fontSize: 18,
             fontFamily: "SourceSansPro-Regular",
         },
+    },
+}
+
+export const reactNavigationTheme = {
+    ...DarkTheme,
+    colors: {
+        ...DarkTheme.colors,
+        background: appColors.background,
+        primary: appColors.primary,
+        text: appColors.white,
     },
 }

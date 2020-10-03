@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native"
 import { RootNavigator } from "navigators"
 import { ApolloProvider } from "@apollo/client"
 import { AuthContext } from "libs/auth-context"
-import { theme } from "styles/theme"
+import { theme, reactNavigationTheme } from "styles/theme"
 import { navigationRef } from "libs/navigator"
 import { useAppSetup } from "hooks"
 
@@ -31,7 +31,7 @@ export default function App() {
         <ThemeProvider theme={theme}>
             <ApolloProvider client={appData.apolloClient}>
                 <AuthContext.Provider value={appData.authContext}>
-                    <NavigationContainer ref={navigationRef}>
+                    <NavigationContainer theme={reactNavigationTheme} ref={navigationRef}>
                         <RootNavigator />
 
                         <Toast ref={(ref: any) => Toast.setRef(ref)} />
