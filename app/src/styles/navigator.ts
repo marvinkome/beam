@@ -4,7 +4,7 @@ import { theme } from "./theme"
 export const navigationStyle = StyleSheet.create({
     tabBar: {
         backgroundColor: theme.colors?.background,
-        borderTopColor: theme.colors?.grey1,
+        borderTopColor: theme.colors?.grey3,
         height: 75,
     },
 

@@ -1,35 +1,53 @@
 import React from "react"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, TouchableNativeFeedback } from "react-native"
 import { Badge, Image, Text } from "react-native-elements"
 import fonts from "styles/fonts"
 import { theme } from "styles/theme"
-import { data } from "./Chats"
 
-export function ChatItem({ item }: { item: typeof data[any] }) {
+type IProps = {
+    item: {
+        id: string
+        name: string
+        timestamp: string
+        image?: string
+        unreadCount: number
+        message: {
+            text: string
+        }
+    }
+}
+export function ChatItem({ item }: IProps) {
     return (
-        <View style={styles.container}>
-            <Image style={styles.avatarStyle} source={item.image} />
+        <TouchableNativeFeedback onPress={() => null}>
+            <View style={styles.container}>
+                <Image
+                    style={styles.avatarStyle}
+                    source={item.image ? { uri: item.image } : require("assets/images/beambot.png")}
+                />
 
-            <View style={styles.itemContent}>
-                <View style={styles.itemHeader}>
-                    <View style={{ flex: 1, marginRight: 10 }}>
-                        <Text style={{ ...fonts.semiBold }} numberOfLines={1}>
-                            {item.name}
-                        </Text>
+                <View style={styles.itemContent}>
+                    <View style={styles.itemHeader}>
+                        <View style={{ flex: 1, marginRight: 10 }}>
+                            <Text style={{ ...fonts.semiBold }} numberOfLines={1}>
+                                {item.name}
+                            </Text>
+                        </View>
+
+                        <Text style={{ fontSize: 14 }}>{item.timestamp}</Text>
                     </View>
 
-                    <Text style={{ fontSize: 14 }}>{item.timestamp}</Text>
-                </View>
+                    <View style={{ flexDirection: "row" }}>
+                        <View style={{ flex: 1, marginRight: 10 }}>
+                            <Text numberOfLines={1}>{item.message.text}</Text>
+                        </View>
 
-                <View style={{ flexDirection: "row" }}>
-                    <View style={{ flex: 1, marginRight: 10 }}>
-                        <Text numberOfLines={1}>{item.message.text}</Text>
+                        {!!item.unreadCount && (
+                            <Badge badgeStyle={{ borderWidth: 0 }} value={item.unreadCount} />
+                        )}
                     </View>
-
-                    <Badge badgeStyle={{ borderWidth: 0 }} value={item.unreadCount} />
                 </View>
             </View>
-        </View>
+        </TouchableNativeFeedback>
     )
 }
 
@@ -39,7 +57,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingVertical: 25,
         paddingHorizontal: 20,
-        borderBottomColor: theme.colors?.grey1,
+        borderBottomColor: theme.colors?.grey3,
         borderBottomWidth: 1,
     },
 

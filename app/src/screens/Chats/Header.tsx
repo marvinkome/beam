@@ -5,8 +5,11 @@ import { Text, Image, Icon } from "react-native-elements"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from "react-native-popup-menu"
 import { theme } from "styles/theme"
+import { useNavigation } from "@react-navigation/native"
 
-export function ChatsHeader() {
+export function ChatsHeader({ picture }: { picture: string }) {
+    const navigation = useNavigation()
+
     return (
         <View style={styles.container}>
             <BeamLogo width={100} height={70} />
@@ -16,7 +19,7 @@ export function ChatsHeader() {
                     <Image
                         style={styles.userImage}
                         containerStyle={styles.userImageContainer}
-                        source={require("assets/images/me.jpeg")}
+                        source={{ uri: picture }}
                         resizeMode="contain"
                     />
                 </MenuTrigger>
@@ -27,7 +30,7 @@ export function ChatsHeader() {
                         optionWrapper: styles.menuOptionWrapper,
                     }}
                 >
-                    <MenuOption onSelect={() => null}>
+                    <MenuOption onSelect={() => navigation.navigate("Profile")}>
                         <Icon name="settings" type="feather" size={20} style={styles.menuIcon} />
                         <Text>Profile settings</Text>
                     </MenuOption>
@@ -60,7 +63,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row",
         borderBottomWidth: 1,
-        borderColor: theme.colors?.grey0,
+        borderColor: theme.colors?.grey3,
     },
     logo: {
         width: 100,
