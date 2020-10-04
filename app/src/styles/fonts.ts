@@ -1,18 +1,18 @@
 export default {
     light: {
         fontFamily: "SourceSansPro-Light",
-        fontWeight: "normal",
+        fontWeight: "400" as any,
     },
     regular: {
         fontFamily: "SourceSansPro-Regular",
-        fontWeight: "normal",
+        fontWeight: "400" as any,
     },
     semiBold: {
         fontFamily: "SourceSansPro-SemiBold",
-        fontWeight: "normal",
+        fontWeight: "400" as any,
     },
     bold: {
         fontFamily: "SourceSansPro-Bold",
-        fontWeight: "normal",
+        fontWeight: "400" as any,
     },
 }

@@ -22,13 +22,16 @@ import { Profile } from "screens/Profile"
 const HomeTab = createBottomTabNavigator()
 export function HomeTabNavigator() {
     return (
-        <HomeTab.Navigator tabBarOptions={{ showLabel: false, style: navigationStyle.tabBar }}>
+        <HomeTab.Navigator
+            initialRouteName="Chats"
+            tabBarOptions={{ showLabel: false, style: navigationStyle.tabBar }}
+        >
             <HomeTab.Screen
                 name="Status"
                 component={Status}
                 options={{
                     tabBarIcon: ({ focused }) => (
-                        <Beam color={focused ? theme.colors?.primary : theme.colors?.white} />
+                        <Beam color={focused ? theme.colors?.primary : theme.colors?.black} />
                     ),
                 }}
             />
@@ -39,7 +42,7 @@ export function HomeTabNavigator() {
                 options={{
                     tabBarIcon: () => (
                         <View style={navigationStyle.createStatusIconContainer}>
-                            <Icon name="pencil" type="octicon" color={theme.colors?.white} />
+                            <Icon name="pencil" type="octicon" />
                         </View>
                     ),
                 }}
@@ -53,7 +56,7 @@ export function HomeTabNavigator() {
                         <Icon
                             name="chatbubbles-outline"
                             type="ionicon"
-                            color={focused ? theme.colors?.primary : theme.colors?.white}
+                            color={focused ? theme.colors?.primary : theme.colors?.black}
                         />
                     ),
                 }}
@@ -65,11 +68,19 @@ export function HomeTabNavigator() {
 const MainStack = createStackNavigator()
 export function MainStackNavigator() {
     return (
-        <MainStack.Navigator headerMode="none">
-            <MainStack.Screen name="Home" component={HomeTabNavigator} />
-            <MainStack.Screen name="Chat" component={Chat} />
+        <MainStack.Navigator>
+            <MainStack.Screen
+                name="Home"
+                component={HomeTabNavigator}
+                options={{ headerShown: false }}
+            />
+            <MainStack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
             <MainStack.Screen name="Profile" component={Profile} />
-            <MainStack.Screen name="StatusComments" component={StatusComments} />
+            <MainStack.Screen
+                name="StatusComments"
+                component={StatusComments}
+                options={{ headerShown: false }}
+            />
         </MainStack.Navigator>
     )
 }

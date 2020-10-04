@@ -1,13 +1,28 @@
 import { DarkTheme } from "@react-navigation/native"
 import { Theme, colors } from "react-native-elements"
+import fonts from "./fonts"
 
 const appColors = {
     primary: "#9175DB",
+    secondary: "#B3A4DB",
     background: "#32294D",
-    white: "#E8EAED",
-    black: "#39324D",
-    grey1: "rgba(50, 41, 77, 0.5)",
-    grey0: "#32294D",
+
+    white: "#39324D", // this is used as black in react native elements internals
+    black: "#E8EAED", // this is used as white in react native elements internals
+
+    grey0: "#686080",
+    grey1: "rgba(62, 63, 64, 0.5)",
+    grey2: "#E8EAED",
+    grey3: "#32294D",
+
+    purple0: "#32294D",
+    purple1: "#4A3C70",
+    purple2: "#534480",
+    purple3: "#614F94",
+    purple4: "#9175DB",
+    purple5: "#B3A4DB",
+
+    green: "#48D38A",
 }
 
 export const theme: Theme = {
@@ -20,40 +35,38 @@ export const theme: Theme = {
     Text: {
         style: {
             fontSize: 16,
-            fontWeight: "400",
-            fontFamily: "SourceSansPro-Regular",
+            ...fonts.regular,
         },
 
         h1Style: {
             fontSize: 35,
-            fontWeight: "400",
-            fontFamily: "SourceSansPro-SemiBold",
+            ...fonts.semiBold,
         },
 
         h2Style: {
             fontSize: 24,
-            fontWeight: "400",
-            fontFamily: "SourceSansPro-SemiBold",
+            ...fonts.semiBold,
         },
 
         h3Style: {
             fontSize: 20,
-            fontWeight: "400",
-            fontFamily: "SourceSansPro-SemiBold",
+            ...fonts.semiBold,
         },
 
         h4Style: {
             fontSize: 18,
-            fontWeight: "400",
-            fontFamily: "SourceSansPro-SemiBold",
+            ...fonts.semiBold,
         },
     },
 
     Button: {
+        containerStyle: {
+            marginBottom: 10,
+        },
+
         buttonStyle: {
             borderRadius: 50,
             padding: 15,
-            marginBottom: 10,
         },
 
         titleStyle: {
@@ -87,6 +100,6 @@ export const reactNavigationTheme = {
         ...DarkTheme.colors,
         background: appColors.background,
         primary: appColors.primary,
-        text: appColors.white,
+        text: appColors.black,
     },
 }

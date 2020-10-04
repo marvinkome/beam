@@ -1,5 +1,5 @@
 import React from "react"
-import { StyleSheet } from "react-native"
+import { Pressable, StyleSheet } from "react-native"
 import { Text } from "react-native-elements"
 import { theme } from "styles/theme"
 
@@ -10,9 +10,9 @@ type IProps = {
 }
 export function TextButton(props: IProps) {
     return (
-        <Text onPress={props.onPress} style={[styles.textStyle, props.style]}>
-            {props.children}
-        </Text>
+        <Pressable onPress={props.onPress}>
+            <Text style={[styles.textStyle, props.style]}>{props.children}</Text>
+        </Pressable>
     )
 }
 

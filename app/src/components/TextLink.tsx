@@ -1,5 +1,5 @@
 import React from "react"
-import { Text, StyleSheet, Linking } from "react-native"
+import { Text, StyleSheet, Linking, Pressable } from "react-native"
 import { theme } from "styles/theme"
 
 type IProps = {
@@ -13,9 +13,9 @@ export function TextLink(props: IProps) {
     }
 
     return (
-        <Text onPress={onPress} style={[styles.textStyle, props.style]}>
-            {props.children}
-        </Text>
+        <Pressable onPress={onPress}>
+            <Text style={[styles.textStyle, props.style]}>{props.children}</Text>
+        </Pressable>
     )
 }
 

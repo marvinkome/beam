@@ -3,7 +3,6 @@ import { ScrollView, View, StyleSheet } from "react-native"
 import { Text, Button, Image } from "react-native-elements"
 import { TextButton, TextLink } from "components"
 import { useGoogleAuth } from "hooks"
-import { theme } from "styles/theme"
 
 export function LandingPage() {
     const { signIn, loading } = useGoogleAuth()
@@ -43,7 +42,7 @@ export function LandingPage() {
                         loading={loading}
                     />
 
-                    <Text>
+                    <Text style={{ color: "#39324D" }}>
                         Already have an account? <TextButton onPress={signIn}>Login</TextButton>
                     </Text>
                 </View>
@@ -78,6 +77,7 @@ const styles = StyleSheet.create({
     headerText: {
         textAlign: "center",
         marginBottom: 36,
+        color: "#39324D",
     },
 
     screenshot: {

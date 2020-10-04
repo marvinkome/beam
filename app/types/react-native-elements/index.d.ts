@@ -12,5 +12,14 @@ declare module "react-native-elements" {
         text: string
         altText: string
         danger: string
+
+        purple0: string
+        purple1: string
+        purple2: string
+        purple3: string
+        purple4: string
+        purple5: string
+
+        green: string
     }
 }
