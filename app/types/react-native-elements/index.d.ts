@@ -19,6 +19,7 @@ declare module "react-native-elements" {
         purple3: string
         purple4: string
         purple5: string
+        purple6: string
 
         green: string
     }

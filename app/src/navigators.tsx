@@ -22,10 +22,7 @@ import { Profile } from "screens/Profile"
 const HomeTab = createBottomTabNavigator()
 export function HomeTabNavigator() {
     return (
-        <HomeTab.Navigator
-            initialRouteName="Chats"
-            tabBarOptions={{ showLabel: false, style: navigationStyle.tabBar }}
-        >
+        <HomeTab.Navigator tabBarOptions={{ showLabel: false, style: navigationStyle.tabBar }}>
             <HomeTab.Screen
                 name="Status"
                 component={Status}
@@ -68,19 +65,11 @@ export function HomeTabNavigator() {
 const MainStack = createStackNavigator()
 export function MainStackNavigator() {
     return (
-        <MainStack.Navigator>
-            <MainStack.Screen
-                name="Home"
-                component={HomeTabNavigator}
-                options={{ headerShown: false }}
-            />
-            <MainStack.Screen name="Chat" component={Chat} options={{ headerShown: false }} />
+        <MainStack.Navigator headerMode="none" initialRouteName="Chat">
+            <MainStack.Screen name="Home" component={HomeTabNavigator} />
+            <MainStack.Screen name="Chat" component={Chat} />
             <MainStack.Screen name="Profile" component={Profile} />
-            <MainStack.Screen
-                name="StatusComments"
-                component={StatusComments}
-                options={{ headerShown: false }}
-            />
+            <MainStack.Screen name="StatusComments" component={StatusComments} />
         </MainStack.Navigator>
     )
 }

@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         flexDirection: "row",
         borderBottomWidth: 1,
-        borderColor: theme.colors?.grey1,
+        borderColor: theme.colors?.grey0,
     },
     logo: {
         width: 100,

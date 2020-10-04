@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
     avatarStyle: {
         borderWidth: 3,
-        borderColor: theme.colors?.green,
+        borderColor: theme.colors?.purple3,
         borderRadius: 10,
         width: 55,
         height: 55,

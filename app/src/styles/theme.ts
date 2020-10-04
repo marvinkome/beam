@@ -10,10 +10,10 @@ const appColors = {
     white: "#39324D", // this is used as black in react native elements internals
     black: "#E8EAED", // this is used as white in react native elements internals
 
-    grey0: "#686080",
-    grey1: "rgba(62, 63, 64, 0.5)",
-    grey2: "#E8EAED",
-    grey3: "#32294D",
+    grey0: "#E8EAED",
+    grey1: "rgba(232, 234, 237, 0.5)",
+    grey2: "#686080",
+    grey3: "rgba(91, 97, 118, 0.5)",
 
     purple0: "#32294D",
     purple1: "#4A3C70",
@@ -85,11 +85,11 @@ export const theme: Theme = {
             borderRadius: 10,
             borderWidth: 1,
             paddingHorizontal: 15,
-            borderColor: "#5B6176",
+            borderColor: appColors.grey3,
         },
         inputStyle: {
             fontSize: 18,
-            fontFamily: "SourceSansPro-Regular",
+            ...fonts.regular,
         },
     },
 }
