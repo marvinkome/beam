@@ -89,14 +89,14 @@ export async function apolloSetup() {
         },
     })
 
-    // const persistor = new CachePersistor({
-    //     cache,
-    //     storage: AsyncStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>,
-    //     maxSize: false,
-    //     debug: __DEV__,
-    // })
+    const persistor = new CachePersistor({
+        cache,
+        storage: AsyncStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>,
+        maxSize: false,
+        debug: __DEV__,
+    })
 
     const client = new ApolloClient({ link, cache })
 
-    return { persistor: null, client }
+    return { persistor, client }
 }

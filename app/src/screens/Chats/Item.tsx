@@ -1,4 +1,5 @@
 import React from "react"
+import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, View, TouchableNativeFeedback } from "react-native"
 import { Badge, Image, Text } from "react-native-elements"
 import fonts from "styles/fonts"
@@ -17,8 +18,10 @@ type IProps = {
     }
 }
 export function ChatItem({ item }: IProps) {
+    const navigation = useNavigation()
+
     return (
-        <TouchableNativeFeedback onPress={() => null}>
+        <TouchableNativeFeedback onPress={() => navigation.navigate("Chat")}>
             <View style={styles.container}>
                 <Image
                     style={styles.avatarStyle}

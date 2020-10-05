@@ -5,75 +5,10 @@ import { ChatHeader } from "./Header"
 import { ChatInput } from "./Input"
 import { ChatBubble } from "./Bubble"
 
-// const messages = [
-//     {
-//         _id: 0,
-//         text: "I'm the book nerd",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 9, 2, 0)),
-//         user: {
-//             _id: 0,
-//             name: "Marvin",
-//         },
-//     },
-//     {
-//         _id: 1,
-//         text: "Have you heard from John, haven't seen that dude in a while. Kinda miss his humour",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 17, 2, 0)),
-//         user: {
-//             _id: 1,
-//             name: "Girozaki",
-//         },
-//     },
-//     {
-//         _id: 2,
-//         text: "Nah man I haven't heard anything from John",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 9, 2, 0)),
-//         user: {
-//             _id: 0,
-//             name: "Marvin",
-//         },
-//     },
-//     {
-//         _id: 25,
-//         text: "I should call him",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 9, 2, 0)),
-//         user: {
-//             _id: 0,
-//             name: "Marvin",
-//         },
-//     },
-//     {
-//         _id: 3,
-//         text: "We should check up on him",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 10, 2, 0)),
-//         user: {
-//             _id: 1,
-//             name: "Girozaki",
-//         },
-//     },
-//     {
-//         _id: 4,
-//         text: "I'm leaving home now. Let's meet",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 15, 2, 0)),
-//         user: {
-//             _id: 1,
-//             name: "Girozaki",
-//         },
-//     },
-//     {
-//         _id: 45,
-//         text: "Ok. Getting ready now",
-//         createdAt: new Date(Date.UTC(2020, 9, 3, 15, 2, 0)),
-//         pending: true,
-//         user: {
-//             _id: 0,
-//             name: "Marvin",
-//         },
-//     },
-// ]
-
 type IProps = {
+    userId?: string
     profile: any
+    sendMessage: (message: string) => void
     messages: Array<{
         _id: string
         text: string
@@ -85,7 +20,7 @@ type IProps = {
         }
     }>
 }
-export function ChatScreen({ profile, messages }: IProps) {
+export function ChatScreen({ profile, messages, sendMessage, ...props }: IProps) {
     return (
         <View style={styles.container}>
             <ChatHeader
@@ -96,17 +31,17 @@ export function ChatScreen({ profile, messages }: IProps) {
 
             <GiftedChat
                 messages={messages}
-                inverted={false}
+                onSend={(message) => sendMessage(message[0].text)}
+                alignTop={true}
                 alwaysShowSend={true}
                 placeholder="Type a message"
-                user={{ _id: 0 }}
+                user={{ _id: props.userId || "" }}
                 renderBubble={(props) => <ChatBubble {...props} />}
                 renderInputToolbar={(props) => <ChatInput {...props} />}
+                minInputToolbarHeight={90}
                 // @ts-ignore
                 renderAvatar={null}
             />
-
-            {/* send button */}
         </View>
     )
 }

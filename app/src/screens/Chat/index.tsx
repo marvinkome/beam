@@ -1,8 +1,9 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
+import Toast from "react-native-toast-message"
 import { sortBy } from "lodash"
 import { gql, useMutation, useQuery } from "@apollo/client"
 import { ChatScreen } from "./Chat"
-import { formatMessages } from "./helpers"
+import { formatMessages, createClientResponse } from "./helpers"
 import { formatDate } from "libs/helpers"
 import { Loader } from "components"
 
@@ -10,6 +11,10 @@ const friendId = "5f5d421b58b04d336e4846ef"
 
 const DATA_QUERY = gql`
     query GetFriendProfileAndChats($friendId: ID!, $first: Int) {
+        me {
+            id
+        }
+
         friend(id: $friendId) {
             id
             lastSeen
@@ -26,6 +31,27 @@ const DATA_QUERY = gql`
                 id
                 timestamp
                 message
+                from {
+                    id
+                    profile {
+                        firstName
+                        picture
+                    }
+                }
+            }
+        }
+    }
+`
+
+const SEND_MESSAGE = gql`
+    mutation SendMessage($friendId: ID!, $message: String!) {
+        sendMessage(to: $friendId, message: $message) {
+            code
+            success
+            sentMessage {
+                id
+                message
+                timestamp
                 from {
                     id
                     profile {
@@ -65,9 +91,67 @@ function useDataQuery() {
     const resp = useQuery(DATA_QUERY, {
         fetchPolicy: "cache-and-network",
         variables: { friendId, first: 30 },
+        onError: () => {
+            // do nothing
+        },
     })
 
     return resp
+}
+
+function useSendMessage() {
+    const [sendMessageToServer] = useMutation(SEND_MESSAGE)
+
+    return async (message: string, friendId: string, userId: string) => {
+        // create optimistic response
+        const optimisticResponse = createClientResponse(message, userId)
+
+        try {
+            const { data } = await sendMessageToServer({
+                variables: { message, friendId },
+                optimisticResponse,
+                update: (cache, resp) => {
+                    const data = cache.readQuery<any>({
+                        variables: { friendId, first: 30 },
+                        query: DATA_QUERY,
+                    })
+
+                    const newMessage = {
+                        __typename: "Message",
+                        ...resp.data.sendMessage.sentMessage,
+                    }
+
+                    cache.writeQuery({
+                        query: DATA_QUERY,
+                        variables: { friendId, first: 30 },
+                        data: {
+                            ...data,
+                            conversation: {
+                                ...data.conversation,
+                                messages: [newMessage, ...data.conversation.messages],
+                            },
+                        },
+                    })
+                },
+            })
+
+            if (!data.sendMessage.success) {
+                Toast.show({ type: "error", text1: "Error sending message", position: "bottom" })
+
+                // TODO: Sentry.captureMessage(data.sendMessage.message)
+                return
+            }
+
+            return data.sendMessage.sentMessage
+        } catch (e) {
+            // TODO: handle offline messaging
+
+            Toast.show({ type: "error", text1: "Error sending message", position: "bottom" })
+
+            // TODO: sentry
+            return
+        }
+    }
 }
 
 function useViewPage() {
@@ -90,28 +174,42 @@ function useMessages(data: any, subscribeToMore: any) {
     const messages = sortBy(formatMessages(data?.conversation?.messages || []), ["timestamp"])
 
     useEffect(() => {
-        subscribeToMore({
-            document: MESSAGE_SUBSCRIPTION,
-            variables: { friendId },
-            updateQuery: (data: any, { subscriptionData }: any) => {
-                if (!subscriptionData.data) return data
+        if (subscribeToMore) {
+            subscribeToMore({
+                document: MESSAGE_SUBSCRIPTION,
+                variables: { friendId },
+                updateQuery: (data: any, { subscriptionData }: any) => {
+                    if (!subscriptionData.data) return data
 
-                const newMessage = subscriptionData.data.messageSent
+                    const newMessage = subscriptionData.data.messageSent
 
-                // update conversation profile
-                return {
-                    ...data,
-                    conversation: {
-                        ...(data.conversation || {}),
-                        messages: [newMessage, ...(data.conversation?.messages || [])],
-                    },
-                }
-            },
-        })
+                    // update conversation profile
+                    return {
+                        ...data,
+                        conversation: {
+                            ...(data.conversation || {}),
+                            messages: [newMessage, ...(data.conversation?.messages || [])],
+                        },
+                    }
+                },
+            })
+        }
     }, [friendId, subscribeToMore])
+
+    const sendMessageToServer = useSendMessage()
+    const sendMessage = async (messageText: string) => {
+        // validate messages
+        messageText = messageText.trim()
+        if (!messageText.length) return
+
+        // Send message to server
+        const sentMessage = await sendMessageToServer(messageText, friendId, data?.me?.id)
+        if (!sentMessage) return
+    }
 
     return {
         messages,
+        sendMessage,
     }
 }
 
@@ -120,18 +218,20 @@ function useProfile(data: any, subscribeToMore: any) {
 
     // subscribe to last seen changes
     useEffect(() => {
-        subscribeToMore({
-            document: LAST_SEEN_SUBSCRIPTION,
-            variables: { friendId },
-            updateQuery: (data: any, { subscriptionData }: any) => {
-                if (!subscriptionData.data) return data
+        if (subscribeToMore) {
+            subscribeToMore({
+                document: LAST_SEEN_SUBSCRIPTION,
+                variables: { friendId },
+                updateQuery: (data: any, { subscriptionData }: any) => {
+                    if (!subscriptionData.data) return data
 
-                const newLastSeen = subscriptionData.data.lastSeen
+                    const newLastSeen = subscriptionData.data.lastSeen
 
-                // update friend profile
-                return { ...data, friend: { ...data.friend, lastSeen: newLastSeen } }
-            },
-        })
+                    // update friend profile
+                    return { ...data, friend: { ...data.friend, lastSeen: newLastSeen } }
+                },
+            })
+        }
     }, [friendId, subscribeToMore])
 
     return {
@@ -146,7 +246,7 @@ function useProfile(data: any, subscribeToMore: any) {
 
 export function Chat() {
     const { data, loading, subscribeToMore } = useDataQuery()
-    const { messages } = useMessages(data, subscribeToMore)
+    const { messages, sendMessage } = useMessages(data, subscribeToMore)
     const profile = useProfile(data, subscribeToMore)
     useViewPage()
 
@@ -154,5 +254,12 @@ export function Chat() {
         return <Loader />
     }
 
-    return <ChatScreen profile={profile} messages={messages} />
+    return (
+        <ChatScreen
+            userId={data?.me?.id}
+            profile={profile}
+            messages={messages}
+            sendMessage={sendMessage}
+        />
+    )
 }
