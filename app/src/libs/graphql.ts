@@ -5,13 +5,16 @@ import {
     createHttpLink,
     from,
     NormalizedCacheObject,
+    split,
 } from "@apollo/client"
+import { WebSocketLink } from "@apollo/client/link/ws"
 import { CachePersistor, PersistentStorage } from "apollo3-cache-persist"
 import { onError } from "@apollo/client/link/error"
 import { setContext } from "@apollo/client/link/context"
-import { AUTH_TOKEN, API_URL } from "./keys"
+import { AUTH_TOKEN, API_URL, API_WS_URL } from "./keys"
 import { navigate, routesName } from "./navigator"
 import { PersistedData } from "apollo3-cache-persist/lib/types"
+import { getMainDefinition } from "@apollo/client/utilities"
 
 export async function apolloSetup() {
     // LINKS
@@ -49,6 +52,27 @@ export async function apolloSetup() {
     const httpLink = from([authLink, errorLink, networkLink])
 
     // WEBSOCKET LINK
+    const wsLink = new WebSocketLink({
+        uri: `${API_WS_URL}/graphql`,
+        options: {
+            reconnect: true,
+            connectionParams: async () => {
+                const authToken = await AsyncStorage.getItem(AUTH_TOKEN)
+                return { authToken }
+            },
+        },
+    })
+
+    const link = split(
+        ({ query }) => {
+            const definition = getMainDefinition(query)
+            return (
+                definition.kind === "OperationDefinition" && definition.operation === "subscription"
+            )
+        },
+        wsLink,
+        httpLink
+    )
 
     // CACHE
     const cache = new InMemoryCache({
@@ -65,17 +89,14 @@ export async function apolloSetup() {
         },
     })
 
-    const persistor = new CachePersistor({
-        cache,
-        storage: AsyncStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>,
-        maxSize: false,
-        debug: __DEV__,
-    })
+    // const persistor = new CachePersistor({
+    //     cache,
+    //     storage: AsyncStorage as PersistentStorage<PersistedData<NormalizedCacheObject>>,
+    //     maxSize: false,
+    //     debug: __DEV__,
+    // })
 
-    const client = new ApolloClient({
-        link: httpLink,
-        cache,
-    })
+    const client = new ApolloClient({ link, cache })
 
-    return { persistor, client }
+    return { persistor: null, client }
 }

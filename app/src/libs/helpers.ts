@@ -32,26 +32,28 @@ export async function getGeolocation() {
     return new Promise(promise)
 }
 
-export function formatDate(date: string) {
+export function formatDate(date: string, forLastSeen?: boolean) {
     const dayjsDate = dayjs(parseInt(date, 10))
     const yesterday = dayjsDate.subtract(1, "d").startOf("day")
     const aWeekOld = dayjsDate.subtract(7, "d").startOf("day")
 
     // if its same day - return time
     if (dayjs().isSame(dayjsDate, "d")) {
-        return dayjsDate.format("hh:mm A")
+        return forLastSeen ? `today at ${dayjsDate.format("hh:mm A")}` : dayjsDate.format("hh:mm A")
     }
 
     // if its yesterday - return 'Yesterday'
     if (dayjsDate.isSame(yesterday, "d")) {
-        return "Yesterday"
+        return forLastSeen ? `yesterday at ${dayjsDate.format("hh:mm A")}` : "Yesterday"
     }
 
     // if its same week - return 'day'
     if (dayjsDate.isBefore(aWeekOld)) {
-        return dayjsDate.format("dddd")
+        return forLastSeen
+            ? `${dayjsDate.format("dddd")} at ${dayjsDate.format("hh:mm A")}`
+            : dayjsDate.format("dddd")
     }
 
     // else return full date
-    return dayjsDate.format("DD/MM/YYYY")
+    return forLastSeen ? `on ${dayjsDate.format("DD MMM YYYY")}` : dayjsDate.format("DD/MM/YYYY")
 }

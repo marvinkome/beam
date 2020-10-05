@@ -5,7 +5,12 @@ import { Icon, Image, Text } from "react-native-elements"
 import fonts from "styles/fonts"
 import { theme } from "styles/theme"
 
-export function ChatHeader() {
+type IProps = {
+    picture: string
+    name: string
+    lastSeen: string
+}
+export function ChatHeader(props: IProps) {
     const navigation = useNavigation()
 
     return (
@@ -18,11 +23,11 @@ export function ChatHeader() {
                 containerStyle={{ marginRight: 20 }}
             />
 
-            <Image style={styles.image} source={require("assets/images/me.jpeg")} />
+            <Image style={styles.image} source={{ uri: props.picture }} />
 
             <View>
-                <Text style={styles.nameStyle}>Girozaki</Text>
-                <Text style={styles.lastSeenStyle}>Last seen yesterday at 12:00 am</Text>
+                <Text style={styles.nameStyle}>{props.name}</Text>
+                <Text style={styles.lastSeenStyle}>{props.lastSeen}</Text>
             </View>
         </View>
     )

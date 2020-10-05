@@ -18,8 +18,8 @@ export function useAppSetup() {
             // setup apollo
             const { client, persistor } = await apolloSetup()
 
-            await persistor.restore()
-            if (__DEV__) await persistor.getLogs(true)
+            // await persistor.restore()
+            // if (__DEV__) await persistor.getLogs(true)
 
             setApolloClient(client)
 
