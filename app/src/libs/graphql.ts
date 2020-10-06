@@ -7,6 +7,7 @@ import {
     NormalizedCacheObject,
     split,
 } from "@apollo/client"
+import { RetryLink } from "@apollo/client/link/retry"
 import { WebSocketLink } from "@apollo/client/link/ws"
 import { CachePersistor, PersistentStorage } from "apollo3-cache-persist"
 import { onError } from "@apollo/client/link/error"
@@ -29,7 +30,15 @@ export async function apolloSetup() {
         }
     })
 
-    // TODO: Retry link
+    // Retry link
+    const retryLink = new RetryLink({
+        delay: (count) => {
+            return count * 1000 * Math.random()
+        },
+        attempts: (err) => {
+            return !!err
+        },
+    })
 
     const networkLink = createHttpLink({
         uri: `${API_URL}/graphql`,
@@ -49,7 +58,7 @@ export async function apolloSetup() {
     })
 
     // HTTP LINK
-    const httpLink = from([authLink, errorLink, networkLink])
+    const httpLink = from([errorLink, retryLink, authLink, networkLink])
 
     // WEBSOCKET LINK
     const wsLink = new WebSocketLink({

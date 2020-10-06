@@ -21,7 +21,7 @@ export function ChatItem({ item }: IProps) {
     const navigation = useNavigation()
 
     return (
-        <TouchableNativeFeedback onPress={() => navigation.navigate("Chat")}>
+        <TouchableNativeFeedback onPress={() => navigation.navigate("Chat", { friendId: item.id })}>
             <View style={styles.container}>
                 <Image
                     style={styles.avatarStyle}

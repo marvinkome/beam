@@ -23,11 +23,18 @@ export function ChatHeader(props: IProps) {
                 containerStyle={{ marginRight: 20 }}
             />
 
-            <Image style={styles.image} source={{ uri: props.picture }} />
+            <Image
+                style={styles.image}
+                source={
+                    props.picture ? { uri: props.picture } : require("assets/images/beambot.png")
+                }
+            />
 
-            <View>
+            <View style={{ justifyContent: "center" }}>
                 <Text style={styles.nameStyle}>{props.name}</Text>
-                <Text style={styles.lastSeenStyle}>{props.lastSeen}</Text>
+                {props.lastSeen.length ? (
+                    <Text style={styles.lastSeenStyle}>{props.lastSeen}</Text>
+                ) : null}
             </View>
         </View>
     )

@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect } from "react"
 import Toast from "react-native-toast-message"
 import { sortBy } from "lodash"
-import { gql, useMutation, useQuery } from "@apollo/client"
+import { ApolloError, gql, useMutation, useQuery } from "@apollo/client"
 import { ChatScreen } from "./Chat"
 import { formatMessages, createClientResponse } from "./helpers"
 import { formatDate } from "libs/helpers"
 import { Loader } from "components"
-
-const friendId = "5f5d421b58b04d336e4846ef"
+import { useRoute } from "@react-navigation/native"
 
 const DATA_QUERY = gql`
     query GetFriendProfileAndChats($friendId: ID!, $first: Int) {
@@ -88,12 +87,11 @@ const LAST_SEEN_SUBSCRIPTION = gql`
 `
 
 function useDataQuery() {
+    const { friendId } = useRoute().params! as any
+
     const resp = useQuery(DATA_QUERY, {
         fetchPolicy: "cache-and-network",
         variables: { friendId, first: 30 },
-        onError: () => {
-            // do nothing
-        },
     })
 
     return resp
@@ -155,6 +153,8 @@ function useSendMessage() {
 }
 
 function useViewPage() {
+    const { friendId } = useRoute().params! as any
+
     const [setViewConversation] = useMutation(gql`
         mutation SetViewConversation($friendId: ID!, $viewing: Boolean) {
             setViewConversation(viewing: $viewing, id: $friendId)
@@ -171,6 +171,7 @@ function useViewPage() {
 }
 
 function useMessages(data: any, subscribeToMore: any) {
+    const { friendId } = useRoute().params! as any
     const messages = sortBy(formatMessages(data?.conversation?.messages || []), ["timestamp"])
 
     useEffect(() => {
@@ -213,8 +214,10 @@ function useMessages(data: any, subscribeToMore: any) {
     }
 }
 
-function useProfile(data: any, subscribeToMore: any) {
+function useProfile(data: any, subscribeToMore: any, error?: ApolloError) {
+    const { friendId } = useRoute().params! as any
     const friend = data?.friend
+    const hasError = error?.networkError?.message === "Network request failed"
 
     // subscribe to last seen changes
     useEffect(() => {
@@ -234,20 +237,23 @@ function useProfile(data: any, subscribeToMore: any) {
         }
     }, [friendId, subscribeToMore])
 
+    let lastSeen = ""
+    if (!hasError) {
+        lastSeen =
+            friend?.lastSeen === null ? "Online" : `Last seen ${formatDate(friend?.lastSeen, true)}`
+    }
+
     return {
         ...friend?.profile,
         isBot: friend?.bot,
-        lastSeen:
-            friend?.lastSeen === null
-                ? "Online"
-                : `Last seen ${formatDate(friend?.lastSeen, true)}`,
+        lastSeen,
     }
 }
 
 export function Chat() {
-    const { data, loading, subscribeToMore } = useDataQuery()
+    const { data, loading, subscribeToMore, error } = useDataQuery()
     const { messages, sendMessage } = useMessages(data, subscribeToMore)
-    const profile = useProfile(data, subscribeToMore)
+    const profile = useProfile(data, subscribeToMore, error)
     useViewPage()
 
     if (loading && !data) {
