@@ -34,8 +34,8 @@ export async function getGeolocation() {
 
 export function formatDate(date: string, forLastSeen?: boolean) {
     const dayjsDate = dayjs(parseInt(date, 10))
-    const yesterday = dayjsDate.subtract(1, "d").startOf("day")
-    const aWeekOld = dayjsDate.subtract(7, "d").startOf("day")
+    const yesterday = dayjs().subtract(1, "d").startOf("day")
+    const aWeekOld = dayjs().subtract(7, "d").startOf("day")
 
     // if its same day - return time
     if (dayjs().isSame(dayjsDate, "d")) {
