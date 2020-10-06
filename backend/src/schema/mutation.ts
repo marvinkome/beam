@@ -86,6 +86,7 @@ export const mutationTypeDefs = gql`
 
         setLocation(location: LocationInput): User
         setNotificationToken(token: String!): Boolean
+        setProfilePicture(pictureUri: String!): User
 
         createInviteLink: String
         addFriend(inviteToken: String!): AddFriendMutationResponse

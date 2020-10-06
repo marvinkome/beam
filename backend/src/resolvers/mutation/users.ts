@@ -169,6 +169,15 @@ export const resolvers = {
         return true
     }),
 
+    setProfilePicture: authenticated(async (_: any, { pictureUri }: any, ctx: IContext) => {
+        const user = ctx.currentUser
+        if (!user) return null
+
+        user.profile.picture = pictureUri
+
+        return user.save()
+    }),
+
     /* ==== INVITE FRIEND ==== */
     createInviteLink: authenticated(async (_: any, __: any, ctx: IContext) => {
         const user = ctx.currentUser

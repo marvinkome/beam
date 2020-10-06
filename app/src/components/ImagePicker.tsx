@@ -4,9 +4,11 @@ import _ImagePicker from "react-native-image-crop-picker"
 import { View, StyleSheet, ImageSourcePropType } from "react-native"
 import { Image, Button } from "react-native-elements"
 import { theme } from "styles/theme"
+import fonts from "styles/fonts"
 
 type IProps = {
     image: ImageSourcePropType
+    loading: boolean
     onSelect: (image: string) => void
 }
 export function ImagePicker(props: IProps) {
@@ -15,6 +17,7 @@ export function ImagePicker(props: IProps) {
             const image = await _ImagePicker.openPicker({
                 width: 400,
                 height: 400,
+                crop: true,
             })
 
             props.onSelect(image.path)
@@ -22,6 +25,7 @@ export function ImagePicker(props: IProps) {
             Toast.show({ type: "error", text1: "Please select an image", position: "bottom" })
         }
     }
+
     return (
         <View>
             <Image
@@ -37,9 +41,11 @@ export function ImagePicker(props: IProps) {
                 icon={{
                     name: "camera",
                     type: "feather",
-                    color: theme.colors?.grey1,
+                    size: 18,
+                    color: theme.colors?.black,
                 }}
                 title="Change"
+                loading={props.loading}
                 onPress={onPress}
             />
         </View>
@@ -50,26 +56,30 @@ const styles = StyleSheet.create({
     profileImageContainer: {
         borderWidth: 3,
         borderColor: theme.colors?.primary,
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         borderRadius: 10,
     },
     profileImage: {
-        width: 150,
-        height: 150,
+        width: 100,
+        height: 100,
         borderRadius: 10,
     },
 
     changeProfileButton: {
-        width: 120,
+        width: 96,
         marginVertical: 15,
-        paddingVertical: 3,
+        paddingVertical: 2,
         borderRadius: 10,
-        borderColor: theme.colors?.grey0,
-        justifyContent: "space-between",
+        borderColor: theme.colors?.black,
+        borderWidth: 2,
+        justifyContent: "space-evenly",
     },
     changeProfileText: {
-        color: theme.colors?.grey1,
+        color: theme.colors?.black,
         letterSpacing: 0,
+        fontSize: 14,
+        marginRight: 7,
+        ...fonts.regular,
     },
 })
