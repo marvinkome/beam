@@ -68,7 +68,7 @@ export function HomeTabNavigator() {
 const MainStack = createStackNavigator()
 export function MainStackNavigator() {
     return (
-        <MainStack.Navigator initialRouteName="Profile" headerMode="none">
+        <MainStack.Navigator headerMode="none">
             <MainStack.Screen name="Home" component={HomeTabNavigator} />
             <MainStack.Screen name="Chat" component={Chat} />
             <MainStack.Screen name="Profile" component={Profile} />

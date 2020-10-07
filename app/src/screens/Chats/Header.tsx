@@ -1,13 +1,18 @@
 import React from "react"
 import BeamLogo from "assets/images/beam-logo-light.svg"
-import { StyleSheet, View } from "react-native"
+import { StyleSheet, View, Share, Alert } from "react-native"
 import { Text, Image, Icon } from "react-native-elements"
 import { TouchableOpacity } from "react-native-gesture-handler"
 import { Menu, MenuTrigger, MenuOptions, MenuOption } from "react-native-popup-menu"
 import { theme } from "styles/theme"
 import { useNavigation } from "@react-navigation/native"
+import { useMutation, gql } from "@apollo/client"
 
-export function ChatsHeader({ picture }: { picture: string }) {
+type IProps = {
+    picture: string
+    onShareBeam: () => void
+}
+function ChatsHeaderView({ picture, onShareBeam }: IProps) {
     const navigation = useNavigation()
 
     return (
@@ -37,10 +42,10 @@ export function ChatsHeader({ picture }: { picture: string }) {
 
                     <MenuOption onSelect={() => null}>
                         <Icon name="user-plus" type="feather" size={20} style={styles.menuIcon} />
-                        <Text>Invite a friend</Text>
+                        <Text>Add a friend</Text>
                     </MenuOption>
 
-                    <MenuOption onSelect={() => null}>
+                    <MenuOption onSelect={onShareBeam}>
                         <Icon
                             name="share-social-outline"
                             type="ionicon"
@@ -54,6 +59,31 @@ export function ChatsHeader({ picture }: { picture: string }) {
             </Menu>
         </View>
     )
+}
+
+export function ChatsHeader({ picture }: { picture: string }) {
+    const [getInviteLink] = useMutation(gql`
+        mutation CreateInviteLink {
+            createInviteLink
+        }
+    `)
+
+    const onShareBeam = async () => {
+        try {
+            const res = await Share.share({
+                message:
+                    "Hey,\nBeam is a place where you can share interesting things with your friends. Come over it's free!\nhttps://usebeam.chat",
+            })
+
+            if (res.action === Share.sharedAction) {
+                console.log("shared with", res.activityType)
+            }
+        } catch (e) {
+            // TODO: Sentry track issue with sharing
+        }
+    }
+
+    return <ChatsHeaderView picture={picture} onShareBeam={onShareBeam} />
 }
 
 const styles = StyleSheet.create({
