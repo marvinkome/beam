@@ -1,9 +1,9 @@
 import React, { useContext } from "react"
 import Beam from "assets/icons/beam.svg"
-import { View } from "react-native"
 import { Icon } from "react-native-elements"
 import { createStackNavigator } from "@react-navigation/stack"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
+import { CreateStatusButton } from "components"
 import { AuthContext } from "libs/auth-context"
 import { navigationStyle } from "styles/navigator"
 import { theme } from "styles/theme"
@@ -13,10 +13,11 @@ import { LandingPage } from "screens/LandingPage"
 import { OnboardingImportContacts } from "screens/OnboardingImportContacts"
 import { Status } from "screens/Status"
 import { StatusComments } from "screens/StatusComments"
-import { CreateStatus } from "screens/CreateStatus"
 import { Chats } from "screens/Chats"
 import { Chat } from "screens/Chat"
 import { Profile } from "screens/Profile"
+
+const EmptyScreen = () => null
 
 // navigators
 const HomeTab = createBottomTabNavigator()
@@ -38,13 +39,9 @@ export function HomeTabNavigator() {
 
             <HomeTab.Screen
                 name="CreateStatus"
-                component={CreateStatus}
+                component={EmptyScreen}
                 options={{
-                    tabBarIcon: () => (
-                        <View style={navigationStyle.createStatusIconContainer}>
-                            <Icon name="pencil" type="octicon" />
-                        </View>
-                    ),
+                    tabBarButton: (props) => <CreateStatusButton {...props} />,
                 }}
             />
 
