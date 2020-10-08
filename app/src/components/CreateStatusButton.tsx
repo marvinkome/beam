@@ -21,7 +21,7 @@ export function CreateStatusButton(props: BottomTabBarButtonProps) {
                 </TouchableOpacity>
             </View>
 
-            <BottomSheet modalProps={{}} isVisible={isVisible}>
+            <BottomSheet modalProps={{ onRequestClose: toggleVisibily }} isVisible={isVisible}>
                 <View style={styles.bottomSheet}>
                     <View style={styles.bottomSheetHeader}>
                         <Text style={styles.bottomSheetHeaderText}>

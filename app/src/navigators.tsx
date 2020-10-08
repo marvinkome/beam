@@ -16,6 +16,7 @@ import { StatusComments } from "screens/StatusComments"
 import { Chats } from "screens/Chats"
 import { Chat } from "screens/Chat"
 import { Profile } from "screens/Profile"
+import { CreateStatus } from "screens/CreateStatus"
 
 const EmptyScreen = () => null
 
@@ -65,10 +66,11 @@ export function HomeTabNavigator() {
 const MainStack = createStackNavigator()
 export function MainStackNavigator() {
     return (
-        <MainStack.Navigator headerMode="none">
+        <MainStack.Navigator initialRouteName="CreateStatus" headerMode="none">
             <MainStack.Screen name="Home" component={HomeTabNavigator} />
             <MainStack.Screen name="Chat" component={Chat} />
             <MainStack.Screen name="Profile" component={Profile} />
+            <MainStack.Screen name="CreateStatus" component={CreateStatus} />
             <MainStack.Screen name="StatusComments" component={StatusComments} />
         </MainStack.Navigator>
     )
