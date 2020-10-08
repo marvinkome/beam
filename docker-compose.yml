@@ -14,14 +14,17 @@ services:
       - APP_KEY=testSecretKey
       - NODE_ENV=staging
       - DB_URL=mongodb://beam_db:beam_db_password@db:27017/beam?authSource=admin
-      - GOOGLE_ID=992903294041-lp2gn624a9h5pakko33q6idlo704j6s9.apps.googleusercontent.com
-      - GOOGLE_SECRET=qdlNGEXa8LsAM6va_U2tuZK8
-      - GMAIL_USER=team@usebeam.chat
-      - GMAIL_PASSWORD=qibezmprofkljudq
-      - FACEBOOK_ID=1019743245095734
-      - FACEBOOK_SECRET=fff24cbe988ec72cda051078b477a906
+      - GOOGLE_ID=ADD_KEY
+      - GOOGLE_SECRET=ADD_SECRET
+      - GMAIL_USER=ADD_EMAIL
+      - GMAIL_PASSWORD=ADD_SECRET
+      - FACEBOOK_ID=ADD_KEY
+      - FACEBOOK_SECRET=ADD_SECRET
       - CLIENT_URL=http://localhost:3000
-      - BOT_EMAIL=team@usebeam.chat
+      - BOT_EMAIL=ADD_EMAIL
+      - FIREBASE_PROJECT_ID=ADD_FIREBASE_PROJECT
+      - FIREBASE_CLIENT_EMAIL=ADD_FIREBASE_CLIENT_EMAIL
+      - FIREBASE_PRIVATE_KEY=ADD_FIREBASE_PRIVATE_KEY
     volumes:
       - ./backend:/app/
       - /app/node_modules
