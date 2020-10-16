@@ -2,10 +2,11 @@ import React, { useRef } from "react"
 import * as Animatable from "react-native-animatable"
 import { View, StyleSheet, TouchableOpacity, Dimensions } from "react-native"
 import { Icon } from "react-native-elements"
-import { StatusColors } from "libs/contants"
+import { StatusColors } from "libs/constants"
 import { theme } from "styles/theme"
 
 type IProps = {
+    onChange: (color: string) => void
     close: () => void
 }
 export function ColorPicker(props: IProps) {
@@ -23,27 +24,27 @@ export function ColorPicker(props: IProps) {
         <Animatable.View ref={view} animation="slideInLeft" duration={200} style={styles.container}>
             <Icon name="close" type="ionicons" onPress={onClose} />
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onChange(StatusColors.color1)}>
                 <View style={[styles.colorItem, { backgroundColor: StatusColors.color1 }]} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onChange(StatusColors.color2)}>
                 <View style={[styles.colorItem, { backgroundColor: StatusColors.color2 }]} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onChange(StatusColors.color3)}>
                 <View style={[styles.colorItem, { backgroundColor: StatusColors.color3 }]} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onChange(StatusColors.color4)}>
                 <View style={[styles.colorItem, { backgroundColor: StatusColors.color4 }]} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onChange(StatusColors.color5)}>
                 <View style={[styles.colorItem, { backgroundColor: StatusColors.color5 }]} />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => props.onChange(StatusColors.color6)}>
                 <View style={[styles.colorItem, { backgroundColor: StatusColors.color6 }]} />
             </TouchableOpacity>
         </Animatable.View>

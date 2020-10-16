@@ -2,23 +2,40 @@ import React, { useState } from "react"
 import { StyleSheet, View } from "react-native"
 import { Button, Icon, Text } from "react-native-elements"
 import { TouchableOpacity } from "react-native-gesture-handler"
-import fonts from "styles/fonts"
 import { theme } from "styles/theme"
 
 import { ColorPicker } from "./ColorPicker"
 import { FontPicker } from "./FontPicker"
 
-export function FooterActions() {
+function toBold(font: string) {
+    const [fontName, style] = font.split("-")
+    if (!style) return fontName
+
+    return fontName + "-Bold"
+}
+
+type IProps = {
+    font: string
+    text: string
+    onChange: (key: "text" | "bgColor" | "font", value: string) => void
+}
+export function FooterActions(props: IProps) {
     const [currentActionView, setCurrentActionView] = useState<"color" | "font" | null>(null)
 
     return (
         <View style={styles.footer}>
             {currentActionView === "color" && (
-                <ColorPicker close={() => setCurrentActionView(null)} />
+                <ColorPicker
+                    onChange={(color) => props.onChange("bgColor", color)}
+                    close={() => setCurrentActionView(null)}
+                />
             )}
 
             {currentActionView === "font" && (
-                <FontPicker close={() => setCurrentActionView(null)} />
+                <FontPicker
+                    onChange={(font) => props.onChange("font", font)}
+                    close={() => setCurrentActionView(null)}
+                />
             )}
 
             {!currentActionView && (
@@ -32,19 +49,23 @@ export function FooterActions() {
 
                     <TouchableOpacity onPress={() => setCurrentActionView("font")}>
                         <View style={{ marginTop: -10 }}>
-                            <Text style={styles.textSelector}>T</Text>
+                            <Text style={[styles.textSelector, { fontFamily: toBold(props.font) }]}>
+                                T
+                            </Text>
                         </View>
                     </TouchableOpacity>
 
-                    <Button
-                        containerStyle={{ marginLeft: "auto" }}
-                        buttonStyle={styles.buttonStyle}
-                        titleStyle={styles.buttonTextStyle}
-                        type="outline"
-                        icon={{ name: "send", type: "ionicon", size: 18 }}
-                        iconRight
-                        title="Next"
-                    />
+                    {!!props.text.trim().length && (
+                        <Button
+                            containerStyle={{ marginLeft: "auto" }}
+                            buttonStyle={styles.buttonStyle}
+                            titleStyle={styles.buttonTextStyle}
+                            type="outline"
+                            icon={{ name: "send", type: "ionicon", size: 18 }}
+                            iconRight
+                            title="Next"
+                        />
+                    )}
                 </>
             )}
         </View>
@@ -64,7 +85,6 @@ const styles = StyleSheet.create({
 
     textSelector: {
         fontSize: 32,
-        ...fonts.bold,
     },
 
     buttonStyle: {
