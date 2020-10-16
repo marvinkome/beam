@@ -15,4 +15,30 @@ export default {
         fontFamily: "SourceSansPro-Bold",
         fontWeight: "normal" as any,
     },
+
+    // status fonts
+    chewy: {
+        fontFamily: "Chewy-Regular",
+        fontWeight: "normal" as any,
+    },
+    cookie: {
+        fontFamily: "Cookie-Regular",
+        fontWeight: "normal" as any,
+    },
+    lobster2: {
+        fontFamily: "LobsterTwo-Regular",
+        fontWeight: "normal" as any,
+    },
+    lobster2Bold: {
+        fontFamily: "LobsterTwo-Bold",
+        fontWeight: "normal" as any,
+    },
+    serif: {
+        fontFamily: "SourceSerifPro-Regular",
+        fontWeight: "normal" as any,
+    },
+    serifBold: {
+        fontFamily: "SourceSerifPro-Bold",
+        fontWeight: "normal" as any,
+    },
 }
