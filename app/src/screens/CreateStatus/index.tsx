@@ -8,7 +8,7 @@ export function CreateStatus() {
     const { goBack } = useNavigation()
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={styles.container}>
             <Icon
                 onPress={goBack}
                 containerStyle={styles.closeIconContainer}
@@ -22,6 +22,10 @@ export function CreateStatus() {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+
     closeIconContainer: {
         position: "absolute",
         top: 0,

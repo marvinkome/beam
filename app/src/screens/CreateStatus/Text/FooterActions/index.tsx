@@ -81,6 +81,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingHorizontal: 25,
         paddingVertical: 10,
+        paddingBottom: 20,
     },
 
     textSelector: {
