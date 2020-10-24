@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - master
+    paths:
+      - "frontend/**"
+      - "backend/**"
   pull_request:
     branches: [master]
 
@@ -24,7 +27,49 @@ jobs:
           wait-on: "http://localhost:3000"
           wait-on-timeout: 200
 
-  deploy:
+  deploy-backend:
+    runs-on: ubuntu-18.04
+    needs: run-tests
+    if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
+
+    steps:
+      - uses: actions/checkout/v2
+
+      - name: Docker Login
+        run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Docker Build
+        run: docker build -t beam-server ./backend
+
+      - name: Tag
+        run: |
+          docker tag beam-server ${{ secrets.DOCKER_USER }}/beam-server:${{ github.sha }}
+          docker tag beam-server ${{ secrets.DOCKER_USER }}/beam-server:latest
+
+      - name: Push
+        run: |
+          docker push ${{ secrets.DOCKER_USER }}/beam-server:${{ github.sha }}
+          docker push ${{ secrets.DOCKER_USER }}/beam-server:latest
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DOCTL_TOKEN }}
+
+      - name: Update deployment file
+        run: |
+          sed -i 's|<IMAGE>|docker.io/marvinkome/beam-server:'${{ github.sha }}'|' $GITHUB_WORKSPACE/config/beam-server.yml
+
+      - name: Save DigitalOcean kubeconfig
+        run: doctl kubernetes cluster kubeconfig save beam-cluster
+
+      - name: Deploy DigitalOcean Kubernetes
+        run: kubectl apply -f $GITHUB_WORKSPACE/config/beam-server.yml
+
+      - name: Verify deployment
+        run: kubectl rollout status deployment/beam-server-dep
+
+  deploy-frontend:
     runs-on: ubuntu-18.04
     needs: run-tests
     if: github.event.push.ref == 'refs/heads/master' || github.ref == 'refs/heads/master'
@@ -36,21 +81,15 @@ jobs:
         run: docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Docker Build
-        run: |
-          docker build -t beam-web ./frontend
-          docker build -t beam-server ./backend
+        run: docker build -t beam-web ./frontend
 
-      - name: Tag Frontend and Backend
+      - name: Tag
         run: |
-          docker tag beam-server ${{ secrets.DOCKER_USER }}/beam-server:${{ github.sha }}
-          docker tag beam-server ${{ secrets.DOCKER_USER }}/beam-server:latest
           docker tag beam-web ${{ secrets.DOCKER_USER }}/beam-web:${{ github.sha }}
           docker tag beam-web ${{ secrets.DOCKER_USER }}/beam-web:latest
 
-      - name: Push Frontend and Backend
+      - name: Push
         run: |
-          docker push ${{ secrets.DOCKER_USER }}/beam-server:${{ github.sha }}
-          docker push ${{ secrets.DOCKER_USER }}/beam-server:latest
           docker push ${{ secrets.DOCKER_USER }}/beam-web:${{ github.sha }}
           docker push ${{ secrets.DOCKER_USER }}/beam-web:latest
 
@@ -61,7 +100,6 @@ jobs:
 
       - name: Update deployment file
         run: |
-          sed -i 's|<IMAGE>|docker.io/marvinkome/beam-server:'${{ github.sha }}'|' $GITHUB_WORKSPACE/config/beam-server.yml
           sed -i 's|<IMAGE>|docker.io/marvinkome/beam-web:'${{ github.sha }}'|' $GITHUB_WORKSPACE/config/beam-web.yml
 
       - name: Save DigitalOcean kubeconfig
@@ -70,10 +108,5 @@ jobs:
       - name: Deploy Frontend to DigitalOcean Kubernetes
         run: kubectl apply -f $GITHUB_WORKSPACE/config/beam-web.yml
 
-      - name: Deploy Backend to DigitalOcean Kubernetes
-        run: kubectl apply -f $GITHUB_WORKSPACE/config/beam-server.yml
-
       - name: Verify deployment
-        run: |
-          kubectl rollout status deployment/beam-server-dep
-          kubectl rollout status deployment/beam-web-dep
+        run: kubectl rollout status deployment/beam-web-dep

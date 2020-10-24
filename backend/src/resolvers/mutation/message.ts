@@ -61,14 +61,18 @@ export const resolvers = {
         })
 
         // send push notification
-        await sendNotification({
-            type: 'user',
-            userToken: friend.notificationToken || '',
-            title: user.profile.name?.split(' ')[0],
-            body: message.message,
-            image: user.profile.picture,
-            linkPath: `/app/chat/${user.id}`,
-        })
+        try {
+            await sendNotification({
+                type: 'user',
+                userToken: friend.notificationToken || '',
+                title: user.profile.name?.split(' ')[0],
+                body: message.message,
+                image: user.profile.picture,
+                linkPath: `/app/chat/${user.id}`,
+            })
+        } catch (e) {
+            console.error(e)
+        }
 
         return {
             code: 200,
@@ -120,14 +124,18 @@ export const resolvers = {
         })
 
         // send push notification
-        await sendNotification({
-            type: 'group',
-            groupId: group.id,
-            title: group.name,
-            body: message.message,
-            image: group.image,
-            linkPath: `/app/group/${group.id}`,
-        })
+        try {
+            await sendNotification({
+                type: 'group',
+                groupId: group.id,
+                title: group.name,
+                body: message.message,
+                image: group.image,
+                linkPath: `/app/group/${group.id}`,
+            })
+        } catch (e) {
+            console.error(e)
+        }
 
         return {
             code: 200,

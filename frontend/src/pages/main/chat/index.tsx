@@ -151,8 +151,8 @@ function useSendMessageToServer() {
                         data: {
                             ...data,
                             conversation: {
-                                ...data.conversation,
-                                messages: [newMessage, ...data.conversation.messages],
+                                ...(data.conversation || {}),
+                                messages: [newMessage, ...(data.conversation?.messages || [])],
                             },
                         },
                     })
@@ -167,6 +167,7 @@ function useSendMessageToServer() {
 
             return data.sendMessage.sentMessage
         } catch (e) {
+            console.log(e)
             toast.dark("Error sending message. Check your network connection")
             return
         }
@@ -228,8 +229,8 @@ function useMessages(data: any, subscribeToMore: any) {
                 return {
                     ...data,
                     conversation: {
-                        ...data.conversation,
-                        messages: [newMessage, ...data.conversation.messages],
+                        ...(data.conversation || {}),
+                        messages: [newMessage, ...(data.conversation?.messages || [])],
                     },
                 }
             },

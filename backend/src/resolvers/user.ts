@@ -63,10 +63,11 @@ export const userResolvers = {
         lastMessage: async (user: IUser, _: any, ctx: IContext) => {
             const conversation = await Conversation.findOne({
                 'users.user': {
-                    $all: [user.id, ctx.currentUser?.id],
+                    $all: [ctx.currentUser?.id, user.id],
                 },
             })
 
+            if (!conversation) return null
             return Message.findOne({ toConversation: conversation?.id }).sort('-timestamp')
         },
 
@@ -76,6 +77,8 @@ export const userResolvers = {
                     $all: [user.id, ctx.currentUser?.id],
                 },
             })
+
+            if (!conversation) return null
 
             const conversationUser = conversation?.users.find((u) => u.user == ctx.currentUser?.id)
             if (!conversationUser) return 0
