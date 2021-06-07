@@ -25,7 +25,7 @@ const HomeTab = createBottomTabNavigator()
 export function HomeTabNavigator() {
     return (
         <HomeTab.Navigator
-            initialRouteName="Chats"
+            initialRouteName="Status"
             tabBarOptions={{ showLabel: false, style: navigationStyle.tabBar }}
         >
             <HomeTab.Screen
@@ -66,7 +66,7 @@ export function HomeTabNavigator() {
 const MainStack = createStackNavigator()
 export function MainStackNavigator() {
     return (
-        <MainStack.Navigator initialRouteName="CreateStatus" headerMode="none">
+        <MainStack.Navigator initialRouteName="Home" headerMode="none">
             <MainStack.Screen name="Home" component={HomeTabNavigator} />
             <MainStack.Screen name="Chat" component={Chat} />
             <MainStack.Screen name="Profile" component={Profile} />
